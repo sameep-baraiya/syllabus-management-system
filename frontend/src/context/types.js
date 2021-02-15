@@ -8,3 +8,12 @@ export const LOGIN_FAIL = 'LOGIN_FAIL';
 export const LOGOUT = 'LOGOUT';
 export const CLEAR_ERRORS = 'CLEAR_ERRORS';
 export const CLEAR_REGISTRATION_DONE = 'CLEAR_REGISTRATION_DONE';
+
+// Subject
+export const GET_SUBJECTS = 'GET_SUBJECTS';
+export const GET_SUBJECT = 'GET_SUBJECT';
+export const CREATE_SUBJECT = 'CREATE_SUBJECT';
+export const SUBJECTS_ERROR = 'SUBJECTS_ERROR';
+export const SET_LOADING = 'SET_LOADING';
+export const RESET_LOADING = 'RESET_LOADING';
+export const CREATE_ERROR = 'CREATE_ERROR';

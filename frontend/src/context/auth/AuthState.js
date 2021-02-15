@@ -2,6 +2,7 @@ import React, { useReducer } from 'react';
 import axios from 'axios';
 import AuthContext from './authContext';
 import authReducer from './authReducer';
+import setAuthToken from '../../utils/setAuthToken';
 import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
@@ -16,7 +17,7 @@ import {
 
 const AuthState = (props) => {
   const initialState = {
-    token: localStorage.getItem('token'),
+    token: localStorage.getItem('dsms-token'),
     isAuthenticated: null,
     registrationDone: false,
     loading: true,
@@ -28,14 +29,10 @@ const AuthState = (props) => {
 
   // Load User
   const loadUser = async () => {
-    const config = {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('dsms-token')}`,
-      },
-    };
+    setAuthToken(localStorage.getItem('dsms-token'));
 
     try {
-      const res = await axios.get('/api/v1/auth', config);
+      const res = await axios.get('/api/v1/auth');
 
       dispatch({
         type: USER_LOADED,

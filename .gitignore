@@ -28,6 +28,7 @@ frontend/.eslintcache
 ### Backend
 backend/node_modules
 backend/config/config.env
+backend/uploads
 
 ### Other
 /.vscode

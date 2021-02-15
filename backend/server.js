@@ -24,9 +24,11 @@ if (process.env.NODE_ENV === 'development') {
 
 // Rout files
 const auth = require('./routes/auth');
+const subject = require('./routes/subject');
 
 // Mount routers
 app.use('/api/v1/auth', auth);
+app.use('/api/v1/subject', subject);
 
 // Handle all error
 app.use(errorHandler);
@@ -44,6 +46,4 @@ app.listen(
 // Handle unhandled promise rejections
 process.on('unhandledRejection', (err, promise) => {
   console.log(`unhandledRejection Error: ${err.message}`.red.inverse);
-  // Close server & exit process
-  server.close(() => process.exit(1));
 });

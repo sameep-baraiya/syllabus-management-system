@@ -58,13 +58,9 @@ User.init(
     },
   },
   {
-    // hooks: {
-    //   afterCreate: (user, options) => {
-
-    //   }
-    // },
     sequelize: sequelize,
     modelName: 'User',
+    tableName: 'User',
     timestamps: true,
   }
 );

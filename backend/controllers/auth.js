@@ -3,7 +3,7 @@ const ErrorResponse = require('../utils/ErrorResponse');
 const User = require('../models/User');
 
 // @desc    Get logged in user
-// @route   Get /api/v1/auth/
+// @route   GET /api/v1/auth/
 // @access  Private
 exports.getLoggedInUser = async (req, res, next) => {
   try {

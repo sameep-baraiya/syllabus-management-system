@@ -10,6 +10,7 @@ import {
   iconDashboard,
   iconAnnouncement,
   iconNotification,
+  iconSyllabusManger,
 } from './Icon';
 import { Link, useHistory } from 'react-router-dom';
 import { Navbar, Button, Nav, Dropdown, ButtonGroup } from 'react-bootstrap';
@@ -26,11 +27,16 @@ const MainNavbar = () => {
   }, []);
 
   const login = () => {
-    histroy.push('login');
+    histroy.replace('login');
   };
 
+  // TODO Fix this
   const register = () => {
-    histroy.push('register');
+    histroy.replace('register');
+  };
+
+  const dashboard = () => {
+    histroy.replace('dashboard');
   };
 
   const onClickLogout = () => {
@@ -68,6 +74,9 @@ const MainNavbar = () => {
         <Nav.Link as={Link} to='/announcement'>
           {iconAnnouncement} Announcement
         </Nav.Link>
+        <Nav.Link as={Link} to='/syllabus-manager'>
+          {iconSyllabusManger} Syllabus Manager
+        </Nav.Link>
       </Nav>
       <div>
         <Button variant='warning'>{iconNotification}</Button>{' '}
@@ -85,7 +94,7 @@ const MainNavbar = () => {
               </Button>
             </Dropdown.Item>
             <Dropdown.Item as='div'>
-              <Button variant='light' block>
+              <Button variant='light' block onClick={dashboard}>
                 {iconDashboard} Dashboard
               </Button>
             </Dropdown.Item>
