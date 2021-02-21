@@ -1,8 +1,8 @@
 import { Fragment } from 'react';
-import { Card, Badge, Table } from 'react-bootstrap';
+import { Card, Badge, Table, Button } from 'react-bootstrap';
 import { iconSubject } from '../layout/Icon';
 
-const subjectCardView = (subject, index) => {
+const SubjectCardView = (subject, index, downloadCallback) => {
   const {
     subjectCode,
     subjectName,
@@ -18,7 +18,11 @@ const subjectCardView = (subject, index) => {
     isOutdated,
     createdAt,
     updatedAt,
+    successorId,
+    predecessorId,
+    files,
   } = subject;
+
   return (
     <Fragment key={index}>
       <br />
@@ -31,21 +35,45 @@ const subjectCardView = (subject, index) => {
             <Badge variant='primary'>{subjectCode}</Badge>{' '}
             <Badge variant='secondary'>{subjectShort}</Badge>{' '}
             <Badge variant='success'>{department}</Badge>{' '}
-            <Badge variant='warning'>Files: {noOfFiles}</Badge>{' '}
-            <Badge variant='info'>Version: {updateNo}</Badge>{' '}
+            <Badge variant='warning'>
+              {noOfFiles !== 0 ? `No of Files: ${noOfFiles}` : null}
+            </Badge>{' '}
+            <Badge variant='info'>
+              {updateNo !== undefined ? `Version: ${updateNo}` : null}
+            </Badge>{' '}
             <Badge variant='dark'>{isElective ? 'elective' : null}</Badge>{' '}
             <Badge variant='danger'>{isOutdated ? 'outdated' : null}</Badge>
           </Card.Subtitle>
-          <br />
-          <strong>Subject Created At:</strong>{' '}
-          {new Date(createdAt).toLocaleString('en-BZ', {
-            hour12: true,
-          })}
-          <br />
-          <strong>Subject Updated At:</strong>{' '}
-          {new Date(updatedAt).toLocaleString('en-BZ', {
-            hour12: true,
-          })}
+          {createdAt && (
+            <Fragment>
+              <br />
+              <strong>Subject Created At:</strong>{' '}
+              {new Date(createdAt).toLocaleString('en-BZ', {
+                hour12: true,
+              })}
+            </Fragment>
+          )}
+          {updatedAt && (
+            <Fragment>
+              <br />
+              <strong>Subject Updated At:</strong>{' '}
+              {new Date(updatedAt).toLocaleString('en-BZ', {
+                hour12: true,
+              })}
+            </Fragment>
+          )}
+          {successorId && (
+            <Fragment>
+              <br />
+              <strong>Successor Id:</strong> {successorId}
+            </Fragment>
+          )}
+          {predecessorId && (
+            <Fragment>
+              <br />
+              <strong>Predecessor Id:</strong> {predecessorId}
+            </Fragment>
+          )}
           {headMasterJSON && (
             <Fragment>
               <br />
@@ -63,13 +91,14 @@ const subjectCardView = (subject, index) => {
               </Table>
             </Fragment>
           )}
-          {subjectDescription ? (
+          {subjectDescription && (
             <Fragment>
+              <br />
               <strong>Description: </strong>
               <br />
               {subjectDescription}
             </Fragment>
-          ) : null}
+          )}
           {theory && (
             <Fragment>
               <br />
@@ -84,6 +113,58 @@ const subjectCardView = (subject, index) => {
               <strong>Practical :</strong>
               <br />
               {practical}
+            </Fragment>
+          )}
+          {files !== null && (
+            <Fragment>
+              <br />
+              <strong>Files :</strong>
+              <br />
+              <Table striped bordered hover>
+                <thead>
+                  <tr>
+                    <th>Index</th>
+                    <th>File Name</th>
+                    <th>Extension</th>
+                    <th>Upload Date</th>
+                    <th>Download</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {files.map((file, index) => {
+                    const { name } = file;
+                    const nameArray = name.split('.');
+                    const extension = nameArray.pop();
+                    const newNameArray = nameArray.join('').split('-');
+                    const date = newNameArray.pop();
+                    return (
+                      <tr key={index}>
+                        <td>{index + 1}</td>
+                        <td>{newNameArray.join('-')}</td>
+                        <td>{extension}</td>
+                        <td>
+                          {new Date(parseInt(date, 10)).toLocaleString(
+                            'en-BZ',
+                            {
+                              hour12: true,
+                            }
+                          )}
+                        </td>
+                        <td>
+                          <Button
+                            name={file.name}
+                            variant='success'
+                            size='sm'
+                            onClick={downloadCallback}
+                          >
+                            Download
+                          </Button>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </Table>
             </Fragment>
           )}
         </Card.Body>
@@ -119,4 +200,4 @@ const cellMakerHeadGroups = (arr = []) => {
   );
 };
 
-export default subjectCardView;
+export default SubjectCardView;

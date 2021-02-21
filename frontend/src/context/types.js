@@ -17,3 +17,11 @@ export const SUBJECTS_ERROR = 'SUBJECTS_ERROR';
 export const SET_LOADING = 'SET_LOADING';
 export const RESET_LOADING = 'RESET_LOADING';
 export const CREATE_ERROR = 'CREATE_ERROR';
+export const CLEAR_SUBJECTS = 'CLEAR_SUBJECTS';
+
+// Course
+export const CREATE_COURSE = 'CREATE_COURSE';
+
+// Download
+export const DOWNLOAD_FILE = 'DOWNLOAD_FILE';
+export const DOWNLOAD_ERROR = 'DOWNLOAD_ERROR';

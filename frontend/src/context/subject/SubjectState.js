@@ -12,12 +12,15 @@ import {
   SET_LOADING,
   RESET_LOADING,
   CREATE_ERROR,
+  CLEAR_SUBJECTS,
 } from '../types';
 
 const SubjectState = (props) => {
   const initialState = {
     subject: null,
     subjects: null,
+    pagination: null,
+    total: 0,
     loading: false,
     error: null,
   };
@@ -25,19 +28,44 @@ const SubjectState = (props) => {
   const [state, dispatch] = useReducer(subjectReducer, initialState);
 
   // Get Subjects
-  const getSubjects = async () => {
+  const getSubjects = async (query = null) => {
     setLoading();
     try {
-      const res = await axios.get('/api/v1/subject');
+      let res;
+      if (query == null) {
+        res = await axios.get('/api/v1/subject');
+      } else {
+        const sort =
+          query.sort !== undefined ? `?sort=${query.sort}` : '?sort=ASC';
+        const select =
+          query.select !== undefined ? `&select=${query.select}` : '';
+        const page = query.page !== undefined ? `&page=${query.page}` : '';
+        const limit = query.limit !== undefined ? `&limit=${query.limit}` : '';
+        const sortBy =
+          query.sortBy !== undefined ? `&sortBy=${query.sortBy}` : '';
+        const search =
+          query.search !== undefined ? `&search=${query.search}` : '';
+        let attributes = '';
+        if (query.attributes !== undefined) {
+          Object.keys(query.attributes).forEach((key) => {
+            attributes = attributes.concat(`&${key}=${query.attributes[key]}`);
+          });
+        }
+        const searchQuery =
+          sort + select + page + limit + sortBy + attributes + search;
+
+        res = await axios.get('/api/v1/subject' + searchQuery);
+      }
 
       dispatch({
         type: GET_SUBJECTS,
         payload: res.data,
       });
     } catch (err) {
+      console.log(err);
       dispatch({
         type: SUBJECTS_ERROR,
-        payload: err.response.data,
+        payload: err.response,
       });
     } finally {
       resetLoading();
@@ -87,6 +115,9 @@ const SubjectState = (props) => {
   // Reset Loading
   const resetLoading = () => dispatch({ type: RESET_LOADING });
 
+  // Clear Subjects
+  const clearSubjects = () => dispatch({ type: CLEAR_SUBJECTS });
+
   return (
     <SubjectContext.Provider
       value={{
@@ -94,11 +125,14 @@ const SubjectState = (props) => {
         subject: state.subject,
         subjects: state.subjects,
         error: state.error,
+        pagination: state.pagination,
+        total: state.total,
         getSubjects,
         clearErrors,
         setLoading,
         resetLoading,
         createSubject,
+        clearSubjects,
       }}
     >
       {props.children}

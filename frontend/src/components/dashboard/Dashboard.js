@@ -3,9 +3,8 @@ import { Link, Switch, Route } from 'react-router-dom';
 import { Row, Col, Card } from 'react-bootstrap';
 import { iconSubject } from '../layout/Icon';
 
-// TODO Improve This
 // Nested Syllabus Manager Route
-import AllSubjects from './AllSubjects';
+import FindSubjects from './FindSubjects';
 import DefaultDashboard from './DefaultDashboard';
 
 // Routing Componets
@@ -19,7 +18,7 @@ const Dashboard = (props) => {
     <Card>
       <Card.Body>
         <Card.Title>{iconSubject} Subject</Card.Title>
-        <Link to='/dashboard/subject/'>• Show all Subject</Link>
+        <Link to='/dashboard/subject/'>• Find Subjects</Link>
       </Card.Body>
     </Card>
   );
@@ -38,7 +37,7 @@ const Dashboard = (props) => {
             <PrivateRoute
               exact
               path='/dashboard/subject'
-              component={AllSubjects}
+              component={FindSubjects}
             />
 
             <Route component={NotFound} />

@@ -1,47 +1,75 @@
 import { Fragment } from 'react';
 import { Table } from 'react-bootstrap';
+import ReactJson from 'react-json-view';
 
 const subjectListView = (subjects = []) => {
+  const keys = Object.keys(subjects[0]);
   return (
     <Fragment>
       <div style={{ overflow: 'auto' }}>
         <Table striped bordered hover>
           <thead>
             <tr>
-              <th>Subject Code</th>
-              <th>Subject Name</th>
-              <th>Subject Short</th>
-              <th>Eepartment</th>
-              <th>Is Elective ?</th>
-              <th>NoOf Files</th>
-              <th>Version No</th>
-              <th>Is Outdated ?</th>
-              <th>Created At</th>
-              <th>Updated At</th>
+              {keys.map((key, index) => (
+                <Fragment key={index}>
+                  <th>{key}</th>
+                </Fragment>
+              ))}
             </tr>
           </thead>
           <tbody>
             {subjects.map((it, index) => {
               return (
                 <tr key={index}>
-                  <td>{it.subjectCode}</td>
-                  <td>{it.subjectName}</td>
-                  <td>{it.subjectShort}</td>
-                  <td>{it.department}</td>
-                  <td>{it.isElective === true ? 'Yes' : 'No'}</td>
-                  <td>{it.noOfFiles}</td>
-                  <td>{it.updateNo}</td>
-                  <td>{it.isOutdated === true ? 'Yes' : 'No'}</td>
-                  <td>
-                    {new Date(it.createdAt).toLocaleString('en-BZ', {
-                      hour12: true,
-                    })}
-                  </td>
-                  <td>
-                    {new Date(it.updatedAt).toLocaleString('en-BZ', {
-                      hour12: true,
-                    })}
-                  </td>
+                  {keys.map((key, index) => {
+                    if (typeof it[key] === 'object') {
+                      if (it[key] === null) {
+                        return (
+                          <Fragment key={index}>
+                            <td>Empty</td>
+                          </Fragment>
+                        );
+                      } else {
+                        return (
+                          <Fragment key={index}>
+                            <td>
+                              <ReactJson src={it[key]} collapsed />
+                            </td>
+                          </Fragment>
+                        );
+                      }
+                    } else if (typeof it[key] === 'boolean') {
+                      return (
+                        <Fragment key={index}>
+                          <td>{it[key] === true ? 'Yes' : 'No'}</td>
+                        </Fragment>
+                      );
+                    } else if (typeof it[key] === 'number') {
+                      return (
+                        <Fragment key={index}>
+                          <td>{it[key]}</td>
+                        </Fragment>
+                      );
+                    } else {
+                      if (!isNaN(new Date(it[key]))) {
+                        return (
+                          <Fragment key={index}>
+                            <td>
+                              {new Date(it[key]).toLocaleString('en-BZ', {
+                                hour12: true,
+                              })}
+                            </td>
+                          </Fragment>
+                        );
+                      } else {
+                        return (
+                          <Fragment key={index}>
+                            <td>{it[key]}</td>
+                          </Fragment>
+                        );
+                      }
+                    }
+                  })}
                 </tr>
               );
             })}

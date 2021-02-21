@@ -25,28 +25,34 @@ import Dashboard from './components/dashboard/Dashboard';
 // State
 import AuthState from './context/auth/AuthState';
 import SubjectState from './context/subject/SubjectState';
+import CourseState from './context/course/CourseState';
+import DownloadState from './context/download/DownloadState';
 
 function App() {
   return (
     <AuthState>
       <SubjectState>
-        <Router>
-          <Navbar />
-          <Container fluid>
-            <Switch>
-              <Route exact path='/' component={Home} />
-              <Route exact path='/about' component={About} />
-              <Route exact path='/login' component={LogIn} />
-              <Route exact path='/register' component={Register} />
-              <PrivateRoute path='/dashboard' component={Dashboard} />
-              <PrivateRoute
-                path='/syllabus-manager'
-                component={SyllabusManager}
-              />
-              <Route component={NotFound} />
-            </Switch>
-          </Container>
-        </Router>
+        <CourseState>
+          <DownloadState>
+            <Router>
+              <Navbar />
+              <Container fluid>
+                <Switch>
+                  <Route exact path='/' component={Home} />
+                  <Route exact path='/about' component={About} />
+                  <Route exact path='/login' component={LogIn} />
+                  <Route exact path='/register' component={Register} />
+                  <PrivateRoute path='/dashboard' component={Dashboard} />
+                  <PrivateRoute
+                    path='/syllabus-manager'
+                    component={SyllabusManager}
+                  />
+                  <Route component={NotFound} />
+                </Switch>
+              </Container>
+            </Router>
+          </DownloadState>
+        </CourseState>
       </SubjectState>
     </AuthState>
   );

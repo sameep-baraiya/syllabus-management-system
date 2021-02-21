@@ -1,41 +1,14 @@
 import {
-  GET_SUBJECTS,
-  // GET_SUBJECT,
-  // ADD_SUBJECT,
   CLEAR_ERRORS,
-  SUBJECTS_ERROR,
   SET_LOADING,
   RESET_LOADING,
-  CREATE_SUBJECT,
+  CREATE_COURSE,
   CREATE_ERROR,
-  CLEAR_SUBJECTS,
 } from '../types';
 
 const authReducer = (state, action) => {
   switch (action.type) {
-    case GET_SUBJECTS:
-      console.log(action.payload.data);
-      return {
-        ...state,
-        subjects: action.payload.data,
-        total: action.payload.total,
-        pagination: action.payload.pagination,
-      };
-    case CLEAR_SUBJECTS:
-      return {
-        ...state,
-        subjects: null,
-        pagination: null,
-        total: 0,
-      };
-    case SUBJECTS_ERROR:
-      return {
-        ...state,
-        subjects: null,
-        error: action.payload,
-      };
-
-    case CREATE_SUBJECT:
+    case CREATE_COURSE:
       return {
         ...state,
         error: null,

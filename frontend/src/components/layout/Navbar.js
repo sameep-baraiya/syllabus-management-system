@@ -12,12 +12,11 @@ import {
   iconNotification,
   iconSyllabusManger,
 } from './Icon';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Navbar, Button, Nav, Dropdown, ButtonGroup } from 'react-bootstrap';
 import AuthContext from '../../context/auth/authContext';
 
 const MainNavbar = () => {
-  const histroy = useHistory();
   const authContext = useContext(AuthContext);
   const { isAuthenticated, user, loadUser, logout } = authContext;
 
@@ -25,19 +24,6 @@ const MainNavbar = () => {
     loadUser();
     // eslint-disable-next-line
   }, []);
-
-  const login = () => {
-    histroy.replace('login');
-  };
-
-  // TODO Fix this
-  const register = () => {
-    histroy.replace('register');
-  };
-
-  const dashboard = () => {
-    histroy.replace('dashboard');
-  };
 
   const onClickLogout = () => {
     logout();
@@ -57,10 +43,12 @@ const MainNavbar = () => {
         </Nav.Link>
       </Nav>
       <div>
-        <Button variant='secondary' onClick={login}>
-          {iconLogIn} Log In
-        </Button>{' '}
-        <Button onClick={register}>{iconRegister} Register</Button>
+        <Link to='/login' style={{ textDecoration: 'none' }}>
+          <Button variant='secondary'>{iconLogIn} Log In</Button>
+        </Link>{' '}
+        <Link to='/register' style={{ textDecoration: 'none' }}>
+          <Button>{iconRegister} Register</Button>
+        </Link>
       </div>
     </Fragment>
   );
@@ -89,14 +77,18 @@ const MainNavbar = () => {
 
           <Dropdown.Menu align='right'>
             <Dropdown.Item as='div'>
-              <Button variant='light' block>
-                {iconUserProfile} Your Profile
-              </Button>
+              <Link to='/profile' style={{ textDecoration: 'none' }}>
+                <Button variant='light' block>
+                  {iconUserProfile} Your Profile
+                </Button>
+              </Link>
             </Dropdown.Item>
             <Dropdown.Item as='div'>
-              <Button variant='light' block onClick={dashboard}>
-                {iconDashboard} Dashboard
-              </Button>
+              <Link to='/dashboard' style={{ textDecoration: 'none' }}>
+                <Button variant='light' block>
+                  {iconDashboard} Dashboard
+                </Button>
+              </Link>
             </Dropdown.Item>
             <Dropdown.Divider />
             <Dropdown.Item as='div'>
