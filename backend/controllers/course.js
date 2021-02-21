@@ -3,9 +3,8 @@ const Course = require('../models/Course');
 const Subject = require('../models/Subject');
 const CourseSubject = require('../models/CourseSubject');
 
-// TODO Remove this file
 // @desc    Create course with subject
-// @route   POST /api/v1/syllabus-manager/course
+// @route   POST /api/v1/course
 // @access  Private
 exports.createCourseWithSubject = async (req, res, next) => {
   const { course, subjects } = req.body;
@@ -13,9 +12,16 @@ exports.createCourseWithSubject = async (req, res, next) => {
     const courseSql = await Course.create(course);
     for (let i = 0; i < subjects.length; i++) {
       if (subjects[i].alreadyExists) {
-        const subject = await Subject.findOne({
-          subjectCode: subjects[i].subjectCode,
+        let subject = await Subject.findOne({
+          where: {
+            subjectCode: subjects[i].subjectCode,
+          },
         });
+        if (subject === null) {
+          return next(
+            new ErrorResponse('Error: Bad request subject not exists', 400)
+          );
+        }
         await courseSql.addSubject(subject);
         const subjectWithRef = await courseSql.getSubjects({
           where: { id: subject.id },
@@ -24,15 +30,16 @@ exports.createCourseWithSubject = async (req, res, next) => {
         courseSubject.semNo = subjects[i].semNo;
         await courseSubject.save();
       } else {
-        const { alreadyExists, semNo, ...rest } = subjects[i];
-        const newSubject = await Subject.create(rest);
-        await courseSql.addSubject(newSubject);
-        const subjectWithRef = await courseSql.getSubjects({
-          where: { id: newSubject.id },
-        });
-        const courseSubject = subjectWithRef[0].CourseSubject;
-        courseSubject.semNo = semNo;
-        await courseSubject.save();
+        // TODO Logic for not alreadyExists
+        // const { alreadyExists, semNo, ...rest } = subjects[i];
+        // const newSubject = await Subject.create(rest);
+        // await courseSql.addSubject(newSubject);
+        // const subjectWithRef = await courseSql.getSubjects({
+        //   where: { id: newSubject.id },
+        // });
+        // const courseSubject = subjectWithRef[0].CourseSubject;
+        // courseSubject.semNo = semNo;
+        // await courseSubject.save();
       }
     }
     res.status(200).json({

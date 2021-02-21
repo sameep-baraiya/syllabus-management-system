@@ -64,16 +64,7 @@ exports.createSubject = async (req, res, next) => {
 // @access  Private
 exports.getSubjects = async (req, res, next) => {
   try {
-    const subjects = await Subject.findAll();
-    const jsonSubcts = [];
-    subjects.forEach((it) => {
-      jsonSubcts.push(it.toJSON());
-    });
-
-    res.status(200).json({
-      success: true,
-      data: jsonSubcts,
-    });
+    res.status(200).json(res.advancedResults);
   } catch (err) {
     return next(err);
   }

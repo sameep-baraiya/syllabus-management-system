@@ -25,10 +25,14 @@ if (process.env.NODE_ENV === 'development') {
 // Rout files
 const auth = require('./routes/auth');
 const subject = require('./routes/subject');
+const course = require('./routes/course');
+const download = require('./routes/download');
 
 // Mount routers
 app.use('/api/v1/auth', auth);
 app.use('/api/v1/subject', subject);
+app.use('/api/v1/course', course);
+app.use('/api/v1/download', download);
 
 // Handle all error
 app.use(errorHandler);

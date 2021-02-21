@@ -1,6 +1,6 @@
 const ErrorResponse = require('../utils/ErrorResponse');
 
-const errorHandler = (err, req, res, next) => {
+const errorHandler = async (err, req, res, next) => {
   // Log to console for dev
   if (process.env.NODE_ENV === 'development') {
     console.log('-----ERROR-----'.red.underline);
