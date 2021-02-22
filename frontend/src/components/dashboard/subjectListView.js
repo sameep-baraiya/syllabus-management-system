@@ -3,6 +3,9 @@ import { Table } from 'react-bootstrap';
 import ReactJson from 'react-json-view';
 
 const subjectListView = (subjects = []) => {
+  if (subjects[0] === undefined) {
+    return <Fragment>No Result</Fragment>;
+  }
   const keys = Object.keys(subjects[0]);
   return (
     <Fragment>

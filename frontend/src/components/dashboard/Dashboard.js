@@ -1,10 +1,11 @@
 import React, { Fragment } from 'react';
 import { Link, Switch, Route } from 'react-router-dom';
 import { Row, Col, Card } from 'react-bootstrap';
-import { iconSubject } from '../layout/Icon';
+import { iconSubject, iconCourse } from '../layout/Icon';
 
 // Nested Syllabus Manager Route
 import FindSubjects from './FindSubjects';
+import FindCourse from './FindCourse';
 import DefaultDashboard from './DefaultDashboard';
 
 // Routing Componets
@@ -19,6 +20,10 @@ const Dashboard = (props) => {
       <Card.Body>
         <Card.Title>{iconSubject} Subject</Card.Title>
         <Link to='/dashboard/subject/'>• Find Subjects</Link>
+        <br />
+        <br />
+        <Card.Title>{iconCourse} Course</Card.Title>
+        <Link to='/dashboard/course/'>• Find Course</Link>
       </Card.Body>
     </Card>
   );
@@ -38,6 +43,11 @@ const Dashboard = (props) => {
               exact
               path='/dashboard/subject'
               component={FindSubjects}
+            />
+            <PrivateRoute
+              exact
+              path='/dashboard/course'
+              component={FindCourse}
             />
 
             <Route component={NotFound} />

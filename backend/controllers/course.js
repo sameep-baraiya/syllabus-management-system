@@ -49,3 +49,14 @@ exports.createCourseWithSubject = async (req, res, next) => {
     return next(err);
   }
 };
+
+// @desc    Get courses
+// @route   GET /api/v1/course
+// @access  Private
+exports.getCourses = async (req, res, next) => {
+  try {
+    res.status(200).json(res.advancedResults);
+  } catch (err) {
+    return next(err);
+  }
+};
