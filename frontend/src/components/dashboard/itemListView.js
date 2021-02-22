@@ -2,7 +2,7 @@ import { Fragment } from 'react';
 import { Table } from 'react-bootstrap';
 import ReactJson from 'react-json-view';
 
-const subjectListView = (subjects = []) => {
+const itemListView = (subjects = []) => {
   if (subjects[0] === undefined) {
     return <Fragment>No Result</Fragment>;
   }
@@ -82,4 +82,4 @@ const subjectListView = (subjects = []) => {
     </Fragment>
   );
 };
-export default subjectListView;
+export default itemListView;

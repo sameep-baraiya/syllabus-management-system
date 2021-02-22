@@ -20,9 +20,9 @@ import {
 } from '../layout/Icon';
 
 // Subject Views
-import SubjectCardView from './subjectCardView';
-import subjectListView from './subjectListView';
-import subjectJsonView from './subjectJsonView';
+import SubjectCardView from './SubjectCardView';
+import itemListView from './itemListView';
+import itemJsonView from './itemJsonView';
 
 const FindSubjects = () => {
   const subjectContext = useContext(SubjectContext);
@@ -553,11 +553,11 @@ const FindSubjects = () => {
         subjects.map((it, index) => {
           return SubjectCardView(it, index, downloadFile);
         })}
-      {subjects && viewMode === 'list' && subjectListView(subjects)}
+      {subjects && viewMode === 'list' && itemListView(subjects)}
       {subjects &&
         viewMode === 'json' &&
         subjects.map((it, index) => {
-          return subjectJsonView(it, index);
+          return itemJsonView(it, index);
         })}
       <br />
     </Fragment>

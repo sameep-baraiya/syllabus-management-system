@@ -19,8 +19,8 @@ import {
 } from '../layout/Icon';
 
 // Subject Views
-import subjectListView from './subjectListView';
-import subjectJsonView from './subjectJsonView';
+import itemListView from './itemListView';
+import itemJsonView from './itemJsonView';
 import CourseCardView from './CourseCardView';
 
 const FindCourse = () => {
@@ -513,11 +513,11 @@ const FindCourse = () => {
         courses.map((it, index) => {
           return CourseCardView(it, index);
         })}
-      {courses && viewMode === 'list' && subjectListView(courses)}
+      {courses && viewMode === 'list' && itemListView(courses)}
       {courses &&
         viewMode === 'json' &&
         courses.map((it, index) => {
-          return subjectJsonView(it, index);
+          return itemJsonView(it, index);
         })}
       <br />
     </Fragment>

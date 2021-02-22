@@ -14,7 +14,6 @@ import {
 const authReducer = (state, action) => {
   switch (action.type) {
     case GET_SUBJECTS:
-      console.log(action.payload.data);
       return {
         ...state,
         subjects: action.payload.data,
