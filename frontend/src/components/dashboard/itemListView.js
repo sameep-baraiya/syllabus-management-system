@@ -2,11 +2,11 @@ import { Fragment } from 'react';
 import { Table } from 'react-bootstrap';
 import ReactJson from 'react-json-view';
 
-const itemListView = (subjects = []) => {
-  if (subjects[0] === undefined) {
+const itemListView = (items = []) => {
+  if (items[0] === undefined) {
     return <Fragment>No Result</Fragment>;
   }
-  const keys = Object.keys(subjects[0]);
+  const keys = Object.keys(items[0]);
   return (
     <Fragment>
       <div style={{ overflow: 'auto' }}>
@@ -21,7 +21,7 @@ const itemListView = (subjects = []) => {
             </tr>
           </thead>
           <tbody>
-            {subjects.map((it, index) => {
+            {items.map((it, index) => {
               return (
                 <tr key={index}>
                   {keys.map((key, index) => {

@@ -1,14 +1,18 @@
 import React, { Fragment } from 'react';
 import { Link, Switch, Route } from 'react-router-dom';
 import { Row, Col, Card } from 'react-bootstrap';
-import { iconCreateCourse, iconCreateSubject } from '../layout/Icon';
+import {
+  iconCreateCourse,
+  iconCreateSubject,
+  iconAcademicBatch,
+} from '../layout/Icon';
 
-// TODO Improve this
 // Nested Syllabus Manager Route
 import CreateViaCSV from './CreateViaCSV';
 import CreateCourse from './CreateCourse';
 import DefaultSM from './DefaultSM';
 import CreateSubject from './CreateSubject';
+import CreateAcademicBatch from './CreateAcademicBatch';
 
 // Routing Componets
 import PrivateRoute from '../routing/PrivateRoute';
@@ -28,6 +32,10 @@ const SyllabusManager = (props) => {
         <br />
         <Card.Title>{iconCreateSubject} Create Subject</Card.Title>
         <Link to='/syllabus-manager/subject/'>• Create via UI</Link>
+        <br />
+        <br />
+        <Card.Title>{iconAcademicBatch} Create Academic Batch</Card.Title>
+        <Link to='/syllabus-manager/academic-batch'>• Create via UI</Link>
       </Card.Body>
     </Card>
   );
@@ -57,6 +65,11 @@ const SyllabusManager = (props) => {
               exact
               path='/syllabus-manager/subject'
               component={CreateSubject}
+            />
+            <PrivateRoute
+              exact
+              path='/syllabus-manager/academic-batch'
+              component={CreateAcademicBatch}
             />
             <Route component={NotFound} />
           </Switch>

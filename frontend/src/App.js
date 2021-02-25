@@ -27,6 +27,7 @@ import AuthState from './context/auth/AuthState';
 import SubjectState from './context/subject/SubjectState';
 import CourseState from './context/course/CourseState';
 import DownloadState from './context/download/DownloadState';
+import AcademicBatchState from './context/academicBatch/AcademicBatchState';
 
 function App() {
   return (
@@ -34,23 +35,25 @@ function App() {
       <SubjectState>
         <CourseState>
           <DownloadState>
-            <Router>
-              <Navbar />
-              <Container fluid>
-                <Switch>
-                  <Route exact path='/' component={Home} />
-                  <Route exact path='/about' component={About} />
-                  <Route exact path='/login' component={LogIn} />
-                  <Route exact path='/register' component={Register} />
-                  <PrivateRoute path='/dashboard' component={Dashboard} />
-                  <PrivateRoute
-                    path='/syllabus-manager'
-                    component={SyllabusManager}
-                  />
-                  <Route component={NotFound} />
-                </Switch>
-              </Container>
-            </Router>
+            <AcademicBatchState>
+              <Router>
+                <Navbar />
+                <Container fluid>
+                  <Switch>
+                    <Route exact path='/' component={Home} />
+                    <Route exact path='/about' component={About} />
+                    <Route exact path='/login' component={LogIn} />
+                    <Route exact path='/register' component={Register} />
+                    <PrivateRoute path='/dashboard' component={Dashboard} />
+                    <PrivateRoute
+                      path='/syllabus-manager'
+                      component={SyllabusManager}
+                    />
+                    <Route component={NotFound} />
+                  </Switch>
+                </Container>
+              </Router>
+            </AcademicBatchState>
           </DownloadState>
         </CourseState>
       </SubjectState>

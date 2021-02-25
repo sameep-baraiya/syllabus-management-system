@@ -29,6 +29,7 @@ import {
   faPen,
   faFlask,
   faPoll,
+  faGraduationCap,
 } from '@fortawesome/free-solid-svg-icons';
 
 const iconUser = <FontAwesomeIcon icon={faUser} />;
@@ -60,6 +61,7 @@ const iconJsonView = <FontAwesomeIcon icon={faFileCode} />;
 const iconTheory = <FontAwesomeIcon icon={faPen} />;
 const iconPractical = <FontAwesomeIcon icon={faFlask} />;
 const iconResult = <FontAwesomeIcon icon={faPoll} />;
+const iconAcademicBatch = <FontAwesomeIcon icon={faGraduationCap} />;
 
 export {
   iconUser,
@@ -91,4 +93,5 @@ export {
   iconTheory,
   iconPractical,
   iconResult,
+  iconAcademicBatch,
 };

@@ -28,3 +28,6 @@ export const CLEAR_COURSES = 'CLEAR_COURSES';
 // Download
 export const DOWNLOAD_FILE = 'DOWNLOAD_FILE';
 export const DOWNLOAD_ERROR = 'DOWNLOAD_ERROR';
+
+// Academic Batch
+export const CREATE_ACADEMIC_BATCH = 'CREATE_ACADEMIC_BATCH';

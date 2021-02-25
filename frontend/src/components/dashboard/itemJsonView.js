@@ -2,12 +2,12 @@ import { Fragment } from 'react';
 import { Card } from 'react-bootstrap';
 import ReactJson from 'react-json-view';
 
-const itemJsonView = (subject, index) => {
+const itemJsonView = (item, index) => {
   return (
     <Fragment key={index}>
       <Card>
         <Card.Body>
-          <ReactJson src={subject} />
+          <ReactJson src={item} />
         </Card.Body>
       </Card>
       <br />

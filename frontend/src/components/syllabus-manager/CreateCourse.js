@@ -11,7 +11,6 @@ import {
 import SubjectContext from '../../context/subject/subjectContext';
 import CourseContext from '../../context/course/courseContext';
 
-// TODO CreateCouse with Course Context
 const CreateCourse = () => {
   const subjectContext = useContext(SubjectContext);
   const courseContext = useContext(CourseContext);
