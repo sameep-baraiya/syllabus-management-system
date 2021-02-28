@@ -71,6 +71,4 @@ const encryptPassword = (password) => {
   return encryptedPassword;
 };
 
-User.sync();
-
 module.exports = User;

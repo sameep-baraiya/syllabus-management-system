@@ -1,7 +1,3 @@
-const User = require('../models/User');
-const Cousre = require('../models/Course');
-const Subject = require('../models/Subject');
-const CourseSubject = require('../models/CourseSubject');
 const colors = require('colors');
 
 // Setup readline
@@ -15,15 +11,16 @@ const dropAllTables = require('./dropAllTables');
 const insertDummyData = require('./insertDummyData');
 const showAllTables = require('./showAllTables');
 const courseWithSubject = require('./courseWithSubject');
+const modelSync = require('./modelSync');
 
 const devSteps = `
 1: Drop all tables from dev-database.
-2: Insert dummy data in dev-database.
-3: Show all tables data from dev-database.
-4: Show all course with related subject from dev-database.
+2: Sync(Create if not exist) all tables from dev-database.
+3: Insert dummy data in dev-database.
+4: Show all tables data from dev-database.
+5: Show all course with related subject's subject code from dev-database.
 > `;
 
-// TODO Rework
 const readQuestion = async () => {
   console.log(
     `Running scriptManager in ${process.env.NODE_ENV} mode`.green.inverse
@@ -35,12 +32,15 @@ const readQuestion = async () => {
         dropAllTables();
         break;
       case '2':
-        insertDummyData();
+        modelSync();
         break;
       case '3':
-        showAllTables();
+        insertDummyData();
         break;
       case '4':
+        showAllTables();
+        break;
+      case '5':
         courseWithSubject();
         break;
       default:
@@ -50,4 +50,4 @@ const readQuestion = async () => {
   });
 };
 
-setTimeout(readQuestion, 2000);
+readQuestion();

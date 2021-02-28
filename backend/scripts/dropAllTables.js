@@ -2,17 +2,20 @@ const User = require('../models/User');
 const Cousre = require('../models/Course');
 const Subject = require('../models/Subject');
 const CourseSubject = require('../models/CourseSubject');
+const AcademicBatch = require('../models/AcademicBatch');
 
 const dropAllTable = async () => {
   try {
-    User.drop();
+    await User.drop();
     console.log('User table dropped!');
-    CourseSubject.drop();
+    await CourseSubject.drop();
     console.log('CourseSubject table dropped!');
-    Cousre.drop();
+    await Cousre.drop();
     console.log('Cousre table dropped!');
-    Subject.drop();
+    await Subject.drop();
     console.log('Subject table dropped!');
+    await AcademicBatch.drop();
+    console.log('Academic Batch table dropped!');
   } catch (err) {
     console.error(err);
   }

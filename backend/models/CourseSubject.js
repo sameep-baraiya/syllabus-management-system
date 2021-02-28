@@ -34,23 +34,11 @@ CourseSubject.init(
   }
 );
 
-const initCourseAndSubjectModel = async () => {
-  try {
-    Course.belongsToMany(Subject, {
-      through: CourseSubject,
-    });
-    Subject.belongsToMany(Course, {
-      through: CourseSubject,
-    });
-
-    await Subject.sync();
-    await Course.sync();
-    await CourseSubject.sync();
-  } catch (err) {
-    console.error(err);
-  }
-};
-
-initCourseAndSubjectModel();
+Course.belongsToMany(Subject, {
+  through: CourseSubject,
+});
+Subject.belongsToMany(Course, {
+  through: CourseSubject,
+});
 
 module.exports = CourseSubject;

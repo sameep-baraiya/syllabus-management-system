@@ -32,6 +32,4 @@ AcademicBatch.init(
   }
 );
 
-AcademicBatch.sync();
-
 module.exports = AcademicBatch;
