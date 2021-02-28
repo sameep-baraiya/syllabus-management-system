@@ -13,12 +13,23 @@ import {
   iconSyllabusManger,
 } from './Icon';
 import { Link } from 'react-router-dom';
-import { Navbar, Button, Nav, Dropdown, ButtonGroup } from 'react-bootstrap';
+import {
+  Navbar,
+  Button,
+  Nav,
+  Dropdown,
+  ButtonGroup,
+  Spinner,
+} from 'react-bootstrap';
 import AuthContext from '../../context/auth/authContext';
+import LoadingContext from '../../context/loading/loadingContext';
 
 const MainNavbar = () => {
   const authContext = useContext(AuthContext);
+  const loadingContext = useContext(LoadingContext);
+
   const { isAuthenticated, user, loadUser, logout } = authContext;
+  const { loading } = loadingContext;
 
   useEffect(() => {
     loadUser();
@@ -43,6 +54,11 @@ const MainNavbar = () => {
         </Nav.Link>
       </Nav>
       <div>
+        {loading ? (
+          <Fragment>
+            <Spinner animation='border' variant='light' size='sm' />{' '}
+          </Fragment>
+        ) : null}
         <Link to='/login' style={{ textDecoration: 'none' }}>
           <Button variant='secondary'>{iconLogIn} Log In</Button>
         </Link>{' '}
@@ -67,6 +83,11 @@ const MainNavbar = () => {
         </Nav.Link>
       </Nav>
       <div>
+        {loading ? (
+          <Fragment>
+            <Spinner animation='border' variant='light' size='sm' />{' '}
+          </Fragment>
+        ) : null}
         <Button variant='warning'>{iconNotification}</Button>{' '}
         <Dropdown as={ButtonGroup}>
           <Button variant='success'>

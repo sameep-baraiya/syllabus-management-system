@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useContext } from 'react';
 import axios from 'axios';
 import SubjectContext from './subjectContext';
 import subjectReducer from './subjectReducer';
@@ -9,13 +9,15 @@ import {
   CREATE_SUBJECT,
   CLEAR_ERRORS,
   SUBJECTS_ERROR,
-  SET_LOADING,
-  RESET_LOADING,
   CREATE_ERROR,
   CLEAR_SUBJECTS,
 } from '../types';
+import LoadingContext from '../loading/loadingContext';
 
 const SubjectState = (props) => {
+  const loadingContext = useContext(LoadingContext);
+  const { setLoading, resetLoading } = loadingContext;
+
   const initialState = {
     subject: null,
     subjects: null,
@@ -109,19 +111,12 @@ const SubjectState = (props) => {
   // Clear Errors
   const clearErrors = () => dispatch({ type: CLEAR_ERRORS });
 
-  // Set Loading
-  const setLoading = () => dispatch({ type: SET_LOADING });
-
-  // Reset Loading
-  const resetLoading = () => dispatch({ type: RESET_LOADING });
-
   // Clear Subjects
   const clearSubjects = () => dispatch({ type: CLEAR_SUBJECTS });
 
   return (
     <SubjectContext.Provider
       value={{
-        loading: state.loading,
         subject: state.subject,
         subjects: state.subjects,
         error: state.error,
@@ -129,8 +124,6 @@ const SubjectState = (props) => {
         total: state.total,
         getSubjects,
         clearErrors,
-        setLoading,
-        resetLoading,
         createSubject,
         clearSubjects,
       }}

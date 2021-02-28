@@ -1,9 +1,7 @@
 import {
   CLEAR_ERRORS,
-  SET_LOADING,
   GET_COURSES,
   COURSES_ERROR,
-  RESET_LOADING,
   CREATE_COURSE,
   CREATE_ERROR,
   CLEAR_COURSES,
@@ -41,16 +39,6 @@ const authReducer = (state, action) => {
       return {
         ...state,
         error: null,
-      };
-    case SET_LOADING:
-      return {
-        ...state,
-        loading: true,
-      };
-    case RESET_LOADING:
-      return {
-        ...state,
-        loading: false,
       };
     default:
       return state;

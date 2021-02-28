@@ -1,5 +1,6 @@
 const ErrorResponse = require('../utils/ErrorResponse');
 
+// TODO Improve this by warping error with ErrorResponse class.
 const errorHandler = async (err, req, res, next) => {
   // Log to console for dev
   if (process.env.NODE_ENV === 'development') {

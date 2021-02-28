@@ -1,10 +1,4 @@
-import {
-  CLEAR_ERRORS,
-  SET_LOADING,
-  RESET_LOADING,
-  DOWNLOAD_FILE,
-  DOWNLOAD_ERROR,
-} from '../types';
+import { CLEAR_ERRORS, DOWNLOAD_FILE, DOWNLOAD_ERROR } from '../types';
 
 const downloadReducer = (state, action) => {
   switch (action.type) {
@@ -17,16 +11,6 @@ const downloadReducer = (state, action) => {
       return {
         ...state,
         error: null,
-      };
-    case SET_LOADING:
-      return {
-        ...state,
-        loading: true,
-      };
-    case RESET_LOADING:
-      return {
-        ...state,
-        loading: false,
       };
     case DOWNLOAD_FILE:
     default:

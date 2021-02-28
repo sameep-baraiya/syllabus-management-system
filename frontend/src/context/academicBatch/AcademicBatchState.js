@@ -1,22 +1,19 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useContext } from 'react';
 import axios from 'axios';
 import AcademicBatchContext from './academicBatchContext';
 import academicBatchReducer from './academicBatchReducer';
-import {
-  CREATE_ACADEMIC_BATCH,
-  CLEAR_ERRORS,
-  SET_LOADING,
-  RESET_LOADING,
-  CREATE_ERROR,
-} from '../types';
+import { CREATE_ACADEMIC_BATCH, CLEAR_ERRORS, CREATE_ERROR } from '../types';
+import LoadingContext from '../loading/loadingContext';
 
 const SubjectState = (props) => {
+  const loadingContext = useContext(LoadingContext);
+  const { setLoading, resetLoading } = loadingContext;
+
   const initialState = {
     academicBatch: null,
     academicBatchs: null,
     pagination: null,
     total: 0,
-    loading: false,
     error: null,
   };
 
@@ -51,24 +48,15 @@ const SubjectState = (props) => {
   // Clear Errors
   const clearErrors = () => dispatch({ type: CLEAR_ERRORS });
 
-  // Set Loading
-  const setLoading = () => dispatch({ type: SET_LOADING });
-
-  // Reset Loading
-  const resetLoading = () => dispatch({ type: RESET_LOADING });
-
   return (
     <AcademicBatchContext.Provider
       value={{
-        loading: state.loading,
         academicBatch: state.academicBatch,
         academicBatchs: state.academicBatchs,
         error: state.error,
         pagination: state.pagination,
         total: state.total,
         clearErrors,
-        setLoading,
-        resetLoading,
         createAcademicBatch,
       }}
     >

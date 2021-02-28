@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useContext } from 'react';
 import axios from 'axios';
 import CourseContext from './courseContext';
 import courseReducer from './courseReducer';
@@ -7,19 +7,20 @@ import {
   COURSES_ERROR,
   CREATE_COURSE,
   CLEAR_ERRORS,
-  SET_LOADING,
-  RESET_LOADING,
   CREATE_ERROR,
   CLEAR_COURSES,
 } from '../types';
+import LoadingContext from '../loading/loadingContext';
 
 const SubjectState = (props) => {
+  const loadingContext = useContext(LoadingContext);
+  const { setLoading, resetLoading } = loadingContext;
+
   const initialState = {
     course: null,
     courses: null,
     pagination: null,
     total: 0,
-    loading: false,
     error: null,
   };
 
@@ -99,27 +100,18 @@ const SubjectState = (props) => {
   // Clear Errors
   const clearErrors = () => dispatch({ type: CLEAR_ERRORS });
 
-  // Set Loading
-  const setLoading = () => dispatch({ type: SET_LOADING });
-
-  // Reset Loading
-  const resetLoading = () => dispatch({ type: RESET_LOADING });
-
   // Clear Courses
   const clearCourses = () => dispatch({ type: CLEAR_COURSES });
 
   return (
     <CourseContext.Provider
       value={{
-        loading: state.loading,
         course: state.course,
         courses: state.courses,
         error: state.error,
         pagination: state.pagination,
         total: state.total,
         clearErrors,
-        setLoading,
-        resetLoading,
         createCourse,
         getCourses,
         clearCourses,

@@ -14,8 +14,6 @@ export const GET_SUBJECTS = 'GET_SUBJECTS';
 export const GET_SUBJECT = 'GET_SUBJECT';
 export const CREATE_SUBJECT = 'CREATE_SUBJECT';
 export const SUBJECTS_ERROR = 'SUBJECTS_ERROR';
-export const SET_LOADING = 'SET_LOADING';
-export const RESET_LOADING = 'RESET_LOADING';
 export const CREATE_ERROR = 'CREATE_ERROR';
 export const CLEAR_SUBJECTS = 'CLEAR_SUBJECTS';
 
@@ -31,3 +29,11 @@ export const DOWNLOAD_ERROR = 'DOWNLOAD_ERROR';
 
 // Academic Batch
 export const CREATE_ACADEMIC_BATCH = 'CREATE_ACADEMIC_BATCH';
+
+// Alert
+export const SET_ALERT = 'SET_ALERT';
+export const RESET_ALERT = 'RESET_ALERT';
+
+// Loading
+export const SET_LOADING = 'SET_LOADING';
+export const RESET_LOADING = 'RESET_LOADING';

@@ -4,8 +4,6 @@ import {
   // ADD_SUBJECT,
   CLEAR_ERRORS,
   SUBJECTS_ERROR,
-  SET_LOADING,
-  RESET_LOADING,
   CREATE_SUBJECT,
   CREATE_ERROR,
   CLEAR_SUBJECTS,
@@ -48,16 +46,6 @@ const authReducer = (state, action) => {
       return {
         ...state,
         error: null,
-      };
-    case SET_LOADING:
-      return {
-        ...state,
-        loading: true,
-      };
-    case RESET_LOADING:
-      return {
-        ...state,
-        loading: false,
       };
     default:
       return state;

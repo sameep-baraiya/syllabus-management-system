@@ -115,7 +115,7 @@ const SubjectCardView = (subject, index, downloadCallback) => {
               {practical}
             </Fragment>
           )}
-          {files !== null && (
+          {files && (
             <Fragment>
               <br />
               <strong>Files :</strong>

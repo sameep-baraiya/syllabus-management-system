@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useContext } from 'react';
 import axios from 'axios';
 import AuthContext from './authContext';
 import authReducer from './authReducer';
@@ -14,13 +14,20 @@ import {
   CLEAR_ERRORS,
   CLEAR_REGISTRATION_DONE,
 } from '../types';
+import LoadingContext from '../loading/loadingContext';
+import AlertContext from '../alert/alertContext';
 
 const AuthState = (props) => {
+  const loadingContext = useContext(LoadingContext);
+  const { setLoading, resetLoading } = loadingContext;
+
+  const alertContext = useContext(AlertContext);
+  const { setAlert } = alertContext;
+
   const initialState = {
     token: localStorage.getItem('dsms-token'),
     isAuthenticated: null,
     registrationDone: false,
-    loading: true,
     user: null,
     error: null,
   };
@@ -29,6 +36,7 @@ const AuthState = (props) => {
 
   // Load User
   const loadUser = async () => {
+    setLoading();
     setAuthToken(localStorage.getItem('dsms-token'));
 
     try {
@@ -39,12 +47,16 @@ const AuthState = (props) => {
         payload: res.data,
       });
     } catch (err) {
+      setAlert('User data not found, Please login to system', 'warning');
       dispatch({ type: AUTH_ERROR });
+    } finally {
+      resetLoading();
     }
   };
 
   // Register User
   const register = async (formData) => {
+    setLoading();
     const config = {
       headers: {
         'Content-Type': 'application/json',
@@ -59,16 +71,20 @@ const AuthState = (props) => {
         payload: res.data,
       });
     } catch (err) {
-      console.error('Error in register', err);
+      // TODO Error handling
+      // setAlert(err.response.data.msg, 'danger');
       dispatch({
         type: REGISTER_FAIL,
         payload: err.response.data.msg,
       });
+    } finally {
+      resetLoading();
     }
   };
 
   // Login User
   const login = async (formData) => {
+    setLoading();
     const config = {
       headers: {
         'Content-Type': 'application/json',
@@ -89,6 +105,7 @@ const AuthState = (props) => {
         payload: err.response.data.msg,
       });
     }
+    resetLoading();
   };
 
   // Logout
@@ -107,7 +124,6 @@ const AuthState = (props) => {
         token: state.token,
         isAuthenticated: state.isAuthenticated,
         registrationDone: state.registrationDone,
-        loading: state.loading,
         user: state.user,
         error: state.error,
         register,

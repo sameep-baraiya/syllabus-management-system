@@ -1,16 +1,14 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useContext } from 'react';
 import axios from 'axios';
 import DownloadContext from './downloadContext';
 import downloadReducer from './downloadReducer';
-import {
-  CLEAR_ERRORS,
-  SET_LOADING,
-  RESET_LOADING,
-  DOWNLOAD_FILE,
-  DOWNLOAD_ERROR,
-} from '../types';
+import { CLEAR_ERRORS, DOWNLOAD_FILE, DOWNLOAD_ERROR } from '../types';
+import LoadingContext from '../loading/loadingContext';
 
-const SubjectState = (props) => {
+const DownloadState = (props) => {
+  const loadingContext = useContext(LoadingContext);
+  const { setLoading, resetLoading } = loadingContext;
+
   const initialState = {
     loading: false,
     error: null,
@@ -48,21 +46,12 @@ const SubjectState = (props) => {
   // Clear Errors
   const clearErrors = () => dispatch({ type: CLEAR_ERRORS });
 
-  // Set Loading
-  const setLoading = () => dispatch({ type: SET_LOADING });
-
-  // Reset Loading
-  const resetLoading = () => dispatch({ type: RESET_LOADING });
-
   return (
     <DownloadContext.Provider
       value={{
-        loading: state.loading,
         error: state.error,
         download,
         clearErrors,
-        setLoading,
-        resetLoading,
       }}
     >
       {props.children}
@@ -70,4 +59,4 @@ const SubjectState = (props) => {
   );
 };
 
-export default SubjectState;
+export default DownloadState;

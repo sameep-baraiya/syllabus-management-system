@@ -30,6 +30,10 @@ import {
   faFlask,
   faPoll,
   faGraduationCap,
+  faCheckCircle,
+  faExclamationCircle,
+  faExclamationTriangle,
+  faQuestionCircle,
 } from '@fortawesome/free-solid-svg-icons';
 
 const iconUser = <FontAwesomeIcon icon={faUser} />;
@@ -62,6 +66,19 @@ const iconTheory = <FontAwesomeIcon icon={faPen} />;
 const iconPractical = <FontAwesomeIcon icon={faFlask} />;
 const iconResult = <FontAwesomeIcon icon={faPoll} />;
 const iconAcademicBatch = <FontAwesomeIcon icon={faGraduationCap} />;
+const fucIconAlert = (variant) => {
+  switch (variant) {
+    case 'success':
+      return <FontAwesomeIcon icon={faCheckCircle}></FontAwesomeIcon>;
+    case 'danger':
+      return <FontAwesomeIcon icon={faExclamationTriangle}></FontAwesomeIcon>;
+    case 'warning':
+      return <FontAwesomeIcon icon={faExclamationCircle}></FontAwesomeIcon>;
+    case 'info':
+    default:
+      return <FontAwesomeIcon icon={faQuestionCircle}></FontAwesomeIcon>;
+  }
+};
 
 export {
   iconUser,
@@ -94,4 +111,5 @@ export {
   iconPractical,
   iconResult,
   iconAcademicBatch,
+  fucIconAlert,
 };
