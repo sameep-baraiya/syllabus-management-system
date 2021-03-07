@@ -1,5 +1,7 @@
 const { sequelize } = require('../config/databaseInit');
 const { DataTypes, Model } = require('sequelize');
+const CRUDLog = require('./CRUDLog');
+const { departmentArray } = require('../common/department');
 
 class Subject extends Model {}
 
@@ -22,14 +24,7 @@ Subject.init(
     },
     department: {
       type: DataTypes.ENUM,
-      values: [
-        'CH - Chemical Engineering',
-        'CI - Civil Engineering',
-        'CE - Computer Engineering',
-        'EC - Electronic Engineering',
-        'ME - Mechanical Engineering',
-        'IT - Information Technology',
-      ],
+      values: departmentArray,
       allowNull: false,
     },
     headMasterJSON: {
@@ -44,6 +39,14 @@ Subject.init(
     },
     practical: {
       type: DataTypes.TEXT,
+    },
+    semNo: {
+      type: DataTypes.SMALLINT.UNSIGNED,
+      allowNull: false,
+    },
+    listIndex: {
+      type: DataTypes.SMALLINT.UNSIGNED,
+      allowNull: false,
     },
     files: {
       type: DataTypes.JSON,
@@ -61,12 +64,43 @@ Subject.init(
       type: DataTypes.SMALLINT.UNSIGNED,
       allowNull: false,
     },
+    isFreezed: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
+    },
+    crudInfo: {
+      type: DataTypes.JSON,
+    },
   },
   {
     sequelize: sequelize,
     modelName: 'Subject',
     tableName: 'Subject',
     timestamps: true,
+    hooks: {
+      afterCreate: async (subject, options) => {
+        try {
+          switch (subject.crudInfo.type) {
+            case 'SUBJECT_CREATE':
+              await CRUDLog.create({
+                msg: `Subject ${subject.subjectName} Created`,
+                type: 'CREATE',
+                model: 'Subject',
+                by: subject.crudInfo.by,
+              });
+              break;
+            default:
+              await CRUDLog.create({
+                msg: 'Unexpected crudInfo Model Subject, Opertaion Create',
+              });
+              break;
+          }
+        } catch (err) {
+          console.error(err);
+        }
+      },
+    },
   }
 );
 

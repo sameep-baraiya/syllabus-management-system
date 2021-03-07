@@ -47,6 +47,11 @@ const SubjectState = (props) => {
           query.sortBy !== undefined ? `&sortBy=${query.sortBy}` : '';
         const search =
           query.search !== undefined ? `&search=${query.search}` : '';
+        const nestSelect =
+          query.nestSelect !== undefined
+            ? `&nestSelect=${query.nestSelect}`
+            : '';
+
         let attributes = '';
         if (query.attributes !== undefined) {
           Object.keys(query.attributes).forEach((key) => {
@@ -54,7 +59,14 @@ const SubjectState = (props) => {
           });
         }
         const searchQuery =
-          sort + select + page + limit + sortBy + attributes + search;
+          sort +
+          select +
+          page +
+          limit +
+          sortBy +
+          attributes +
+          search +
+          nestSelect;
 
         res = await axios.get('/api/v1/subject' + searchQuery);
       }

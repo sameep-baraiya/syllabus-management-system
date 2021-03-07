@@ -28,6 +28,8 @@ const subject = require('./routes/subject');
 const course = require('./routes/course');
 const download = require('./routes/download');
 const academicBatch = require('./routes/academicBatch');
+const bosMeeting = require('./routes/bosMeeting');
+const acMeeting = require('./routes/acMeeting');
 
 // Mount routers
 app.use('/api/v1/auth', auth);
@@ -35,6 +37,8 @@ app.use('/api/v1/subject', subject);
 app.use('/api/v1/course', course);
 app.use('/api/v1/download', download);
 app.use('/api/v1/academic-batch', academicBatch);
+app.use('/api/v1/bosmeeting', bosMeeting);
+app.use('/api/v1/acmeeting', acMeeting);
 
 // Handle all error
 app.use(errorHandler);

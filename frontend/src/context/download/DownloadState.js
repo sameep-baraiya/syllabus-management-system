@@ -16,17 +16,17 @@ const DownloadState = (props) => {
 
   const [state, dispatch] = useReducer(downloadReducer, initialState);
 
-  // Get Subjects
-  const download = async (filename) => {
+  // Download File Based On Path
+  const download = async (filepath) => {
     setLoading();
     try {
-      const res = await axios.get(`/api/v1/download/${filename}`, {
+      const res = await axios.get(`/api/v1/download/${filepath}`, {
         responseType: 'blob',
       });
       const url = window.URL.createObjectURL(new Blob([res.data]));
       const link = document.createElement('a');
       link.href = url;
-      link.setAttribute('download', filename);
+      link.setAttribute('download', filepath.split('/').pop());
       document.body.appendChild(link);
       link.click();
       dispatch({

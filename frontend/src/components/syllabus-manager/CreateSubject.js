@@ -1,10 +1,40 @@
-import React, { Fragment, useState, useContext } from 'react';
-import { Form, Button, Table, Card, Row, Col } from 'react-bootstrap';
+import React, { Fragment, useState, useContext, useEffect } from 'react';
+import {
+  Form,
+  Button,
+  Table,
+  Card,
+  Row,
+  Col,
+  InputGroup,
+  FormControl,
+} from 'react-bootstrap';
 import SubjectContext from '../../context/subject/subjectContext';
+import SubjectCardView from '../dashboard/SubjectCardView';
 
+// TODO V1 Create Subject
 const CreateSubject = () => {
   const subjectContext = useContext(SubjectContext);
-  const { createSubject } = subjectContext;
+  const {
+    createSubject,
+    clearSubjects,
+    getSubjects,
+    subjects,
+  } = subjectContext;
+
+  const [searchQuery, setSearchQuery] = useState({
+    search: '',
+    attributes: { isOutdated: false },
+    select: 'subjectCode,subjectName,subjectShort,department',
+  });
+  const { search } = searchQuery;
+
+  const [isClone, setIsClone] = useState(false);
+
+  useEffect(() => {
+    clearSubjects();
+    // eslint-disable-next-line
+  }, [search]);
 
   const [reqObj, setReqObj] = useState({
     subjectCode: '',
@@ -123,30 +153,32 @@ const CreateSubject = () => {
       department: 'None',
       headMasterJSON: {
         headMasters: [
-          'Theory',
-          'Sessional',
-          'Practical',
-          'Term Work',
           'Lecture',
           'Tutorial',
           'Practical',
           'L+T',
           'P',
-          'Total',
+          'Total CS',
+          'Theory',
+          'Sessional',
+          'Practical',
+          'Term Work',
+          'Total ES',
         ],
         headGroups: [
-          'Exam Scheme',
-          'Exam Scheme',
-          'Exam Scheme',
-          'Exam Scheme',
           'Teaching Scheme',
           'Teaching Scheme',
           'Teaching Scheme',
           'Credit Structure',
           'Credit Structure',
-          'Total',
+          'Credit Structure',
+          'Exam Scheme',
+          'Exam Scheme',
+          'Exam Scheme',
+          'Exam Scheme',
+          'Exam Scheme',
         ],
-        points: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        points: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       },
       theory: '',
       isElective: false,
@@ -167,8 +199,152 @@ const CreateSubject = () => {
       createSubject(reqObj);
     }
   };
+  const onSearchInputChange = (e) => {
+    setSearchQuery({
+      ...searchQuery,
+      search: e.target.value,
+    });
+  };
+
+  const onSearch = (e) => {
+    getSubjects(searchQuery);
+  };
+
+  const onGet = (e) => {
+    getSubjects({
+      search: e.target.name,
+    });
+    setIsClone(true);
+  };
+
+  const onClone = (e) => {
+    const {
+      subjectName,
+      subjectShort,
+      subjectDescription,
+      department,
+      headMasterJSON,
+      theory,
+      isElective,
+      practical,
+    } = subjects[0];
+    setReqObj({
+      subjectCode: '',
+      subjectName: subjectName !== null ? subjectName : '',
+      subjectShort: subjectShort !== null ? subjectShort : '',
+      subjectDescription: subjectDescription !== null ? subjectDescription : '',
+      department: department !== null ? department : 'None',
+      headMasterJSON:
+        headMasterJSON !== null
+          ? headMasterJSON
+          : {
+              headMasters: [
+                'Lecture',
+                'Tutorial',
+                'Practical',
+                'L+T',
+                'P',
+                'Total CS',
+                'Theory',
+                'Sessional',
+                'Practical',
+                'Term Work',
+                'Total ES',
+              ],
+              headGroups: [
+                'Teaching Scheme',
+                'Teaching Scheme',
+                'Teaching Scheme',
+                'Credit Structure',
+                'Credit Structure',
+                'Credit Structure',
+                'Exam Scheme',
+                'Exam Scheme',
+                'Exam Scheme',
+                'Exam Scheme',
+                'Exam Scheme',
+              ],
+              points: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            },
+      theory: theory !== null ? theory : '',
+      isElective: isElective !== null ? isElective : false,
+      practical: practical !== null ? practical : '',
+      files: [{ name: '', file: null }],
+    });
+  };
+
+  const getMode = (
+    <Form>
+      <Card bg='light'>
+        <Card.Body>
+          <Form.Group controlId='smSubjectSearch'>
+            <Form.Label>Search Subjects</Form.Label>
+            <InputGroup className='mb-3'>
+              <FormControl
+                name='searchQuery'
+                type='text'
+                placeholder='Search by Subject Code, Subject Name, Subject Short'
+                value={search}
+                onChange={onSearchInputChange}
+              />
+              <InputGroup.Append>
+                <Button variant='outline-success' onClick={onSearch}>
+                  Search
+                </Button>
+              </InputGroup.Append>
+            </InputGroup>
+          </Form.Group>
+          <Form.Group controlId='smSearchResult'>
+            <Form.Label>Select Subject</Form.Label>
+            {subjects &&
+              subjects.map((sub, index) => {
+                return (
+                  <div key={index} style={{ paddingBottom: '8px' }}>
+                    <Button
+                      name={sub.subjectCode}
+                      variant='info'
+                      onClick={onGet}
+                    >
+                      Get
+                    </Button>{' '}
+                    {sub.subjectCode},{sub.subjectName} ({sub.subjectShort})
+                  </div>
+                );
+              })}
+          </Form.Group>
+        </Card.Body>
+      </Card>
+    </Form>
+  );
+
+  const cloneMode = subjects && (
+    <Card bg='light'>
+      <Card.Body>
+        <div>
+          Clone Following Subject{' '}
+          <Button variant='success' onClick={onClone}>
+            Clone
+          </Button>{' '}
+          <Button
+            variant='warning'
+            onClick={(e) => {
+              setIsClone(false);
+            }}
+          >
+            Back to Search
+          </Button>{' '}
+          (Will not clone files)
+        </div>
+        {SubjectCardView(subjects[0], 0)}
+      </Card.Body>
+    </Card>
+  );
   return (
     <Fragment>
+      <h3>Clone Subject</h3>
+      {isClone ? cloneMode : getMode}
+      <hr />
+      <h3>Create Subject</h3>
       <Form onSubmit={onSubmit}>
         <Form.Group controlId='smSubjectCode'>
           <Form.Label>Subject Code</Form.Label>

@@ -12,8 +12,10 @@ const insertDummyData = require('./insertDummyData');
 const showAllTables = require('./showAllTables');
 const courseWithSubject = require('./courseWithSubject');
 const modelSync = require('./modelSync');
+const modelSyncForced = require('./modelSyncForced');
 
 const devSteps = `
+0: ModelSyncForced (drop->create) from dev-database.
 1: Drop all tables from dev-database.
 2: Sync(Create if not exist) all tables from dev-database.
 3: Insert dummy data in dev-database.
@@ -28,6 +30,9 @@ const readQuestion = async () => {
   readline.question(devSteps, (no) => {
     console.log(`Excuting step ${no}`.green.inverse);
     switch (no) {
+      case '0':
+        modelSyncForced();
+        break;
       case '1':
         dropAllTables();
         break;

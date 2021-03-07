@@ -1,6 +1,10 @@
 const { Op } = require('sequelize');
 const ErrorResponse = require('../utils/ErrorResponse');
-const advancedResult = (Model, searchFields = []) => async (req, res, next) => {
+const advancedResult = (Model, searchFields = [], NestModel) => async (
+  req,
+  res,
+  next
+) => {
   try {
     console.log(req.query);
     const query = { ...req.query };
@@ -13,6 +17,7 @@ const advancedResult = (Model, searchFields = []) => async (req, res, next) => {
       'limit',
       'sortBy',
       'search',
+      'nestSelect',
     ];
     removeFields.forEach((param) => delete query[param]);
 
@@ -59,6 +64,10 @@ const advancedResult = (Model, searchFields = []) => async (req, res, next) => {
         `${req.query.sort || 'ASC'}`,
       ],
     ];
+    const include = req.query.nestSelect && {
+      model: NestModel,
+      attributes: req.query.nestSelect && req.query.nestSelect.split(','),
+    };
 
     if (req.query.search !== undefined) {
       const searchQuery = req.query.search;
@@ -86,6 +95,7 @@ const advancedResult = (Model, searchFields = []) => async (req, res, next) => {
       offset,
       order,
       attributes: req.query.select && req.query.select.split(','),
+      include: include,
     });
 
     // page start from 0

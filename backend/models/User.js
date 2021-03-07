@@ -2,6 +2,7 @@ const { sequelize } = require('../config/databaseInit');
 const { DataTypes, Model } = require('sequelize');
 const bcryptjs = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const CRUDLog = require('./CRUDLog');
 
 class User extends Model {
   getSignedJwtToken() {
@@ -56,12 +57,39 @@ User.init(
       type: DataTypes.BOOLEAN,
       defaultValue: false,
     },
+    crudInfo: {
+      type: DataTypes.JSON,
+    },
   },
   {
     sequelize: sequelize,
     modelName: 'User',
     tableName: 'User',
     timestamps: true,
+    hooks: {
+      afterCreate: async (user, options) => {
+        try {
+          switch (user.crudInfo.type) {
+            case 'USER_CREATE':
+              await CRUDLog.create({
+                msg: `User ${user.name} Created`,
+                type: 'CREATE',
+                model: 'User',
+                by: user.crudInfo.by,
+              });
+              break;
+            default:
+              await CRUDLog.create({
+                msg: 'Unexpected crudInfo Model User, Opertaion Create',
+              });
+              break;
+          }
+        } catch (err) {
+          console.error(err);
+          throw err;
+        }
+      },
+    },
   }
 );
 

@@ -1,5 +1,6 @@
 const { sequelize } = require('../config/databaseInit');
 const { DataTypes, Model } = require('sequelize');
+const Course = require('./Course');
 
 class AcademicBatch extends Model {}
 
@@ -20,9 +21,6 @@ AcademicBatch.init(
       type: DataTypes.STRING(9),
       allowNull: false,
     },
-    coursesObj: {
-      type: DataTypes.JSON,
-    },
   },
   {
     sequelize: sequelize,
@@ -31,5 +29,8 @@ AcademicBatch.init(
     timestamps: true,
   }
 );
+
+Course.hasMany(AcademicBatch);
+AcademicBatch.belongsTo(Course);
 
 module.exports = AcademicBatch;

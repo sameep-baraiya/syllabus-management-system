@@ -1,10 +1,13 @@
 const express = require('express');
 const multer = require('multer');
+const mkdirp = require('mkdirp');
 var mime = require('mime-types');
 const Subject = require('../models/Subject');
+const Course = require('../models/Course');
 var storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, './uploads');
+    const dir = './uploads/Subjects';
+    mkdirp(dir, (err) => cb(err, dir));
   },
   filename: (req, file, cb) => {
     cb(
@@ -29,7 +32,11 @@ router
   .route('/')
   .get(
     protect,
-    advancedResult(Subject, ['subjectCode', 'subjectName', 'subjectShort']),
+    advancedResult(
+      Subject,
+      ['subjectCode', 'subjectName', 'subjectShort'],
+      Course
+    ),
     getSubjects
   );
 

@@ -10,17 +10,32 @@ import {
 } from 'react-bootstrap';
 import SubjectContext from '../../context/subject/subjectContext';
 import CourseContext from '../../context/course/courseContext';
+import CourseCardView from '../dashboard/CourseCardView';
 
 const CreateCourse = () => {
   const subjectContext = useContext(SubjectContext);
   const courseContext = useContext(CourseContext);
 
   const { subjects, getSubjects, clearSubjects } = subjectContext;
-  const { createCourse } = courseContext;
+  const { createCourse, getCourses, clearCourses, courses } = courseContext;
+
+  const [searchQueryC, setSearchQueryC] = useState({
+    search: '',
+    attributes: { isOutdated: false },
+    select: 'courseCode',
+  });
+
+  useEffect(() => {
+    console.log('useEffect');
+    clearCourses();
+    // eslint-disable-next-line
+  }, [searchQueryC.search]);
+
+  const [isClone, setIsClone] = useState(false);
 
   const [searchQuery, setSearchQuery] = useState({
     search: '',
-    attributes: [['isOutdated', 'fasle']],
+    attributes: { isOutdated: false },
     select: 'subjectCode,subjectName,subjectShort,department',
   });
   const { search } = searchQuery;
@@ -66,7 +81,6 @@ const CreateCourse = () => {
     e.preventDefault();
     if (
       courseCode === '' ||
-      courseDescription === '' ||
       courseType === 'None' ||
       department === 'None' ||
       courseLength === 0 ||
@@ -190,8 +204,130 @@ const CreateCourse = () => {
     });
     sortSubjects();
   };
+
+  const onSearchInputChangeC = (e) => {
+    setSearchQueryC({
+      ...searchQueryC,
+      search: e.target.value,
+    });
+  };
+
+  const onSearchC = (e) => {
+    getCourses(searchQueryC);
+  };
+
+  const onGet = (e) => {
+    getCourses({
+      search: e.target.name,
+      nestSelect: 'subjectCode,subjectName,subjectShort',
+    });
+    setIsClone(true);
+  };
+
+  const onClone = (e) => {
+    const cloneSubjects = [];
+    courses[0].Subjects.forEach((sub) => {
+      cloneSubjects.push({
+        subjectCode: sub.subjectCode,
+        subjectName: sub.subjectName,
+        semNo: sub.CourseSubject.semNo,
+        alreadyExists: true,
+      });
+    });
+    setReqObj({
+      course: {
+        courseCode: '',
+        courseDescription:
+          courses[0].courseDescription !== null
+            ? courses[0].courseDescription
+            : '',
+        courseType:
+          courses[0].courseType !== null ? courses[0].courseType : 'None',
+        department:
+          courses[0].department !== null ? courses[0].department : 'None',
+        courseLength:
+          courses[0].courseLength !== null ? courses[0].courseLength : 0,
+        noOfSemesters:
+          courses[0].noOfSemesters !== null ? courses[0].noOfSemesters : 0,
+        updateNo: courses[0].updateNo !== null ? courses[0].updateNo : 0,
+      },
+      subjects: cloneSubjects,
+    });
+  };
+
+  const getMode = (
+    <Form>
+      <Card bg='light'>
+        <Card.Body>
+          <Form.Group controlId='ccCourseSearch'>
+            <Form.Label>Search Courses</Form.Label>
+            <InputGroup className='mb-3'>
+              <FormControl
+                name='searchQuery'
+                type='text'
+                placeholder='Search by Course Code'
+                value={searchQueryC.search}
+                onChange={onSearchInputChangeC}
+              />
+              <InputGroup.Append>
+                <Button variant='outline-success' onClick={onSearchC}>
+                  Search
+                </Button>
+              </InputGroup.Append>
+            </InputGroup>
+          </Form.Group>
+          <Form.Group controlId='ccSearchResult'>
+            <Form.Label>Select Course</Form.Label>
+            {courses &&
+              courses.map((course, index) => {
+                return (
+                  <div key={index} style={{ paddingBottom: '8px' }}>
+                    <Button
+                      name={course.courseCode}
+                      variant='info'
+                      onClick={onGet}
+                    >
+                      Get
+                    </Button>{' '}
+                    {course.courseCode}
+                  </div>
+                );
+              })}
+          </Form.Group>
+        </Card.Body>
+      </Card>
+    </Form>
+  );
+
+  const cloneMode = courses && (
+    <Card bg='light'>
+      <Card.Body>
+        <div>
+          Clone Following Subject{' '}
+          <Button variant='success' onClick={onClone}>
+            Clone
+          </Button>{' '}
+          <Button
+            variant='warning'
+            onClick={(e) => {
+              setIsClone(false);
+            }}
+          >
+            Back to Search
+          </Button>{' '}
+          (Will not clone files)
+        </div>
+        {CourseCardView(courses[0], 0)}
+      </Card.Body>
+    </Card>
+  );
+
   return (
     <Fragment>
+      <h3>Clone Course</h3>
+      {isClone ? cloneMode : getMode}
+      <hr />
+      <h3>Create Course</h3>
       <Form onSubmit={onSubmit}>
         <Form.Group controlId='smCourseCode'>
           <Form.Label>Course Code</Form.Label>
@@ -314,9 +450,24 @@ const CreateCourse = () => {
             <hr />
             <Form.Group controlId='smSubjects'>
               <Form.Label>Assign Appropriate Semester Number</Form.Label>
+              <div
+                className='float-right'
+                style={{ paddingBottom: '8px', paddingTop: '8px' }}
+              >
+                <Button
+                  variant='warning'
+                  size='sm'
+                  onClick={(e) => {
+                    sortSubjects();
+                  }}
+                >
+                  <strong>Sort By Semester Number</strong>
+                </Button>
+              </div>
               <Table striped bordered hover>
                 <thead>
                   <tr>
+                    <th>#</th>
                     <th>Subject Code</th>
                     <th>Subject Name (Subject Short)</th>
                     <th>Semester Number</th>
@@ -326,7 +477,8 @@ const CreateCourse = () => {
                 <tbody>
                   {reqObj.subjects.map((sub, index) => (
                     <tr key={index}>
-                      <td width='20%'>{sub.subjectCode}</td>
+                      <td width='5%'>{index + 1}</td>
+                      <td width='15%'>{sub.subjectCode}</td>
                       <td width='60%'>{sub.subjectName}</td>
                       <td width='10%'>
                         <FormControl

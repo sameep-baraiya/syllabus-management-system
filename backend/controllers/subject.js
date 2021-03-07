@@ -8,16 +8,22 @@ exports.createSubject = async (req, res, next) => {
   const { data } = req.body;
 
   const {
+    // Model Fields
     subjectCode,
     subjectName,
     subjectShort,
     subjectDescription,
     department,
     headMasterJSON,
+    semNo,
+    listIndex,
     theory,
     isElective,
     practical,
+    // Context For Different Type Of Creation Handling
+    createContext,
   } = JSON.parse(data);
+
   const files = [];
   req.files.forEach((it) => {
     files.push({
@@ -36,20 +42,35 @@ exports.createSubject = async (req, res, next) => {
       return next(new ErrorResponse('Subject already exists', 409));
     }
 
-    const newSubject = await Subject.create({
-      subjectCode,
-      subjectName,
-      subjectShort,
-      subjectDescription,
-      department,
-      headMasterJSON,
-      theory,
-      isElective,
-      practical,
-      updateNo: 0,
-      files,
-      noOfFiles: files.length,
-    });
+    switch (createContext.method) {
+      case 'CREATE':
+        await Subject.create({
+          subjectCode,
+          subjectName,
+          subjectShort,
+          subjectDescription,
+          department,
+          headMasterJSON,
+          semNo,
+          listIndex,
+          theory,
+          isElective,
+          practical,
+          updateNo: 0,
+          files,
+          noOfFiles: files.length,
+          isFreezed: false,
+        });
+        break;
+      case 'CLONE_CREATE':
+        // TODO Clone Create
+        break;
+      case 'UPDATE_CREATE':
+        // TODO Update Create
+        break;
+      default:
+        return next(new ErrorResponse('Bad Request: Create Subjcet', 400));
+    }
 
     res.status(200).json({
       success: true,
@@ -59,6 +80,7 @@ exports.createSubject = async (req, res, next) => {
   }
 };
 
+// TODO Refactor
 // @desc    Get subjects
 // @route   GET /api/v1/subject
 // @access  Private
@@ -70,6 +92,7 @@ exports.getSubjects = async (req, res, next) => {
   }
 };
 
+// TODO Refactor
 // @desc    Get single subject with specified id
 // @route   GET /api/v1/subject/:id
 // @access  Private

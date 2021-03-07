@@ -1,54 +1,37 @@
 import React, { Fragment, useContext, useState, useEffect } from 'react';
-import SubjectContext from '../../context/subject/subjectContext';
-import DownloadContext from '../../context/download/downloadContext';
+import SubjectContext from '../../../context/subject/subjectContext';
+import PropTypes from 'prop-types';
+
+import { departmentOptions } from '../../../common/department';
+
+// Utils
+import s2pn from '../../../utils/s2pn';
+
+// Icons
+import { iconSearch } from '../../layout/Icon';
 
 import {
   Button,
-  ButtonGroup,
   Form,
   InputGroup,
   FormControl,
-  Pagination,
   Row,
   Col,
 } from 'react-bootstrap';
-import {
-  iconCardView,
-  iconListView,
-  iconJsonView,
-  iconResult,
-} from '../layout/Icon';
 
-// Subject Views
-import SubjectCardView from './SubjectCardView';
-import itemListView from './itemListView';
-import itemJsonView from './itemJsonView';
-
-const FindSubjects = () => {
+const FindSubject = ({ defaultSelect = 'all' }) => {
   const subjectContext = useContext(SubjectContext);
-  const {
-    subjects,
-    getSubjects,
-    clearSubjects,
-    total,
-    pagination,
-  } = subjectContext;
+  const { getSubjects, clearSubjects } = subjectContext;
 
-  const downloadContext = useContext(DownloadContext);
-  const { download } = downloadContext;
-
-  const downloadFile = (e) => {
-    download(e.target.name);
-  };
-
-  const [viewMode, setViewMode] = useState('card');
-
+  // Normal Search
   const [searchQuery, setSearchQuery] = useState({
     search: '',
     page: 0,
+    select: defaultSelect,
   });
   const { search } = searchQuery;
 
+  // Advanced Search
   const [advancedSearchQuery, setAdvancedSearchQuery] = useState({
     page: 0,
     select: 'all',
@@ -67,6 +50,23 @@ const FindSubjects = () => {
     // eslint-disable-next-line
   }, [search]);
 
+  // Swiching Between Normal and Advanced Mode
+  const onClickAdvanved = (e) => {
+    if (isAdvanced === false) {
+      setAdvancedSearchQuery({
+        search: '',
+        page: 0,
+        select: 'all',
+        sortBy: 'id',
+        sort: 'ASC',
+        limit: 5,
+        attributes: {},
+      });
+    }
+    setIsAdvanced(!isAdvanced);
+  };
+
+  // Normal Search
   const onSearchInputChange = (e) => {
     setSearchQuery({
       ...searchQuery,
@@ -74,64 +74,51 @@ const FindSubjects = () => {
     });
   };
 
-  const onSearch = (e) => {
-    e.preventDefault();
-    if (isAdvanced) {
-      const copy = { ...advancedSearchQuery };
-      if (copy.select === 'all') {
-        delete copy.select;
-      }
-      copy.search = search;
-      getSubjects(copy);
-    } else {
-      getSubjects(searchQuery);
-    }
-  };
+  // const onPaginationClick = (e) => {
+  //   let page = -1;
+  //   switch (e.target.name) {
+  //     case 'first':
+  //       page = pagination.prev !== undefined ? 0 : -1;
+  //       break;
+  //     case 'previous':
+  //       page = pagination.prev !== undefined ? pagination.prev.page : -1;
+  //       break;
+  //     case 'current':
+  //       page = pagination.current.page;
+  //       break;
+  //     case 'next':
+  //       page = pagination.next !== undefined ? pagination.next.page : -1;
+  //       break;
+  //     case 'last':
+  //       page =
+  //         pagination.next !== undefined
+  //           ? Math.ceil(total / pagination.current.limit) - 1
+  //           : -1;
+  //       break;
+  //     default:
+  //       page = -1;
+  //   }
+  //   if (page !== -1) {
+  //     if (isAdvanced) {
+  //       const copy = { ...advancedSearchQuery };
+  //       if (copy.select === 'all') {
+  //         delete copy.select;
+  //       }
+  //       copy.search = search;
+  //       getSubjects({
+  //         ...copy,
+  //         page,
+  //       });
+  //     } else {
+  //       getSubjects({
+  //         ...searchQuery,
+  //         page,
+  //       });
+  //     }
+  //   }
+  // };
 
-  const onPaginationClick = (e) => {
-    let page = -1;
-    switch (e.target.name) {
-      case 'first':
-        page = pagination.prev !== undefined ? 0 : -1;
-        break;
-      case 'previous':
-        page = pagination.prev !== undefined ? pagination.prev.page : -1;
-        break;
-      case 'current':
-        page = pagination.current.page;
-        break;
-      case 'next':
-        page = pagination.next !== undefined ? pagination.next.page : -1;
-        break;
-      case 'last':
-        page =
-          pagination.next !== undefined
-            ? Math.ceil(total / pagination.current.limit) - 1
-            : -1;
-        break;
-      default:
-        page = -1;
-    }
-    if (page !== -1) {
-      if (isAdvanced) {
-        const copy = { ...advancedSearchQuery };
-        if (copy.select === 'all') {
-          delete copy.select;
-        }
-        copy.search = search;
-        getSubjects({
-          ...copy,
-          page,
-        });
-      } else {
-        getSubjects({
-          ...searchQuery,
-          page,
-        });
-      }
-    }
-  };
-
+  // Advanced Search
   const onChange = (e) => {
     switch (e.target.name.split('.')[0]) {
       case 'select':
@@ -142,6 +129,7 @@ const FindSubjects = () => {
         nameClause(e);
         break;
       case 'limit':
+      case 'page':
         numberClause(e);
         break;
       case 'where':
@@ -161,7 +149,7 @@ const FindSubjects = () => {
       } else {
         setAdvancedSearchQuery({
           ...advancedSearchQuery,
-          select: 'subjectCode,subjectName',
+          select: 'id,subjectCode,subjectName',
         });
       }
     } else {
@@ -190,19 +178,20 @@ const FindSubjects = () => {
   const numberClause = (e) => {
     setAdvancedSearchQuery({
       ...advancedSearchQuery,
-      [e.target.name]: isNaN(parseInt(e.target.value))
-        ? 0
-        : parseInt(e.target.value),
+      [e.target.name]: s2pn(e.target.value),
     });
   };
 
   const whereClause = (e) => {
     const setField = e.target.name.split('.').pop();
     if (e.target.value !== 'None' && e.target.value !== '') {
-      if (setField === 'updateNo') {
-        attributes[setField] = isNaN(parseInt(e.target.value))
-          ? 0
-          : parseInt(e.target.value);
+      if (
+        setField === 'updateNo' ||
+        setField === 'semNo' ||
+        setField === 'listIndex' ||
+        setField === 'noOfFiles'
+      ) {
+        attributes[setField] = s2pn(e.target.value);
         setAdvancedSearchQuery({
           ...advancedSearchQuery,
           attributes,
@@ -223,23 +212,28 @@ const FindSubjects = () => {
     }
   };
 
-  const onClickAdvanved = (e) => {
-    if (isAdvanced === false) {
-      setAdvancedSearchQuery({
-        search: '',
-        page: 0,
-        select: 'all',
-        sortBy: 'id',
-        sort: 'ASC',
-        limit: 5,
-        attributes: {},
-      });
+  // Fires Search Query
+  const onSearch = (e) => {
+    e.preventDefault();
+    if (isAdvanced) {
+      const copy = { ...advancedSearchQuery };
+      if (copy.select === 'all') {
+        delete copy.select;
+      }
+      copy.search = search;
+      getSubjects(copy);
+    } else {
+      const copy = { ...searchQuery };
+      if (copy.select === 'all') {
+        delete copy.select;
+      }
+      copy.search = search;
+      getSubjects(copy);
     }
-    setIsAdvanced(!isAdvanced);
   };
 
   const advancedSearch = () => (
-    <Form.Group as={Row} controlId='dAdvancedSubjectSearch'>
+    <Form.Group as={Row} controlId='FindSubject.advancedSubjectSearch'>
       <Col sm={4}>
         <h5>Selections Clause</h5>
         <Form.Check
@@ -252,6 +246,13 @@ const FindSubjects = () => {
         <hr />
         {advancedSearchQuery.select !== 'all' ? (
           <Fragment>
+            <Form.Check
+              name='select.id'
+              type='checkbox'
+              label='Id'
+              defaultChecked
+              disabled
+            />
             <Form.Check
               name='select.subjectCode'
               type='checkbox'
@@ -309,6 +310,18 @@ const FindSubjects = () => {
               onChange={onChange}
             />
             <Form.Check
+              name='select.semNo'
+              type='checkbox'
+              label='Semester Number'
+              onChange={onChange}
+            />
+            <Form.Check
+              name='select.listIndex'
+              type='checkbox'
+              label='Index Number In List'
+              onChange={onChange}
+            />
+            <Form.Check
               name='select.files'
               type='checkbox'
               label='Files'
@@ -330,6 +343,18 @@ const FindSubjects = () => {
               name='select.updateNo'
               type='checkbox'
               label='Update No'
+              onChange={onChange}
+            />
+            <Form.Check
+              name='select.isFreezed'
+              type='checkbox'
+              label='Is Freezed'
+              onChange={onChange}
+            />
+            <Form.Check
+              name='select.crudInfo'
+              type='checkbox'
+              label='Last CRUD Operation Info'
               onChange={onChange}
             />
             <Form.Check
@@ -370,8 +395,11 @@ const FindSubjects = () => {
           <option value='subjectShort'>Subject Short</option>
           <option value='department'>Department</option>
           <option value='isElective'>Is Elective</option>
+          <option value='semNo'>Semester Number</option>
+          <option value='listIndex'>Index Number In List</option>
           <option value='noOfFiles'>No Of Files</option>
           <option value='isOutdated'>Is Outdated</option>
+          <option value='isFreezed'>Is Freezed</option>
           <option value='updateNo'>Update No</option>
           <option value='createdAt'>Created At</option>
           <option value='updatedAt'>Updated At</option>
@@ -406,6 +434,30 @@ const FindSubjects = () => {
           defaultValue='5'
           onChange={onChange}
         />
+        <br />
+        <Form.Label>Page Number (default 0)</Form.Label>
+        <Form.Control
+          name='page'
+          type='number'
+          placeholder='Enter Page Number'
+          defaultValue='0'
+          onChange={onChange}
+        />
+        <hr />
+        <Form.Label>No Of Files ?</Form.Label>
+        <Form.Control
+          name='where.noOfFiles'
+          type='number'
+          placeholder='Enter No Of Files'
+          onChange={onChange}
+        />
+        <br />
+        <Form.Label>Is Freezed ?</Form.Label>
+        <Form.Control name='where.isFreezed' as='select' onChange={onChange}>
+          <option>None</option>
+          <option value='true'>Yes</option>
+          <option value='false'>No</option>
+        </Form.Control>
       </Col>
 
       <Col sm={4}>
@@ -413,12 +465,7 @@ const FindSubjects = () => {
         <Form.Label>Department ?</Form.Label>
         <Form.Control name='where.department' as='select' onChange={onChange}>
           <option>None</option>
-          <option>CH - Chemical Engineering</option>
-          <option>CI - Civil Engineering</option>
-          <option>CE - Computer Engineering</option>
-          <option>EC - Electronic Engineering</option>
-          <option>ME - Mechanical Engineering</option>
-          <option>IT - Information Technology</option>
+          {departmentOptions()}
         </Form.Control>
         <br />
         <Form.Label>Is Elective ?</Form.Label>
@@ -442,126 +489,70 @@ const FindSubjects = () => {
           placeholder='Enter Update No'
           onChange={onChange}
         />
+        <br />
+        <Form.Label>Semester Number ?</Form.Label>
+        <Form.Control
+          name='where.semNo'
+          type='number'
+          placeholder='Enter Semester Number'
+          onChange={onChange}
+        />
+        <br />
+        <Form.Label>Index Number In List ?</Form.Label>
+        <Form.Control
+          name='where.listIndex'
+          type='number'
+          placeholder='Enter Index Number In List'
+          onChange={onChange}
+        />
       </Col>
     </Form.Group>
   );
 
   return (
-    <Fragment>
-      <Form onSubmit={onSearch}>
-        <Form.Group controlId='dSubjectSearch'>
-          <Form.Label>Search Subjects</Form.Label>
-          <InputGroup className='mb-3'>
-            <FormControl
-              name='searchQuery'
-              type='text'
-              placeholder='Search by Subject Code, Subject Name, Subject Short'
-              value={search}
-              onChange={onSearchInputChange}
-            />
-            <InputGroup.Append>
-              <Button variant='outline-success' type='submit'>
-                Search
-              </Button>
-            </InputGroup.Append>
-            <InputGroup.Append>
-              <Button
-                variant={isAdvanced ? 'info' : 'outline-info'}
-                onClick={onClickAdvanved}
-              >
-                Advanced Search
-              </Button>
-            </InputGroup.Append>
-          </InputGroup>
-        </Form.Group>
-        {isAdvanced ? advancedSearch() : null}
-      </Form>
+    <Form onSubmit={onSearch}>
+      <Form.Group controlId='FindSubject.subjectSearch'>
+        <h3>
+          <strong>{iconSearch} Search Subjects</strong>
+        </h3>
 
-      <h4>
-        <strong>{iconResult} Result :</strong>
+        {isAdvanced ? null : (
+          <p className='h6 text-muted'>
+            <strong>Default Selected Fields: </strong>
+            {searchQuery.select.split(',').join(', ')}
+          </p>
+        )}
 
-        <ButtonGroup aria-label='viewMode' className='float-right'>
-          <Button
-            name='card'
-            variant={viewMode === 'card' ? 'success' : 'warning'}
-            onClick={() => setViewMode('card')}
-          >
-            {iconCardView}
-          </Button>
-          <Button
-            name='list'
-            variant={viewMode === 'list' ? 'success' : 'warning'}
-            onClick={() => setViewMode('list')}
-          >
-            {iconListView}
-          </Button>
-          <Button
-            name='json'
-            variant={viewMode === 'json' ? 'success' : 'warning'}
-            onClick={() => setViewMode('json')}
-          >
-            {iconJsonView}
-          </Button>
-        </ButtonGroup>
-      </h4>
-      {pagination && (
-        <Pagination>
-          <Pagination.Item
-            name='first'
-            active={pagination.prev === undefined}
-            onClick={onPaginationClick}
-          >
-            First 0
-          </Pagination.Item>
-          <Pagination.Item
-            name='previous'
-            disabled={pagination.prev === undefined}
-            onClick={onPaginationClick}
-          >
-            Previous {pagination.prev && pagination.prev.page}
-          </Pagination.Item>
-          <Pagination.Item name='current' active onClick={onPaginationClick}>
-            Current {pagination.current.page}
-          </Pagination.Item>
-          <Pagination.Item
-            name='next'
-            disabled={pagination.next === undefined}
-            onClick={onPaginationClick}
-          >
-            Next {pagination.next && pagination.next.page}
-          </Pagination.Item>
-          <Pagination.Item
-            name='last'
-            active={pagination.next === undefined}
-            onClick={onPaginationClick}
-          >
-            Last {Math.ceil(total / pagination.current.limit) - 1}
-          </Pagination.Item>
-          <Pagination.Item disabled>
-            <strong>{pagination.current.limit}</strong> Results Per Page
-          </Pagination.Item>
-
-          {total !== 0 ? (
-            <Pagination.Item disabled>
-              Total No Of Results: <strong>{total}</strong>
-            </Pagination.Item>
-          ) : null}
-        </Pagination>
-      )}
-      {subjects &&
-        viewMode === 'card' &&
-        subjects.map((it, index) => {
-          return SubjectCardView(it, index, downloadFile);
-        })}
-      {subjects && viewMode === 'list' && itemListView(subjects)}
-      {subjects &&
-        viewMode === 'json' &&
-        subjects.map((it, index) => {
-          return itemJsonView(it, index);
-        })}
-      <br />
-    </Fragment>
+        <InputGroup className='mb-3'>
+          <FormControl
+            name='searchQuery'
+            type='text'
+            placeholder='Search by Subject Code, Subject Name, Subject Short'
+            value={search}
+            onChange={onSearchInputChange}
+          />
+          <InputGroup.Append>
+            <Button variant='outline-success' type='submit'>
+              Search
+            </Button>
+          </InputGroup.Append>
+          <InputGroup.Append>
+            <Button
+              variant={isAdvanced ? 'info' : 'outline-info'}
+              onClick={onClickAdvanved}
+            >
+              Advanced Search
+            </Button>
+          </InputGroup.Append>
+        </InputGroup>
+      </Form.Group>
+      {isAdvanced ? advancedSearch() : null}
+    </Form>
   );
 };
 
-export default FindSubjects;
+FindSubject.propTypes = {
+  defaultSelect: PropTypes.string.isRequired,
+};
+
+export default FindSubject;

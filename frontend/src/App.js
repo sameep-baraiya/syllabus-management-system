@@ -1,9 +1,11 @@
 import { Container } from 'react-bootstrap';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import './components/style/sidebar.css';
 
 // Layout Componets
 import Navbar from './components/layout/Navbar';
 import Alert from './components/layout/Alert';
+import Sidebar from './components/layout/Sidebar';
 
 // Page Componets
 import Home from './components/page/Home';
@@ -17,10 +19,10 @@ import SyllabusManager from './components/syllabus-manager/SyllabusManager';
 import LogIn from './components/auth/LogIn';
 import Register from './components/auth/Register';
 
-// Routing Componets
+// // Routing Componets
 import PrivateRoute from './components/routing/PrivateRoute';
 
-// Darshboard Componets
+// // Darshboard Componets
 import Dashboard from './components/dashboard/Dashboard';
 
 // State
@@ -44,20 +46,34 @@ function App() {
                   <Router>
                     <Navbar />
                     <Alert />
-                    <Container fluid>
-                      <Switch>
-                        <Route exact path='/' component={Home} />
-                        <Route exact path='/about' component={About} />
-                        <Route exact path='/login' component={LogIn} />
-                        <Route exact path='/register' component={Register} />
-                        <PrivateRoute path='/dashboard' component={Dashboard} />
-                        <PrivateRoute
-                          path='/syllabus-manager'
-                          component={SyllabusManager}
-                        />
-                        <Route component={NotFound} />
-                      </Switch>
-                    </Container>
+                    <div className='grid-container'>
+                      <div className='sidebar'>
+                        <Sidebar />
+                      </div>
+                      <div className='main-content'>
+                        <Container>
+                          <Switch>
+                            <Route exact path='/' component={Home} />
+                            <Route exact path='/about' component={About} />
+                            <Route exact path='/login' component={LogIn} />
+                            <Route
+                              exact
+                              path='/register'
+                              component={Register}
+                            />
+                            <PrivateRoute
+                              path='/dashboard'
+                              component={Dashboard}
+                            />
+                            <PrivateRoute
+                              path='/syllabus-manager'
+                              component={SyllabusManager}
+                            />
+                            <Route component={NotFound} />
+                          </Switch>
+                        </Container>
+                      </div>
+                    </div>
                   </Router>
                 </AcademicBatchState>
               </DownloadState>

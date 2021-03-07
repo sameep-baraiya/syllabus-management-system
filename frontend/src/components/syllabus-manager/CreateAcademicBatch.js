@@ -1,15 +1,8 @@
 import React, { Fragment, useContext, useState, useEffect } from 'react';
-import {
-  Form,
-  Button,
-  Card,
-  InputGroup,
-  FormControl,
-  Badge,
-  Table,
-} from 'react-bootstrap';
+import { Form, Button, Card, InputGroup, FormControl } from 'react-bootstrap';
 import CourseContext from '../../context/course/courseContext';
 import AcademicBatchContext from '../../context/academicBatch/academicBatchContext';
+import CourseCardView from '../dashboard/CourseCardView';
 
 const CreateAcademicBatch = () => {
   const courseContext = useContext(CourseContext);
@@ -23,14 +16,13 @@ const CreateAcademicBatch = () => {
     academicBatchDescription: '',
     academicBatchName: '',
     yearLable: '',
-    coursesObj: [],
+    courseCode: '',
   });
   const {
     academicBatchCode,
     academicBatchDescription,
     academicBatchName,
     yearLable,
-    coursesObj,
   } = reqObj;
 
   const [searchQuery, setSearchQuery] = useState({
@@ -40,20 +32,10 @@ const CreateAcademicBatch = () => {
 
   const { search } = searchQuery;
 
-  const [selectedCourses, setSelectedCourses] = useState([]);
-
-  const handleSelectionChange = (e) => {
-    var options = e.target.options;
-    var value = [];
-    for (var i = 0, l = options.length; i < l; i++) {
-      if (options[i].selected) {
-        value.push(options[i].value);
-      }
-    }
-    setSelectedCourses(value);
-  };
+  const [isCourseSelected, setIsCourseSelected] = useState(false);
 
   useEffect(() => {
+    setIsCourseSelected(false);
     clearCourses();
     // eslint-disable-next-line
   }, [search]);
@@ -76,60 +58,18 @@ const CreateAcademicBatch = () => {
     getCourses(searchQuery);
   };
 
-  const onRemove = (e) => {
-    const courses = coursesObj;
-    courses.splice(parseInt(e.target.name), 1);
+  const onCourseSelect = (e) => {
     setReqObj({
       ...reqObj,
-      coursesObj: courses,
+      courseCode: e.target.name,
     });
-  };
 
-  const onAddCourses = (e) => {
-    const newCourses = coursesObj;
-    selectedCourses.forEach((cc) => {
-      if (
-        newCourses
-          .map((obj) => {
-            return obj.courseCode;
-          })
-          .indexOf(cc) === -1
-      ) {
-        newCourses.push({
-          courseCode: cc,
-          startSemNo: 0,
-          endSemNo: 0,
-          stratMY: 'MM-YYYY',
-          endMY: 'MM-YYYY',
-        });
-      }
+    setIsCourseSelected(true);
+
+    getCourses({
+      search: e.target.name,
+      select: '',
     });
-    setReqObj({
-      ...reqObj,
-      coursesObj: newCourses,
-    });
-  };
-
-  const handleFocus = (e) => e.target.select();
-
-  const onChangeField = (e) => {
-    const field = e.target.name.split('.').pop();
-    const index = parseInt(e.target.name.split('.')[0]);
-    if (field === 'startSemNo' || field === 'endSemNo') {
-      coursesObj[index][field] = isNaN(parseInt(e.target.value))
-        ? 0
-        : parseInt(e.target.value);
-      setReqObj({
-        ...reqObj,
-        coursesObj,
-      });
-    } else {
-      coursesObj[index][field] = e.target.value;
-      setReqObj({
-        ...reqObj,
-        coursesObj,
-      });
-    }
   };
 
   const onSubmit = (e) => {
@@ -151,9 +91,8 @@ const CreateAcademicBatch = () => {
       academicBatchDescription: '',
       academicBatchName: '',
       yearLable: '',
-      coursesObj: [],
+      coursesId: '',
     });
-    setSelectedCourses([]);
     setSearchQuery({
       search: '',
       select: 'courseCode',
@@ -163,7 +102,7 @@ const CreateAcademicBatch = () => {
   return (
     <Fragment>
       <Form onSubmit={onSubmit}>
-        <Form.Group controlId='acAcademicBatchCode'>
+        <Form.Group controlId='abAcademicBatchCode'>
           <Form.Label>Academic Batch Code</Form.Label>
           <Form.Control
             name='academicBatchCode'
@@ -173,7 +112,7 @@ const CreateAcademicBatch = () => {
             value={academicBatchCode}
           />
         </Form.Group>
-        <Form.Group controlId='acAcademicBatchName'>
+        <Form.Group controlId='abAcademicBatchName'>
           <Form.Label>Academic Batch Name</Form.Label>
           <Form.Control
             name='academicBatchName'
@@ -183,7 +122,7 @@ const CreateAcademicBatch = () => {
             value={academicBatchName}
           />
         </Form.Group>
-        <Form.Group controlId='acAcademicBatchDescription'>
+        <Form.Group controlId='abAcademicBatchDescription'>
           <Form.Label>Academic Batch Description</Form.Label>
           <Form.Control
             name='academicBatchDescription'
@@ -194,7 +133,7 @@ const CreateAcademicBatch = () => {
             value={academicBatchDescription}
           />
         </Form.Group>
-        <Form.Group controlId='acYearLable'>
+        <Form.Group controlId='abYearLable'>
           <Form.Label>Year Lable</Form.Label>
           <Form.Control
             name='yearLable'
@@ -206,7 +145,7 @@ const CreateAcademicBatch = () => {
         </Form.Group>
         <Card bg='light'>
           <Card.Body>
-            <Form.Group controlId='acCoursesSearch'>
+            <Form.Group controlId='abCoursesSearch'>
               <Form.Label>Search Courses</Form.Label>
               <InputGroup className='mb-3'>
                 <FormControl
@@ -223,95 +162,23 @@ const CreateAcademicBatch = () => {
                 </InputGroup.Append>
               </InputGroup>
             </Form.Group>
-            <Form.Group controlId='acSearchResult'>
-              <Form.Label>
-                Select Courses (Use Ctrl/Shift for multiple selection)
-              </Form.Label>
-              <Form.Control
-                as='select'
-                multiple
-                onChange={handleSelectionChange}
-                htmlSize={5}
-              >
-                {courses &&
-                  courses.map((course, index) => {
-                    return <option key={index}>{course.courseCode}</option>;
-                  })}
-              </Form.Control>
-            </Form.Group>
-            <Button variant='success' onClick={onAddCourses}>
-              Add Courses
-            </Button>{' '}
-            <Badge variant='primary'>No of Courses: {coursesObj.length}</Badge>
-            <hr />
-            <Form.Group controlId='acCourses'>
-              <Form.Label>Assign Appropriate Field Data</Form.Label>
-              <Table striped bordered hover>
-                <thead>
-                  <tr>
-                    <th>Course Code</th>
-                    <th>Start Sem No</th>
-                    <th>End Sem No</th>
-                    <th>Start Month/Year</th>
-                    <th>End Month/Year</th>
-                    <th>Remove Course</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {coursesObj.map((obj, index) => (
-                    <tr key={index}>
-                      <td width='20%'>{obj.courseCode}</td>
-                      <td width='10%'>
-                        <FormControl
-                          name={`${index}.startSemNo`}
-                          type='number'
-                          value={obj.startSemNo}
-                          onChange={onChangeField}
-                          onFocus={handleFocus}
-                        />
-                      </td>
-                      <td width='10%'>
-                        <FormControl
-                          name={`${index}.endSemNo`}
-                          type='number'
-                          value={obj.endSemNo}
-                          onChange={onChangeField}
-                          onFocus={handleFocus}
-                        />
-                      </td>
-                      <td width='25%'>
-                        <FormControl
-                          name={`${index}.stratMY`}
-                          type='text'
-                          value={obj.stratMY}
-                          onChange={onChangeField}
-                          onFocus={handleFocus}
-                        />
-                      </td>
-                      <td width='25%'>
-                        <FormControl
-                          name={`${index}.endMY`}
-                          type='text'
-                          value={obj.endMY}
-                          onChange={onChangeField}
-                          onFocus={handleFocus}
-                        />
-                      </td>
-                      <td width='10%'>
-                        <Button
-                          variant='danger'
-                          size='sm'
-                          block
-                          name={index}
-                          onClick={onRemove}
-                        >
-                          Remove
-                        </Button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </Table>
+            <Form.Group controlId='abSearchResult'>
+              <Form.Label>Select Course</Form.Label>
+              {courses &&
+                (isCourseSelected
+                  ? CourseCardView(courses[0], 0)
+                  : courses.map((course, index) => {
+                      return (
+                        <div key={index} style={{ paddingBottom: '8px' }}>
+                          <Button
+                            name={course.courseCode}
+                            onClick={onCourseSelect}
+                          >
+                            Select {course.courseCode}
+                          </Button>
+                        </div>
+                      );
+                    }))}
             </Form.Group>
           </Card.Body>
         </Card>

@@ -34,6 +34,8 @@ import {
   faExclamationCircle,
   faExclamationTriangle,
   faQuestionCircle,
+  faHandshake,
+  faSearch,
 } from '@fortawesome/free-solid-svg-icons';
 
 const iconUser = <FontAwesomeIcon icon={faUser} />;
@@ -55,6 +57,7 @@ const iconDashboard = <FontAwesomeIcon icon={faChalkboardTeacher} />;
 const iconAnnouncement = <FontAwesomeIcon icon={faBullhorn} />;
 const iconNotification = <FontAwesomeIcon icon={faBell} />;
 const iconSyllabusManger = <FontAwesomeIcon icon={faBookMedical} />;
+// TODO Remove this 2
 const iconCreateCourse = <FontAwesomeIcon icon={faFolderPlus} />;
 const iconCreateSubject = <FontAwesomeIcon icon={faPlusSquare} />;
 const iconSubject = <FontAwesomeIcon icon={faBook} />;
@@ -79,6 +82,9 @@ const fucIconAlert = (variant) => {
       return <FontAwesomeIcon icon={faQuestionCircle}></FontAwesomeIcon>;
   }
 };
+const iconMeeting = <FontAwesomeIcon icon={faHandshake} />;
+const iconSearch = <FontAwesomeIcon icon={faSearch} />;
+const iconCreate = <FontAwesomeIcon icon={faFolderPlus} />;
 
 export {
   iconUser,
@@ -112,4 +118,7 @@ export {
   iconResult,
   iconAcademicBatch,
   fucIconAlert,
+  iconMeeting,
+  iconSearch,
+  iconCreate,
 };

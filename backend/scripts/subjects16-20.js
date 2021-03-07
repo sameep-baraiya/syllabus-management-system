@@ -41,6 +41,12 @@ const subjects = [
     updateNo: 0,
     isElective: false,
     semNo: 1,
+    listIndex: 1,
+    isFreezed: false,
+    crudInfo: {
+      type: 'SUBJECT_CREATE',
+      by: 'Script Manger User',
+    },
   },
   {
     subjectCode: 'AF 115',
@@ -54,6 +60,12 @@ const subjects = [
     updateNo: 0,
     isElective: false,
     semNo: 1,
+    listIndex: 2,
+    isFreezed: false,
+    crudInfo: {
+      type: 'SUBJECT_CREATE',
+      by: 'Script Manger User',
+    },
   },
   {
     subjectCode: 'AF 122',
@@ -67,6 +79,12 @@ const subjects = [
     updateNo: 0,
     isElective: false,
     semNo: 1,
+    listIndex: 3,
+    isFreezed: false,
+    crudInfo: {
+      type: 'SUBJECT_CREATE',
+      by: 'Script Manger User',
+    },
   },
   {
     subjectCode: 'AF 124',
@@ -80,6 +98,12 @@ const subjects = [
     updateNo: 0,
     isElective: false,
     semNo: 1,
+    listIndex: 4,
+    isFreezed: false,
+    crudInfo: {
+      type: 'SUBJECT_CREATE',
+      by: 'Script Manger User',
+    },
   },
   {
     subjectCode: 'AF 126',
@@ -93,6 +117,12 @@ const subjects = [
     updateNo: 0,
     isElective: false,
     semNo: 1,
+    listIndex: 5,
+    isFreezed: false,
+    crudInfo: {
+      type: 'SUBJECT_CREATE',
+      by: 'Script Manger User',
+    },
   },
   {
     subjectCode: 'CT 116',
@@ -106,6 +136,12 @@ const subjects = [
     updateNo: 0,
     isElective: false,
     semNo: 1,
+    listIndex: 6,
+    isFreezed: false,
+    crudInfo: {
+      type: 'SUBJECT_CREATE',
+      by: 'Script Manger User',
+    },
   },
   {
     subjectCode: 'ES 110',
@@ -119,6 +155,12 @@ const subjects = [
     updateNo: 0,
     isElective: false,
     semNo: 1,
+    listIndex: 7,
+    isFreezed: false,
+    crudInfo: {
+      type: 'SUBJECT_CREATE',
+      by: 'Script Manger User',
+    },
   },
   // Sem 2
   {
@@ -133,6 +175,12 @@ const subjects = [
     updateNo: 0,
     isElective: false,
     semNo: 2,
+    listIndex: 1,
+    isFreezed: false,
+    crudInfo: {
+      type: 'SUBJECT_CREATE',
+      by: 'Script Manger User',
+    },
   },
   {
     subjectCode: 'AF 212',
@@ -146,6 +194,12 @@ const subjects = [
     updateNo: 0,
     isElective: false,
     semNo: 2,
+    listIndex: 2,
+    isFreezed: false,
+    crudInfo: {
+      type: 'SUBJECT_CREATE',
+      by: 'Script Manger User',
+    },
   },
   {
     subjectCode: 'AF 214',
@@ -159,6 +213,12 @@ const subjects = [
     updateNo: 0,
     isElective: false,
     semNo: 2,
+    listIndex: 3,
+    isFreezed: false,
+    crudInfo: {
+      type: 'SUBJECT_CREATE',
+      by: 'Script Manger User',
+    },
   },
   {
     subjectCode: 'AF 215',
@@ -172,6 +232,12 @@ const subjects = [
     updateNo: 0,
     isElective: false,
     semNo: 2,
+    listIndex: 4,
+    isFreezed: false,
+    crudInfo: {
+      type: 'SUBJECT_CREATE',
+      by: 'Script Manger User',
+    },
   },
   {
     subjectCode: 'AM 210',
@@ -185,6 +251,12 @@ const subjects = [
     updateNo: 0,
     isElective: false,
     semNo: 2,
+    listIndex: 5,
+    isFreezed: false,
+    crudInfo: {
+      type: 'SUBJECT_CREATE',
+      by: 'Script Manger User',
+    },
   },
   {
     subjectCode: 'CT 215',
@@ -198,6 +270,12 @@ const subjects = [
     updateNo: 0,
     isElective: false,
     semNo: 2,
+    listIndex: 6,
+    isFreezed: false,
+    crudInfo: {
+      type: 'SUBJECT_CREATE',
+      by: 'Script Manger User',
+    },
   },
   {
     subjectCode: 'CT 216',
@@ -211,6 +289,12 @@ const subjects = [
     updateNo: 0,
     isElective: false,
     semNo: 2,
+    listIndex: 7,
+    isFreezed: false,
+    crudInfo: {
+      type: 'SUBJECT_CREATE',
+      by: 'Script Manger User',
+    },
   },
   // Sem 3
   {
@@ -225,6 +309,12 @@ const subjects = [
     updateNo: 0,
     isElective: false,
     semNo: 3,
+    listIndex: 1,
+    isFreezed: false,
+    crudInfo: {
+      type: 'SUBJECT_CREATE',
+      by: 'Script Manger User',
+    },
   },
   {
     subjectCode: 'IT 301',
@@ -238,6 +328,12 @@ const subjects = [
     updateNo: 0,
     isElective: false,
     semNo: 3,
+    listIndex: 2,
+    isFreezed: false,
+    crudInfo: {
+      type: 'SUBJECT_CREATE',
+      by: 'Script Manger User',
+    },
   },
   {
     subjectCode: 'IT 302',
@@ -251,6 +347,12 @@ const subjects = [
     updateNo: 0,
     isElective: false,
     semNo: 3,
+    listIndex: 3,
+    isFreezed: false,
+    crudInfo: {
+      type: 'SUBJECT_CREATE',
+      by: 'Script Manger User',
+    },
   },
   {
     subjectCode: 'IT 303',
@@ -264,6 +366,12 @@ const subjects = [
     updateNo: 0,
     isElective: false,
     semNo: 3,
+    listIndex: 4,
+    isFreezed: false,
+    crudInfo: {
+      type: 'SUBJECT_CREATE',
+      by: 'Script Manger User',
+    },
   },
   {
     subjectCode: 'IT 304',
@@ -277,6 +385,12 @@ const subjects = [
     updateNo: 0,
     isElective: false,
     semNo: 3,
+    listIndex: 5,
+    isFreezed: false,
+    crudInfo: {
+      type: 'SUBJECT_CREATE',
+      by: 'Script Manger User',
+    },
   },
   {
     subjectCode: 'IT 305',
@@ -290,6 +404,12 @@ const subjects = [
     updateNo: 0,
     isElective: false,
     semNo: 3,
+    listIndex: 6,
+    isFreezed: false,
+    crudInfo: {
+      type: 'SUBJECT_CREATE',
+      by: 'Script Manger User',
+    },
   },
   // Sem 4
   {
@@ -304,6 +424,12 @@ const subjects = [
     updateNo: 0,
     isElective: false,
     semNo: 4,
+    listIndex: 1,
+    isFreezed: false,
+    crudInfo: {
+      type: 'SUBJECT_CREATE',
+      by: 'Script Manger User',
+    },
   },
   {
     subjectCode: 'AF 411',
@@ -317,6 +443,12 @@ const subjects = [
     updateNo: 0,
     isElective: false,
     semNo: 4,
+    listIndex: 2,
+    isFreezed: false,
+    crudInfo: {
+      type: 'SUBJECT_CREATE',
+      by: 'Script Manger User',
+    },
   },
   {
     subjectCode: 'IT 402',
@@ -330,6 +462,12 @@ const subjects = [
     updateNo: 0,
     isElective: false,
     semNo: 4,
+    listIndex: 3,
+    isFreezed: false,
+    crudInfo: {
+      type: 'SUBJECT_CREATE',
+      by: 'Script Manger User',
+    },
   },
   {
     subjectCode: 'IT 403',
@@ -343,6 +481,12 @@ const subjects = [
     updateNo: 0,
     isElective: false,
     semNo: 4,
+    listIndex: 4,
+    isFreezed: false,
+    crudInfo: {
+      type: 'SUBJECT_CREATE',
+      by: 'Script Manger User',
+    },
   },
   {
     subjectCode: 'IT 406',
@@ -356,6 +500,12 @@ const subjects = [
     updateNo: 0,
     isElective: false,
     semNo: 4,
+    listIndex: 5,
+    isFreezed: false,
+    crudInfo: {
+      type: 'SUBJECT_CREATE',
+      by: 'Script Manger User',
+    },
   },
   {
     subjectCode: 'IT 407',
@@ -369,6 +519,12 @@ const subjects = [
     updateNo: 0,
     isElective: false,
     semNo: 4,
+    listIndex: 6,
+    isFreezed: false,
+    crudInfo: {
+      type: 'SUBJECT_CREATE',
+      by: 'Script Manger User',
+    },
   },
   // Sem 5
   {
@@ -383,6 +539,12 @@ const subjects = [
     updateNo: 0,
     isElective: false,
     semNo: 5,
+    listIndex: 1,
+    isFreezed: false,
+    crudInfo: {
+      type: 'SUBJECT_CREATE',
+      by: 'Script Manger User',
+    },
   },
   {
     subjectCode: 'IT 502',
@@ -396,6 +558,12 @@ const subjects = [
     updateNo: 0,
     isElective: false,
     semNo: 5,
+    listIndex: 2,
+    isFreezed: false,
+    crudInfo: {
+      type: 'SUBJECT_CREATE',
+      by: 'Script Manger User',
+    },
   },
   {
     subjectCode: 'IT 509',
@@ -409,6 +577,12 @@ const subjects = [
     updateNo: 0,
     isElective: false,
     semNo: 5,
+    listIndex: 3,
+    isFreezed: false,
+    crudInfo: {
+      type: 'SUBJECT_CREATE',
+      by: 'Script Manger User',
+    },
   },
   {
     subjectCode: 'IT 510',
@@ -422,6 +596,12 @@ const subjects = [
     updateNo: 0,
     isElective: false,
     semNo: 5,
+    listIndex: 4,
+    isFreezed: false,
+    crudInfo: {
+      type: 'SUBJECT_CREATE',
+      by: 'Script Manger User',
+    },
   },
   {
     subjectCode: 'IT 511',
@@ -435,6 +615,12 @@ const subjects = [
     updateNo: 0,
     isElective: false,
     semNo: 5,
+    listIndex: 5,
+    isFreezed: false,
+    crudInfo: {
+      type: 'SUBJECT_CREATE',
+      by: 'Script Manger User',
+    },
   },
   {
     subjectCode: 'IT 506',
@@ -448,6 +634,12 @@ const subjects = [
     updateNo: 0,
     isElective: true,
     semNo: 5,
+    listIndex: 6,
+    isFreezed: false,
+    crudInfo: {
+      type: 'SUBJECT_CREATE',
+      by: 'Script Manger User',
+    },
   },
   {
     subjectCode: 'IT 506A',
@@ -461,6 +653,12 @@ const subjects = [
     updateNo: 0,
     isElective: true,
     semNo: 5,
+    listIndex: 7,
+    isFreezed: false,
+    crudInfo: {
+      type: 'SUBJECT_CREATE',
+      by: 'Script Manger User',
+    },
   },
   // Sem 6
   {
@@ -475,6 +673,12 @@ const subjects = [
     updateNo: 0,
     isElective: false,
     semNo: 6,
+    listIndex: 1,
+    isFreezed: false,
+    crudInfo: {
+      type: 'SUBJECT_CREATE',
+      by: 'Script Manger User',
+    },
   },
   {
     subjectCode: 'IT 607',
@@ -488,6 +692,12 @@ const subjects = [
     updateNo: 0,
     isElective: false,
     semNo: 6,
+    listIndex: 2,
+    isFreezed: false,
+    crudInfo: {
+      type: 'SUBJECT_CREATE',
+      by: 'Script Manger User',
+    },
   },
   {
     subjectCode: 'IT 608',
@@ -501,6 +711,12 @@ const subjects = [
     updateNo: 0,
     isElective: false,
     semNo: 6,
+    listIndex: 3,
+    isFreezed: false,
+    crudInfo: {
+      type: 'SUBJECT_CREATE',
+      by: 'Script Manger User',
+    },
   },
   {
     subjectCode: 'AF 601',
@@ -514,6 +730,12 @@ const subjects = [
     updateNo: 0,
     isElective: false,
     semNo: 6,
+    listIndex: 4,
+    isFreezed: false,
+    crudInfo: {
+      type: 'SUBJECT_CREATE',
+      by: 'Script Manger User',
+    },
   },
   {
     subjectCode: 'IT 617',
@@ -527,6 +749,12 @@ const subjects = [
     updateNo: 0,
     isElective: false,
     semNo: 6,
+    listIndex: 5,
+    isFreezed: false,
+    crudInfo: {
+      type: 'SUBJECT_CREATE',
+      by: 'Script Manger User',
+    },
   },
   {
     subjectCode: 'IT 618',
@@ -540,6 +768,12 @@ const subjects = [
     updateNo: 0,
     isElective: true,
     semNo: 6,
+    listIndex: 6,
+    isFreezed: false,
+    crudInfo: {
+      type: 'SUBJECT_CREATE',
+      by: 'Script Manger User',
+    },
   },
   {
     subjectCode: 'IT 618A',
@@ -553,6 +787,12 @@ const subjects = [
     updateNo: 0,
     isElective: true,
     semNo: 6,
+    listIndex: 7,
+    isFreezed: false,
+    crudInfo: {
+      type: 'SUBJECT_CREATE',
+      by: 'Script Manger User',
+    },
   },
   {
     subjectCode: 'IT 618B',
@@ -566,6 +806,12 @@ const subjects = [
     updateNo: 0,
     isElective: true,
     semNo: 6,
+    listIndex: 8,
+    isFreezed: false,
+    crudInfo: {
+      type: 'SUBJECT_CREATE',
+      by: 'Script Manger User',
+    },
   },
   {
     subjectCode: 'IT 618C',
@@ -579,6 +825,12 @@ const subjects = [
     updateNo: 0,
     isElective: true,
     semNo: 6,
+    listIndex: 9,
+    isFreezed: false,
+    crudInfo: {
+      type: 'SUBJECT_CREATE',
+      by: 'Script Manger User',
+    },
   },
   // Sem 7
   {
@@ -593,6 +845,12 @@ const subjects = [
     updateNo: 0,
     isElective: false,
     semNo: 7,
+    listIndex: 1,
+    isFreezed: false,
+    crudInfo: {
+      type: 'SUBJECT_CREATE',
+      by: 'Script Manger User',
+    },
   },
   {
     subjectCode: 'IT 707',
@@ -606,6 +864,12 @@ const subjects = [
     updateNo: 0,
     isElective: false,
     semNo: 7,
+    listIndex: 2,
+    isFreezed: false,
+    crudInfo: {
+      type: 'SUBJECT_CREATE',
+      by: 'Script Manger User',
+    },
   },
   {
     subjectCode: 'IT 714',
@@ -619,6 +883,12 @@ const subjects = [
     updateNo: 0,
     isElective: false,
     semNo: 7,
+    listIndex: 3,
+    isFreezed: false,
+    crudInfo: {
+      type: 'SUBJECT_CREATE',
+      by: 'Script Manger User',
+    },
   },
   {
     subjectCode: 'IT 717',
@@ -632,6 +902,12 @@ const subjects = [
     updateNo: 0,
     isElective: false,
     semNo: 7,
+    listIndex: 4,
+    isFreezed: false,
+    crudInfo: {
+      type: 'SUBJECT_CREATE',
+      by: 'Script Manger User',
+    },
   },
   {
     subjectCode: 'IT 716',
@@ -645,6 +921,12 @@ const subjects = [
     updateNo: 0,
     isElective: false,
     semNo: 7,
+    listIndex: 5,
+    isFreezed: false,
+    crudInfo: {
+      type: 'SUBJECT_CREATE',
+      by: 'Script Manger User',
+    },
   },
   {
     subjectCode: 'IT 718',
@@ -658,6 +940,12 @@ const subjects = [
     updateNo: 0,
     isElective: true,
     semNo: 7,
+    listIndex: 6,
+    isFreezed: false,
+    crudInfo: {
+      type: 'SUBJECT_CREATE',
+      by: 'Script Manger User',
+    },
   },
   {
     subjectCode: 'IT 718A',
@@ -671,6 +959,12 @@ const subjects = [
     updateNo: 0,
     isElective: true,
     semNo: 7,
+    listIndex: 7,
+    isFreezed: false,
+    crudInfo: {
+      type: 'SUBJECT_CREATE',
+      by: 'Script Manger User',
+    },
   },
   {
     subjectCode: 'IT 718B',
@@ -684,6 +978,12 @@ const subjects = [
     updateNo: 0,
     isElective: true,
     semNo: 7,
+    listIndex: 8,
+    isFreezed: false,
+    crudInfo: {
+      type: 'SUBJECT_CREATE',
+      by: 'Script Manger User',
+    },
   },
   {
     subjectCode: 'IT 718C',
@@ -697,6 +997,12 @@ const subjects = [
     updateNo: 0,
     isElective: true,
     semNo: 7,
+    listIndex: 9,
+    isFreezed: false,
+    crudInfo: {
+      type: 'SUBJECT_CREATE',
+      by: 'Script Manger User',
+    },
   },
   {
     subjectCode: 'IT 718D',
@@ -710,6 +1016,12 @@ const subjects = [
     updateNo: 0,
     isElective: true,
     semNo: 7,
+    listIndex: 10,
+    isFreezed: false,
+    crudInfo: {
+      type: 'SUBJECT_CREATE',
+      by: 'Script Manger User',
+    },
   },
   // Sem 8
   {
@@ -724,6 +1036,12 @@ const subjects = [
     updateNo: 0,
     isElective: false,
     semNo: 8,
+    listIndex: 1,
+    isFreezed: false,
+    crudInfo: {
+      type: 'SUBJECT_CREATE',
+      by: 'Script Manger User',
+    },
   },
   {
     subjectCode: 'AF 802',
@@ -737,6 +1055,12 @@ const subjects = [
     updateNo: 0,
     isElective: false,
     semNo: 8,
+    listIndex: 2,
+    isFreezed: false,
+    crudInfo: {
+      type: 'SUBJECT_CREATE',
+      by: 'Script Manger User',
+    },
   },
 ];
 

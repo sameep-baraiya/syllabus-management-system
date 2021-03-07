@@ -36,7 +36,7 @@ const SubjectCardView = (subject, index, downloadCallback) => {
             <Badge variant='secondary'>{subjectShort}</Badge>{' '}
             <Badge variant='success'>{department}</Badge>{' '}
             <Badge variant='warning'>
-              {noOfFiles !== 0 ? `No of Files: ${noOfFiles}` : null}
+              {noOfFiles && `No of Files: ${noOfFiles}`}
             </Badge>{' '}
             <Badge variant='info'>
               {updateNo !== undefined ? `Version: ${updateNo}` : null}
@@ -152,7 +152,7 @@ const SubjectCardView = (subject, index, downloadCallback) => {
                         </td>
                         <td>
                           <Button
-                            name={file.name}
+                            name={file.path}
                             variant='success'
                             size='sm'
                             onClick={downloadCallback}

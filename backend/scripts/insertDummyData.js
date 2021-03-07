@@ -1,5 +1,5 @@
 const User = require('../models/User');
-const Cousre = require('../models/Course');
+// const Cousre = require('../models/Course');
 const Subject = require('../models/Subject');
 const subjects = require('./subjects16-20');
 
@@ -14,19 +14,16 @@ const insertDummyData = async () => {
     console.log('Faculty-Member Created');
 
     // Course
-    const cousre = await Cousre.create(courseData);
-    console.log('Course Created');
+    // const cousre = await Cousre.create(courseData);
+    // console.log('Course Created');
 
     // Subjects
     subjects.forEach(async (subject) => {
-      const newSubject = await Subject.create(subject);
-      await cousre.addSubject(newSubject);
-      const subjectWithRef = await cousre.getSubjects({
-        where: { id: newSubject.id },
-      });
-      const courseSubject = subjectWithRef[0].CourseSubject;
-      courseSubject.semNo = subject.semNo;
-      await courseSubject.save();
+      try {
+        await Subject.create(subject);
+      } catch (err) {
+        console.log(err);
+      }
     });
     console.log('Subjects Created');
   } catch (err) {
@@ -42,6 +39,10 @@ const adminData = {
   department: 'IT - Information Technology',
   password: 'admin123@',
   isApproved: true,
+  crudInfo: {
+    type: 'USER_CREATE',
+    by: 'Script Manger',
+  },
 };
 const smData = {
   name: 'itsm-mname-lname',
@@ -50,6 +51,10 @@ const smData = {
   role: 'syllabus-manager',
   department: 'IT - Information Technology',
   password: 'smsm123@',
+  crudInfo: {
+    type: 'USER_CREATE',
+    by: 'Script Manger',
+  },
 };
 const fmData = {
   name: 'itfm-mname-lname',
@@ -58,6 +63,10 @@ const fmData = {
   role: 'faculty-member',
   department: 'IT - Information Technology',
   password: 'fmfm123@',
+  crudInfo: {
+    type: 'USER_CREATE',
+    by: 'Script Manger',
+  },
 };
 
 const courseData = {
@@ -67,6 +76,7 @@ const courseData = {
   courseLength: 48,
   noOfSemesters: 8,
   updateNo: 0,
+  crudInfo: 'USER_CREATE',
 };
 
 module.exports = insertDummyData;

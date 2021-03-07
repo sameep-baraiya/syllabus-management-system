@@ -271,6 +271,7 @@ const LogIn = () => {
           </Col>
         </Row>
       </Container>
+      <br />
     </Fragment>
   );
 };
