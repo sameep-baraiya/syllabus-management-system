@@ -101,7 +101,12 @@ const ViewSubject = ({ subject = null }) => {
             </div>
             <Table striped bordered hover>
               <thead>
-                <tr>{cellMakerHeadGroups(headMasterJSON.headGroups)}</tr>
+                <tr>
+                  {cellMakerHeadGroups(
+                    headMasterJSON.headGroups,
+                    headMasterJSON.headGroupsLength
+                  )}
+                </tr>
               </thead>
               <thead>
                 <tr>{cellMaker(headMasterJSON.headMasters)}</tr>

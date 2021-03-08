@@ -1,13 +1,12 @@
 import React, { useState, useContext } from 'react';
-import { Form, Button, Table, Card, Row, Col } from 'react-bootstrap';
+import { Form, Button, Card, Row, Col } from 'react-bootstrap';
 import SubjectContext from '../../../context/subject/subjectContext';
 import { iconCreate } from '../../layout/Icon';
 
 // Utils
 import s2pn from '../../../utils/s2pn';
-import cellMaker from '../../../utils/cellMaker';
-import cellMakerHeadGroups from '../../../utils/cellMakerHeadGroups';
-import editableCellMaker from '../../../utils/editableCellMaker';
+
+import HaedMasterJSONInput from './HaedMasterJSONInput';
 
 // TODO V1 Create Subject
 const CreateSubject = () => {
@@ -33,7 +32,7 @@ const CreateSubject = () => {
   //   // eslint-disable-next-line
   // }, [search]);
 
-  const [reqObj, setReqObj] = useState({
+  const initialReqObj = {
     subjectCode: '',
     subjectName: '',
     subjectShort: '',
@@ -53,19 +52,8 @@ const CreateSubject = () => {
         'Term Work',
         'Total ES',
       ],
-      headGroups: [
-        'Teaching Scheme',
-        'Teaching Scheme',
-        'Teaching Scheme',
-        'Credit Structure',
-        'Credit Structure',
-        'Credit Structure',
-        'Exam Scheme',
-        'Exam Scheme',
-        'Exam Scheme',
-        'Exam Scheme',
-        'Exam Scheme',
-      ],
+      headGroups: ['Teaching Scheme', 'Credit Structure', 'Exam Scheme'],
+      headGroupsLength: [3, 3, 5],
       points: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     },
     theory: '',
@@ -79,14 +67,16 @@ const CreateSubject = () => {
     files: [{ name: '', file: null }],
     // successorId: '',
     // predecessor: '',
-  });
+  };
+
+  const [reqObj, setReqObj] = useState({ ...initialReqObj });
   const {
     subjectCode,
     subjectName,
     subjectShort,
     subjectDescription,
     department,
-    headMasterJSON,
+    // headMasterJSON,
     // theory,
     // isElective,
     // practical,
@@ -111,20 +101,6 @@ const CreateSubject = () => {
   // checkBox onChange handler
   const onChangeCheckBox = (e) => {
     setReqObj({ ...reqObj, [e.target.name]: e.target.checked });
-  };
-
-  // Related to HaedMasterJSON
-  const changeCellValue = (e) => {
-    const tempPointsArray = reqObj.headMasterJSON.points;
-    // TODO s2pf
-    tempPointsArray[parseInt(e.target.name)] = s2pn(e.target.value);
-    setReqObj({
-      ...reqObj,
-      headMasterJSON: {
-        ...reqObj.headMasterJSON,
-        points: tempPointsArray,
-      },
-    });
   };
 
   // Related To File
@@ -169,51 +145,7 @@ const CreateSubject = () => {
 
   // For Clearing all input
   const clearData = (e) => {
-    setReqObj({
-      subjectCode: '',
-      subjectName: '',
-      subjectShort: '',
-      subjectDescription: '',
-      department: 'None',
-      headMasterJSON: {
-        headMasters: [
-          'Lecture',
-          'Tutorial',
-          'Practical',
-          'L+T',
-          'P',
-          'Total CS',
-          'Theory',
-          'Sessional',
-          'Practical',
-          'Term Work',
-          'Total ES',
-        ],
-        headGroups: [
-          'Teaching Scheme',
-          'Teaching Scheme',
-          'Teaching Scheme',
-          'Credit Structure',
-          'Credit Structure',
-          'Credit Structure',
-          'Exam Scheme',
-          'Exam Scheme',
-          'Exam Scheme',
-          'Exam Scheme',
-          'Exam Scheme',
-        ],
-        points: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      },
-      theory: '',
-      isElective: false,
-      practical: '',
-      semNo: 0,
-      listIndex: 0,
-      updateNo: 0,
-      isOutdated: false,
-      isFreezed: false,
-      files: [{ name: '', file: null }],
-    });
+    setReqObj({ ...initialReqObj });
   };
 
   // Fires Create Query
@@ -435,17 +367,7 @@ const CreateSubject = () => {
       </Form.Group>
       <Form.Group controlId='CreateSubject.headMasterJSON'>
         <Form.Label>Head Master</Form.Label>
-        <Table striped bordered hover>
-          <thead>
-            <tr>{cellMakerHeadGroups(headMasterJSON.headGroups)}</tr>
-          </thead>
-          <thead>
-            <tr>{cellMaker(headMasterJSON.headMasters)}</tr>
-          </thead>
-          <tbody>
-            <tr>{editableCellMaker(headMasterJSON.points, changeCellValue)}</tr>
-          </tbody>
-        </Table>
+        <HaedMasterJSONInput reqObj={reqObj} setReqObj={setReqObj} />
       </Form.Group>
       <Form.Group controlId='CreateSubject.subjectProperty'>
         <Form.Label>Subject Property</Form.Label>

@@ -36,6 +36,7 @@ import {
   faQuestionCircle,
   faHandshake,
   faSearch,
+  faCopy,
 } from '@fortawesome/free-solid-svg-icons';
 
 const iconUser = <FontAwesomeIcon icon={faUser} />;
@@ -85,6 +86,8 @@ const fucIconAlert = (variant) => {
 const iconMeeting = <FontAwesomeIcon icon={faHandshake} />;
 const iconSearch = <FontAwesomeIcon icon={faSearch} />;
 const iconCreate = <FontAwesomeIcon icon={faFolderPlus} />;
+const iconCopy = <FontAwesomeIcon icon={faCopy} />;
+const iconCreate2 = <FontAwesomeIcon icon={faPlusSquare} />;
 
 export {
   iconUser,
@@ -121,4 +124,6 @@ export {
   iconMeeting,
   iconSearch,
   iconCreate,
+  iconCopy,
+  iconCreate2,
 };

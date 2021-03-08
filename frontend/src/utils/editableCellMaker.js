@@ -6,13 +6,15 @@ const editableCellMaker = (arr = [], changeCellValue) => {
   return (
     <Fragment>
       {arr.map((it, index) => (
-        <td key={index}>
+        <td key={index} style={{ padding: '0px' }}>
           <Form.Control
             name={index}
-            type='text'
+            type='number'
             onChange={changeCellValue}
             value={it}
             onFocus={handleFocus}
+            step='0.1'
+            style={{ borderRadius: '0px', borderWidth: '0px' }}
           />
         </td>
       ))}

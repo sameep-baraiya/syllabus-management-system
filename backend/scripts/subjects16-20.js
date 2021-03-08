@@ -12,19 +12,8 @@ const headTemp = {
     'Term Work',
     'Total ES',
   ],
-  headGroups: [
-    'Teaching Scheme',
-    'Teaching Scheme',
-    'Teaching Scheme',
-    'Credit Structure',
-    'Credit Structure',
-    'Credit Structure',
-    'Exam Scheme',
-    'Exam Scheme',
-    'Exam Scheme',
-    'Exam Scheme',
-    'Exam Scheme',
-  ],
+  headGroups: ['Teaching Scheme', 'Credit Structure', 'Exam Scheme'],
+  headGroupsLength: [3, 3, 5],
 };
 
 const subjects = [

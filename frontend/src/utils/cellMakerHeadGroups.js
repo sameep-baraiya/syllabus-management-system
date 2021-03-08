@@ -1,15 +1,10 @@
 import { Fragment } from 'react';
 
-const cellMakerHeadGroups = (arr = []) => {
-  let counts = {};
-  for (let i = 0; i < arr.length; i++) {
-    let num = arr[i];
-    counts[num] = counts[num] ? counts[num] + 1 : 1;
-  }
+const cellMakerHeadGroups = (arr = [], lenArr = []) => {
   return (
     <Fragment>
-      {Object.keys(counts).map((it, index) => (
-        <td key={index} colSpan={counts[it]}>
+      {arr.map((it, index) => (
+        <td key={index} colSpan={lenArr[index]}>
           {it}
         </td>
       ))}
