@@ -64,6 +64,10 @@ const syllabusManager = {
           title: 'Create Subject',
           link: '/syllabus-manager/subject',
         },
+        {
+          title: 'Edit Subject',
+          link: '/syllabus-manager/subject/edit',
+        },
       ],
     },
     {

@@ -17,6 +17,8 @@ export const SUBJECTS_ERROR = 'SUBJECTS_ERROR';
 export const SUBJECT_ERROR = 'SUBJECT_ERROR';
 export const CREATE_ERROR = 'CREATE_ERROR';
 export const CLEAR_SUBJECTS = 'CLEAR_SUBJECTS';
+export const UPDATE_SUBJECT = 'UPDATE_SUBJECT';
+export const UPDATE_ERROR = 'UPDATE_ERROR';
 
 // Course
 export const CREATE_COURSE = 'CREATE_COURSE';

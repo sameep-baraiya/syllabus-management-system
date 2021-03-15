@@ -2,14 +2,14 @@ import React, { useState, useContext } from 'react';
 import { Button, ButtonGroup, Card } from 'react-bootstrap';
 
 // Subject Model Components
-import CreateSubject from '../models/subject/CreateSubject';
-import FindSubject from '../models/subject/FindSubject';
-import ViewSubject from '../models/subject/ViewSubject';
+import EditSubject from '../../models/subject/EditSubject';
+import FindSubject from '../../models/subject/FindSubject';
+import ViewSubject from '../../models/subject/ViewSubject';
 
 // Context
-import SubjectContext from '../../context/subject/subjectContext';
+import SubjectContext from '../../../context/subject/subjectContext';
 
-const SMCreateSubject = () => {
+const SMEditSubject = () => {
   const subjectContext = useContext(SubjectContext);
   const { subjects, getSubject, subject } = subjectContext;
 
@@ -24,14 +24,13 @@ const SMCreateSubject = () => {
 
   const onSubjectSelectClick = () => {
     if (operationMode === 'clone') {
-      console.log('clone');
       setMode('clone');
     } else if (operationMode === 'predecessor') {
-      console.log('predecessor');
       setMode('predecessor');
     } else if (operationMode === 'successor') {
-      console.log('successor');
       setMode('successor');
+    } else if (operationMode === 'original') {
+      setMode('original');
     }
     setIsSelected(false);
     setOperationMode('');
@@ -65,11 +64,21 @@ const SMCreateSubject = () => {
     <div>
       <br />
       <h2>
-        <strong>Create/Clone Subject</strong>
+        <strong>Edit/Clone Subject</strong>
       </h2>
       <div className='mb-3'>
         Select operation :{' '}
         <ButtonGroup>
+          <Button
+            variant={operationMode === 'original' ? 'info' : 'outline-info'}
+            onClick={() => {
+              operationMode === 'original'
+                ? setOperationMode('')
+                : setOperationMode('original');
+            }}
+          >
+            Set Original Subject
+          </Button>
           <Button
             variant={operationMode === 'clone' ? 'primary' : 'outline-primary'}
             onClick={() => {
@@ -135,10 +144,10 @@ const SMCreateSubject = () => {
         </Card>
       )}
       <hr />
-      <CreateSubject mode={mode} setMode={setMode} />
+      <EditSubject mode={mode} setMode={setMode} />
       <br />
     </div>
   );
 };
 
-export default SMCreateSubject;
+export default SMEditSubject;

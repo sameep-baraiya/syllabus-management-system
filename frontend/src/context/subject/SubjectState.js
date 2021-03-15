@@ -11,6 +11,8 @@ import {
   SUBJECT_ERROR,
   CREATE_ERROR,
   CLEAR_SUBJECTS,
+  UPDATE_SUBJECT,
+  UPDATE_ERROR,
 } from '../types';
 import LoadingContext from '../loading/loadingContext';
 
@@ -150,6 +152,54 @@ const SubjectState = (props) => {
     }
   };
 
+  // Update Sujbect
+  const updateSubject = async (reqObj) => {
+    setLoading();
+    try {
+      const formData = new FormData();
+      const { files, theoryFile, practicalFile, ...rest } = reqObj;
+
+      if (theoryFile) {
+        formData.append('theory', theoryFile.file, theoryFile.name);
+      }
+
+      if (practicalFile) {
+        formData.append('practical', practicalFile.file, practicalFile.name);
+      }
+
+      files.forEach((it) => {
+        formData.append('file', it.file, it.name);
+      });
+
+      formData.append('data', JSON.stringify(rest));
+
+      const config = {
+        headers: {
+          'content-type': 'multipart/form-data',
+        },
+      };
+
+      const res = await axios.put(
+        `/api/v1/subject/${reqObj.id}`,
+        formData,
+        config
+      );
+
+      dispatch({
+        type: UPDATE_SUBJECT,
+        payload: res.data,
+      });
+    } catch (err) {
+      console.error(err);
+      dispatch({
+        type: UPDATE_ERROR,
+        payload: err.response,
+      });
+    } finally {
+      resetLoading();
+    }
+  };
+
   // Clear Errors
   const clearErrors = () => dispatch({ type: CLEAR_ERRORS });
 
@@ -169,6 +219,7 @@ const SubjectState = (props) => {
         clearErrors,
         createSubject,
         clearSubjects,
+        updateSubject,
       }}
     >
       {props.children}

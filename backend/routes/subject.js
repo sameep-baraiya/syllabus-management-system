@@ -40,12 +40,16 @@ const {
   createSubject,
   getSubjects,
   getSubject,
+  updateSubject,
 } = require('../controllers/subject');
 
 const router = express.Router();
 
 router.route('/').post(protect, uploadFiels, createSubject);
-router.route('/:id').get(protect, getSubject);
+router
+  .route('/:id')
+  .get(protect, getSubject)
+  .put(protect, uploadFiels, updateSubject);
 router
   .route('/')
   .get(

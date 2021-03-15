@@ -38,6 +38,7 @@ import {
   faCopy,
   faBookOpen,
   faCheckDouble,
+  faEdit,
 } from '@fortawesome/free-solid-svg-icons';
 
 const iconUser = <FontAwesomeIcon icon={faUser} />;
@@ -90,6 +91,8 @@ const iconCreate = <FontAwesomeIcon icon={faFolderPlus} />;
 const iconCopy = <FontAwesomeIcon icon={faCopy} />;
 const iconCreate2 = <FontAwesomeIcon icon={faPlusSquare} />;
 const iconValidate = <FontAwesomeIcon icon={faCheckDouble} />;
+const iconEdit = <FontAwesomeIcon icon={faEdit} />;
+const iconEdit2 = <FontAwesomeIcon icon={faPen} />;
 
 export {
   iconUser,
@@ -129,4 +132,6 @@ export {
   iconCopy,
   iconCreate2,
   iconValidate,
+  iconEdit,
+  iconEdit2,
 };

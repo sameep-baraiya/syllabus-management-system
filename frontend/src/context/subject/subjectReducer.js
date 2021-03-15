@@ -7,6 +7,8 @@ import {
   CREATE_SUBJECT,
   CREATE_ERROR,
   CLEAR_SUBJECTS,
+  UPDATE_SUBJECT,
+  UPDATE_ERROR,
 } from '../types';
 
 const authReducer = (state, action) => {
@@ -46,6 +48,16 @@ const authReducer = (state, action) => {
       return {
         ...state,
         error: null,
+      };
+    case UPDATE_SUBJECT:
+      return {
+        ...state,
+        error: null,
+      };
+    case UPDATE_ERROR:
+      return {
+        ...state,
+        error: action.payload,
       };
     case CREATE_ERROR:
       return {

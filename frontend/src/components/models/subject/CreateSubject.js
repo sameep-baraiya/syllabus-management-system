@@ -203,7 +203,11 @@ const CreateSubject = ({ mode, setMode }) => {
       filesNullCase.practicalFile = { name: '', file: null, url: '' };
     }
 
+    delete reqObj.theoryFile;
+    delete reqObj.practicalFile;
+
     setReqObj({
+      ...reqObj,
       subjectCode: '',
       department: department !== null ? department : 'None',
       subjectName: subjectName !== null ? subjectName : '',

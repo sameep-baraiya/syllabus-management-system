@@ -116,7 +116,7 @@ Subject.init(
             case 'SUBJECT_UPDATE':
               await CRUDLog.create({
                 msg: `Subject ${subject.subjectCode}: ${subject.subjectName} Updated`,
-                type: 'CREATE',
+                type: 'UPDATE',
                 model: 'Subject',
                 by: subject.crudInfo.by,
               });
