@@ -1,9 +1,9 @@
 import {
   GET_SUBJECTS,
-  // GET_SUBJECT,
-  // ADD_SUBJECT,
+  GET_SUBJECT,
   CLEAR_ERRORS,
   SUBJECTS_ERROR,
+  SUBJECT_ERROR,
   CREATE_SUBJECT,
   CREATE_ERROR,
   CLEAR_SUBJECTS,
@@ -18,6 +18,11 @@ const authReducer = (state, action) => {
         total: action.payload.total,
         pagination: action.payload.pagination,
       };
+    case GET_SUBJECT:
+      return {
+        ...state,
+        subject: action.payload.data,
+      };
     case CLEAR_SUBJECTS:
       return {
         ...state,
@@ -31,7 +36,12 @@ const authReducer = (state, action) => {
         subjects: null,
         error: action.payload,
       };
-
+    case SUBJECT_ERROR:
+      return {
+        ...state,
+        subject: null,
+        error: action.payload,
+      };
     case CREATE_SUBJECT:
       return {
         ...state,

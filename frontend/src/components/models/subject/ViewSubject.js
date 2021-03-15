@@ -19,13 +19,13 @@ const ViewSubject = ({ subject = null }) => {
     subjectShort,
     subjectDescription,
     department,
-    theory,
+    // theory,
     isElective,
     semNo,
     listIndex,
     isFreezed,
     crudInfo,
-    practical,
+    // practical,
     headMasterJSON,
     noOfFiles,
     // TODO after create
@@ -127,7 +127,7 @@ const ViewSubject = ({ subject = null }) => {
           </Fragment>
         )}
         {/* TODO Theory & Practical */}
-        {unf(theory) && (
+        {/* {unf(theory) && (
           <Fragment>
             <div className='mb-1'>
               <strong>Theory :</strong>
@@ -144,7 +144,7 @@ const ViewSubject = ({ subject = null }) => {
               {practical}
             </div>
           </Fragment>
-        )}
+        )} */}
         {unf(crudInfo) && (
           <Fragment>
             <div className='mb-1'>
@@ -155,7 +155,7 @@ const ViewSubject = ({ subject = null }) => {
             </div>
           </Fragment>
         )}
-        {unf(files) && (
+        {unf(files) && Array.isArray(files) && (
           <Fragment>
             <div>
               <strong>Files :</strong>
@@ -209,7 +209,7 @@ const ViewSubject = ({ subject = null }) => {
 };
 
 ViewSubject.propTypes = {
-  subject: PropTypes.object.isRequired,
+  subject: PropTypes.object,
 };
 
 export default ViewSubject;

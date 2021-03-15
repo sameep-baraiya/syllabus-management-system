@@ -1,21 +1,24 @@
 import React, { useState, useContext } from 'react';
 import { Button, ButtonGroup, Card } from 'react-bootstrap';
 
+// Academic Batch Model Components
+import CreateAcademicBatch from '../models/academic-batch/CreateAcademicBatch';
+
 // Subject Model Components
-import CreateSubject from '../models/subject/CreateSubject';
+// import CreateSubject from '../models/subject/CreateSubject';
 import FindSubject from '../models/subject/FindSubject';
 import ViewSubject from '../models/subject/ViewSubject';
 
 // Context
 import SubjectContext from '../../context/subject/subjectContext';
 
-const SMCreateSubject = () => {
+const SMCreateAcademicBatch = () => {
   const subjectContext = useContext(SubjectContext);
   const { subjects, getSubject, subject } = subjectContext;
 
   const [operationMode, setOperationMode] = useState('');
   const [isSelected, setIsSelected] = useState(false);
-  const [mode, setMode] = useState('');
+  // const [, setMode] = useState('');
 
   const onSelectClick = (id) => {
     setIsSelected(true);
@@ -25,13 +28,13 @@ const SMCreateSubject = () => {
   const onSubjectSelectClick = () => {
     if (operationMode === 'clone') {
       console.log('clone');
-      setMode('clone');
+      // setMode('clone');
     } else if (operationMode === 'predecessor') {
       console.log('predecessor');
-      setMode('predecessor');
+      // setMode('predecessor');
     } else if (operationMode === 'successor') {
       console.log('successor');
-      setMode('successor');
+      // setMode('successor');
     }
     setIsSelected(false);
     setOperationMode('');
@@ -60,12 +63,10 @@ const SMCreateSubject = () => {
       </div>
     );
   };
-
   return (
     <div>
-      <br />
       <h2>
-        <strong>Create/Clone Subject</strong>
+        <strong>Create/Clone Academic Batch</strong>
       </h2>
       <div className='mb-3'>
         Select operation :{' '}
@@ -78,7 +79,7 @@ const SMCreateSubject = () => {
                 : setOperationMode('clone');
             }}
           >
-            Clone Subject
+            Clone Academic Batch
           </Button>
           <Button
             variant={
@@ -90,7 +91,7 @@ const SMCreateSubject = () => {
                 : setOperationMode('successor');
             }}
           >
-            Set Successor Subject
+            Set Successor Academic Batch
           </Button>
           <Button
             variant={
@@ -102,7 +103,7 @@ const SMCreateSubject = () => {
                 : setOperationMode('predecessor');
             }}
           >
-            Set Predecessor Subject
+            Set Predecessor Academic Batch
           </Button>
         </ButtonGroup>
       </div>
@@ -135,10 +136,9 @@ const SMCreateSubject = () => {
         </Card>
       )}
       <hr />
-      <CreateSubject mode={mode} setMode={setMode} />
-      <br />
+      <CreateAcademicBatch />
     </div>
   );
 };
 
-export default SMCreateSubject;
+export default SMCreateAcademicBatch;

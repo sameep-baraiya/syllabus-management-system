@@ -26,6 +26,15 @@ const insertDummyData = async () => {
       }
     });
     console.log('Subjects Created');
+    // const subject1 = await Subject.findOne({
+    //   include: {
+    //     model: Subject,
+    //     as: 'successor',
+    //   },
+    // });
+    // console.log(subject1.toJSON());
+    // const subject2 = await Subject.findOne();
+    // await subject1.setSuccessor(subject2);
   } catch (err) {
     console.error(err);
   }

@@ -7,9 +7,11 @@ import { Switch, Route } from 'react-router-dom';
 import DefaultSM from './DefaultSM';
 // import CreateSubject from './CreateSubject';
 import SMCreateSubject from './SMCreateSubject';
+import SMCreateAcademicBatch from './SMCreateAcademicBatch';
+import SMCreateCourse from './SMCreateCourse';
 // import CreateAcademicBatch from './CreateAcademicBatch';
-// import CreateACMeeting from './CreateACMeeting';
-// import CreateBOSMeeting from './CreateBOSMeeting';
+import CreateACMeeting from './CreateACMeeting';
+import CreateBOSMeeting from './CreateBOSMeeting';
 
 // Routing Componets
 import PrivateRoute from '../routing/PrivateRoute';
@@ -21,36 +23,31 @@ const SyllabusManager = (props) => {
   return (
     <Switch>
       <PrivateRoute exact path='/syllabus-manager/' component={DefaultSM} />
-      {/* <PrivateRoute
-              exact
-              path='/syllabus-manager/course/'
-              component={CreateCourse}
-            />
-            <PrivateRoute
-              exact
-              path='/syllabus-manager/course/csv'
-              component={CreateViaCSV}
-            /> */}
+      <PrivateRoute
+        exact
+        path='/syllabus-manager/course/'
+        component={SMCreateCourse}
+      />
       <PrivateRoute
         exact
         path='/syllabus-manager/subject'
         component={SMCreateSubject}
       />
-      {/* <PrivateRoute
-              exact
-              path='/syllabus-manager/academic-batch'
-              component={CreateAcademicBatch}
-            />
-            <PrivateRoute
-              exact
-              path='/syllabus-manager/acmeeting'
-              component={CreateACMeeting}
-            />
-            <PrivateRoute
-              exact
-              path='/syllabus-manager/bosmeeting'
-              component={CreateBOSMeeting}
-            /> */}
+      <PrivateRoute
+        exact
+        path='/syllabus-manager/academic-batch'
+        component={SMCreateAcademicBatch}
+      />
+      <PrivateRoute
+        exact
+        path='/syllabus-manager/acmeeting'
+        component={CreateACMeeting}
+      />
+      <PrivateRoute
+        exact
+        path='/syllabus-manager/bosmeeting'
+        component={CreateBOSMeeting}
+      />
       <Route component={NotFound} />
     </Switch>
   );

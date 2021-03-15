@@ -1,9 +1,9 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { Card } from 'react-bootstrap';
 // Siderbar Link Data
 import { home, dashboard, syllabusManager } from '../routing/sidebarLinkData';
 
-// TODO Rework UI
 const Sidebar = () => {
   let location = useLocation();
 
@@ -18,38 +18,33 @@ const Sidebar = () => {
     }
   };
   return (
-    <Fragment>
-      <div className='sidebar flex-column'>
-        <div className='sidebar-title-div'>
-          <div className='sidebar-title'>
+    <Card className='m-2'>
+      <Card.Body>
+        <div className='sidebar flex-column'>
+          <h2>
             <strong>{sidebarData().sidebarTitle}</strong>
-          </div>
-        </div>
-        <br />
-        {sidebarData().sidebarLink &&
-          sidebarData().sidebarLink.map((it, index) => (
-            <div key={index} className='sidebar-link-div'>
-              <div className='sidebar-link-title'>
-                {it.titleIcon} {it.title}
-              </div>
-              {it.subLink.map((sit, sindex) => (
-                <div key={sindex} className='sidebar-sublink-div'>
-                  <Link
-                    className={
-                      location.pathname === sit.link
-                        ? 'sidebar-sublink-link active'
-                        : 'sidebar-sublink-link'
-                    }
-                    to={sit.link}
-                  >
-                    {sit.title}
-                  </Link>
+          </h2>
+          <br />
+          {sidebarData().sidebarLink &&
+            sidebarData().sidebarLink.map((it, index) => (
+              <div key={index}>
+                <div className='h6 mt-3'>
+                  <strong>
+                    {it.titleIcon} {it.title}
+                  </strong>
                 </div>
-              ))}
-            </div>
-          ))}
-      </div>
-    </Fragment>
+                <div>
+                  {it.subLink.map((sit, sindex) => (
+                    <div key={sindex}>
+                      <Link to={sit.link}>• {sit.title}</Link>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+        </div>
+      </Card.Body>
+    </Card>
   );
 };
 

@@ -22,7 +22,6 @@ import {
   faFolderPlus,
   faPlusSquare,
   faBook,
-  faFileArchive,
   faWindowRestore,
   faThList,
   faFileCode,
@@ -37,6 +36,8 @@ import {
   faHandshake,
   faSearch,
   faCopy,
+  faBookOpen,
+  faCheckDouble,
 } from '@fortawesome/free-solid-svg-icons';
 
 const iconUser = <FontAwesomeIcon icon={faUser} />;
@@ -62,14 +63,14 @@ const iconSyllabusManger = <FontAwesomeIcon icon={faBookMedical} />;
 const iconCreateCourse = <FontAwesomeIcon icon={faFolderPlus} />;
 const iconCreateSubject = <FontAwesomeIcon icon={faPlusSquare} />;
 const iconSubject = <FontAwesomeIcon icon={faBook} />;
-const iconCourse = <FontAwesomeIcon icon={faFileArchive} />;
+const iconCourse = <FontAwesomeIcon icon={faGraduationCap} />;
 const iconCardView = <FontAwesomeIcon icon={faWindowRestore} />;
 const iconListView = <FontAwesomeIcon icon={faThList} />;
 const iconJsonView = <FontAwesomeIcon icon={faFileCode} />;
 const iconTheory = <FontAwesomeIcon icon={faPen} />;
 const iconPractical = <FontAwesomeIcon icon={faFlask} />;
 const iconResult = <FontAwesomeIcon icon={faPoll} />;
-const iconAcademicBatch = <FontAwesomeIcon icon={faGraduationCap} />;
+const iconAcademicBatch = <FontAwesomeIcon icon={faBookOpen} />;
 const fucIconAlert = (variant) => {
   switch (variant) {
     case 'success':
@@ -88,6 +89,7 @@ const iconSearch = <FontAwesomeIcon icon={faSearch} />;
 const iconCreate = <FontAwesomeIcon icon={faFolderPlus} />;
 const iconCopy = <FontAwesomeIcon icon={faCopy} />;
 const iconCreate2 = <FontAwesomeIcon icon={faPlusSquare} />;
+const iconValidate = <FontAwesomeIcon icon={faCheckDouble} />;
 
 export {
   iconUser,
@@ -126,4 +128,5 @@ export {
   iconCreate,
   iconCopy,
   iconCreate2,
+  iconValidate,
 };

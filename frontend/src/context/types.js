@@ -14,6 +14,7 @@ export const GET_SUBJECTS = 'GET_SUBJECTS';
 export const GET_SUBJECT = 'GET_SUBJECT';
 export const CREATE_SUBJECT = 'CREATE_SUBJECT';
 export const SUBJECTS_ERROR = 'SUBJECTS_ERROR';
+export const SUBJECT_ERROR = 'SUBJECT_ERROR';
 export const CREATE_ERROR = 'CREATE_ERROR';
 export const CLEAR_SUBJECTS = 'CLEAR_SUBJECTS';
 

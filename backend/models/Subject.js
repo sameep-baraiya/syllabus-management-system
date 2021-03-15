@@ -1,7 +1,6 @@
 const { sequelize } = require('../config/databaseInit');
 const { DataTypes, Model } = require('sequelize');
 const CRUDLog = require('./CRUDLog');
-const { departmentArray } = require('../common/department');
 
 class Subject extends Model {}
 
@@ -10,6 +9,7 @@ Subject.init(
     subjectCode: {
       type: DataTypes.STRING(40),
       unique: true,
+      allowNull: false,
     },
     subjectName: {
       type: DataTypes.STRING(60),
@@ -17,28 +17,30 @@ Subject.init(
     },
     subjectShort: {
       type: DataTypes.STRING(10),
+    },
+    subjectType: {
+      type: DataTypes.STRING,
       allowNull: false,
     },
     subjectDescription: {
       type: DataTypes.STRING,
     },
     department: {
-      type: DataTypes.ENUM,
-      values: departmentArray,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     headMasterJSON: {
       type: DataTypes.JSON,
     },
-    theory: {
-      type: DataTypes.TEXT,
+    theoryFile: {
+      type: DataTypes.JSON,
     },
     isElective: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
     },
-    practical: {
-      type: DataTypes.TEXT,
+    practicalFile: {
+      type: DataTypes.JSON,
     },
     semNo: {
       type: DataTypes.SMALLINT.UNSIGNED,
@@ -84,7 +86,36 @@ Subject.init(
           switch (subject.crudInfo.type) {
             case 'SUBJECT_CREATE':
               await CRUDLog.create({
-                msg: `Subject ${subject.subjectName} Created`,
+                msg: `Subject ${subject.subjectCode}: ${subject.subjectName} Created`,
+                type: 'CREATE',
+                model: 'Subject',
+                by: subject.crudInfo.by,
+              });
+              break;
+            default:
+              await CRUDLog.create({
+                msg: 'Unexpected crudInfo Model Subject, Opertaion Create',
+              });
+              break;
+          }
+        } catch (err) {
+          console.error(err);
+        }
+      },
+      afterUpdate: async (subject, options) => {
+        try {
+          switch (subject.crudInfo.type) {
+            case 'SUBJECT_UPDATE_SUCCESSOR_PREDECESSOR':
+              await CRUDLog.create({
+                msg: `Subject ${subject.subjectCode}: ${subject.subjectName} Successor/Predecessor Updated`,
+                type: 'UPDATE',
+                model: 'Subject',
+                by: subject.crudInfo.by,
+              });
+              break;
+            case 'SUBJECT_UPDATE':
+              await CRUDLog.create({
+                msg: `Subject ${subject.subjectCode}: ${subject.subjectName} Updated`,
                 type: 'CREATE',
                 model: 'Subject',
                 by: subject.crudInfo.by,
@@ -104,7 +135,7 @@ Subject.init(
   }
 );
 
-Subject.hasOne(Subject, { as: 'successor' });
-Subject.hasOne(Subject, { as: 'predecessor' });
+Subject.belongsTo(Subject, { as: 'successor' });
+Subject.belongsTo(Subject, { as: 'predecessor' });
 
 module.exports = Subject;

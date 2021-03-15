@@ -1,5 +1,6 @@
 import { Container } from 'react-bootstrap';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { pdfjs } from 'react-pdf';
 import './components/style/sidebar.css';
 
 // Layout Componets
@@ -35,6 +36,8 @@ import LoadingState from './context/loading/LoadingState';
 import AlertState from './context/alert/AlertState';
 
 function App() {
+  pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
+
   return (
     <LoadingState>
       <AlertState>

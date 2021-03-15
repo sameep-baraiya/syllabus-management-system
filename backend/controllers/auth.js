@@ -7,7 +7,10 @@ const User = require('../models/User');
 // @access  Private
 exports.getLoggedInUser = async (req, res, next) => {
   try {
-    const user = await User.findByPk(req.userId);
+    const user = await User.findByPk(req.user.id);
+    if (user === null) {
+      return next(new ErrorResponse('Bad Request: User Not Found', 404));
+    }
     const result = user.toJSON();
     delete result.password;
     res.status(200).json({

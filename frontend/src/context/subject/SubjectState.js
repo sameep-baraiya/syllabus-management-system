@@ -4,11 +4,11 @@ import SubjectContext from './subjectContext';
 import subjectReducer from './subjectReducer';
 import {
   GET_SUBJECTS,
-  // GET_SUBJECT,
-  // TODO Create GET_SUBJECT Route
+  GET_SUBJECT,
   CREATE_SUBJECT,
   CLEAR_ERRORS,
   SUBJECTS_ERROR,
+  SUBJECT_ERROR,
   CREATE_ERROR,
   CLEAR_SUBJECTS,
 } from '../types';
@@ -86,12 +86,42 @@ const SubjectState = (props) => {
     }
   };
 
+  // Get Subject
+  const getSubject = async (id = 0) => {
+    setLoading();
+    try {
+      let res;
+      res = await axios.get(`/api/v1/subject/${id}`);
+      dispatch({
+        type: GET_SUBJECT,
+        payload: res.data,
+      });
+    } catch (err) {
+      console.log(err);
+      dispatch({
+        type: SUBJECT_ERROR,
+        payload: err.response,
+      });
+    } finally {
+      resetLoading();
+    }
+  };
+
   // Create Sujbect
   const createSubject = async (reqObj) => {
     setLoading();
     try {
       const formData = new FormData();
-      const { files, ...rest } = reqObj;
+      const { files, theoryFile, practicalFile, ...rest } = reqObj;
+
+      if (theoryFile) {
+        formData.append('theory', theoryFile.file, theoryFile.name);
+      }
+
+      if (practicalFile) {
+        formData.append('practical', practicalFile.file, practicalFile.name);
+      }
+
       files.forEach((it) => {
         formData.append('file', it.file, it.name);
       });
@@ -134,6 +164,7 @@ const SubjectState = (props) => {
         error: state.error,
         pagination: state.pagination,
         total: state.total,
+        getSubject,
         getSubjects,
         clearErrors,
         createSubject,

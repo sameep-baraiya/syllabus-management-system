@@ -26,12 +26,21 @@ exports.protect = async (req, res, next) => {
     try {
       // Verify token
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
-      req.userId = decoded.id;
-      if (!req.userId) {
+      decoded.id;
+      if (!decoded.id) {
         return next(
           new ErrorResponse('Not authorized to access this route', 401)
         );
       }
+      const user = await User.findByPk(decoded.id, {
+        attributes: ['id', 'name'],
+      });
+      if (user === null) {
+        return next(
+          new ErrorResponse('Not authorized to access this route', 401)
+        );
+      }
+      req.user = user;
       next();
     } catch (err) {
       return next(

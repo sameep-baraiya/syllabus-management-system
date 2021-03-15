@@ -240,6 +240,15 @@ const CreateBOSMeeting = () => {
                           <option value='dep'>Deprecation of Subject</option>
                         </Form.Control>
                         <br />
+                        <Form.Label>Type of Modificaion</Form.Label>
+                        <Form.Control name={index} as='select'>
+                          <option>None</option>
+                          <option>Modification in Theory</option>
+                          <option>Modification in Practical</option>
+                          <option>Modification in Schema</option>
+                          <option>Modification in SemNo/ListIndex</option>
+                        </Form.Control>
+                        <br />
                         <Form.Label>Linked Subject Code</Form.Label>
                         <Form.Control
                           name={index}
@@ -247,6 +256,13 @@ const CreateBOSMeeting = () => {
                           placeholder='Linked Subject Code'
                           value={change.linkedSubjectCode}
                           onChange={onLinkedSubjectCodeChange}
+                        />
+                        <br />
+                        <Form.Label>Linked Subject Name</Form.Label>
+                        <Form.Control
+                          name={index}
+                          type='text'
+                          placeholder='Linked Subject Name'
                         />
                         <br />
                         <Form.Label>Is Change approved in Meeting ?</Form.Label>
@@ -273,7 +289,7 @@ const CreateBOSMeeting = () => {
                           as='textarea'
                           placeholder='Enter change details'
                           value={change.description}
-                          rows={12}
+                          rows={20}
                           onChange={onDescriptionChange}
                         />
                       </td>

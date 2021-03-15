@@ -1,11 +1,17 @@
-import { iconHome, iconAbout, iconSubject } from '../layout/Icon';
+import {
+  iconHome,
+  iconAbout,
+  iconSubject,
+  iconCourse,
+  iconAcademicBatch,
+  iconMeeting,
+} from '../layout/Icon';
 
 const home = {
   sidebarTitle: 'Home',
   sidebarLink: [
     {
       title: 'Account Access',
-      // TODOD Icon
       titleIcon: iconHome,
       subLink: [
         {
@@ -57,6 +63,40 @@ const syllabusManager = {
         {
           title: 'Create Subject',
           link: '/syllabus-manager/subject',
+        },
+      ],
+    },
+    {
+      title: 'Academic Batch',
+      titleIcon: iconAcademicBatch,
+      subLink: [
+        {
+          title: 'Create Academic Batch',
+          link: '/syllabus-manager/academic-batch',
+        },
+      ],
+    },
+    {
+      title: 'Course',
+      titleIcon: iconCourse,
+      subLink: [
+        {
+          title: 'Create Course',
+          link: '/syllabus-manager/course',
+        },
+      ],
+    },
+    {
+      title: 'Meeting',
+      titleIcon: iconMeeting,
+      subLink: [
+        {
+          title: 'Create Board Of Studies Meeting',
+          link: '/syllabus-manager/bosmeeting',
+        },
+        {
+          title: 'Create Academic Council Meeting',
+          link: '/syllabus-manager/acmeeting',
         },
       ],
     },
