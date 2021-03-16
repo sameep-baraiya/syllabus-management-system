@@ -36,7 +36,12 @@ const Sidebar = () => {
                 <div>
                   {it.subLink.map((sit, sindex) => (
                     <div key={sindex}>
-                      <Link to={sit.link}>• {sit.title}</Link>
+                      <Link
+                        to={sit.link}
+                        className={sit.isDanger && 'text-danger'}
+                      >
+                        • {sit.title}
+                      </Link>
                     </div>
                   ))}
                 </div>

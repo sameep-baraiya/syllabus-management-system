@@ -13,6 +13,8 @@ import {
   CLEAR_SUBJECTS,
   UPDATE_SUBJECT,
   UPDATE_ERROR,
+  DELETE_SUBJECT,
+  DELETE_ERROR,
 } from '../types';
 import LoadingContext from '../loading/loadingContext';
 
@@ -200,6 +202,29 @@ const SubjectState = (props) => {
     }
   };
 
+  // Delete Subject
+  const deleteSubject = async (reqObj) => {
+    setLoading();
+    try {
+      let res;
+      res = await axios.delete(`/api/v1/subject/${reqObj.id}`, {
+        data: { password: reqObj.password },
+      });
+      dispatch({
+        type: DELETE_SUBJECT,
+        payload: res.data,
+      });
+    } catch (err) {
+      console.log(err);
+      dispatch({
+        type: DELETE_ERROR,
+        payload: err.response,
+      });
+    } finally {
+      resetLoading();
+    }
+  };
+
   // Clear Errors
   const clearErrors = () => dispatch({ type: CLEAR_ERRORS });
 
@@ -220,6 +245,7 @@ const SubjectState = (props) => {
         createSubject,
         clearSubjects,
         updateSubject,
+        deleteSubject,
       }}
     >
       {props.children}

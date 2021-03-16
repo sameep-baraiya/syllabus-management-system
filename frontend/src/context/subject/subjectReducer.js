@@ -9,6 +9,8 @@ import {
   CLEAR_SUBJECTS,
   UPDATE_SUBJECT,
   UPDATE_ERROR,
+  DELETE_ERROR,
+  DELETE_SUBJECT,
 } from '../types';
 
 const authReducer = (state, action) => {
@@ -45,21 +47,15 @@ const authReducer = (state, action) => {
         error: action.payload,
       };
     case CREATE_SUBJECT:
-      return {
-        ...state,
-        error: null,
-      };
     case UPDATE_SUBJECT:
+    case DELETE_SUBJECT:
       return {
         ...state,
         error: null,
       };
     case UPDATE_ERROR:
-      return {
-        ...state,
-        error: action.payload,
-      };
     case CREATE_ERROR:
+    case DELETE_ERROR:
       return {
         ...state,
         error: action.payload,

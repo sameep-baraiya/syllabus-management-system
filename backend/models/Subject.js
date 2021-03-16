@@ -123,7 +123,28 @@ Subject.init(
               break;
             default:
               await CRUDLog.create({
-                msg: 'Unexpected crudInfo Model Subject, Opertaion Create',
+                msg: 'Unexpected crudInfo Model Subject, Opertaion Update',
+              });
+              break;
+          }
+        } catch (err) {
+          console.error(err);
+        }
+      },
+      afterDestroy: async (subject, options) => {
+        try {
+          switch (subject.crudInfo.type) {
+            case 'SUBJECT_DELETE':
+              await CRUDLog.create({
+                msg: `Subject ${subject.subjectCode}: ${subject.subjectName} Deleted`,
+                type: 'DELETE',
+                model: 'Subject',
+                by: subject.crudInfo.by,
+              });
+              break;
+            default:
+              await CRUDLog.create({
+                msg: 'Unexpected crudInfo Model Subject, Opertaion Delete',
               });
               break;
           }

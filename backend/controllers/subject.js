@@ -1,5 +1,6 @@
 const ErrorResponse = require('../utils/ErrorResponse');
 const Subject = require('../models/Subject');
+const User = require('../models/User');
 
 // @desc    Create subject
 // @route   POST /api/v1/subject
@@ -371,6 +372,40 @@ exports.updateSubject = async (req, res, next) => {
       await newSub.setSuccessor(successerSub);
       await successerSub.setPredecessor(newSub);
     }
+
+    res.status(200).json({
+      success: true,
+    });
+  } catch (err) {
+    return next(err);
+  }
+};
+
+// @desc    Delete subject
+// @route   DELETE /api/v1/subject/:id
+// @access  Private
+exports.deleteSubject = async (req, res, next) => {
+  const { id } = req.params;
+  const { password } = req.body;
+
+  try {
+    const user = await User.findByPk(req.user.id);
+
+    if (!user.matchPassword(password)) {
+      return next(new ErrorResponse('Passowrd not matched', 404));
+    }
+
+    const subject = await Subject.findByPk(id);
+    if (subject === null) {
+      return next(new ErrorResponse('Subject not found', 404));
+    }
+
+    subject.crudInfo = {
+      type: 'SUBJECT_DELETE',
+      by: req.user.name,
+    };
+
+    await subject.destroy();
 
     res.status(200).json({
       success: true,

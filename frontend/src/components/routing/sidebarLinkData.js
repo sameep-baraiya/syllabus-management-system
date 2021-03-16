@@ -68,6 +68,11 @@ const syllabusManager = {
           title: 'Edit Subject',
           link: '/syllabus-manager/subject/edit',
         },
+        {
+          title: 'Delete Subject',
+          link: '/syllabus-manager/subject/delete',
+          isDanger: true,
+        },
       ],
     },
     {

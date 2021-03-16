@@ -4,6 +4,7 @@ import { Switch, Route } from 'react-router-dom';
 // Subject Components
 import SMCreateSubject from './subject/SMCreateSubject';
 import SMEditSubject from './subject/SMEditSubject';
+import SMDeleteSubject from './subject/SMDeleteSubject';
 
 // Nested Syllabus Manager Route
 // import CreateViaCSV from './CreateViaCSV';
@@ -40,6 +41,11 @@ const SyllabusManager = (props) => {
         exact
         path='/syllabus-manager/subject/edit'
         component={SMEditSubject}
+      />
+      <PrivateRoute
+        exact
+        path='/syllabus-manager/subject/delete'
+        component={SMDeleteSubject}
       />
       <PrivateRoute
         exact

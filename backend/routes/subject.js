@@ -41,6 +41,7 @@ const {
   getSubjects,
   getSubject,
   updateSubject,
+  deleteSubject,
 } = require('../controllers/subject');
 
 const router = express.Router();
@@ -49,6 +50,7 @@ router.route('/').post(protect, uploadFiels, createSubject);
 router
   .route('/:id')
   .get(protect, getSubject)
+  .delete(protect, deleteSubject)
   .put(protect, uploadFiels, updateSubject);
 router
   .route('/')
