@@ -56,11 +56,7 @@ router
   .route('/')
   .get(
     protect,
-    advancedResult(
-      Subject,
-      ['subjectCode', 'subjectName', 'subjectShort'],
-      Course
-    ),
+    advancedResult(Subject, ['subjectCode', 'subjectName', 'subjectShort']),
     getSubjects
   );
 

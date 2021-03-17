@@ -50,6 +50,16 @@ const dashboard = {
         },
       ],
     },
+    {
+      title: 'Course',
+      titleIcon: iconCourse,
+      subLink: [
+        {
+          title: 'Find Course',
+          link: '/dashboard/course',
+        },
+      ],
+    },
   ],
 };
 
