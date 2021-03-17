@@ -1,5 +1,5 @@
 const User = require('../models/User');
-// const Cousre = require('../models/Course');
+const Cousre = require('../models/Course');
 const Subject = require('../models/Subject');
 const subjects = require('./subjects16-20');
 
@@ -12,10 +12,6 @@ const insertDummyData = async () => {
     console.log('Syllabus-Manager Created');
     const fm = await User.create(fmData);
     console.log('Faculty-Member Created');
-
-    // Course
-    // const cousre = await Cousre.create(courseData);
-    // console.log('Course Created');
 
     // Subjects
     subjects.forEach(async (subject) => {
@@ -35,6 +31,10 @@ const insertDummyData = async () => {
     // console.log(subject1.toJSON());
     // const subject2 = await Subject.findOne();
     // await subject1.setSuccessor(subject2);
+
+    // Course
+    const cousre = await Cousre.create(courseData);
+    console.log('Course Created');
   } catch (err) {
     console.error(err);
   }
@@ -79,13 +79,18 @@ const fmData = {
 };
 
 const courseData = {
-  courseCode: 'ITBTECH2020-20201',
-  courseType: 'B.Tech',
+  courseCode: 'BTIT 101',
+  courseName: 'BACHELOR OF TECHNOLOGY IN INFORMATION TECHNOLOGY',
+  courseType: 'B.Tech - Bachelor of Technology',
   department: 'IT - Information Technology',
-  courseLength: 48,
-  noOfSemesters: 8,
-  updateNo: 0,
-  crudInfo: 'USER_CREATE',
+  noOfSem: 8,
+  monthPerSem: 6,
+  isOutdated: false,
+  isFreezed: false,
+  crudInfo: {
+    type: 'COURSE_CREATE',
+    by: 'Script Manger',
+  },
 };
 
 module.exports = insertDummyData;

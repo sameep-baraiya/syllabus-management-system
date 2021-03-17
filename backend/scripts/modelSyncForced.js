@@ -1,5 +1,5 @@
 const User = require('../models/User');
-// const Cousre = require('../models/Course');
+const Cousre = require('../models/Course');
 const Subject = require('../models/Subject');
 // const CourseSubject = require('../models/CourseSubject');
 // const AcademicBatch = require('../models/AcademicBatch');
@@ -12,6 +12,7 @@ const modelSyncForced = async () => {
     await CRUDLog.sync({ force: true });
     await User.sync({ force: true });
     await Subject.sync({ force: true });
+    await Cousre.sync({ force: true });
   } catch (err) {
     console.error(err);
   }

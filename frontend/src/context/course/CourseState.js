@@ -26,7 +26,7 @@ const SubjectState = (props) => {
 
   const [state, dispatch] = useReducer(courseReducer, initialState);
 
-  // Create Sujbect
+  // Create Course
   const createCourse = async (reqObj) => {
     setLoading();
     try {
