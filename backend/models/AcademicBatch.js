@@ -8,7 +8,7 @@ class AcademicBatch extends Model {}
 AcademicBatch.init(
   {
     academicBatchCode: {
-      type: DataTypes.STRING(40),
+      type: DataTypes.STRING(60),
       unique: true,
     },
     academicBatchDescription: {
@@ -67,14 +67,6 @@ AcademicBatch.init(
       afterUpdate: async (ab, options) => {
         try {
           switch (ab.crudInfo.type) {
-            case 'ACADEMIC_BATCH_UPDATE_SUCCESSOR_PREDECESSOR':
-              await CRUDLog.create({
-                msg: `Academic Batch ${ab.academicBatchCode}: ${ab.academicBatchName} Successor/Predecessor Updated`,
-                type: 'UPDATE',
-                model: 'Academic Batch',
-                by: ab.crudInfo.by,
-              });
-              break;
             case 'ACADEMIC_BATCH_UPDATE':
               await CRUDLog.create({
                 msg: `Academic Batch ${ab.academicBatchCode}: ${ab.academicBatchName} Updated`,

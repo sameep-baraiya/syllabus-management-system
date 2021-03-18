@@ -7,7 +7,7 @@ class Course extends Model {}
 Course.init(
   {
     courseCode: {
-      type: DataTypes.STRING(40),
+      type: DataTypes.STRING(60),
       unique: true,
     },
     courseName: {

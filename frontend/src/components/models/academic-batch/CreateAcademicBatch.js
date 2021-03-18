@@ -3,522 +3,593 @@ import {
   Form,
   Button,
   Card,
-  Badge,
   InputGroup,
-  FormControl,
+  Row,
+  Col,
+  Alert,
   Table,
 } from 'react-bootstrap';
+
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+
+import PropTypes from 'prop-types';
+
+// Course Components
+import FindCourse from '../course/FindCourse';
+import ViewCourse from '../course/ViewCourse';
+
+// Seubject Components
+import FindSubject from '../subject/FindSubject';
+
+// Context
+import AcademicBatchContext from '../../../context/academicBatch/academicBatchContext';
 import SubjectContext from '../../../context/subject/subjectContext';
 import CourseContext from '../../../context/course/courseContext';
-import CourseCardView from '../../dashboard/CourseCardView';
 
-const CreateAcademicBatch = () => {
+// Layout
+import { iconCreate, iconValidate } from '../../layout/Icon';
+
+const CreateAcademicBatch = ({ mode, setMode }) => {
+  const academicBatchContext = useContext(AcademicBatchContext);
+  const { createAcademicBatch, academicBatch } = academicBatchContext;
+
+  const cubjectContext = useContext(CourseContext);
+  const { courses, getCourse, course } = cubjectContext;
+
   const subjectContext = useContext(SubjectContext);
-  const courseContext = useContext(CourseContext);
+  const { subjects } = subjectContext;
 
-  const { subjects, getSubjects, clearSubjects } = subjectContext;
-  const { createCourse, getCourses, clearCourses, courses } = courseContext;
+  const initialReqObj = {
+    academicBatchCode: '',
+    academicBatchDescription: '',
+    academicBatchName: '',
+    startYear: '',
+    endYear: '',
+    courseObj: null,
+    subjectsArr: [],
+    isFreezed: false,
+  };
 
-  const [searchQueryC, setSearchQueryC] = useState({
-    search: '',
-    attributes: { isOutdated: false },
-    select: 'courseCode',
-  });
+  const [reqObj, setReqObj] = useState({ ...initialReqObj });
 
-  useEffect(() => {
-    console.log('useEffect');
-    clearCourses();
-    // eslint-disable-next-line
-  }, [searchQueryC.search]);
-
-  const [isClone, setIsClone] = useState(false);
-
-  const [searchQuery, setSearchQuery] = useState({
-    search: '',
-    attributes: { isOutdated: false },
-    select: 'subjectCode,subjectName,subjectShort,department,semNo,listIndex',
-  });
-  const { search } = searchQuery;
-  useEffect(() => {
-    clearSubjects();
-    // eslint-disable-next-line
-  }, [search]);
-  const [reqObj, setReqObj] = useState({
-    course: {
-      courseCode: '',
-      courseDescription: '',
-      courseType: 'None',
-      department: 'None',
-      courseLength: 0,
-      noOfSemesters: 0,
-      updateNo: 0,
-    },
-    subjects: [],
-  });
   const {
-    courseCode,
-    courseDescription,
-    courseType,
-    department,
-    courseLength,
-    noOfSemesters,
-  } = reqObj.course;
+    academicBatchCode,
+    academicBatchDescription,
+    academicBatchName,
+    startYear,
+    endYear,
+    courseObj,
+    subjectsArr,
+    isFreezed,
+  } = reqObj;
 
-  const [selectedSubjects, setSelectedSubjects] = useState([]);
+  const [showNext, setShowNext] = useState(false);
 
-  const handleSelectionChange = (e) => {
-    var options = e.target.options;
-    var value = [];
-    for (var i = 0, l = options.length; i < l; i++) {
-      if (options[i].selected) {
-        value.push(options[i].value);
-      }
-    }
-    setSelectedSubjects(value);
+  // Input onChange handler
+  const onChange = (e) => {
+    setReqObj({ ...reqObj, [e.target.name]: e.target.value });
+  };
+
+  // checkBox onChange handler
+  const onChangeCheckBox = (e) => {
+    setReqObj({ ...reqObj, [e.target.name]: e.target.checked });
   };
 
   const onSubmit = (e) => {
     e.preventDefault();
-    if (
-      courseCode === '' ||
-      courseType === 'None' ||
-      department === 'None' ||
-      courseLength === 0 ||
-      noOfSemesters === 0
-    ) {
-      console.log('Enter proper data');
-    } else {
-      createCourse(reqObj);
-    }
-  };
-
-  const onChange = (e) => {
-    if (e.target.name === 'courseLength' || e.target.name === 'noOfSemesters') {
-      setReqObj({
-        ...reqObj,
-        course: {
-          ...reqObj.course,
-          [e.target.name]: isNaN(parseInt(e.target.value))
-            ? 0
-            : parseInt(e.target.value),
-        },
-      });
-    } else {
-      setReqObj({
-        ...reqObj,
-        course: {
-          ...reqObj.course,
-          [e.target.name]: e.target.value,
-        },
-      });
-    }
+    setShowNext(true);
   };
 
   const onClear = (e) => {
+    setReqObj(initialReqObj);
+  };
+
+  const doClone = () => {
+    const {
+      academicBatchDescription,
+      academicBatchName,
+      startYear,
+      endYear,
+      isFreezed,
+    } = academicBatch;
+
     setReqObj({
-      course: {
-        courseCode: '',
-        courseDescription: '',
-        courseType: 'None',
-        department: 'None',
-        courseLength: 0,
-        noOfSemesters: 0,
-        updateNo: 0,
-      },
-      subjects: [],
+      academicBatchCode: '',
+      academicBatchName: academicBatchName !== null ? academicBatchName : '',
+      academicBatchDescription:
+        academicBatchDescription !== null ? academicBatchDescription : '',
+      startYear: startYear !== null ? startYear : '',
+      endYear: endYear !== null ? endYear : '',
+      isFreezed: isFreezed !== null ? isFreezed : false,
     });
-    setSelectedSubjects([]);
-    setSearchQuery({
-      search: '',
-      attributes: [['isOutdated', 'fasle']],
-      select: 'subjectCode,subjectName,subjectShort,department',
-    });
+    setMode('');
   };
 
-  // const onChangeSemNo = (e) => {
-  //   const subjects = reqObj.subjects;
-  //   subjects[parseInt(e.target.name)].semNo = isNaN(parseInt(e.target.value))
-  //     ? 0
-  //     : parseInt(e.target.value);
-  //   setReqObj({
-  //     ...reqObj,
-  //     subjects: subjects,
-  //   });
-  //   sortSubjects();
-  // };
-  // const handleFocus = (e) => e.target.select();
-
-  const onSearchInputChange = (e) => {
-    setSearchQuery({
-      ...searchQuery,
-      search: e.target.value,
-    });
+  const onModeChange = () => {
+    if (mode === 'clone') {
+      doClone();
+    }
   };
 
-  const onSearch = (e) => {
-    getSubjects(searchQuery);
+  useEffect(() => {
+    onModeChange();
+    // eslint-disable-next-line
+  }, [mode]);
+
+  const [isSelected, setIsSelected] = useState(false);
+
+  const onSelectClick = (id) => {
+    setIsSelected(true);
+    getCourse(id);
   };
 
-  const sortSubjects = () => {
-    const subjects = reqObj.subjects;
-    subjects.sort((a, b) => a.semNo - b.semNo);
+  const onCourseSelectClick = () => {
     setReqObj({
       ...reqObj,
-      subjects,
+      courseObj: { ...course },
     });
+    setIsSelected(false);
   };
 
-  const onRemove = (e) => {
-    const subjects = reqObj.subjects;
-    subjects.splice(parseInt(e.target.name), 1);
-    setReqObj({
-      ...reqObj,
-      subjects: subjects,
-    });
-    // array.splice
-    sortSubjects();
+  const selectionList = () => {
+    return (
+      <div>
+        <FindCourse defaultSelect='id,courseCode,courseName' />
+        {courses &&
+          courses.map((it, index) => (
+            <div
+              key={index}
+              className='p-3 mb-2 bg-dark text-white'
+              onClick={() => onSelectClick(it.id)}
+              style={{
+                cursor: 'pointer',
+              }}
+            >
+              <span className='pt-1 pb-1 pl-3 pr-3 mr-3 bg-secondary text-white'>
+                Select
+              </span>
+              {it.courseCode}: {it.courseName}
+            </div>
+          ))}
+      </div>
+    );
   };
 
-  const onAddSubjects = (e) => {
-    const newSubjects = reqObj.subjects;
-    selectedSubjects.forEach((ss) => {
-      const ssCode = ss.split(',')[0];
-      if (
-        newSubjects
-          .map((obj) => {
-            return obj.subjectCode;
-          })
-          .indexOf(ssCode) === -1
-      ) {
-        newSubjects.push({
-          subjectCode: ssCode,
-          subjectName: ss.split(',').pop(),
-          semNo: 1,
-          alreadyExists: true,
-        });
-      }
-    });
-    setReqObj({
-      ...reqObj,
-      subjects: newSubjects,
-    });
-    sortSubjects();
-  };
-
-  const onSearchInputChangeC = (e) => {
-    setSearchQueryC({
-      ...searchQueryC,
-      search: e.target.value,
-    });
-  };
-
-  const onSearchC = (e) => {
-    getCourses(searchQueryC);
-  };
-
-  const onGet = (e) => {
-    getCourses({
-      search: e.target.name,
-      nestSelect: 'subjectCode,subjectName,subjectShort',
-    });
-    setIsClone(true);
-  };
-
-  const onClone = (e) => {
-    const cloneSubjects = [];
-    courses[0].Subjects.forEach((sub) => {
-      cloneSubjects.push({
-        subjectCode: sub.subjectCode,
-        subjectName: sub.subjectName,
-        semNo: sub.CourseSubject.semNo,
-        alreadyExists: true,
-      });
-    });
-    setReqObj({
-      course: {
-        courseCode: '',
-        courseDescription:
-          courses[0].courseDescription !== null
-            ? courses[0].courseDescription
-            : '',
-        courseType:
-          courses[0].courseType !== null ? courses[0].courseType : 'None',
-        department:
-          courses[0].department !== null ? courses[0].department : 'None',
-        courseLength:
-          courses[0].courseLength !== null ? courses[0].courseLength : 0,
-        noOfSemesters:
-          courses[0].noOfSemesters !== null ? courses[0].noOfSemesters : 0,
-        updateNo: courses[0].updateNo !== null ? courses[0].updateNo : 0,
-      },
-      subjects: cloneSubjects,
-    });
-  };
-
-  const getMode = (
-    <Form>
-      <Card bg='light'>
-        <Card.Body>
-          <Form.Group controlId='ccCourseSearch'>
-            <Form.Label>Search Academic Batch</Form.Label>
-            <InputGroup className='mb-3'>
-              <FormControl
-                name='searchQuery'
-                type='text'
-                placeholder='Search by Course Code'
-                value={searchQueryC.search}
-                onChange={onSearchInputChangeC}
-              />
-              <InputGroup.Append>
-                <Button variant='outline-success' onClick={onSearchC}>
-                  Search
-                </Button>
-              </InputGroup.Append>
-            </InputGroup>
-          </Form.Group>
-          <Form.Group controlId='ccSearchResult'>
-            <Form.Label>Select Academic Batch</Form.Label>
-            {courses &&
-              courses.map((course, index) => {
-                return (
-                  <div key={index} style={{ paddingBottom: '8px' }}>
-                    <Button
-                      name={course.courseCode}
-                      variant='info'
-                      onClick={onGet}
-                    >
-                      Get
-                    </Button>{' '}
-                    {course.courseCode}
-                  </div>
-                );
-              })}
-          </Form.Group>
-        </Card.Body>
-      </Card>
-    </Form>
-  );
-
-  const cloneMode = courses && (
-    <Card bg='light'>
-      <Card.Body>
-        <div>
-          Clone Following Subject{' '}
-          <Button variant='success' onClick={onClone}>
-            Clone
-          </Button>{' '}
-          <Button
-            variant='warning'
-            onClick={(e) => {
-              setIsClone(false);
-            }}
-          >
-            Back to Search
-          </Button>{' '}
-          (Will not clone files)
-        </div>
-        {CourseCardView(courses[0], 0)}
-      </Card.Body>
-    </Card>
-  );
-
-  return (
-    <Fragment>
-      <h3>Clone Academic Batch</h3>
-      {isClone ? cloneMode : getMode}
-      <hr />
-      <h3>Create Academic Batch</h3>
-      <Form onSubmit={onSubmit}>
-        <Form.Group controlId='smCourseCode'>
+  const createAcademicBatchUI = () => (
+    <div>
+      <Form>
+        <h3>
+          <strong>{iconCreate} Create Academic Batch</strong>
+        </h3>
+        <Form.Group controlId='AcademicBatch.academicBatchCode'>
           <Form.Label>Academic Batch Code</Form.Label>
+          <InputGroup>
+            <Form.Control
+              name='academicBatchCode'
+              type='text'
+              placeholder='Enter new academic batch code'
+              onChange={onChange}
+              value={academicBatchCode}
+            />
+            <InputGroup.Append>
+              <Button
+                variant='secondary'
+                onClick={() => {
+                  const randNum = Math.random();
+                  const newAcademicBatchCode =
+                    'TODO_ACADEMICBATCHCODE_' + randNum;
+                  setReqObj({
+                    ...reqObj,
+                    academicBatchCode: newAcademicBatchCode,
+                  });
+                }}
+              >
+                Auto Generate
+              </Button>
+            </InputGroup.Append>
+          </InputGroup>
+        </Form.Group>
+        <Form.Group controlId='AcademicBatch.academicBatchName'>
+          <Form.Label>Academic Batch Name</Form.Label>
           <Form.Control
-            name='courseCode'
+            name='academicBatchName'
             type='text'
-            placeholder='Enter new course code'
-            value={courseCode}
+            placeholder='Enter new academic batch name'
             onChange={onChange}
+            value={academicBatchName}
           />
         </Form.Group>
-        <Form.Group controlId='smCourseDescription'>
+        <Form.Group controlId='AcademicBatch.academicBatchDescription'>
           <Form.Label>Academic Batch Description</Form.Label>
           <Form.Control
-            name='courseDescription'
+            name='academicBatchDescription'
             as='textarea'
-            placeholder='Enter course description (optional)'
+            placeholder='Enter academic batch description (optional)'
             rows={5}
-            value={courseDescription}
             onChange={onChange}
+            value={academicBatchDescription}
           />
         </Form.Group>
-        <Form.Group controlId='abYearLable'>
-          <Form.Label>Year Lable</Form.Label>
-          <Form.Control
-            name='yearLable'
-            type='text'
-            placeholder='Enter year lable (Ex: 2020-2021)'
-          />
+        <Form.Group controlId='AcademicBatch.academicBatchProperty'>
+          <Form.Label>Academic Batch Property</Form.Label>
+          <Card>
+            <Card.Body>
+              <Form.Check
+                name='isFreezed'
+                type='checkbox'
+                label='Is Freezed ?'
+                checked={isFreezed}
+                onChange={onChangeCheckBox}
+              />
+            </Card.Body>
+          </Card>
         </Form.Group>
-        {/* <Form.Group controlId='smCourseLength'>
-          <Form.Label>Course Length (No Of Months)</Form.Label>
-          <Form.Control
-            name='courseLength'
-            type='number'
-            placeholder='Enter new course length'
-            value={courseLength}
-            onChange={onChange}
-            onFocus={handleFocus}
-          />
-        </Form.Group>
-        <Form.Group controlId='smNoOfSemesters'>
-          <Form.Label>No Of Semesters</Form.Label>
-          <Form.Control
-            name='noOfSemesters'
-            type='number'
-            placeholder='Enter new no of semesters'
-            value={noOfSemesters}
-            onChange={onChange}
-            onFocus={handleFocus}
-          />
-        </Form.Group>
-        <Form.Group controlId='smCourseType'>
-          <Form.Label>Course Type</Form.Label>
-          <Form.Control
-            name='courseType'
-            as='select'
-            value={courseType}
-            onChange={onChange}
-          >
-            <option>None</option>
-            <option>B.Tech</option>
-            <option>M.Tech</option>
-          </Form.Control>
-        </Form.Group>
-        <Form.Group controlId='smDepartment'>
-          <Form.Label>Department</Form.Label>
-          <Form.Control
-            name='department'
-            as='select'
-            value={department}
-            onChange={onChange}
-          >
-            <option>None</option>
-            <option>CH - Chemical Engineering</option>
-            <option>CI - Civil Engineering</option>
-            <option>CE - Computer Engineering</option>
-            <option>EC - Electronic Engineering</option>
-            <option>ME - Mechanical Engineering</option>
-            <option>IT - Information Technology</option>
-          </Form.Control>
-        </Form.Group> */}
-        <Card bg='light'>
-          <Card.Body>
-            <Form.Group controlId='smSubjectSearch'>
-              <Form.Label>Search Subjects</Form.Label>
-              <InputGroup className='mb-3'>
-                <FormControl
-                  name='searchQuery'
-                  type='text'
-                  placeholder='Search by Subject Code, Subject Name, Subject Short'
-                  value={search}
-                  onChange={onSearchInputChange}
+        <Form.Group controlId='AcademicBatch.year'>
+          <Row>
+            <Col>
+              <Form.Label>Start Year</Form.Label>
+              <div>
+                <DatePicker
+                  selected={
+                    startYear === ''
+                      ? null
+                      : new Date(parseInt(startYear) + 1, 0, 0)
+                  }
+                  onChange={(date) => {
+                    if (date !== null) {
+                      setReqObj({
+                        ...reqObj,
+                        startYear: `${date.getFullYear()}`,
+                      });
+                    }
+                  }}
+                  showYearPicker
+                  dateFormat='yyyy'
+                  className='form-control'
                 />
-                <InputGroup.Append>
-                  <Button variant='outline-success' onClick={onSearch}>
-                    Search
+              </div>
+            </Col>
+            <Col>
+              <Form.Label>End Year</Form.Label>
+              <div>
+                <DatePicker
+                  selected={
+                    endYear === ''
+                      ? null
+                      : new Date(parseInt(endYear) + 1, 0, 0)
+                  }
+                  onChange={(date) => {
+                    if (date !== null) {
+                      setReqObj({
+                        ...reqObj,
+                        endYear: `${date.getFullYear()}`,
+                      });
+                    }
+                  }}
+                  showYearPicker
+                  dateFormat='yyyy'
+                  className='form-control'
+                />
+              </div>
+            </Col>
+          </Row>
+        </Form.Group>
+      </Form>
+      <Form.Group controlId='AcademicBatch.course'>
+        <Form.Label>Select Course</Form.Label>
+        {courseObj !== null ? (
+          <Alert variant='info'>
+            <strong>Selected Course : </strong>
+            <br />
+            {courseObj.courseCode}: {courseObj.courseName} [
+            {courseObj.department}, {courseObj.courseType}]
+            <Button
+              variant='warning'
+              size='sm'
+              className='mb-1 mt-1'
+              onClick={() => {
+                setReqObj({
+                  ...reqObj,
+                  courseObj: null,
+                });
+              }}
+            >
+              Change Course
+            </Button>
+          </Alert>
+        ) : (
+          <Card>
+            <Card.Body>
+              {isSelected ? (
+                <div>
+                  <ViewCourse course={course} />
+                  <br />
+                  <Button variant='success' onClick={onCourseSelectClick}>
+                    Select
+                  </Button>{' '}
+                  <Button
+                    variant='secondary'
+                    onClick={() => {
+                      setIsSelected(false);
+                    }}
+                  >
+                    Back To Search
                   </Button>
-                </InputGroup.Append>
-              </InputGroup>
-            </Form.Group>
-            <Form.Group controlId='smSearchResult'>
-              <Form.Label>
-                Select Subjects (Use Ctrl/Shift for multiple selection)
-              </Form.Label>
-              <Form.Control
-                as='select'
-                multiple
-                onChange={handleSelectionChange}
-                htmlSize={5}
-              >
-                {subjects &&
-                  subjects.map((sub, index) => {
-                    return (
-                      <option key={index}>
-                        {sub.subjectCode},{sub.subjectName} ({sub.subjectShort})
-                      </option>
-                    );
-                  })}
-              </Form.Control>
-            </Form.Group>
-            <Button variant='success' onClick={onAddSubjects}>
-              Add Subjects
-            </Button>{' '}
-            <Badge variant='primary'>
-              No of Subjects: {reqObj.subjects.length}
-            </Badge>
-            <hr />
-            <Form.Group controlId='smSubjects'>
-              <div
-                className='float-right'
-                style={{ paddingBottom: '8px', paddingTop: '8px' }}
-              >
-                <Button
-                  variant='warning'
-                  size='sm'
-                  onClick={(e) => {
-                    sortSubjects();
+                </div>
+              ) : (
+                selectionList()
+              )}
+            </Card.Body>
+          </Card>
+        )}
+      </Form.Group>
+      <Form.Group controlId='AcademicBatch.subjects'>
+        <Form.Label>Select Subjects</Form.Label>
+        <Card>
+          <Card.Body>
+            <FindSubject defaultSelect='id,subjectCode,subjectName,subjectShort,listIndex,semNo' />
+            {subjects &&
+              subjects.map((sub, index) => (
+                <div
+                  key={index}
+                  className='p-3 mb-2 bg-dark text-white'
+                  onClick={() => {
+                    const newSubjectArr = subjectsArr;
+                    if (
+                      newSubjectArr
+                        .map((obj) => {
+                          return obj.id;
+                        })
+                        .indexOf(sub.id) === -1
+                    ) {
+                      newSubjectArr.push({
+                        id: sub.id,
+                        subjectCode: sub.subjectCode,
+                        subjectName: sub.subjectName,
+                        subjectShort: sub.subjectShort,
+                        semNo: sub.semNo,
+                        listIndex: sub.listIndex,
+                      });
+                    }
+
+                    setReqObj({
+                      ...reqObj,
+                      subjectsArr: newSubjectArr,
+                    });
+                  }}
+                  style={{
+                    cursor: 'pointer',
                   }}
                 >
-                  <strong>Sort By Semester Number</strong>
-                </Button>
-              </div>
-              <Table striped bordered hover>
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>Subject List Index</th>
-                    <th>Subject Code</th>
-                    <th>Subject Name (Subject Short)</th>
-                    <th>Semester Number</th>
-                    <th>Remove Subject</th>
+                  <span className='pt-1 pb-1 pl-3 pr-3 mr-3 bg-secondary text-white'>
+                    Select
+                  </span>
+                  {sub.subjectCode}: {sub.subjectName} ({sub.subjectShort})
+                  [Sem: {sub.semNo}, Index: {sub.listIndex}]
+                </div>
+              ))}
+            <hr />
+
+            <strong>Linked Subjects</strong>
+            <div className='float-right mb-2'>
+              <Button
+                size='sm'
+                variant='warning'
+                onClick={() => {
+                  const newSubjectArr = subjectsArr;
+                  newSubjectArr.sort((a, b) => {
+                    if (a.semNo === b.semNo) {
+                      return a.listIndex - b.listIndex;
+                    } else {
+                      return a.semNo - b.semNo;
+                    }
+                  });
+                  setReqObj({
+                    ...reqObj,
+                    subjectsArr: newSubjectArr,
+                  });
+                }}
+              >
+                Sort Subjects
+              </Button>
+            </div>
+            <Table bordered striped>
+              <thead>
+                <tr className='table-secondary'>
+                  <th width='2%'>#</th>
+                  <th width='20%'>Subject Code</th>
+                  <th width='45%'>Subject Name</th>
+                  <th width='15%'>Subject Short</th>
+                  <th width='6%'>Sem No</th>
+                  <th width='6%'>List Index</th>
+                  <th width='6%'>Remove</th>
+                </tr>
+              </thead>
+              <tbody>
+                {subjectsArr.map((sub, index) => (
+                  <tr key={index}>
+                    <td>{index + 1}</td>
+                    <td>{sub.subjectCode}</td>
+                    <td>{sub.subjectName}</td>
+                    <td>{sub.subjectShort}</td>
+                    <td>{sub.semNo}</td>
+                    <td>{sub.listIndex}</td>
+                    <td>
+                      <Button
+                        size='sm'
+                        variant='danger'
+                        block
+                        onClick={() => {
+                          const newSubjectArr = subjectsArr;
+                          newSubjectArr.splice(index, 1);
+                          setReqObj({
+                            ...reqObj,
+                            subjectsArr: newSubjectArr,
+                          });
+                        }}
+                      >
+                        Remove
+                      </Button>
+                    </td>
                   </tr>
-                </thead>
-                <tbody>
-                  {reqObj.subjects.map((sub, index) => (
-                    <tr key={index}>
-                      <td width='5%'>{index + 1}</td>
-                      <td width='15%'>{sub.listIndex}</td>
-                      <td width='15%'>{sub.subjectCode}</td>
-                      <td width='60%'>{sub.subjectName}</td>
-                      <td width='10%'>{sub.semNo}</td>
-                      <td width='10%'>
-                        <Button
-                          variant='danger'
-                          size='sm'
-                          block
-                          name={index}
-                          onClick={onRemove}
-                        >
-                          Remove
-                        </Button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </Table>
-            </Form.Group>
+                ))}
+              </tbody>
+            </Table>
           </Card.Body>
         </Card>
-        <br />
-        <Button variant='primary' type='submit'>
-          Submit
-        </Button>{' '}
-        <Button variant='secondary' type='reset' onClick={onClear}>
-          Clear
-        </Button>
-      </Form>
-      <br />
-    </Fragment>
+      </Form.Group>
+      <Button variant='primary' onClick={onSubmit}>
+        Review Input
+      </Button>{' '}
+      <Button variant='secondary' onClick={onClear}>
+        Clear
+      </Button>
+    </div>
   );
+
+  const validateData = () => {
+    const alertArray = [];
+    if (academicBatchCode === '') {
+      alertArray.push(['Academic Batch Code should not be Empty', 'danger']);
+    } else if (!/^[a-zA-Z0-9-_() .]+$/.test(academicBatchCode)) {
+      alertArray.push([
+        'Academic Batch Code only Alphanumeric and - _ ( ) . Allowed',
+        'danger',
+      ]);
+    }
+
+    if (academicBatchName === '') {
+      alertArray.push(['Academic Batch Name should not be Empty', 'danger']);
+    } else if (!/^[a-zA-Z0-9-_() .]+$/.test(academicBatchName)) {
+      alertArray.push([
+        'Academic Batch Name only Alphanumeric and - _ ( ) . characters Allowed',
+        'danger',
+      ]);
+    }
+
+    if (academicBatchDescription === '') {
+      alertArray.push([
+        'Academic Batch Description (Optional) is Empty',
+        'warning',
+      ]);
+    } else if (
+      !/^([a-zA-Z0-9 _.\-~!@#$%^&*()_+{}[\]|\\:;"'<,>.?/`\n=]+)$/.test(
+        academicBatchDescription
+      )
+    ) {
+      alertArray.push([
+        'Academic Batch Description only Alphanumeric and _ . - ~ ! @ # $ % ^ & * ( ) _ + { } [ ] | \\ : ; " \' < , > . ? / ` \\n characters Allowed',
+        'danger',
+      ]);
+    }
+
+    if (startYear.length !== 4 && isNaN(parseInt(startYear))) {
+      alertArray.push(['Start Year must be in appropriate', 'danger']);
+    }
+
+    if (endYear.length !== 4 && isNaN(parseInt(endYear))) {
+      alertArray.push(['End Year must be in appropriate', 'danger']);
+    }
+
+    if (!courseObj) {
+      alertArray.push(['Course is not selected', 'warning']);
+    }
+
+    if (subjectsArr.length === 0) {
+      alertArray.push(['0 Subject are selected', 'warning']);
+    }
+
+    if (isFreezed === true) {
+      alertArray.push([
+        'Academic Batch Freezed will make course editable by Admin only',
+        'warning',
+      ]);
+    }
+
+    let noOfDanger = 0;
+    let noOfWarning = 0;
+    alertArray.forEach((it) => {
+      if (it[1] === 'danger') {
+        noOfDanger += 1;
+      } else {
+        noOfWarning += 1;
+      }
+    });
+
+    return (
+      <div>
+        <Button
+          className='mb-2'
+          variant='info'
+          onClick={() => {
+            setShowNext(false);
+          }}
+        >
+          Back To Create Academic Batch
+        </Button>
+        <h3>
+          <strong>{iconValidate} Validate Input</strong>
+        </h3>
+        <Row className='mb-2 mt-1'>
+          <Col>
+            <Alert variant='danger'>Error: {noOfDanger}</Alert>
+          </Col>
+          <Col>
+            <Alert variant='warning'>Warning: {noOfWarning}</Alert>
+          </Col>
+          {noOfDanger === 0 && (
+            <Col>
+              <Alert variant='success'>
+                Error Free, Can Create Academic Batch
+              </Alert>
+            </Col>
+          )}
+        </Row>
+        {alertArray.map((it, index) => (
+          <div key={index} className='mb-2'>
+            <Alert variant={it[1]}>{it[0]}</Alert>
+          </div>
+        ))}
+        <hr />
+        <h4>
+          <strong>Academic Batch Data</strong>
+        </h4>
+        {noOfDanger === 0 && (
+          <Fragment>
+            <Button
+              variant='primary'
+              onClick={() => {
+                const { courseObj, subjectsArr, ...rest } = reqObj;
+                rest.courseId = courseObj ? courseObj.id : null;
+                rest.subjects = [];
+                subjectsArr.forEach((s) => {
+                  rest.subjects.push(s.id);
+                });
+                if (rest.subjects.length === 0) {
+                  delete rest.subjects;
+                }
+                if (!rest.courseId) {
+                  delete rest.courseId;
+                }
+
+                createAcademicBatch(rest);
+              }}
+            >
+              Create Academic Batch
+            </Button>
+          </Fragment>
+        )}
+      </div>
+    );
+  };
+
+  return <div>{showNext ? validateData() : createAcademicBatchUI()}</div>;
+};
+
+CreateAcademicBatch.propTypes = {
+  mode: PropTypes.string.isRequired,
+  setMode: PropTypes.func.isRequired,
 };
 
 export default CreateAcademicBatch;

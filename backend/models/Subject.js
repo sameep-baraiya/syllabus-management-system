@@ -7,7 +7,7 @@ class Subject extends Model {}
 Subject.init(
   {
     subjectCode: {
-      type: DataTypes.STRING(40),
+      type: DataTypes.STRING(60),
       unique: true,
       allowNull: false,
     },

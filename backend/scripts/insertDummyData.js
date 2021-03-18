@@ -51,11 +51,15 @@ const insertDummyData = async () => {
     console.log('Academic Batch Created');
 
     academicBatch.crudInfo = {
-      type: 'ACADEMIC_BATCH_UPDATE_SUCCESSOR_PREDECESSOR',
+      type: 'ACADEMIC_BATCH_UPDATE',
       by: 'Script Manger',
     };
     await academicBatch.setCourse(cousre);
 
+    academicBatch.crudInfo = {
+      type: 'ACADEMIC_BATCH_UPDATE',
+      by: 'Script Manger',
+    };
     // academicBatch.addSubjects([sub1, sub2, sub3]);
     await academicBatch.addSubjects(subjectsArray);
   } catch (err) {

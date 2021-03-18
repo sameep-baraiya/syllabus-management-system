@@ -89,7 +89,7 @@ const CreateCourse = () => {
   const createCourseUI = () => (
     <Form onSubmit={onSubmit}>
       <h3>
-        <strong>{iconCreate} Create Subject</strong>
+        <strong>{iconCreate} Create Course</strong>
       </h3>
       <Form.Group controlId='CreateCourse.courseCode'>
         <Form.Label>Course Code</Form.Label>

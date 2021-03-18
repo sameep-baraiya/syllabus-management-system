@@ -11,12 +11,14 @@ import SMCreateCourse from './course/SMCreateCourse';
 import SMEditCourse from './course/SMEditCourse';
 import SMDeleteCourse from './course/SMDeleteCourse';
 
+// Academic Batch Components
+import SMCreateAcademicBatch from './academic-batch/SMCreateAcademicBatch';
+
 // Nested Syllabus Manager Route
 // import CreateViaCSV from './CreateViaCSV';
 // import CreateCourse from './CreateCourse';
 import DefaultSM from './DefaultSM';
 // import CreateSubject from './CreateSubject';
-import SMCreateAcademicBatch from './SMCreateAcademicBatch';
 // import CreateAcademicBatch from './CreateAcademicBatch';
 import CreateACMeeting from './CreateACMeeting';
 import CreateBOSMeeting from './CreateBOSMeeting';

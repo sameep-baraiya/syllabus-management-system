@@ -1,6 +1,8 @@
 const ErrorResponse = require('../utils/ErrorResponse');
 const AcademicBatch = require('../models/AcademicBatch');
+const AcademicBatchSubject = require('../models/AcademicBatchSubject');
 const Course = require('../models/Course');
+const Subject = require('../models/Subject');
 
 // @desc    Create Academic Batch
 // @route   POST /api/v1/academic-batch
@@ -11,36 +13,81 @@ exports.createAcademicBatch = async (req, res, next) => {
       academicBatchCode,
       academicBatchDescription,
       academicBatchName,
-      yearLable,
-      courseCode,
+      startYear,
+      endYear,
+      courseId,
+      subjects,
+      isFreezed,
     } = req.body;
 
-    const academicBatch = await AcademicBatch.create({
-      academicBatchCode,
-      academicBatchDescription,
-      academicBatchName,
-      yearLable,
-    });
-
-    if (academicBatch === null) {
-      return next(
-        new ErrorResponse('Error: While creating Academic Batch', 400)
-      );
-    }
-
-    let course = await Course.findOne({
+    const academicBatch = await AcademicBatch.findOne({
       where: {
-        courseCode,
+        academicBatchCode,
       },
     });
 
-    if (course === null) {
-      return next(
-        new ErrorResponse('Error: Bad request course not exists', 400)
-      );
+    if (academicBatch) {
+      return next(new ErrorResponse('Academic Batch allready exists', 400));
     }
 
-    course.addAcademicBatch(academicBatch);
+    let course = null;
+    if (courseId) {
+      course = await Course.findByPk(courseId, {
+        attributes: ['id'],
+      });
+
+      if (!course) {
+        return next(new ErrorResponse('Course not exists', 400));
+      }
+    }
+
+    const subjectsArr = [];
+    if (subjects) {
+      for (let i = 0; i < subjects.length; i++) {
+        const tempSub = await Subject.findByPk(subjects[i], {
+          attributes: ['id'],
+        });
+
+        if (!tempSub) {
+          return next(new ErrorResponse('Subject not exists', 400));
+        }
+
+        subjectsArr.push(tempSub);
+      }
+    }
+
+    const newAcademicBatch = await AcademicBatch.create({
+      academicBatchCode,
+      academicBatchDescription,
+      academicBatchName,
+      startYear,
+      endYear,
+      isFreezed,
+      crudInfo: {
+        type: 'ACADEMIC_BATCH_CREATE',
+        by: req.user.name,
+      },
+    });
+
+    if (!newAcademicBatch) {
+      return next(new ErrorResponse('Not able create Academic Batch', 400));
+    }
+
+    if (course) {
+      newAcademicBatch.crudInfo = {
+        type: 'ACADEMIC_BATCH_UPDATE',
+        by: req.user.name,
+      };
+      await newAcademicBatch.setCourse(course);
+    }
+
+    if (subjectsArr.length !== 0) {
+      newAcademicBatch.crudInfo = {
+        type: 'ACADEMIC_BATCH_UPDATE',
+        by: req.user.name,
+      };
+      await newAcademicBatch.addSubjects(subjectsArr);
+    }
 
     res.status(200).json({
       success: true,

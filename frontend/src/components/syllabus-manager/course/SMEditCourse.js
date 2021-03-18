@@ -35,11 +35,11 @@ const SMEditCourse = () => {
       <div>
         <FindCourse defaultSelect='id,courseCode,courseName' />
         {courses &&
-          courses.map((sub, index) => (
+          courses.map((it, index) => (
             <div
               key={index}
               className='p-3 mb-2 bg-dark text-white'
-              onClick={() => onSelectClick(sub.id)}
+              onClick={() => onSelectClick(it.id)}
               style={{
                 cursor: 'pointer',
               }}
@@ -47,7 +47,7 @@ const SMEditCourse = () => {
               <span className='pt-1 pb-1 pl-3 pr-3 mr-3 bg-secondary text-white'>
                 Select
               </span>
-              {sub.courseCode}: {sub.courseName}
+              {it.courseCode}: {it.courseName}
             </div>
           ))}
       </div>

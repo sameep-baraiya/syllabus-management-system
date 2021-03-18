@@ -1,16 +1,13 @@
 import React, { useState, useContext } from 'react';
-import { Button, ButtonGroup, Card } from 'react-bootstrap';
+import { Button, Card } from 'react-bootstrap';
 
 // Academic Batch Model Components
-import CreateAcademicBatch from '../models/academic-batch/CreateAcademicBatch';
-
-// Subject Model Components
-// import CreateSubject from '../models/subject/CreateSubject';
-import FindSubject from '../models/subject/FindSubject';
-import ViewSubject from '../models/subject/ViewSubject';
+import CreateAcademicBatch from '../../models/academic-batch/CreateAcademicBatch';
+import FindSubject from '../../models/subject/FindSubject';
+import ViewSubject from '../../models/subject/ViewSubject';
 
 // Context
-import SubjectContext from '../../context/subject/subjectContext';
+import SubjectContext from '../../../context/subject/subjectContext';
 
 const SMCreateAcademicBatch = () => {
   const subjectContext = useContext(SubjectContext);
@@ -18,7 +15,7 @@ const SMCreateAcademicBatch = () => {
 
   const [operationMode, setOperationMode] = useState('');
   const [isSelected, setIsSelected] = useState(false);
-  // const [, setMode] = useState('');
+  const [mode, setMode] = useState('');
 
   const onSelectClick = (id) => {
     setIsSelected(true);
@@ -28,16 +25,9 @@ const SMCreateAcademicBatch = () => {
   const onSubjectSelectClick = () => {
     if (operationMode === 'clone') {
       console.log('clone');
-      // setMode('clone');
-    } else if (operationMode === 'predecessor') {
-      console.log('predecessor');
-      // setMode('predecessor');
-    } else if (operationMode === 'successor') {
-      console.log('successor');
-      // setMode('successor');
+      setMode('clone');
     }
     setIsSelected(false);
-    setOperationMode('');
   };
 
   const selectionList = () => {
@@ -70,42 +60,17 @@ const SMCreateAcademicBatch = () => {
       </h2>
       <div className='mb-3'>
         Select operation :{' '}
-        <ButtonGroup>
-          <Button
-            variant={operationMode === 'clone' ? 'primary' : 'outline-primary'}
-            onClick={() => {
-              operationMode === 'clone'
-                ? setOperationMode('')
-                : setOperationMode('clone');
-            }}
-          >
-            Clone Academic Batch
-          </Button>
-          <Button
-            variant={
-              operationMode === 'successor' ? 'success' : 'outline-success'
-            }
-            onClick={() => {
-              operationMode === 'successor'
-                ? setOperationMode('')
-                : setOperationMode('successor');
-            }}
-          >
-            Set Successor Academic Batch
-          </Button>
-          <Button
-            variant={
-              operationMode === 'predecessor' ? 'warning' : 'outline-warning'
-            }
-            onClick={() => {
-              operationMode === 'predecessor'
-                ? setOperationMode('')
-                : setOperationMode('predecessor');
-            }}
-          >
-            Set Predecessor Academic Batch
-          </Button>
-        </ButtonGroup>
+        <Button
+          variant={operationMode === 'clone' ? 'primary' : 'outline-primary'}
+          onClick={() => {
+            operationMode === 'clone'
+              ? setOperationMode('')
+              : setOperationMode('clone');
+          }}
+          block
+        >
+          Clone Academic Batch
+        </Button>
       </div>
       {operationMode && (
         <Card>
@@ -136,7 +101,7 @@ const SMCreateAcademicBatch = () => {
         </Card>
       )}
       <hr />
-      <CreateAcademicBatch />
+      <CreateAcademicBatch mode={mode} setMode={setMode} />
     </div>
   );
 };
