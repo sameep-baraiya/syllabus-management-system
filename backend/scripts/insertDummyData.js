@@ -1,6 +1,11 @@
 const User = require('../models/User');
 const Cousre = require('../models/Course');
 const Subject = require('../models/Subject');
+const AcademicBatchSubject = require('../models/AcademicBatchSubject');
+const AcademicBatch = require('../models/AcademicBatch');
+// const BOSMeeting = require('../models/BOSMeeting');
+// const ACMeeting = require('../models/ACMeeting');
+const CRUDLog = require('../models/CRUDLog');
 const subjects = require('./subjects16-20');
 
 const insertDummyData = async () => {
@@ -14,14 +19,16 @@ const insertDummyData = async () => {
     console.log('Faculty-Member Created');
 
     // Subjects
+    const subjectsArray = [];
     subjects.forEach(async (subject) => {
       try {
-        await Subject.create(subject);
+        const tempSub = await Subject.create(subject);
+        subjectsArray.push(tempSub);
       } catch (err) {
         console.log(err);
       }
     });
-    console.log('Subjects Created');
+    // console.log('Subjects Created');
     // const subject1 = await Subject.findOne({
     //   include: {
     //     model: Subject,
@@ -32,9 +39,25 @@ const insertDummyData = async () => {
     // const subject2 = await Subject.findOne();
     // await subject1.setSuccessor(subject2);
 
+    // const sub1 = await Subject.create(subjects[0]);
+    // const sub2 = await Subject.create(subjects[1]);
+    // const sub3 = await Subject.create(subjects[2]);
+
     // Course
     const cousre = await Cousre.create(courseData);
     console.log('Course Created');
+
+    const academicBatch = await AcademicBatch.create(academicBatchData);
+    console.log('Academic Batch Created');
+
+    academicBatch.crudInfo = {
+      type: 'ACADEMIC_BATCH_UPDATE_SUCCESSOR_PREDECESSOR',
+      by: 'Script Manger',
+    };
+    await academicBatch.setCourse(cousre);
+
+    // academicBatch.addSubjects([sub1, sub2, sub3]);
+    await academicBatch.addSubjects(subjectsArray);
   } catch (err) {
     console.error(err);
   }
@@ -89,6 +112,18 @@ const courseData = {
   isFreezed: false,
   crudInfo: {
     type: 'COURSE_CREATE',
+    by: 'Script Manger',
+  },
+};
+
+const academicBatchData = {
+  academicBatchCode: 'AB16-20',
+  academicBatchName: 'IT 2016-2020',
+  startYear: '2016',
+  endYear: '2020',
+  isFreezed: false,
+  crudInfo: {
+    type: 'ACADEMIC_BATCH_CREATE',
     by: 'Script Manger',
   },
 };
