@@ -253,26 +253,23 @@ const CreateCourse = () => {
     }
 
     if (department === 'None') {
-      alertArray.push(['Subject Department should not be Empty', 'danger']);
+      alertArray.push(['Course Department should not be Empty', 'danger']);
     } else if (department === 'Keep Empty For Now') {
       alertArray.push([
-        'Subject Department is set to Empty purposefully.',
+        'Course Department is set to Empty purposefully.',
         'warning',
       ]);
     }
 
     if (courseType === 'None') {
-      alertArray.push(['Subject Type should not be Empty', 'danger']);
+      alertArray.push(['Course Type should not be Empty', 'danger']);
     } else if (courseType === 'Keep Empty For Now') {
-      alertArray.push([
-        'Subject Type is set to Empty purposefully.',
-        'warning',
-      ]);
+      alertArray.push(['Course Type is set to Empty purposefully.', 'warning']);
     }
 
     if (isFreezed === true) {
       alertArray.push([
-        'Subject Freezed will make subject editable by Admin only',
+        'Course Freezed will make course editable by Admin only',
         'warning',
       ]);
     }

@@ -97,3 +97,76 @@ exports.getCourses = async (req, res, next) => {
     return next(err);
   }
 };
+
+// @desc    Get single Course with specified id
+// @route   GET /api/v1/course/:id
+// @access  Private
+exports.getCourse = async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    const course = await Course.findByPk(id);
+    if (course === null) {
+      return next(new ErrorResponse('Course not found', 404));
+    }
+
+    res.status(200).json({
+      success: true,
+      data: course.toJSON(),
+    });
+  } catch (err) {
+    return next(err);
+  }
+};
+
+// @desc    Update course
+// @route   PUT /api/v1/course/:id
+// @access  Private
+exports.updateCourse = async (req, res, next) => {
+  const { id } = req.params;
+
+  const {
+    courseCode,
+    courseName,
+    courseDescription,
+    courseType,
+    department,
+    noOfSem,
+    monthPerSem,
+    isOutdated,
+    isFreezed,
+  } = req.body;
+
+  try {
+    const course = await Course.findByPk(id);
+
+    if (course === null) {
+      return next(new ErrorResponse('Error: Course does not exist', 400));
+    }
+
+    const newCourse = await course.update({
+      courseCode,
+      courseName,
+      courseDescription,
+      courseType,
+      department,
+      noOfSem,
+      monthPerSem,
+      isOutdated,
+      isFreezed,
+      crudInfo: {
+        type: 'COURSE_UPDATE',
+        by: req.user.name,
+      },
+    });
+
+    if (newCourse === null) {
+      return next(new ErrorResponse('Error: Unable to update course', 400));
+    }
+
+    res.status(200).json({
+      success: true,
+    });
+  } catch (err) {
+    return next(err);
+  }
+};

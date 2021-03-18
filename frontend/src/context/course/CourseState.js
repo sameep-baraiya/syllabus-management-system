@@ -4,7 +4,11 @@ import CourseContext from './courseContext';
 import courseReducer from './courseReducer';
 import {
   GET_COURSES,
+  GET_COURSE,
+  UPDATE_COURSE,
   COURSES_ERROR,
+  COURSE_ERROR,
+  UPDATE_ERROR,
   CREATE_COURSE,
   CLEAR_ERRORS,
   CREATE_ERROR,
@@ -108,6 +112,57 @@ const SubjectState = (props) => {
     }
   };
 
+  // Get Course
+  const getCourse = async (id = 0) => {
+    setLoading();
+    try {
+      const res = await axios.get(`/api/v1/course/${id}`);
+
+      dispatch({
+        type: GET_COURSE,
+        payload: res.data,
+      });
+    } catch (err) {
+      console.error(err);
+      dispatch({
+        type: COURSE_ERROR,
+        payload: err.response,
+      });
+    } finally {
+      resetLoading();
+    }
+  };
+
+  // Update Course
+  const updateCourse = async (reqObj) => {
+    setLoading();
+    try {
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
+      const res = await axios.put(
+        `/api/v1/course/${reqObj.id}`,
+        reqObj,
+        config
+      );
+
+      dispatch({
+        type: UPDATE_COURSE,
+        payload: res.data,
+      });
+    } catch (err) {
+      console.error(err);
+      dispatch({
+        type: UPDATE_ERROR,
+        payload: err.response,
+      });
+    } finally {
+      resetLoading();
+    }
+  };
+
   // Clear Errors
   const clearErrors = () => dispatch({ type: CLEAR_ERRORS });
 
@@ -125,6 +180,8 @@ const SubjectState = (props) => {
         clearErrors,
         createCourse,
         getCourses,
+        getCourse,
+        updateCourse,
         clearCourses,
       }}
     >

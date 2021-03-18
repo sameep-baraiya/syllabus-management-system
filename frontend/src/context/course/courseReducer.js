@@ -1,7 +1,11 @@
 import {
   CLEAR_ERRORS,
   GET_COURSES,
+  GET_COURSE,
+  UPDATE_COURSE,
   COURSES_ERROR,
+  COURSE_ERROR,
+  UPDATE_ERROR,
   CREATE_COURSE,
   CREATE_ERROR,
   CLEAR_COURSES,
@@ -24,11 +28,19 @@ const authReducer = (state, action) => {
         total: 0,
         pagination: null,
       };
+    case UPDATE_COURSE:
     case CREATE_COURSE:
       return {
         ...state,
         error: null,
       };
+    case GET_COURSE:
+      return {
+        ...state,
+        course: action.payload.data,
+      };
+    case UPDATE_ERROR:
+    case COURSE_ERROR:
     case COURSES_ERROR:
     case CREATE_ERROR:
       return {

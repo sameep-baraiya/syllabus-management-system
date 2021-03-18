@@ -209,7 +209,7 @@ const EditSubject = ({ mode, setMode }) => {
 
   const [showNext, setShowNext] = useState(false);
 
-  // Fires Create Query
+  // Go for validation
   const onSubmit = (e) => {
     e.preventDefault(e);
     setShowNext(true);
@@ -1391,7 +1391,7 @@ const EditSubject = ({ mode, setMode }) => {
           </Col>
           {noOfDanger === 0 && (
             <Col>
-              <Alert variant='success'>Error Free, Can Create Subject</Alert>
+              <Alert variant='success'>Error Free, Can Edit Subject</Alert>
             </Col>
           )}
         </Row>

@@ -103,6 +103,10 @@ const syllabusManager = {
           title: 'Create Course',
           link: '/syllabus-manager/course',
         },
+        {
+          title: 'Edit Course',
+          link: '/syllabus-manager/course/edit',
+        },
       ],
     },
     {

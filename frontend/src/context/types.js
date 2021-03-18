@@ -27,6 +27,9 @@ export const CREATE_COURSE = 'CREATE_COURSE';
 export const GET_COURSES = 'GET_COURSES';
 export const COURSES_ERROR = 'COURSES_ERROR';
 export const CLEAR_COURSES = 'CLEAR_COURSES';
+export const GET_COURSE = 'GET_COURSE';
+export const COURSE_ERROR = 'COURSE_ERROR';
+export const UPDATE_COURSE = 'UPDATE_COURSE';
 
 // Download
 export const DOWNLOAD_FILE = 'DOWNLOAD_FILE';
