@@ -107,6 +107,11 @@ const syllabusManager = {
           title: 'Edit Course',
           link: '/syllabus-manager/course/edit',
         },
+        {
+          title: 'Delete Course',
+          link: '/syllabus-manager/course/delete',
+          isDanger: true,
+        },
       ],
     },
     {

@@ -9,6 +9,7 @@ import SMDeleteSubject from './subject/SMDeleteSubject';
 // Course Components
 import SMCreateCourse from './course/SMCreateCourse';
 import SMEditCourse from './course/SMEditCourse';
+import SMDeleteCourse from './course/SMDeleteCourse';
 
 // Nested Syllabus Manager Route
 // import CreateViaCSV from './CreateViaCSV';
@@ -54,6 +55,11 @@ const SyllabusManager = (props) => {
         exact
         path='/syllabus-manager/course/edit'
         component={SMEditCourse}
+      />
+      <PrivateRoute
+        exact
+        path='/syllabus-manager/course/delete'
+        component={SMDeleteCourse}
       />
       <PrivateRoute
         exact

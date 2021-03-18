@@ -8,6 +8,7 @@ const {
   getCourses,
   getCourse,
   updateCourse,
+  deleteCourse,
 } = require('../controllers/course');
 const advancedResult = require('../middleware/advancedResult');
 
@@ -20,6 +21,10 @@ router
     getCourses
   );
 
-router.route('/:id').get(protect, getCourse).put(protect, updateCourse);
+router
+  .route('/:id')
+  .get(protect, getCourse)
+  .put(protect, updateCourse)
+  .delete(protect, deleteCourse);
 
 module.exports = router;

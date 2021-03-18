@@ -8,6 +8,8 @@ import {
   UPDATE_COURSE,
   COURSES_ERROR,
   COURSE_ERROR,
+  DELETE_COURSE,
+  DELETE_ERROR,
   UPDATE_ERROR,
   CREATE_COURSE,
   CLEAR_ERRORS,
@@ -163,6 +165,29 @@ const SubjectState = (props) => {
     }
   };
 
+  // Delete Course
+  const deleteCourse = async (reqObj) => {
+    setLoading();
+    try {
+      let res;
+      res = await axios.delete(`/api/v1/course/${reqObj.id}`, {
+        data: { password: reqObj.password },
+      });
+      dispatch({
+        type: DELETE_COURSE,
+        payload: res.data,
+      });
+    } catch (err) {
+      console.log(err);
+      dispatch({
+        type: DELETE_ERROR,
+        payload: err.response,
+      });
+    } finally {
+      resetLoading();
+    }
+  };
+
   // Clear Errors
   const clearErrors = () => dispatch({ type: CLEAR_ERRORS });
 
@@ -182,6 +207,7 @@ const SubjectState = (props) => {
         getCourses,
         getCourse,
         updateCourse,
+        deleteCourse,
         clearCourses,
       }}
     >

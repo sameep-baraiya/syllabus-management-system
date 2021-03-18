@@ -1,5 +1,6 @@
 const ErrorResponse = require('../utils/ErrorResponse');
 const Course = require('../models/Course');
+const User = require('../models/User');
 
 // @desc    Create course
 // @route   POST /api/v1/course
@@ -162,6 +163,40 @@ exports.updateCourse = async (req, res, next) => {
     if (newCourse === null) {
       return next(new ErrorResponse('Error: Unable to update course', 400));
     }
+
+    res.status(200).json({
+      success: true,
+    });
+  } catch (err) {
+    return next(err);
+  }
+};
+
+// @desc    Delete course
+// @route   DELETE /api/v1/course/:id
+// @access  Private
+exports.deleteCourse = async (req, res, next) => {
+  const { id } = req.params;
+  const { password } = req.body;
+
+  try {
+    const user = await User.findByPk(req.user.id);
+
+    if (!user.matchPassword(password)) {
+      return next(new ErrorResponse('Passowrd not matched', 404));
+    }
+
+    const course = await Course.findByPk(id);
+    if (course === null) {
+      return next(new ErrorResponse('course not found', 404));
+    }
+
+    course.crudInfo = {
+      type: 'COURSE_DELETE',
+      by: req.user.name,
+    };
+
+    await course.destroy();
 
     res.status(200).json({
       success: true,
