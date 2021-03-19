@@ -4,6 +4,7 @@ import { Switch, Route } from 'react-router-dom';
 // Nested Syllabus Manager Route
 import DashboardSubject from './DashboardSubject';
 import DashboardCourse from './DashboardCourse';
+import DashboardAcademicBatch from './DashboardAcademicBatch';
 // import FindCourse from './FindCourse';
 import DefaultDashboard from './DefaultDashboard';
 
@@ -27,6 +28,11 @@ const Dashboard = (props) => {
           exact
           path='/dashboard/course'
           component={DashboardCourse}
+        />
+        <PrivateRoute
+          exact
+          path='/dashboard/academic-batch'
+          component={DashboardAcademicBatch}
         />
         {/* <PrivateRoute exact path='/dashboard/course' component={FindCourse} /> */}
 

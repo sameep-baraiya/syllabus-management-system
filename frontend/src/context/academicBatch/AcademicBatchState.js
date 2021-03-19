@@ -2,7 +2,14 @@ import React, { useReducer, useContext } from 'react';
 import axios from 'axios';
 import AcademicBatchContext from './academicBatchContext';
 import academicBatchReducer from './academicBatchReducer';
-import { CREATE_ACADEMIC_BATCH, CLEAR_ERRORS, CREATE_ERROR } from '../types';
+import {
+  CREATE_ACADEMIC_BATCH,
+  CLEAR_ERRORS,
+  CREATE_ERROR,
+  GET_ACADEMIC_BATCHES,
+  ACADEMIC_BATCHES_ERROR,
+  CLEAR_ACADEMIC_BATCHES,
+} from '../types';
 import LoadingContext from '../loading/loadingContext';
 
 const SubjectState = (props) => {
@@ -11,7 +18,7 @@ const SubjectState = (props) => {
 
   const initialState = {
     academicBatch: null,
-    academicBatchs: null,
+    academicBatches: null,
     pagination: null,
     total: 0,
     error: null,
@@ -45,6 +52,66 @@ const SubjectState = (props) => {
     }
   };
 
+  // Get Subjects
+  const getAcademicBatches = async (query = null) => {
+    setLoading();
+    try {
+      let res;
+      if (query == null) {
+        res = await axios.get('/api/v1/academic-batch');
+      } else {
+        const sort =
+          query.sort !== undefined ? `?sort=${query.sort}` : '?sort=ASC';
+        const select =
+          query.select !== undefined ? `&select=${query.select}` : '';
+        const page = query.page !== undefined ? `&page=${query.page}` : '';
+        const limit = query.limit !== undefined ? `&limit=${query.limit}` : '';
+        const sortBy =
+          query.sortBy !== undefined ? `&sortBy=${query.sortBy}` : '';
+        const search =
+          query.search !== undefined ? `&search=${query.search}` : '';
+        const nestSelect =
+          query.nestSelect !== undefined
+            ? `&nestSelect=${query.nestSelect}`
+            : '';
+
+        let attributes = '';
+        if (query.attributes !== undefined) {
+          Object.keys(query.attributes).forEach((key) => {
+            attributes = attributes.concat(`&${key}=${query.attributes[key]}`);
+          });
+        }
+        const searchQuery =
+          sort +
+          select +
+          page +
+          limit +
+          sortBy +
+          attributes +
+          search +
+          nestSelect;
+
+        res = await axios.get('/api/v1/academic-batch' + searchQuery);
+      }
+
+      dispatch({
+        type: GET_ACADEMIC_BATCHES,
+        payload: res.data,
+      });
+    } catch (err) {
+      console.log(err);
+      dispatch({
+        type: ACADEMIC_BATCHES_ERROR,
+        payload: err.response,
+      });
+    } finally {
+      resetLoading();
+    }
+  };
+
+  // Clear Academic Batches
+  const clearAcademicBatches = () => dispatch({ type: CLEAR_ACADEMIC_BATCHES });
+
   // Clear Errors
   const clearErrors = () => dispatch({ type: CLEAR_ERRORS });
 
@@ -52,12 +119,14 @@ const SubjectState = (props) => {
     <AcademicBatchContext.Provider
       value={{
         academicBatch: state.academicBatch,
-        academicBatchs: state.academicBatchs,
+        academicBatches: state.academicBatches,
         error: state.error,
         pagination: state.pagination,
         total: state.total,
         clearErrors,
         createAcademicBatch,
+        getAcademicBatches,
+        clearAcademicBatches,
       }}
     >
       {props.children}

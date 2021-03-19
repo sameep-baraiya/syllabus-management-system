@@ -96,3 +96,15 @@ exports.createAcademicBatch = async (req, res, next) => {
     return next(err);
   }
 };
+
+// TODO Refactor
+// @desc    Get academic batches
+// @route   GET /api/v1/academic-batch
+// @access  Private
+exports.getAcademicBatches = async (req, res, next) => {
+  try {
+    res.status(200).json(res.advancedResults);
+  } catch (err) {
+    return next(err);
+  }
+};

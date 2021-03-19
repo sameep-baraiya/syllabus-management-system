@@ -60,6 +60,16 @@ const dashboard = {
         },
       ],
     },
+    {
+      title: 'Academic Batch',
+      titleIcon: iconAcademicBatch,
+      subLink: [
+        {
+          title: 'Find Academic Batch',
+          link: '/dashboard/academic-batch',
+        },
+      ],
+    },
   ],
 };
 
