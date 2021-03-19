@@ -108,3 +108,55 @@ exports.getAcademicBatches = async (req, res, next) => {
     return next(err);
   }
 };
+
+// @desc    Get single academic batch with specified id
+// @route   GET /api/v1/academic-batch/:id
+// @access  Private
+exports.getAcademicBatch = async (req, res, next) => {
+  const { id } = req.params;
+  console.log(id, req.query);
+  try {
+    const academicBatch = await AcademicBatch.findByPk(id);
+    if (academicBatch === null) {
+      return next(new ErrorResponse('Academic Batch not found', 404));
+    }
+
+    const course = await academicBatch.getCourse({
+      attributes: [
+        'id',
+        'courseCode',
+        'courseName',
+        'courseType',
+        'department',
+      ],
+    });
+    const subjects = await academicBatch.getSubjects({
+      attributes: [
+        'id',
+        'subjectCode',
+        'subjectName',
+        'subjectShort',
+        'semNo',
+        'listIndex',
+      ],
+    });
+    const newSubjects = [];
+
+    subjects.forEach((sub) => {
+      const tempSub = sub.toJSON();
+      delete tempSub.AcademicBatchSubject;
+      newSubjects.push(tempSub);
+    });
+
+    res.status(200).json({
+      success: true,
+      data: {
+        ...academicBatch.toJSON(),
+        course: course.toJSON(),
+        subjects: newSubjects,
+      },
+    });
+  } catch (err) {
+    return next(err);
+  }
+};

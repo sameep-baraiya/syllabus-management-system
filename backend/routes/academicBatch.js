@@ -2,6 +2,7 @@ const express = require('express');
 const {
   createAcademicBatch,
   getAcademicBatches,
+  getAcademicBatch,
 } = require('../controllers/academicBatch');
 
 // Model
@@ -20,5 +21,7 @@ router
     advancedResult(AcademicBatch, ['academicBatchCode', 'academicBatchName']),
     getAcademicBatches
   );
+
+router.route('/:id').get(protect, getAcademicBatch);
 
 module.exports = router;

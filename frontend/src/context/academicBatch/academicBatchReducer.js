@@ -5,6 +5,8 @@ import {
   GET_ACADEMIC_BATCHES,
   ACADEMIC_BATCHES_ERROR,
   CLEAR_ACADEMIC_BATCHES,
+  GET_ACADEMIC_BATCH,
+  ACADEMIC_BATCH_ERROR,
 } from '../types';
 
 const authReducer = (state, action) => {
@@ -27,6 +29,17 @@ const authReducer = (state, action) => {
       return {
         ...state,
         error: null,
+      };
+    case GET_ACADEMIC_BATCH:
+      return {
+        ...state,
+        academicBatch: action.payload.data,
+      };
+    case ACADEMIC_BATCH_ERROR:
+      return {
+        ...state,
+        academicBatch: null,
+        error: action.payload,
       };
     case ACADEMIC_BATCHES_ERROR:
       return {

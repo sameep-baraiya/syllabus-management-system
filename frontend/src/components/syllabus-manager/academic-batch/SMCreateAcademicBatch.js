@@ -3,15 +3,19 @@ import { Button, Card } from 'react-bootstrap';
 
 // Academic Batch Model Components
 import CreateAcademicBatch from '../../models/academic-batch/CreateAcademicBatch';
-import FindSubject from '../../models/subject/FindSubject';
-import ViewSubject from '../../models/subject/ViewSubject';
+import FindAcademicBatch from '../../models/academic-batch/FindAcademicBatch';
+import ViewAcademicBatch from '../../models/academic-batch/ViewAcademicBatch';
 
 // Context
-import SubjectContext from '../../../context/subject/subjectContext';
+import AcademicBatchContext from '../../../context/academicBatch/academicBatchContext';
 
 const SMCreateAcademicBatch = () => {
-  const subjectContext = useContext(SubjectContext);
-  const { subjects, getSubject, subject } = subjectContext;
+  const academicBatchContext = useContext(AcademicBatchContext);
+  const {
+    getAcademicBatch,
+    academicBatches,
+    academicBatch,
+  } = academicBatchContext;
 
   const [operationMode, setOperationMode] = useState('');
   const [isSelected, setIsSelected] = useState(false);
@@ -19,27 +23,31 @@ const SMCreateAcademicBatch = () => {
 
   const onSelectClick = (id) => {
     setIsSelected(true);
-    getSubject(id);
+    getAcademicBatch({
+      id: id,
+      nestSelect: 'Course,Subject',
+    });
   };
 
-  const onSubjectSelectClick = () => {
+  const onAcademicBatchSelectClick = () => {
     if (operationMode === 'clone') {
       console.log('clone');
       setMode('clone');
     }
     setIsSelected(false);
+    setOperationMode('');
   };
 
   const selectionList = () => {
     return (
       <div>
-        <FindSubject defaultSelect='id,subjectCode,subjectName,subjectShort' />
-        {subjects &&
-          subjects.map((sub, index) => (
+        <FindAcademicBatch defaultSelect='id,academicBatchCode,academicBatchName' />
+        {academicBatches &&
+          academicBatches.map((ab, index) => (
             <div
               key={index}
               className='p-3 mb-2 bg-dark text-white'
-              onClick={() => onSelectClick(sub.id)}
+              onClick={() => onSelectClick(ab.id)}
               style={{
                 cursor: 'pointer',
               }}
@@ -47,7 +55,7 @@ const SMCreateAcademicBatch = () => {
               <span className='pt-1 pb-1 pl-3 pr-3 mr-3 bg-secondary text-white'>
                 Select
               </span>
-              {sub.subjectCode}: {sub.subjectName} ({sub.subjectShort})
+              {ab.academicBatchCode}: {ab.academicBatchName}
             </div>
           ))}
       </div>
@@ -74,15 +82,13 @@ const SMCreateAcademicBatch = () => {
       </div>
       {operationMode && (
         <Card>
-          <Card.Header>
-            Find and Select for setting subject {operationMode}
-          </Card.Header>
+          <Card.Header>Find and Select for Academic Batch to clone</Card.Header>
           <Card.Body>
             {isSelected ? (
               <div>
-                <ViewSubject subject={subject} />
+                <ViewAcademicBatch academicBatch={academicBatch} />
                 <br />
-                <Button variant='success' onClick={onSubjectSelectClick}>
+                <Button variant='success' onClick={onAcademicBatchSelectClick}>
                   Select
                 </Button>{' '}
                 <Button

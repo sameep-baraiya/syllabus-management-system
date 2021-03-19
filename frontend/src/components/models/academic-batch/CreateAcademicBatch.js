@@ -92,6 +92,8 @@ const CreateAcademicBatch = ({ mode, setMode }) => {
       startYear,
       endYear,
       isFreezed,
+      course,
+      subjects,
     } = academicBatch;
 
     setReqObj({
@@ -102,6 +104,11 @@ const CreateAcademicBatch = ({ mode, setMode }) => {
       startYear: startYear !== null ? startYear : '',
       endYear: endYear !== null ? endYear : '',
       isFreezed: isFreezed !== null ? isFreezed : false,
+      courseObj: course !== null ? course : false,
+      subjectsArr:
+        subjects !== null && Array.isArray(subjects) && subjects.length
+          ? subjects
+          : [],
     });
     setMode('');
   };

@@ -7,7 +7,9 @@ import {
   CLEAR_ERRORS,
   CREATE_ERROR,
   GET_ACADEMIC_BATCHES,
+  GET_ACADEMIC_BATCH,
   ACADEMIC_BATCHES_ERROR,
+  ACADEMIC_BATCH_ERROR,
   CLEAR_ACADEMIC_BATCHES,
 } from '../types';
 import LoadingContext from '../loading/loadingContext';
@@ -109,6 +111,38 @@ const SubjectState = (props) => {
     }
   };
 
+  // Get Academic Batch
+  const getAcademicBatch = async (query = 0) => {
+    setLoading();
+    try {
+      let res = null;
+      if (Number.isFinite(query)) {
+        res = await axios.get(`/api/v1/academic-batch/${query}`);
+      } else {
+        const nestSelect =
+          query.nestSelect !== undefined
+            ? `?nestSelect=${query.nestSelect}`
+            : '';
+        const id = query.id !== undefined ? query.id : 0;
+        const searchQuery = `/api/v1/academic-batch/${id}${nestSelect}`;
+        res = await axios.get(searchQuery);
+      }
+
+      dispatch({
+        type: GET_ACADEMIC_BATCH,
+        payload: res.data,
+      });
+    } catch (err) {
+      console.error(err);
+      dispatch({
+        type: ACADEMIC_BATCH_ERROR,
+        payload: err.response,
+      });
+    } finally {
+      resetLoading();
+    }
+  };
+
   // Clear Academic Batches
   const clearAcademicBatches = () => dispatch({ type: CLEAR_ACADEMIC_BATCHES });
 
@@ -127,6 +161,7 @@ const SubjectState = (props) => {
         createAcademicBatch,
         getAcademicBatches,
         clearAcademicBatches,
+        getAcademicBatch,
       }}
     >
       {props.children}
