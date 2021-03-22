@@ -58,7 +58,7 @@ const subjects = [
     subjectShort: 'EG',
     headMasterJSON: {
       ...headTemp,
-      points: [4, 0, 3, 4, 1.5, 5.5, 60, 40, 0, 0, 100],
+      points: [4, 0, 3, 4, 1.5, 5.5, 60, 40, 0, 50, 150],
     },
     subjectType: 'Subject Type 1',
     department: 'IT - Information Technology',
@@ -279,7 +279,7 @@ const subjects = [
     subjectShort: 'CP-2',
     headMasterJSON: {
       ...headTemp,
-      points: [3, 0, 0, 3, 0, 3, 60, 0, 40, 0, 100],
+      points: [4, 0, 2, 4, 1, 5, 60, 40, 25, 25, 150],
     },
     subjectType: 'Subject Type 1',
     department: 'IT - Information Technology',

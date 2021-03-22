@@ -3,6 +3,7 @@ const AcademicBatch = require('../models/AcademicBatch');
 const AcademicBatchSubject = require('../models/AcademicBatchSubject');
 const Course = require('../models/Course');
 const Subject = require('../models/Subject');
+const createABFiles = require('../utils/createABFiles');
 
 // @desc    Create Academic Batch
 // @route   POST /api/v1/academic-batch
@@ -156,6 +157,67 @@ exports.getAcademicBatch = async (req, res, next) => {
         subjects: newSubjects,
       },
     });
+  } catch (err) {
+    return next(err);
+  }
+};
+
+// @desc    Create file
+// @route   POST /api/v1/academic-batch/:id
+// @access  Private
+exports.createFile = async (req, res, next) => {
+  const { id } = req.params;
+  const { type, socketId } = req.body;
+  try {
+    const academicBatch = await AcademicBatch.findByPk(id);
+    if (academicBatch === null) {
+      return next(new ErrorResponse('Academic Batch not found', 404));
+    }
+
+    const course = await academicBatch.getCourse({
+      attributes: [
+        'id',
+        'courseCode',
+        'courseName',
+        'courseType',
+        'department',
+      ],
+    });
+
+    const subjects = await academicBatch.getSubjects({
+      attributes: [
+        'id',
+        'subjectCode',
+        'subjectName',
+        'subjectType',
+        'department',
+        'subjectShort',
+        'headMasterJSON',
+        'semNo',
+        'listIndex',
+        'isElective',
+      ],
+    });
+    const newSubjects = [];
+
+    subjects.forEach((sub) => {
+      const tempSub = sub.toJSON();
+      delete tempSub.AcademicBatchSubject;
+      newSubjects.push(tempSub);
+    });
+
+    // TODO Notification
+    const data = {
+      ...academicBatch.toJSON(),
+      course: course.toJSON(),
+      subjects: newSubjects,
+    };
+
+    res.status(200).json({
+      success: true,
+    });
+
+    createABFiles(type, data, req.app.get('socketio'), socketId, req.user);
   } catch (err) {
     return next(err);
   }

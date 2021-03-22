@@ -3,6 +3,7 @@ const {
   createAcademicBatch,
   getAcademicBatches,
   getAcademicBatch,
+  createFile,
 } = require('../controllers/academicBatch');
 
 // Model
@@ -22,6 +23,6 @@ router
     getAcademicBatches
   );
 
-router.route('/:id').get(protect, getAcademicBatch);
+router.route('/:id').get(protect, getAcademicBatch).post(protect, createFile);
 
 module.exports = router;

@@ -23,16 +23,20 @@ import {
 } from 'react-bootstrap';
 import AuthContext from '../../context/auth/authContext';
 import LoadingContext from '../../context/loading/loadingContext';
+import NotificationContext from '../../context/notification/notificationContext';
 
 const MainNavbar = () => {
   const authContext = useContext(AuthContext);
   const loadingContext = useContext(LoadingContext);
+  const notificationContext = useContext(NotificationContext);
 
   const { isAuthenticated, user, loadUser, logout } = authContext;
   const { loading } = loadingContext;
+  const { initNotification } = notificationContext;
 
   useEffect(() => {
     loadUser();
+    initNotification();
     // eslint-disable-next-line
   }, []);
 

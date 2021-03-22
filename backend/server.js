@@ -3,6 +3,7 @@ const app = express();
 const dotenv = require('dotenv');
 const morgan = require('morgan');
 const colors = require('colors');
+const socket = require('socket.io');
 
 // Middleware import
 const errorHandler = require('./middleware/error');
@@ -45,13 +46,26 @@ app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
 
-app.listen(
+const server = app.listen(
   PORT,
   console.log(
     `Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.black
       .bgGreen
   )
 );
+
+const io = socket(server);
+//Whenever someone connects this gets executed
+io.on('connection', (socket) => {
+  console.log('A user connected'.green);
+  console.log(socket.id);
+
+  //Whenever someone disconnects this piece of code executed
+  socket.on('disconnect', () => {
+    console.log('A user disconnected'.yellow);
+  });
+});
+app.set('socketio', io);
 
 // Handle unhandled promise rejections
 process.on('unhandledRejection', (err, promise) => {

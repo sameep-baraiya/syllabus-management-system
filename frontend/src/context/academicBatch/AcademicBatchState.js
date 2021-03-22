@@ -11,6 +11,8 @@ import {
   ACADEMIC_BATCHES_ERROR,
   ACADEMIC_BATCH_ERROR,
   CLEAR_ACADEMIC_BATCHES,
+  CREATE_FILE,
+  CREATE_FILE_ERROR,
 } from '../types';
 import LoadingContext from '../loading/loadingContext';
 
@@ -143,6 +145,27 @@ const SubjectState = (props) => {
     }
   };
 
+  // Create File
+  const createFile = async (reqObj = null) => {
+    setLoading();
+    try {
+      const { id, ...rest } = reqObj;
+      const res = await axios.post(`/api/v1/academic-batch/${id}`, rest);
+      dispatch({
+        type: CREATE_FILE,
+        payload: res.data,
+      });
+    } catch (err) {
+      console.error(err);
+      dispatch({
+        type: CREATE_FILE_ERROR,
+        payload: err.response,
+      });
+    } finally {
+      resetLoading();
+    }
+  };
+
   // Clear Academic Batches
   const clearAcademicBatches = () => dispatch({ type: CLEAR_ACADEMIC_BATCHES });
 
@@ -162,6 +185,7 @@ const SubjectState = (props) => {
         getAcademicBatches,
         clearAcademicBatches,
         getAcademicBatch,
+        createFile,
       }}
     >
       {props.children}

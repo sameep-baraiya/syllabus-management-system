@@ -34,6 +34,7 @@ import DownloadState from './context/download/DownloadState';
 import AcademicBatchState from './context/academicBatch/AcademicBatchState';
 import LoadingState from './context/loading/LoadingState';
 import AlertState from './context/alert/AlertState';
+import NotificationState from './context/notification/NotificationState';
 
 function App() {
   pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
@@ -41,48 +42,50 @@ function App() {
   return (
     <LoadingState>
       <AlertState>
-        <AuthState>
-          <SubjectState>
-            <CourseState>
-              <DownloadState>
-                <AcademicBatchState>
-                  <Router>
-                    <Navbar />
-                    <Alert />
-                    <div className='grid-container'>
-                      <div className='sidebar'>
-                        <Sidebar />
+        <NotificationState>
+          <AuthState>
+            <SubjectState>
+              <CourseState>
+                <DownloadState>
+                  <AcademicBatchState>
+                    <Router>
+                      <Navbar />
+                      <Alert />
+                      <div className='grid-container'>
+                        <div className='sidebar'>
+                          <Sidebar />
+                        </div>
+                        <div className='main-content'>
+                          <Container>
+                            <Switch>
+                              <Route exact path='/' component={Home} />
+                              <Route exact path='/about' component={About} />
+                              <Route exact path='/login' component={LogIn} />
+                              <Route
+                                exact
+                                path='/register'
+                                component={Register}
+                              />
+                              <PrivateRoute
+                                path='/dashboard'
+                                component={Dashboard}
+                              />
+                              <PrivateRoute
+                                path='/syllabus-manager'
+                                component={SyllabusManager}
+                              />
+                              <Route component={NotFound} />
+                            </Switch>
+                          </Container>
+                        </div>
                       </div>
-                      <div className='main-content'>
-                        <Container>
-                          <Switch>
-                            <Route exact path='/' component={Home} />
-                            <Route exact path='/about' component={About} />
-                            <Route exact path='/login' component={LogIn} />
-                            <Route
-                              exact
-                              path='/register'
-                              component={Register}
-                            />
-                            <PrivateRoute
-                              path='/dashboard'
-                              component={Dashboard}
-                            />
-                            <PrivateRoute
-                              path='/syllabus-manager'
-                              component={SyllabusManager}
-                            />
-                            <Route component={NotFound} />
-                          </Switch>
-                        </Container>
-                      </div>
-                    </div>
-                  </Router>
-                </AcademicBatchState>
-              </DownloadState>
-            </CourseState>
-          </SubjectState>
-        </AuthState>
+                    </Router>
+                  </AcademicBatchState>
+                </DownloadState>
+              </CourseState>
+            </SubjectState>
+          </AuthState>
+        </NotificationState>
       </AlertState>
     </LoadingState>
   );

@@ -5,6 +5,7 @@ import {
   iconCourse,
   iconAcademicBatch,
   iconMeeting,
+  iconFileGen,
 } from '../layout/Icon';
 
 const home = {
@@ -102,6 +103,16 @@ const syllabusManager = {
         {
           title: 'Create Academic Batch',
           link: '/syllabus-manager/academic-batch',
+        },
+      ],
+    },
+    {
+      title: 'Files',
+      titleIcon: iconFileGen,
+      subLink: [
+        {
+          title: 'Create Files',
+          link: '/syllabus-manager/academic-batch/create-file',
         },
       ],
     },

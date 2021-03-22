@@ -67,6 +67,14 @@ AcademicBatch.init(
       afterUpdate: async (ab, options) => {
         try {
           switch (ab.crudInfo.type) {
+            case 'ACADEMIC_BATCH_FILE_CREATE':
+              await CRUDLog.create({
+                msg: `Academic Batch ${ab.academicBatchCode}: ${ab.academicBatchName} file(s) created`,
+                type: 'UPDATE',
+                model: 'Academic Batch',
+                by: ab.crudInfo.by,
+              });
+              break;
             case 'ACADEMIC_BATCH_UPDATE':
               await CRUDLog.create({
                 msg: `Academic Batch ${ab.academicBatchCode}: ${ab.academicBatchName} Updated`,

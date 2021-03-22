@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Test</title>
+    <style>
+      .center {
+        text-align: center;
+      }
+
+      table {
+        border: 1px solid black;
+        border-collapse: collapse;
+        width: 100%;
+      }
+
+      th,
+      td {
+        border: 1px solid black;
+        padding: 8px;
+      }
+
+      @media print {
+        .new-page {
+          page-break-before: always;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="center">
+      <h2>Dharmsinh Desai University</h2>
+      <h3>
+        Faculty of Technology <br />
+        Department of <%= course.department %>
+      </h3>
+      <h1>Detailed Syllabus Book</h1>
+      <div>
+        Detailed Syllabus for <%= course.courseType %> (<%= course.department
+        %>) course
+      </div>
+      <br />
+      <div>Department of <%= course.department %>,</div>
+      <div>Faculty of Technology,</div>
+      <div>Dharmsinh Desai University, Nadiad – 387 001, Gujarat, India.</div>
+      <div><strong>Website:</strong> http://www.ddu.ac.in</div>
+    </div>
+
+    <div class="new-page">
+      <table>
+        <thead>
+          <tr>
+            <th>SR NO.</th>
+            <th>SEMESTER</th>
+            <th>TOTAL CREDIT</th>
+            <th>TOTAL MARKS</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% creditIndex.forEach(function(ci, index){ %>
+          <!-- If element exist -->
+          <% if (ci) { %>
+          <tr>
+            <td><%= index %></td>
+            <td>SEM - <%= ci[0] %></td>
+            <td><%= ci[1] %></td>
+            <td><%= ci[2] %></td>
+          </tr>
+          <% } %>
+          <!-- End If -->
+          <% }); %>
+          <tr>
+            <td></td>
+            <td><strong>TOTAL</strong></td>
+            <td><strong><%= creditIndexTotal[0] %></strong></td>
+            <td><strong><%= creditIndexTotal[1] %></strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Sem and Index List -->
+    <% semIndex.forEach(function(siList){ %>
+    <!-- If siList exist -->
+    <% if (siList) { %>
+
+    <div class="new-page">
+      <table>
+        <thead>
+          <tr>
+            <th colspan="2">SEM - <%= subjects[siList[0]].semNo %></th>
+            <%
+            subjects[siList[0]].headMasterJSON.headGroups.forEach(function(hmg,
+            index){ %>
+            <th
+              colspan="<%= subjects[siList[0]].headMasterJSON.headGroupsLength[index] %>"
+            >
+              <%= hmg %>
+            </th>
+            <% }); %>
+          </tr>
+          <tr>
+            <th>SUB CODE</th>
+            <th>SUB NAME</th>
+            <%
+            subjects[siList[0]].headMasterJSON.headMasters.forEach(function(hm){
+            %>
+            <td><%= hm %></td>
+            <% }); %>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Sem Index -->
+          <% siList.forEach(function(si){ %>
+          <!-- If si exist -->
+          <% if (siList) { %>
+          <tr>
+            <td><%= subjects[si].subjectCode %></td>
+            <td>
+              <%= subjects[si].subjectName %> <%= subjects[si].isElective ?
+              '(Elective)' : '' %>
+            </td>
+            <% subjects[si].headMasterJSON.points.forEach(function(pt){ %>
+            <td><%= pt %></td>
+            <% }); %> <% } %>
+          </tr>
+          <!-- End If -->
+          <% }); %>
+          <!-- End For -->
+          <tr>
+            <td colspan="2"></td>
+            <td colspan="<%= csIndex %>"></td>
+            <td>
+              <strong><%= creditIndex[subjects[siList[0]].semNo][1] %></strong>
+            </td>
+            <td colspan="<%= (esIndex - csIndex - 1) %>"></td>
+            <td>
+              <strong><%= creditIndex[subjects[siList[0]].semNo][2] %></strong>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <% } %>
+    <!-- End If -->
+    <% }); %>
+    <!-- End For -->
+
+    <!-- Subjects -->
+    <% subjects.forEach(function(sub){ %>
+    <div class="new-page">
+      <h2><%= sub.subjectName %></h2>
+      <p>
+        <strong>Subject Code :</strong> <%= sub.subjectCode %> <br />
+        <strong>Subject Short :</strong> <%= sub.subjectShort %> <br />
+        <strong>Subject Type :</strong> <%= sub.subjectType %> <br />
+        <strong>Subject Department :</strong> <%= sub.department %> <br />
+        <strong>Subject Semester Number :</strong> <%= sub.semNo %> <br />
+        <strong>Subject Index In List :</strong> <%= sub.listIndex %> <br />
+        <strong>Is Elective :</strong> <%= sub.isElective ? 'Yes' : 'No' %>
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <% sub.headMasterJSON.headGroups.forEach(function(hmg, index){ %>
+            <th colspan="<%= sub.headMasterJSON.headGroupsLength[index] %>">
+              <%= hmg %>
+            </th>
+            <% }); %>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <% sub.headMasterJSON.headMasters.forEach(function(hm){ %>
+            <td><%= hm %></td>
+            <% }); %>
+          </tr>
+          <tr>
+            <% sub.headMasterJSON.points.forEach(function(pt){ %>
+            <td><%= pt %></td>
+            <% }); %>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <% }); %>
+  </body>
+</html>

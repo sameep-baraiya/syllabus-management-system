@@ -7,6 +7,8 @@ import {
   CLEAR_ACADEMIC_BATCHES,
   GET_ACADEMIC_BATCH,
   ACADEMIC_BATCH_ERROR,
+  CREATE_FILE,
+  CREATE_FILE_ERROR,
 } from '../types';
 
 const authReducer = (state, action) => {
@@ -25,6 +27,7 @@ const authReducer = (state, action) => {
         total: 0,
         pagination: null,
       };
+    case CREATE_FILE:
     case CREATE_ACADEMIC_BATCH:
       return {
         ...state,
@@ -48,6 +51,7 @@ const authReducer = (state, action) => {
         error: action.payload,
       };
     case CREATE_ERROR:
+    case CREATE_FILE_ERROR:
       return {
         ...state,
         error: action.payload,
