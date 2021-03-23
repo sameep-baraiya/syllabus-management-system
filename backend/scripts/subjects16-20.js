@@ -38,17 +38,17 @@ const subjects = [
       by: 'Script Manger User',
     },
     theoryFile: {
-      name: 'obsidian-1615530248079.png',
-      path: 'uploads/Subjects/obsidian-1615530248079.png',
+      name: 'Test Theory-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
     },
     practicalFile: {
-      name: 'obsidian-1615530248079.png',
-      path: 'uploads/Subjects/obsidian-1615530248079.png',
+      name: 'Test Practical-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
     },
     files: [
       {
-        name: 'obsidian-1615530248079.png',
-        path: 'uploads/Subjects/obsidian-1615530248079.png',
+        name: 'Test Theory-1615530125925.pdf',
+        path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
       },
     ],
   },
@@ -71,6 +71,20 @@ const subjects = [
       type: 'SUBJECT_CREATE',
       by: 'Script Manger User',
     },
+    theoryFile: {
+      name: 'Test Theory-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+    },
+    practicalFile: {
+      name: 'Test Practical-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
+    },
+    files: [
+      {
+        name: 'Test Theory-1615530125925.pdf',
+        path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+      },
+    ],
   },
   {
     subjectCode: 'AF 122',
@@ -91,6 +105,20 @@ const subjects = [
       type: 'SUBJECT_CREATE',
       by: 'Script Manger User',
     },
+    theoryFile: {
+      name: 'Test Theory-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+    },
+    practicalFile: {
+      name: 'Test Practical-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
+    },
+    files: [
+      {
+        name: 'Test Theory-1615530125925.pdf',
+        path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+      },
+    ],
   },
   {
     subjectCode: 'AF 124',
@@ -111,6 +139,20 @@ const subjects = [
       type: 'SUBJECT_CREATE',
       by: 'Script Manger User',
     },
+    theoryFile: {
+      name: 'Test Theory-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+    },
+    practicalFile: {
+      name: 'Test Practical-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
+    },
+    files: [
+      {
+        name: 'Test Theory-1615530125925.pdf',
+        path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+      },
+    ],
   },
   {
     subjectCode: 'AF 126',
@@ -131,6 +173,20 @@ const subjects = [
       type: 'SUBJECT_CREATE',
       by: 'Script Manger User',
     },
+    theoryFile: {
+      name: 'Test Theory-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+    },
+    practicalFile: {
+      name: 'Test Practical-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
+    },
+    files: [
+      {
+        name: 'Test Theory-1615530125925.pdf',
+        path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+      },
+    ],
   },
   {
     subjectCode: 'CT 116',
@@ -151,6 +207,20 @@ const subjects = [
       type: 'SUBJECT_CREATE',
       by: 'Script Manger User',
     },
+    theoryFile: {
+      name: 'Test Theory-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+    },
+    practicalFile: {
+      name: 'Test Practical-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
+    },
+    files: [
+      {
+        name: 'Test Theory-1615530125925.pdf',
+        path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+      },
+    ],
   },
   {
     subjectCode: 'ES 110',
@@ -171,6 +241,20 @@ const subjects = [
       type: 'SUBJECT_CREATE',
       by: 'Script Manger User',
     },
+    theoryFile: {
+      name: 'Test Theory-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+    },
+    practicalFile: {
+      name: 'Test Practical-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
+    },
+    files: [
+      {
+        name: 'Test Theory-1615530125925.pdf',
+        path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+      },
+    ],
   },
   // Sem 2
   {
@@ -192,6 +276,20 @@ const subjects = [
       type: 'SUBJECT_CREATE',
       by: 'Script Manger User',
     },
+    theoryFile: {
+      name: 'Test Theory-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+    },
+    practicalFile: {
+      name: 'Test Practical-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
+    },
+    files: [
+      {
+        name: 'Test Theory-1615530125925.pdf',
+        path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+      },
+    ],
   },
   {
     subjectCode: 'AF 212',
@@ -212,6 +310,20 @@ const subjects = [
       type: 'SUBJECT_CREATE',
       by: 'Script Manger User',
     },
+    theoryFile: {
+      name: 'Test Theory-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+    },
+    practicalFile: {
+      name: 'Test Practical-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
+    },
+    files: [
+      {
+        name: 'Test Theory-1615530125925.pdf',
+        path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+      },
+    ],
   },
   {
     subjectCode: 'AF 214',
@@ -232,6 +344,20 @@ const subjects = [
       type: 'SUBJECT_CREATE',
       by: 'Script Manger User',
     },
+    theoryFile: {
+      name: 'Test Theory-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+    },
+    practicalFile: {
+      name: 'Test Practical-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
+    },
+    files: [
+      {
+        name: 'Test Theory-1615530125925.pdf',
+        path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+      },
+    ],
   },
   {
     subjectCode: 'AF 215',
@@ -252,6 +378,20 @@ const subjects = [
       type: 'SUBJECT_CREATE',
       by: 'Script Manger User',
     },
+    theoryFile: {
+      name: 'Test Theory-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+    },
+    practicalFile: {
+      name: 'Test Practical-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
+    },
+    files: [
+      {
+        name: 'Test Theory-1615530125925.pdf',
+        path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+      },
+    ],
   },
   {
     subjectCode: 'AM 210',
@@ -272,6 +412,20 @@ const subjects = [
       type: 'SUBJECT_CREATE',
       by: 'Script Manger User',
     },
+    theoryFile: {
+      name: 'Test Theory-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+    },
+    practicalFile: {
+      name: 'Test Practical-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
+    },
+    files: [
+      {
+        name: 'Test Theory-1615530125925.pdf',
+        path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+      },
+    ],
   },
   {
     subjectCode: 'CT 215',
@@ -292,6 +446,20 @@ const subjects = [
       type: 'SUBJECT_CREATE',
       by: 'Script Manger User',
     },
+    theoryFile: {
+      name: 'Test Theory-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+    },
+    practicalFile: {
+      name: 'Test Practical-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
+    },
+    files: [
+      {
+        name: 'Test Theory-1615530125925.pdf',
+        path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+      },
+    ],
   },
   {
     subjectCode: 'CT 216',
@@ -312,6 +480,20 @@ const subjects = [
       type: 'SUBJECT_CREATE',
       by: 'Script Manger User',
     },
+    theoryFile: {
+      name: 'Test Theory-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+    },
+    practicalFile: {
+      name: 'Test Practical-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
+    },
+    files: [
+      {
+        name: 'Test Theory-1615530125925.pdf',
+        path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+      },
+    ],
   },
   // Sem 3
   {
@@ -333,6 +515,20 @@ const subjects = [
       type: 'SUBJECT_CREATE',
       by: 'Script Manger User',
     },
+    theoryFile: {
+      name: 'Test Theory-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+    },
+    practicalFile: {
+      name: 'Test Practical-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
+    },
+    files: [
+      {
+        name: 'Test Theory-1615530125925.pdf',
+        path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+      },
+    ],
   },
   {
     subjectCode: 'IT 301',
@@ -353,6 +549,20 @@ const subjects = [
       type: 'SUBJECT_CREATE',
       by: 'Script Manger User',
     },
+    theoryFile: {
+      name: 'Test Theory-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+    },
+    practicalFile: {
+      name: 'Test Practical-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
+    },
+    files: [
+      {
+        name: 'Test Theory-1615530125925.pdf',
+        path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+      },
+    ],
   },
   {
     subjectCode: 'IT 302',
@@ -373,6 +583,20 @@ const subjects = [
       type: 'SUBJECT_CREATE',
       by: 'Script Manger User',
     },
+    theoryFile: {
+      name: 'Test Theory-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+    },
+    practicalFile: {
+      name: 'Test Practical-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
+    },
+    files: [
+      {
+        name: 'Test Theory-1615530125925.pdf',
+        path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+      },
+    ],
   },
   {
     subjectCode: 'IT 303',
@@ -393,6 +617,20 @@ const subjects = [
       type: 'SUBJECT_CREATE',
       by: 'Script Manger User',
     },
+    theoryFile: {
+      name: 'Test Theory-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+    },
+    practicalFile: {
+      name: 'Test Practical-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
+    },
+    files: [
+      {
+        name: 'Test Theory-1615530125925.pdf',
+        path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+      },
+    ],
   },
   {
     subjectCode: 'IT 304',
@@ -413,6 +651,20 @@ const subjects = [
       type: 'SUBJECT_CREATE',
       by: 'Script Manger User',
     },
+    theoryFile: {
+      name: 'Test Theory-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+    },
+    practicalFile: {
+      name: 'Test Practical-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
+    },
+    files: [
+      {
+        name: 'Test Theory-1615530125925.pdf',
+        path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+      },
+    ],
   },
   {
     subjectCode: 'IT 305',
@@ -433,6 +685,20 @@ const subjects = [
       type: 'SUBJECT_CREATE',
       by: 'Script Manger User',
     },
+    theoryFile: {
+      name: 'Test Theory-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+    },
+    practicalFile: {
+      name: 'Test Practical-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
+    },
+    files: [
+      {
+        name: 'Test Theory-1615530125925.pdf',
+        path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+      },
+    ],
   },
   // Sem 4
   {
@@ -454,6 +720,20 @@ const subjects = [
       type: 'SUBJECT_CREATE',
       by: 'Script Manger User',
     },
+    theoryFile: {
+      name: 'Test Theory-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+    },
+    practicalFile: {
+      name: 'Test Practical-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
+    },
+    files: [
+      {
+        name: 'Test Theory-1615530125925.pdf',
+        path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+      },
+    ],
   },
   {
     subjectCode: 'AF 411',
@@ -474,6 +754,20 @@ const subjects = [
       type: 'SUBJECT_CREATE',
       by: 'Script Manger User',
     },
+    theoryFile: {
+      name: 'Test Theory-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+    },
+    practicalFile: {
+      name: 'Test Practical-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
+    },
+    files: [
+      {
+        name: 'Test Theory-1615530125925.pdf',
+        path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+      },
+    ],
   },
   {
     subjectCode: 'IT 402',
@@ -494,6 +788,20 @@ const subjects = [
       type: 'SUBJECT_CREATE',
       by: 'Script Manger User',
     },
+    theoryFile: {
+      name: 'Test Theory-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+    },
+    practicalFile: {
+      name: 'Test Practical-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
+    },
+    files: [
+      {
+        name: 'Test Theory-1615530125925.pdf',
+        path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+      },
+    ],
   },
   {
     subjectCode: 'IT 403',
@@ -514,6 +822,20 @@ const subjects = [
       type: 'SUBJECT_CREATE',
       by: 'Script Manger User',
     },
+    theoryFile: {
+      name: 'Test Theory-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+    },
+    practicalFile: {
+      name: 'Test Practical-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
+    },
+    files: [
+      {
+        name: 'Test Theory-1615530125925.pdf',
+        path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+      },
+    ],
   },
   {
     subjectCode: 'IT 406',
@@ -534,6 +856,20 @@ const subjects = [
       type: 'SUBJECT_CREATE',
       by: 'Script Manger User',
     },
+    theoryFile: {
+      name: 'Test Theory-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+    },
+    practicalFile: {
+      name: 'Test Practical-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
+    },
+    files: [
+      {
+        name: 'Test Theory-1615530125925.pdf',
+        path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+      },
+    ],
   },
   {
     subjectCode: 'IT 407',
@@ -554,6 +890,20 @@ const subjects = [
       type: 'SUBJECT_CREATE',
       by: 'Script Manger User',
     },
+    theoryFile: {
+      name: 'Test Theory-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+    },
+    practicalFile: {
+      name: 'Test Practical-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
+    },
+    files: [
+      {
+        name: 'Test Theory-1615530125925.pdf',
+        path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+      },
+    ],
   },
   // Sem 5
   {
@@ -575,6 +925,20 @@ const subjects = [
       type: 'SUBJECT_CREATE',
       by: 'Script Manger User',
     },
+    theoryFile: {
+      name: 'Test Theory-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+    },
+    practicalFile: {
+      name: 'Test Practical-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
+    },
+    files: [
+      {
+        name: 'Test Theory-1615530125925.pdf',
+        path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+      },
+    ],
   },
   {
     subjectCode: 'IT 502',
@@ -595,6 +959,20 @@ const subjects = [
       type: 'SUBJECT_CREATE',
       by: 'Script Manger User',
     },
+    theoryFile: {
+      name: 'Test Theory-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+    },
+    practicalFile: {
+      name: 'Test Practical-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
+    },
+    files: [
+      {
+        name: 'Test Theory-1615530125925.pdf',
+        path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+      },
+    ],
   },
   {
     subjectCode: 'IT 509',
@@ -615,6 +993,20 @@ const subjects = [
       type: 'SUBJECT_CREATE',
       by: 'Script Manger User',
     },
+    theoryFile: {
+      name: 'Test Theory-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+    },
+    practicalFile: {
+      name: 'Test Practical-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
+    },
+    files: [
+      {
+        name: 'Test Theory-1615530125925.pdf',
+        path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+      },
+    ],
   },
   {
     subjectCode: 'IT 510',
@@ -635,6 +1027,20 @@ const subjects = [
       type: 'SUBJECT_CREATE',
       by: 'Script Manger User',
     },
+    theoryFile: {
+      name: 'Test Theory-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+    },
+    practicalFile: {
+      name: 'Test Practical-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
+    },
+    files: [
+      {
+        name: 'Test Theory-1615530125925.pdf',
+        path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+      },
+    ],
   },
   {
     subjectCode: 'IT 511',
@@ -655,6 +1061,20 @@ const subjects = [
       type: 'SUBJECT_CREATE',
       by: 'Script Manger User',
     },
+    theoryFile: {
+      name: 'Test Theory-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+    },
+    practicalFile: {
+      name: 'Test Practical-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
+    },
+    files: [
+      {
+        name: 'Test Theory-1615530125925.pdf',
+        path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+      },
+    ],
   },
   {
     subjectCode: 'IT 506',
@@ -675,6 +1095,20 @@ const subjects = [
       type: 'SUBJECT_CREATE',
       by: 'Script Manger User',
     },
+    theoryFile: {
+      name: 'Test Theory-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+    },
+    practicalFile: {
+      name: 'Test Practical-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
+    },
+    files: [
+      {
+        name: 'Test Theory-1615530125925.pdf',
+        path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+      },
+    ],
   },
   {
     subjectCode: 'IT 506A',
@@ -695,6 +1129,20 @@ const subjects = [
       type: 'SUBJECT_CREATE',
       by: 'Script Manger User',
     },
+    theoryFile: {
+      name: 'Test Theory-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+    },
+    practicalFile: {
+      name: 'Test Practical-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
+    },
+    files: [
+      {
+        name: 'Test Theory-1615530125925.pdf',
+        path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+      },
+    ],
   },
   // Sem 6
   {
@@ -716,6 +1164,20 @@ const subjects = [
       type: 'SUBJECT_CREATE',
       by: 'Script Manger User',
     },
+    theoryFile: {
+      name: 'Test Theory-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+    },
+    practicalFile: {
+      name: 'Test Practical-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
+    },
+    files: [
+      {
+        name: 'Test Theory-1615530125925.pdf',
+        path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+      },
+    ],
   },
   {
     subjectCode: 'IT 607',
@@ -736,6 +1198,20 @@ const subjects = [
       type: 'SUBJECT_CREATE',
       by: 'Script Manger User',
     },
+    theoryFile: {
+      name: 'Test Theory-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+    },
+    practicalFile: {
+      name: 'Test Practical-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
+    },
+    files: [
+      {
+        name: 'Test Theory-1615530125925.pdf',
+        path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+      },
+    ],
   },
   {
     subjectCode: 'IT 608',
@@ -756,6 +1232,20 @@ const subjects = [
       type: 'SUBJECT_CREATE',
       by: 'Script Manger User',
     },
+    theoryFile: {
+      name: 'Test Theory-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+    },
+    practicalFile: {
+      name: 'Test Practical-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
+    },
+    files: [
+      {
+        name: 'Test Theory-1615530125925.pdf',
+        path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+      },
+    ],
   },
   {
     subjectCode: 'AF 601',
@@ -776,6 +1266,20 @@ const subjects = [
       type: 'SUBJECT_CREATE',
       by: 'Script Manger User',
     },
+    theoryFile: {
+      name: 'Test Theory-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+    },
+    practicalFile: {
+      name: 'Test Practical-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
+    },
+    files: [
+      {
+        name: 'Test Theory-1615530125925.pdf',
+        path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+      },
+    ],
   },
   {
     subjectCode: 'IT 617',
@@ -796,6 +1300,20 @@ const subjects = [
       type: 'SUBJECT_CREATE',
       by: 'Script Manger User',
     },
+    theoryFile: {
+      name: 'Test Theory-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+    },
+    practicalFile: {
+      name: 'Test Practical-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
+    },
+    files: [
+      {
+        name: 'Test Theory-1615530125925.pdf',
+        path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+      },
+    ],
   },
   {
     subjectCode: 'IT 618',
@@ -816,6 +1334,20 @@ const subjects = [
       type: 'SUBJECT_CREATE',
       by: 'Script Manger User',
     },
+    theoryFile: {
+      name: 'Test Theory-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+    },
+    practicalFile: {
+      name: 'Test Practical-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
+    },
+    files: [
+      {
+        name: 'Test Theory-1615530125925.pdf',
+        path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+      },
+    ],
   },
   {
     subjectCode: 'IT 618A',
@@ -836,6 +1368,20 @@ const subjects = [
       type: 'SUBJECT_CREATE',
       by: 'Script Manger User',
     },
+    theoryFile: {
+      name: 'Test Theory-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+    },
+    practicalFile: {
+      name: 'Test Practical-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
+    },
+    files: [
+      {
+        name: 'Test Theory-1615530125925.pdf',
+        path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+      },
+    ],
   },
   {
     subjectCode: 'IT 618B',
@@ -856,6 +1402,20 @@ const subjects = [
       type: 'SUBJECT_CREATE',
       by: 'Script Manger User',
     },
+    theoryFile: {
+      name: 'Test Theory-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+    },
+    practicalFile: {
+      name: 'Test Practical-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
+    },
+    files: [
+      {
+        name: 'Test Theory-1615530125925.pdf',
+        path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+      },
+    ],
   },
   {
     subjectCode: 'IT 618C',
@@ -876,6 +1436,20 @@ const subjects = [
       type: 'SUBJECT_CREATE',
       by: 'Script Manger User',
     },
+    theoryFile: {
+      name: 'Test Theory-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+    },
+    practicalFile: {
+      name: 'Test Practical-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
+    },
+    files: [
+      {
+        name: 'Test Theory-1615530125925.pdf',
+        path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+      },
+    ],
   },
   // Sem 7
   {
@@ -897,6 +1471,20 @@ const subjects = [
       type: 'SUBJECT_CREATE',
       by: 'Script Manger User',
     },
+    theoryFile: {
+      name: 'Test Theory-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+    },
+    practicalFile: {
+      name: 'Test Practical-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
+    },
+    files: [
+      {
+        name: 'Test Theory-1615530125925.pdf',
+        path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+      },
+    ],
   },
   {
     subjectCode: 'IT 707',
@@ -917,6 +1505,20 @@ const subjects = [
       type: 'SUBJECT_CREATE',
       by: 'Script Manger User',
     },
+    theoryFile: {
+      name: 'Test Theory-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+    },
+    practicalFile: {
+      name: 'Test Practical-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
+    },
+    files: [
+      {
+        name: 'Test Theory-1615530125925.pdf',
+        path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+      },
+    ],
   },
   {
     subjectCode: 'IT 714',
@@ -937,6 +1539,20 @@ const subjects = [
       type: 'SUBJECT_CREATE',
       by: 'Script Manger User',
     },
+    theoryFile: {
+      name: 'Test Theory-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+    },
+    practicalFile: {
+      name: 'Test Practical-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
+    },
+    files: [
+      {
+        name: 'Test Theory-1615530125925.pdf',
+        path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+      },
+    ],
   },
   {
     subjectCode: 'IT 717',
@@ -957,6 +1573,20 @@ const subjects = [
       type: 'SUBJECT_CREATE',
       by: 'Script Manger User',
     },
+    theoryFile: {
+      name: 'Test Theory-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+    },
+    practicalFile: {
+      name: 'Test Practical-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
+    },
+    files: [
+      {
+        name: 'Test Theory-1615530125925.pdf',
+        path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+      },
+    ],
   },
   {
     subjectCode: 'IT 716',
@@ -977,6 +1607,20 @@ const subjects = [
       type: 'SUBJECT_CREATE',
       by: 'Script Manger User',
     },
+    theoryFile: {
+      name: 'Test Theory-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+    },
+    practicalFile: {
+      name: 'Test Practical-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
+    },
+    files: [
+      {
+        name: 'Test Theory-1615530125925.pdf',
+        path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+      },
+    ],
   },
   {
     subjectCode: 'IT 718',
@@ -997,6 +1641,20 @@ const subjects = [
       type: 'SUBJECT_CREATE',
       by: 'Script Manger User',
     },
+    theoryFile: {
+      name: 'Test Theory-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+    },
+    practicalFile: {
+      name: 'Test Practical-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
+    },
+    files: [
+      {
+        name: 'Test Theory-1615530125925.pdf',
+        path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+      },
+    ],
   },
   {
     subjectCode: 'IT 718A',
@@ -1017,6 +1675,20 @@ const subjects = [
       type: 'SUBJECT_CREATE',
       by: 'Script Manger User',
     },
+    theoryFile: {
+      name: 'Test Theory-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+    },
+    practicalFile: {
+      name: 'Test Practical-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
+    },
+    files: [
+      {
+        name: 'Test Theory-1615530125925.pdf',
+        path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+      },
+    ],
   },
   {
     subjectCode: 'IT 718B',
@@ -1037,6 +1709,20 @@ const subjects = [
       type: 'SUBJECT_CREATE',
       by: 'Script Manger User',
     },
+    theoryFile: {
+      name: 'Test Theory-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+    },
+    practicalFile: {
+      name: 'Test Practical-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
+    },
+    files: [
+      {
+        name: 'Test Theory-1615530125925.pdf',
+        path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+      },
+    ],
   },
   {
     subjectCode: 'IT 718C',
@@ -1057,6 +1743,20 @@ const subjects = [
       type: 'SUBJECT_CREATE',
       by: 'Script Manger User',
     },
+    theoryFile: {
+      name: 'Test Theory-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+    },
+    practicalFile: {
+      name: 'Test Practical-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
+    },
+    files: [
+      {
+        name: 'Test Theory-1615530125925.pdf',
+        path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+      },
+    ],
   },
   {
     subjectCode: 'IT 718D',
@@ -1077,6 +1777,20 @@ const subjects = [
       type: 'SUBJECT_CREATE',
       by: 'Script Manger User',
     },
+    theoryFile: {
+      name: 'Test Theory-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+    },
+    practicalFile: {
+      name: 'Test Practical-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
+    },
+    files: [
+      {
+        name: 'Test Theory-1615530125925.pdf',
+        path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+      },
+    ],
   },
   // Sem 8
   {
@@ -1098,6 +1812,20 @@ const subjects = [
       type: 'SUBJECT_CREATE',
       by: 'Script Manger User',
     },
+    theoryFile: {
+      name: 'Test Theory-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+    },
+    practicalFile: {
+      name: 'Test Practical-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
+    },
+    files: [
+      {
+        name: 'Test Theory-1615530125925.pdf',
+        path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+      },
+    ],
   },
   {
     subjectCode: 'AF 802',
@@ -1118,6 +1846,20 @@ const subjects = [
       type: 'SUBJECT_CREATE',
       by: 'Script Manger User',
     },
+    theoryFile: {
+      name: 'Test Theory-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+    },
+    practicalFile: {
+      name: 'Test Practical-1615530125925.pdf',
+      path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
+    },
+    files: [
+      {
+        name: 'Test Theory-1615530125925.pdf',
+        path: 'uploads/Subjects/Test Theory-1615530125925.pdf',
+      },
+    ],
   },
 ];
 

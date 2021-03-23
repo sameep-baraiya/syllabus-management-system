@@ -193,6 +193,8 @@ exports.createFile = async (req, res, next) => {
         'department',
         'subjectShort',
         'headMasterJSON',
+        'theoryFile',
+        'practicalFile',
         'semNo',
         'listIndex',
         'isElective',

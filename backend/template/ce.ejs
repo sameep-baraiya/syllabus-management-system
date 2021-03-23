@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Test</title>
+    <style>
+      .center {
+        text-align: center;
+      }
+
+      table {
+        border: 1px solid black;
+        border-collapse: collapse;
+        width: 100%;
+      }
+
+      th,
+      td {
+        border: 1px solid black;
+        padding: 8px;
+      }
+
+      @media print {
+        .new-page {
+          page-break-before: always;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <table>
+        <thead>
+          <tr>
+            <th>SR NO.</th>
+            <th>SEMESTER</th>
+            <th>TOTAL CREDIT</th>
+            <th>TOTAL MARKS</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% creditIndex.forEach(function(ci, index){ %>
+          <!-- If element exist -->
+          <% if (ci) { %>
+          <!-- Odd Even All Cases -->
+          <% if (isAll || isEven === (ci[0] % 2 === 0)) { %>
+          <tr>
+            <td><%= index %></td>
+            <td>SEM - <%= ci[0] %></td>
+            <td><%= ci[1] %></td>
+            <td><%= ci[2] %></td>
+          </tr>
+          <% } %>
+          <!-- End If -->
+          <% } %>
+          <!-- End If -->
+          <% }); %>
+
+          <!-- Total Case -->
+          <% if (isAll) { %>
+          <tr>
+            <td></td>
+            <td><strong>TOTAL</strong></td>
+            <td><strong><%= creditIndexTotal[0] %></strong></td>
+            <td><strong><%= creditIndexTotal[1] %></strong></td>
+          </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Sem and Index List -->
+    <% semIndex.forEach(function(siList){ %>
+    <!-- If siList exist -->
+    <% if (siList) { %>
+    <!-- Odd Even All Cases -->
+    <% if (isAll || isEven === (subjects[siList[0]].semNo % 2 === 0)) { %>
+
+    <div class="new-page">
+      <table>
+        <thead>
+          <tr>
+            <th colspan="2">SEM - <%= subjects[siList[0]].semNo %></th>
+            <%
+            subjects[siList[0]].headMasterJSON.headGroups.forEach(function(hmg,
+            index){ %>
+            <th
+              colspan="<%= subjects[siList[0]].headMasterJSON.headGroupsLength[index] %>"
+            >
+              <%= hmg %>
+            </th>
+            <% }); %>
+          </tr>
+          <tr>
+            <th>SUB CODE</th>
+            <th>SUB NAME</th>
+            <%
+            subjects[siList[0]].headMasterJSON.headMasters.forEach(function(hm){
+            %>
+            <td><%= hm %></td>
+            <% }); %>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Sem Index -->
+          <% siList.forEach(function(si){ %>
+          <!-- If si exist -->
+          <% if (siList) { %>
+          <tr>
+            <td><%= subjects[si].subjectCode %></td>
+            <td>
+              <%= subjects[si].subjectName %> <%= subjects[si].isElective ?
+              '(Elective)' : '' %>
+            </td>
+            <% subjects[si].headMasterJSON.points.forEach(function(pt){ %>
+            <td><%= pt %></td>
+            <% }); %> <% } %>
+          </tr>
+          <!-- End If -->
+          <% }); %>
+          <!-- End For -->
+          <tr>
+            <td colspan="2"></td>
+            <td colspan="<%= csIndex %>"></td>
+            <td>
+              <strong><%= creditIndex[subjects[siList[0]].semNo][1] %></strong>
+            </td>
+            <td colspan="<%= (esIndex - csIndex - 1) %>"></td>
+            <td>
+              <strong><%= creditIndex[subjects[siList[0]].semNo][2] %></strong>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <% } %>
+    <!-- End If  -->
+    <% } %>
+    <!-- End If -->
+    <% }); %>
+    <!-- End For -->
+  </body>
+</html>
