@@ -5,6 +5,8 @@ import {
   INIT_NOTIFICATION,
   INIT_NOTIFICATION_ERROR,
   // SET_NOTIFICATION,
+  RECONNECT_NOTIFICATION,
+  RECONNECT_ERROR,
   CLEAR_ERRORS,
 } from '../types';
 import LoadingContext from '../loading/loadingContext';
@@ -38,6 +40,23 @@ const SubjectState = (props) => {
     }
   };
 
+  // Reconnect Notification
+  const reconnectNotification = async (reqObj) => {
+    setLoading();
+    try {
+      dispatch({
+        type: RECONNECT_NOTIFICATION,
+      });
+    } catch (err) {
+      dispatch({
+        type: RECONNECT_ERROR,
+        payload: err.response,
+      });
+    } finally {
+      resetLoading();
+    }
+  };
+
   // Clear Errors
   const clearErrors = () => dispatch({ type: CLEAR_ERRORS });
 
@@ -49,6 +68,7 @@ const SubjectState = (props) => {
         error: state.error,
         clearErrors,
         initNotification,
+        reconnectNotification,
       }}
     >
       {props.children}

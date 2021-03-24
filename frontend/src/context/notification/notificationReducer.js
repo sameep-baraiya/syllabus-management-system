@@ -2,6 +2,8 @@ import io from 'socket.io-client';
 import {
   INIT_NOTIFICATION,
   INIT_NOTIFICATION_ERROR,
+  RECONNECT_NOTIFICATION,
+  RECONNECT_ERROR,
   // SET_NOTIFICATION,
   CLEAR_ERRORS,
 } from '../types';
@@ -13,13 +15,19 @@ const notificationReducer = (state, action) => {
       const socket = io(ENDPOINT, {
         transports: ['websocket', 'polling', 'flashsocket'],
       });
-      socket.on('connect', (data) => {
+      socket.on('connect', () => {
         console.log('Connected With Server');
       });
       return {
         ...state,
         socket: socket,
       };
+    case RECONNECT_NOTIFICATION:
+      state.socket.connect();
+      return {
+        ...state,
+      };
+    case RECONNECT_ERROR:
     case INIT_NOTIFICATION_ERROR:
       return {
         ...state,

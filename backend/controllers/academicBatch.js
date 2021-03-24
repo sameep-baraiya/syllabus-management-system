@@ -208,18 +208,20 @@ exports.createFile = async (req, res, next) => {
       newSubjects.push(tempSub);
     });
 
-    // TODO Notification
     const data = {
       ...academicBatch.toJSON(),
       course: course.toJSON(),
       subjects: newSubjects,
     };
 
+    const io = req.app.get('socketio');
+
+    createABFiles(academicBatch, type, data, req.user, io, socketId);
+    console.log('red'.red);
+
     res.status(200).json({
       success: true,
     });
-
-    createABFiles(type, data, req.app.get('socketio'), socketId, req.user);
   } catch (err) {
     return next(err);
   }

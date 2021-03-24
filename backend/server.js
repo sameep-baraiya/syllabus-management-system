@@ -58,7 +58,6 @@ const io = socket(server);
 //Whenever someone connects this gets executed
 io.on('connection', (socket) => {
   console.log('A user connected'.green);
-  console.log(socket.id);
 
   //Whenever someone disconnects this piece of code executed
   socket.on('disconnect', () => {

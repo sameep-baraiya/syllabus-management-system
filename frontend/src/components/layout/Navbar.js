@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useEffect } from 'react';
+import React, { Fragment, useContext, useEffect, useState } from 'react';
 import {
   iconUser,
   iconLogOut,
@@ -32,7 +32,13 @@ const MainNavbar = () => {
 
   const { isAuthenticated, user, loadUser, logout } = authContext;
   const { loading } = loadingContext;
-  const { initNotification } = notificationContext;
+  const {
+    initNotification,
+    socket,
+    reconnectNotification,
+  } = notificationContext;
+
+  const [isDisconnected, setIsDisconnected] = useState(false);
 
   useEffect(() => {
     loadUser();
@@ -42,6 +48,35 @@ const MainNavbar = () => {
 
   const onClickLogout = () => {
     logout();
+  };
+
+  if (socket) {
+    if (socket._callbacks) {
+      if (!socket._callbacks.$disconnect) {
+        socket.on('disconnect', () => {
+          console.log('Disconnected');
+          socket.disconnect();
+          setIsDisconnected(true);
+        });
+      }
+    }
+  }
+
+  if (socket) {
+    if (socket._callbacks) {
+      if (socket._callbacks.$connect) {
+        if (socket._callbacks.$connect.length < 2) {
+          socket.on('connect', () => {
+            console.log('Connected');
+            setIsDisconnected(false);
+          });
+        }
+      }
+    }
+  }
+
+  const reconnect = () => {
+    reconnectNotification();
   };
 
   const guestLinks = (
@@ -63,6 +98,13 @@ const MainNavbar = () => {
             <Spinner animation='border' variant='light' size='sm' />{' '}
           </Fragment>
         ) : null}
+        {isDisconnected && (
+          <Fragment>
+            <Button variant='danger' onClick={reconnect}>
+              You Are Disconnected
+            </Button>{' '}
+          </Fragment>
+        )}
         <Link to='/login' style={{ textDecoration: 'none' }}>
           <Button variant='secondary'>{iconLogIn} Log In</Button>
         </Link>{' '}
@@ -92,6 +134,13 @@ const MainNavbar = () => {
             <Spinner animation='border' variant='light' size='sm' />{' '}
           </Fragment>
         ) : null}
+        {isDisconnected && (
+          <Fragment>
+            <Button variant='danger' onClick={reconnect}>
+              You Are Disconnected
+            </Button>{' '}
+          </Fragment>
+        )}
         <Button variant='warning'>{iconNotification}</Button>{' '}
         <Dropdown as={ButtonGroup}>
           <Button variant='success'>
