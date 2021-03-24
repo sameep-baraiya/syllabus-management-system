@@ -104,6 +104,10 @@ const syllabusManager = {
           title: 'Create Academic Batch',
           link: '/syllabus-manager/academic-batch',
         },
+        {
+          title: 'Edit Academic Batch',
+          link: '/syllabus-manager/academic-batch/edit',
+        },
       ],
     },
     {

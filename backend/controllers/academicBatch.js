@@ -226,3 +226,100 @@ exports.createFile = async (req, res, next) => {
     return next(err);
   }
 };
+
+// @desc    Update Academic Batch
+// @route   PUT /api/v1/academic-batch/:id
+// @access  Private
+exports.updateAcademicBatch = async (req, res, next) => {
+  const { id } = req.params;
+
+  const {
+    academicBatchCode,
+    academicBatchDescription,
+    academicBatchName,
+    startYear,
+    endYear,
+    courseId,
+    subjects,
+    isFreezed,
+  } = req.body;
+
+  try {
+    const academicBatch = await AcademicBatch.findByPk(id);
+
+    if (academicBatch === null) {
+      return next(
+        new ErrorResponse('Error: Academic Batch does not exist', 400)
+      );
+    }
+
+    let course = null;
+    if (courseId) {
+      course = await Course.findByPk(courseId, {
+        attributes: ['id'],
+      });
+
+      if (!course) {
+        return next(new ErrorResponse('Course not exists', 400));
+      }
+    }
+
+    const subjectsArr = [];
+    if (subjects) {
+      for (let i = 0; i < subjects.length; i++) {
+        const tempSub = await Subject.findByPk(subjects[i], {
+          attributes: ['id'],
+        });
+
+        if (!tempSub) {
+          return next(new ErrorResponse('Subject not exists', 400));
+        }
+
+        subjectsArr.push(tempSub);
+      }
+    }
+
+    const newAcademicBatch = await academicBatch.update({
+      academicBatchCode,
+      academicBatchDescription,
+      academicBatchName,
+      startYear,
+      endYear,
+      courseId,
+      subjects,
+      isFreezed,
+      crudInfo: {
+        type: 'ACADEMIC_BATCH_UPDATE',
+        by: req.user.name,
+      },
+    });
+
+    if (newAcademicBatch === null) {
+      return next(
+        new ErrorResponse('Error: Unable to update academic batch', 400)
+      );
+    }
+
+    if (course) {
+      newAcademicBatch.crudInfo = {
+        type: 'ACADEMIC_BATCH_UPDATE',
+        by: req.user.name,
+      };
+      await newAcademicBatch.setCourse(course);
+    }
+
+    if (subjectsArr.length !== 0) {
+      newAcademicBatch.crudInfo = {
+        type: 'ACADEMIC_BATCH_UPDATE',
+        by: req.user.name,
+      };
+      await newAcademicBatch.setSubjects(subjectsArr);
+    }
+
+    res.status(200).json({
+      success: true,
+    });
+  } catch (err) {
+    return next(err);
+  }
+};

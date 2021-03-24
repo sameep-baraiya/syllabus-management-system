@@ -11,6 +11,8 @@ import {
   ACADEMIC_BATCHES_ERROR,
   ACADEMIC_BATCH_ERROR,
   CLEAR_ACADEMIC_BATCHES,
+  UPDATE_ACADEMIC_BATCH,
+  UPDATE_ERROR,
   CREATE_FILE,
   CREATE_FILE_ERROR,
 } from '../types';
@@ -166,6 +168,36 @@ const SubjectState = (props) => {
     }
   };
 
+  // Update Course
+  const updateAcademicBatch = async (reqObj) => {
+    setLoading();
+    try {
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
+      const res = await axios.put(
+        `/api/v1/academic-batch/${reqObj.id}`,
+        reqObj,
+        config
+      );
+
+      dispatch({
+        type: UPDATE_ACADEMIC_BATCH,
+        payload: res.data,
+      });
+    } catch (err) {
+      console.error(err);
+      dispatch({
+        type: UPDATE_ERROR,
+        payload: err.response,
+      });
+    } finally {
+      resetLoading();
+    }
+  };
+
   // Clear Academic Batches
   const clearAcademicBatches = () => dispatch({ type: CLEAR_ACADEMIC_BATCHES });
 
@@ -186,6 +218,7 @@ const SubjectState = (props) => {
         clearAcademicBatches,
         getAcademicBatch,
         createFile,
+        updateAcademicBatch,
       }}
     >
       {props.children}

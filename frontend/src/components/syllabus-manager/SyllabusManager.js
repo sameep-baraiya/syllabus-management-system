@@ -13,6 +13,7 @@ import SMDeleteCourse from './course/SMDeleteCourse';
 
 // Academic Batch Components
 import SMCreateAcademicBatch from './academic-batch/SMCreateAcademicBatch';
+import SMEditAcademicBatch from './academic-batch/SMEditAcademicBatch';
 import SMCreateFile from './academic-batch/SMCreateFile';
 
 // Nested Syllabus Manager Route
@@ -68,6 +69,11 @@ const SyllabusManager = (props) => {
         exact
         path='/syllabus-manager/academic-batch'
         component={SMCreateAcademicBatch}
+      />
+      <PrivateRoute
+        exact
+        path='/syllabus-manager/academic-batch/edit'
+        component={SMEditAcademicBatch}
       />
       <PrivateRoute
         exact
