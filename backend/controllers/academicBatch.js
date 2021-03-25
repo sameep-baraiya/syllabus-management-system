@@ -3,6 +3,7 @@ const AcademicBatch = require('../models/AcademicBatch');
 const AcademicBatchSubject = require('../models/AcademicBatchSubject');
 const Course = require('../models/Course');
 const Subject = require('../models/Subject');
+const User = require('../models/User');
 const createABFiles = require('../utils/createABFiles');
 
 // @desc    Create Academic Batch
@@ -115,48 +116,56 @@ exports.getAcademicBatches = async (req, res, next) => {
 // @access  Private
 exports.getAcademicBatch = async (req, res, next) => {
   const { id } = req.params;
-  console.log(id, req.query);
+  const { nestSelect } = req.query;
   try {
     const academicBatch = await AcademicBatch.findByPk(id);
     if (academicBatch === null) {
       return next(new ErrorResponse('Academic Batch not found', 404));
     }
 
-    const course = await academicBatch.getCourse({
-      attributes: [
-        'id',
-        'courseCode',
-        'courseName',
-        'courseType',
-        'department',
-      ],
-    });
-    const subjects = await academicBatch.getSubjects({
-      attributes: [
-        'id',
-        'subjectCode',
-        'subjectName',
-        'subjectShort',
-        'semNo',
-        'listIndex',
-      ],
-    });
-    const newSubjects = [];
+    // TODO Fix
+    if (nestSelect) {
+      const course = await academicBatch.getCourse({
+        attributes: [
+          'id',
+          'courseCode',
+          'courseName',
+          'courseType',
+          'department',
+        ],
+      });
+      const subjects = await academicBatch.getSubjects({
+        attributes: [
+          'id',
+          'subjectCode',
+          'subjectName',
+          'subjectShort',
+          'semNo',
+          'listIndex',
+        ],
+      });
+      const newSubjects = [];
 
-    subjects.forEach((sub) => {
-      const tempSub = sub.toJSON();
-      delete tempSub.AcademicBatchSubject;
-      newSubjects.push(tempSub);
-    });
+      subjects.forEach((sub) => {
+        const tempSub = sub.toJSON();
+        delete tempSub.AcademicBatchSubject;
+        newSubjects.push(tempSub);
+      });
 
-    res.status(200).json({
-      success: true,
-      data: {
-        ...academicBatch.toJSON(),
-        course: course.toJSON(),
-        subjects: newSubjects,
-      },
-    });
+      res.status(200).json({
+        success: true,
+        data: {
+          ...academicBatch.toJSON(),
+          course: course.toJSON(),
+          subjects: newSubjects,
+        },
+      });
+    } else {
+      res.status(200).json({
+        success: true,
+        data: academicBatch.toJSON(),
+      });
+    }
   } catch (err) {
     return next(err);
   }
@@ -315,6 +324,43 @@ exports.updateAcademicBatch = async (req, res, next) => {
       };
       await newAcademicBatch.setSubjects(subjectsArr);
     }
+
+    res.status(200).json({
+      success: true,
+    });
+  } catch (err) {
+    return next(err);
+  }
+};
+
+// @desc    Delete Academic Batch
+// @route   DELETE /api/v1/academic-batch/:id
+// @access  Private
+exports.deleteAcademicBatch = async (req, res, next) => {
+  console.log('Yes'.green);
+  const { id } = req.params;
+  const { password } = req.body;
+
+  try {
+    const user = await User.findByPk(req.user.id);
+
+    if (!user.matchPassword(password)) {
+      return next(new ErrorResponse('Passowrd not matched', 404));
+    }
+
+    const academicBatch = await AcademicBatch.findByPk(id);
+    if (academicBatch === null) {
+      return next(new ErrorResponse('academicBatch not found', 404));
+    }
+
+    await academicBatch.removeSubjects();
+
+    academicBatch.crudInfo = {
+      type: 'ACADEMIC_BATCH_DELETE',
+      by: req.user.name,
+    };
+
+    await academicBatch.destroy();
 
     res.status(200).json({
       success: true,

@@ -108,6 +108,11 @@ const syllabusManager = {
           title: 'Edit Academic Batch',
           link: '/syllabus-manager/academic-batch/edit',
         },
+        {
+          title: 'Delete Academic Batch',
+          link: '/syllabus-manager/academic-batch/delete',
+          isDanger: true,
+        },
       ],
     },
     {

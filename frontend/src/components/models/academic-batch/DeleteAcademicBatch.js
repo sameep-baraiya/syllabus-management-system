@@ -3,26 +3,26 @@ import { Form, Button, Alert } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
 // Context
-import CourseContext from '../../../context/course/courseContext';
+import AcademicBatchContext from '../../../context/academicBatch/academicBatchContext';
 import { Fragment } from 'react';
 
-const DeleteCourse = ({ mode, setMode }) => {
-  const courseContext = useContext(CourseContext);
-  const { course, deleteCourse } = courseContext;
+const DeleteAcademicBatch = ({ mode, setMode }) => {
+  const academicBatchContext = useContext(AcademicBatchContext);
+  const { academicBatch, deleteAcademicBatch } = academicBatchContext;
 
   const [reqObj, setReqObj] = useState({
     id: 0,
-    courseCode: '',
-    courseName: '',
+    academicBatchCode: '',
+    academicBatchName: '',
   });
 
   const [password, setPassowrd] = useState('');
 
   const doDelete = () => {
     setReqObj({
-      id: course.id,
-      courseCode: course.courseCode,
-      courseName: course.courseName,
+      id: academicBatch.id,
+      academicBatchCode: academicBatch.academicBatchCode,
+      academicBatchName: academicBatch.academicBatchName,
     });
     setMode('');
   };
@@ -40,7 +40,7 @@ const DeleteCourse = ({ mode, setMode }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    deleteCourse({
+    deleteAcademicBatch({
       id: reqObj.id,
       password: password,
     });
@@ -50,8 +50,8 @@ const DeleteCourse = ({ mode, setMode }) => {
     setPassowrd('');
     setReqObj({
       id: 0,
-      courseCode: '',
-      courseName: '',
+      academicBatchCode: '',
+      academicBatchName: '',
     });
   };
 
@@ -61,16 +61,16 @@ const DeleteCourse = ({ mode, setMode }) => {
         <Fragment>
           <Alert variant='info'>
             <h4>
-              <strong>Course Details:</strong>
+              <strong>Academic Batch Details:</strong>
             </h4>
-            <strong>Course Code:</strong> {reqObj.courseCode}
+            <strong>Academic Batch Code:</strong> {reqObj.academicBatchCode}
             <br />
-            <strong>Course Name:</strong> {reqObj.courseName}
+            <strong>Academic Batch Name:</strong> {reqObj.academicBatchName}
           </Alert>
           <Form onSubmit={onSubmit}>
-            <Form.Group controlId='DeleteCourse.password'>
+            <Form.Group controlId='DeleteAcademicBatch.password'>
               <Form.Label>
-                Enter you password then press submit to delete course
+                Enter you password then press submit to delete academic batch
               </Form.Label>
               <Form.Control
                 type='password'
@@ -94,17 +94,18 @@ const DeleteCourse = ({ mode, setMode }) => {
           <h4>
             <strong>Warning</strong>
           </h4>
-          Usually courses contains important records attached with past academic
-          batches. Possible use case if you have inserted course by mistake.
+          Usually academic batches contains important records attached with past
+          subjects and courses. Possible use case if you have inserted academic
+          batch by mistake.
         </Alert>
       )}
     </div>
   );
 };
 
-DeleteCourse.propTypes = {
+DeleteAcademicBatch.propTypes = {
   mode: PropTypes.string.isRequired,
   setMode: PropTypes.func.isRequired,
 };
 
-export default DeleteCourse;
+export default DeleteAcademicBatch;

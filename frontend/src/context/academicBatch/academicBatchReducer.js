@@ -11,6 +11,8 @@ import {
   CREATE_FILE_ERROR,
   UPDATE_ACADEMIC_BATCH,
   UPDATE_ERROR,
+  DELETE_ACADEMIC_BATCH,
+  DELETE_ERROR,
 } from '../types';
 
 const authReducer = (state, action) => {
@@ -32,6 +34,7 @@ const authReducer = (state, action) => {
     case CREATE_FILE:
     case CREATE_ACADEMIC_BATCH:
     case UPDATE_ACADEMIC_BATCH:
+    case DELETE_ACADEMIC_BATCH:
       return {
         ...state,
         error: null,
@@ -55,6 +58,7 @@ const authReducer = (state, action) => {
       };
     case CREATE_ERROR:
     case UPDATE_ERROR:
+    case DELETE_ERROR:
     case CREATE_FILE_ERROR:
       return {
         ...state,

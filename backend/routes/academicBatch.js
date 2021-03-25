@@ -5,6 +5,7 @@ const {
   getAcademicBatch,
   createFile,
   updateAcademicBatch,
+  deleteAcademicBatch,
 } = require('../controllers/academicBatch');
 
 // Model
@@ -28,6 +29,7 @@ router
   .route('/:id')
   .get(protect, getAcademicBatch)
   .post(protect, createFile)
-  .put(protect, updateAcademicBatch);
+  .put(protect, updateAcademicBatch)
+  .delete(protect, deleteAcademicBatch);
 
 module.exports = router;

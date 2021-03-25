@@ -15,6 +15,7 @@ import SMDeleteCourse from './course/SMDeleteCourse';
 import SMCreateAcademicBatch from './academic-batch/SMCreateAcademicBatch';
 import SMEditAcademicBatch from './academic-batch/SMEditAcademicBatch';
 import SMCreateFile from './academic-batch/SMCreateFile';
+import SMDeleteAcademicBatch from './academic-batch/SMDeleteAcademicBatch';
 
 // Nested Syllabus Manager Route
 // import CreateViaCSV from './CreateViaCSV';
@@ -74,6 +75,11 @@ const SyllabusManager = (props) => {
         exact
         path='/syllabus-manager/academic-batch/edit'
         component={SMEditAcademicBatch}
+      />
+      <PrivateRoute
+        exact
+        path='/syllabus-manager/academic-batch/delete'
+        component={SMDeleteAcademicBatch}
       />
       <PrivateRoute
         exact

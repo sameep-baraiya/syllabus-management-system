@@ -13,12 +13,14 @@ import {
   CLEAR_ACADEMIC_BATCHES,
   UPDATE_ACADEMIC_BATCH,
   UPDATE_ERROR,
+  DELETE_ACADEMIC_BATCH,
+  DELETE_ERROR,
   CREATE_FILE,
   CREATE_FILE_ERROR,
 } from '../types';
 import LoadingContext from '../loading/loadingContext';
 
-const SubjectState = (props) => {
+const AcademicBatchState = (props) => {
   const loadingContext = useContext(LoadingContext);
   const { setLoading, resetLoading } = loadingContext;
 
@@ -168,7 +170,7 @@ const SubjectState = (props) => {
     }
   };
 
-  // Update Course
+  // Update Academic Batch
   const updateAcademicBatch = async (reqObj) => {
     setLoading();
     try {
@@ -198,6 +200,29 @@ const SubjectState = (props) => {
     }
   };
 
+  // Delete Academic Batch
+  const deleteAcademicBatch = async (reqObj) => {
+    setLoading();
+    try {
+      let res;
+      res = await axios.delete(`/api/v1/academic-batch/${reqObj.id}`, {
+        data: { password: reqObj.password },
+      });
+      dispatch({
+        type: DELETE_ACADEMIC_BATCH,
+        payload: res.data,
+      });
+    } catch (err) {
+      console.log(err);
+      dispatch({
+        type: DELETE_ERROR,
+        payload: err.response,
+      });
+    } finally {
+      resetLoading();
+    }
+  };
+
   // Clear Academic Batches
   const clearAcademicBatches = () => dispatch({ type: CLEAR_ACADEMIC_BATCHES });
 
@@ -219,6 +244,7 @@ const SubjectState = (props) => {
         getAcademicBatch,
         createFile,
         updateAcademicBatch,
+        deleteAcademicBatch,
       }}
     >
       {props.children}
@@ -226,4 +252,4 @@ const SubjectState = (props) => {
   );
 };
 
-export default SubjectState;
+export default AcademicBatchState;
