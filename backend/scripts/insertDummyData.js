@@ -3,8 +3,7 @@ const Cousre = require('../models/Course');
 const Subject = require('../models/Subject');
 const AcademicBatchSubject = require('../models/AcademicBatchSubject');
 const AcademicBatch = require('../models/AcademicBatch');
-// const BOSMeeting = require('../models/BOSMeeting');
-// const ACMeeting = require('../models/ACMeeting');
+const Meeting = require('../models/Meeting');
 const CRUDLog = require('../models/CRUDLog');
 const subjects = require('./subjects16-20');
 
@@ -62,6 +61,11 @@ const insertDummyData = async () => {
     };
     // academicBatch.addSubjects([sub1, sub2, sub3]);
     await academicBatch.addSubjects(subjectsArray);
+
+    const bosMeeting = await Meeting.create(bosMeetingData);
+    console.log('BOS Meeting Created');
+    const acMeeting = await Meeting.create(acMeetingData);
+    console.log('AC Meeting Created');
   } catch (err) {
     console.error(err);
   }
@@ -128,6 +132,86 @@ const academicBatchData = {
   isFreezed: false,
   crudInfo: {
     type: 'ACADEMIC_BATCH_CREATE',
+    by: 'Script Manger',
+  },
+};
+
+const bosMeetingData = {
+  meetingCode: 'BOS 2021',
+  meetingsNotes: 'BOS Meeting Notes',
+  meetingType: 'bos',
+  dateOfMeeting: new Date(),
+  department: 'IT - Information Technology',
+  requestedChanges: [
+    {
+      type: 'add',
+      description: 'Added New Subject For Sem 2 student',
+      linkedSubjectCode: 'NEWSUB',
+      linkedSubjectName: 'THE NEW SUBJECT',
+      effectiveFrom: new Date(),
+      isApproved: false,
+    },
+    {
+      type: 'mod',
+      mType: 'theory',
+      description: 'Modifed thoery of subject MODSUB added new topices',
+      linkedSubjectCode: 'MODSUB',
+      linkedSubjectName: 'MODIFED SUBJECT',
+      effectiveFrom: new Date(),
+      isApproved: true,
+    },
+    {
+      type: 'dep',
+      description: 'Deprecation of subject DEPSUB',
+      linkedSubjectCode: 'DEPSUB',
+      linkedSubjectName: 'DEPRECATION SUBJECT',
+      effectiveFrom: new Date(),
+      isApproved: true,
+    },
+  ],
+  isFreezed: false,
+  crudInfo: {
+    type: 'MEETING_CREATE',
+    by: 'Script Manger',
+  },
+};
+
+const acMeetingData = {
+  meetingCode: 'AC 2021',
+  meetingsNotes: 'AC Meeting Notes',
+  meetingType: 'ac',
+  dateOfMeeting: new Date(),
+  department: 'IT - Information Technology',
+  requestedChanges: [
+    {
+      type: 'add',
+      description: 'Added New Subject For Sem 2 student',
+      linkedSubjectCode: 'NEWSUB',
+      linkedSubjectName: 'THE NEW SUBJECT',
+      effectiveFrom: new Date(),
+      isApproved: false,
+    },
+    {
+      type: 'mod',
+      mType: 'theory',
+      description: 'Modifed thoery of subject MODSUB but no new topices',
+      linkedSubjectCode: 'MODSUB',
+      linkedSubjectName: 'MODIFED SUBJECT',
+      effectiveFrom: new Date(),
+      isApproved: true,
+    },
+    {
+      type: 'dep',
+      description: 'Deprecation of subject DEPSUB',
+      linkedSubjectCode: 'DEPSUB',
+      linkedSubjectName: 'DEPRECATION SUBJECT',
+      effectiveFrom: new Date(),
+      isApproved: false,
+    },
+  ],
+  isFreezed: false,
+  crudInfo: {
+    type: 'MEETING_CREATE',
     by: 'Script Manger',
   },
 };

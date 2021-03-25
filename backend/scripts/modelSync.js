@@ -3,8 +3,7 @@ const Cousre = require('../models/Course');
 const Subject = require('../models/Subject');
 const AcademicBatchSubject = require('../models/AcademicBatchSubject');
 const AcademicBatch = require('../models/AcademicBatch');
-// const BOSMeeting = require('../models/BOSMeeting');
-// const ACMeeting = require('../models/ACMeeting');
+const Meeting = require('../models/Meeting');
 const CRUDLog = require('../models/CRUDLog');
 
 const modelSync = async () => {
@@ -15,8 +14,7 @@ const modelSync = async () => {
     await AcademicBatch.sync();
     await Subject.sync();
     await AcademicBatchSubject.sync();
-    // await BOSMeeting.sync();
-    // await ACMeeting.sync();
+    await Meeting.sync();
   } catch (err) {
     console.error(err);
   }

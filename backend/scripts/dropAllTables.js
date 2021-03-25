@@ -3,8 +3,7 @@ const Cousre = require('../models/Course');
 const Subject = require('../models/Subject');
 const AcademicBatchSubject = require('../models/AcademicBatchSubject');
 const AcademicBatch = require('../models/AcademicBatch');
-// const BOSMeeting = require('../models/BOSMeeting');
-// const ACMeeting = require('../models/ACMeeting');
+const Meeting = require('../models/Meeting');
 const CRUDLog = require('../models/CRUDLog');
 
 const dropAllTable = async () => {
@@ -15,8 +14,7 @@ const dropAllTable = async () => {
     await AcademicBatch.drop();
     await Cousre.drop();
     await Subject.drop();
-    // await BOSMeeting.drop();
-    // await ACMeeting.drop();
+    await Meeting.drop();
   } catch (err) {
     console.error(err);
   }

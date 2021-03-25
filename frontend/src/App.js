@@ -35,6 +35,7 @@ import AcademicBatchState from './context/academicBatch/AcademicBatchState';
 import LoadingState from './context/loading/LoadingState';
 import AlertState from './context/alert/AlertState';
 import NotificationState from './context/notification/NotificationState';
+import MeetingState from './context/meeting/MeetingState';
 
 function App() {
   pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
@@ -48,38 +49,40 @@ function App() {
               <CourseState>
                 <DownloadState>
                   <AcademicBatchState>
-                    <Router>
-                      <Navbar />
-                      <Alert />
-                      <div className='grid-container'>
-                        <div className='sidebar'>
-                          <Sidebar />
+                    <MeetingState>
+                      <Router>
+                        <Navbar />
+                        <Alert />
+                        <div className='grid-container'>
+                          <div className='sidebar'>
+                            <Sidebar />
+                          </div>
+                          <div className='main-content'>
+                            <Container>
+                              <Switch>
+                                <Route exact path='/' component={Home} />
+                                <Route exact path='/about' component={About} />
+                                <Route exact path='/login' component={LogIn} />
+                                <Route
+                                  exact
+                                  path='/register'
+                                  component={Register}
+                                />
+                                <PrivateRoute
+                                  path='/dashboard'
+                                  component={Dashboard}
+                                />
+                                <PrivateRoute
+                                  path='/syllabus-manager'
+                                  component={SyllabusManager}
+                                />
+                                <Route component={NotFound} />
+                              </Switch>
+                            </Container>
+                          </div>
                         </div>
-                        <div className='main-content'>
-                          <Container>
-                            <Switch>
-                              <Route exact path='/' component={Home} />
-                              <Route exact path='/about' component={About} />
-                              <Route exact path='/login' component={LogIn} />
-                              <Route
-                                exact
-                                path='/register'
-                                component={Register}
-                              />
-                              <PrivateRoute
-                                path='/dashboard'
-                                component={Dashboard}
-                              />
-                              <PrivateRoute
-                                path='/syllabus-manager'
-                                component={SyllabusManager}
-                              />
-                              <Route component={NotFound} />
-                            </Switch>
-                          </Container>
-                        </div>
-                      </div>
-                    </Router>
+                      </Router>
+                    </MeetingState>
                   </AcademicBatchState>
                 </DownloadState>
               </CourseState>

@@ -149,12 +149,8 @@ const syllabusManager = {
       titleIcon: iconMeeting,
       subLink: [
         {
-          title: 'Create Board Of Studies Meeting',
-          link: '/syllabus-manager/bosmeeting',
-        },
-        {
-          title: 'Create Academic Council Meeting',
-          link: '/syllabus-manager/acmeeting',
+          title: 'Create Meeting',
+          link: '/syllabus-manager/meeting',
         },
       ],
     },
