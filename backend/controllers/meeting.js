@@ -58,3 +58,14 @@ exports.createMeeting = async (req, res, next) => {
     return next(err);
   }
 };
+
+// @desc    Get meetings
+// @route   GET /api/v1/meeting
+// @access  Private
+exports.getMeetings = async (req, res, next) => {
+  try {
+    res.status(200).json(res.advancedResults);
+  } catch (err) {
+    return next(err);
+  }
+};

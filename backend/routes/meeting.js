@@ -19,10 +19,20 @@ var storage = multer.diskStorage({
 
 var upload = multer({ storage: storage });
 
-const { createMeeting } = require('../controllers/meeting');
+const { createMeeting, getMeetings } = require('../controllers/meeting');
+
+// Model
+const Meeting = require('../models/Meeting');
+
+// Middleware
 const { protect } = require('../middleware/auth');
+const advancedResult = require('../middleware/advancedResult');
+
 const router = express.Router();
 
-router.route('/').post(protect, upload.array('file'), createMeeting);
+router
+  .route('/')
+  .post(protect, upload.array('file'), createMeeting)
+  .get(protect, advancedResult(Meeting, ['meetingCode']), getMeetings);
 
 module.exports = router;

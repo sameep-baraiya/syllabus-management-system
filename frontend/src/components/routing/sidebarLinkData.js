@@ -71,6 +71,16 @@ const dashboard = {
         },
       ],
     },
+    {
+      title: 'Meeting',
+      titleIcon: iconMeeting,
+      subLink: [
+        {
+          title: 'Find Meeting',
+          link: '/dashboard/meeting',
+        },
+      ],
+    },
   ],
 };
 

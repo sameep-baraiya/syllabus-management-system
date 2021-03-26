@@ -66,3 +66,5 @@ export const RECONNECT_ERROR = 'RECONNECT_ERROR';
 // Meeting
 export const CREATE_MEETING = 'CREATE_MEETING';
 export const CLEAR_MEETINGS = 'CLEAR_MEETINGS';
+export const GET_MEETINGS = 'GET_MEETINGS';
+export const MEETINGS_ERROR = 'MEETINGS_ERROR';

@@ -3,6 +3,8 @@ import {
   CLEAR_ERRORS,
   CREATE_ERROR,
   CLEAR_MEETINGS,
+  GET_MEETINGS,
+  MEETINGS_ERROR,
 } from '../types';
 
 const authReducer = (state, action) => {
@@ -13,6 +15,19 @@ const authReducer = (state, action) => {
         meetings: null,
         pagination: null,
         total: 0,
+      };
+    case MEETINGS_ERROR:
+      return {
+        ...state,
+        meetings: null,
+        error: action.payload,
+      };
+    case GET_MEETINGS:
+      return {
+        ...state,
+        meetings: action.payload.data,
+        pagination: action.payload.pagination,
+        total: action.payload.total,
       };
     case CREATE_MEETING:
       return {

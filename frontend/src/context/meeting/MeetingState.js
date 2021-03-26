@@ -4,6 +4,8 @@ import MeetingContext from './meetingContext';
 import meetingReducer from './meetingReducer';
 import {
   CREATE_MEETING,
+  GET_MEETINGS,
+  MEETINGS_ERROR,
   CLEAR_ERRORS,
   CREATE_ERROR,
   CLEAR_MEETINGS,
@@ -24,6 +26,63 @@ const MeetingState = (props) => {
   };
 
   const [state, dispatch] = useReducer(meetingReducer, initialState);
+
+  // Get Meetings
+  const getMeetings = async (query = null) => {
+    setLoading();
+    try {
+      let res;
+      if (query == null) {
+        res = await axios.get('/api/v1/meeting');
+      } else {
+        const sort =
+          query.sort !== undefined ? `?sort=${query.sort}` : '?sort=ASC';
+        const select =
+          query.select !== undefined ? `&select=${query.select}` : '';
+        const page = query.page !== undefined ? `&page=${query.page}` : '';
+        const limit = query.limit !== undefined ? `&limit=${query.limit}` : '';
+        const sortBy =
+          query.sortBy !== undefined ? `&sortBy=${query.sortBy}` : '';
+        const search =
+          query.search !== undefined ? `&search=${query.search}` : '';
+        const nestSelect =
+          query.nestSelect !== undefined
+            ? `&nestSelect=${query.nestSelect}`
+            : '';
+
+        let attributes = '';
+        if (query.attributes !== undefined) {
+          Object.keys(query.attributes).forEach((key) => {
+            attributes = attributes.concat(`&${key}=${query.attributes[key]}`);
+          });
+        }
+        const searchQuery =
+          sort +
+          select +
+          page +
+          limit +
+          sortBy +
+          attributes +
+          search +
+          nestSelect;
+
+        res = await axios.get('/api/v1/meeting' + searchQuery);
+      }
+
+      dispatch({
+        type: GET_MEETINGS,
+        payload: res.data,
+      });
+    } catch (err) {
+      console.log(err);
+      dispatch({
+        type: MEETINGS_ERROR,
+        payload: err.response,
+      });
+    } finally {
+      resetLoading();
+    }
+  };
 
   // Create Meeting
   const createMeeting = async (reqObj) => {
@@ -77,6 +136,7 @@ const MeetingState = (props) => {
         clearErrors,
         createMeeting,
         clearMeetings,
+        getMeetings,
       }}
     >
       {props.children}
