@@ -5,6 +5,8 @@ import {
   CLEAR_MEETINGS,
   GET_MEETINGS,
   MEETINGS_ERROR,
+  GET_MEETING,
+  MEETING_ERROR,
 } from '../types';
 
 const authReducer = (state, action) => {
@@ -29,12 +31,18 @@ const authReducer = (state, action) => {
         pagination: action.payload.pagination,
         total: action.payload.total,
       };
+    case GET_MEETING:
+      return {
+        ...state,
+        meeting: action.payload.data,
+      };
     case CREATE_MEETING:
       return {
         ...state,
         error: null,
       };
     case CREATE_ERROR:
+    case MEETING_ERROR:
       return {
         ...state,
         error: action.payload,

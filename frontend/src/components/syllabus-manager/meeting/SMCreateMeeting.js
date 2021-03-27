@@ -1,21 +1,17 @@
 import React, { useState, useContext } from 'react';
 import { Button, Card, Row, Col } from 'react-bootstrap';
 
-// Academic Batch Model Components
+// Meeting Model Components
 import CreateMeeting from '../../models/meeting/CreateMeeting';
-import FindAcademicBatch from '../../models/academic-batch/FindAcademicBatch';
-import ViewAcademicBatch from '../../models/academic-batch/ViewAcademicBatch';
+import FindMeeting from '../../models/meeting/FindMeeting';
+import ViewMeeting from '../../models/meeting/ViewMeeting';
 
 // Context
-import AcademicBatchContext from '../../../context/academicBatch/academicBatchContext';
+import MeetingContext from '../../../context/meeting/meetingContext';
 
 const SMCreateMeeting = () => {
-  const academicBatchContext = useContext(AcademicBatchContext);
-  const {
-    getAcademicBatch,
-    academicBatches,
-    academicBatch,
-  } = academicBatchContext;
+  const meetingContext = useContext(MeetingContext);
+  const { getMeeting, meetings, meeting } = meetingContext;
 
   const [operationMode, setOperationMode] = useState('');
   const [meetingType, setMeetingType] = useState('bos');
@@ -24,13 +20,10 @@ const SMCreateMeeting = () => {
 
   const onSelectClick = (id) => {
     setIsSelected(true);
-    getAcademicBatch({
-      id: id,
-      nestSelect: 'Course,Subject',
-    });
+    getMeeting(id);
   };
 
-  const onAcademicBatchSelectClick = () => {
+  const onMeetingSelectClick = () => {
     if (operationMode === 'clone') {
       console.log('clone');
       setMode('clone');
@@ -42,13 +35,13 @@ const SMCreateMeeting = () => {
   const selectionList = () => {
     return (
       <div>
-        <FindAcademicBatch defaultSelect='id,academicBatchCode,academicBatchName' />
-        {academicBatches &&
-          academicBatches.map((ab, index) => (
+        <FindMeeting defaultSelect='id,meetingCode,meetingType' />
+        {meetings &&
+          meetings.map((mt, index) => (
             <div
               key={index}
               className='p-3 mb-2 bg-dark text-white'
-              onClick={() => onSelectClick(ab.id)}
+              onClick={() => onSelectClick(mt.id)}
               style={{
                 cursor: 'pointer',
               }}
@@ -56,7 +49,10 @@ const SMCreateMeeting = () => {
               <span className='pt-1 pb-1 pl-3 pr-3 mr-3 bg-secondary text-white'>
                 Select
               </span>
-              {ab.academicBatchCode}: {ab.academicBatchName}
+              {mt.meetingCode}:{' '}
+              {mt.meetingType === 'bos'
+                ? 'Board Of Studies'
+                : 'Academic Council'}
             </div>
           ))}
       </div>
@@ -83,13 +79,13 @@ const SMCreateMeeting = () => {
       </div>
       {operationMode && (
         <Card>
-          <Card.Header>Find and Select for Academic Batch to clone</Card.Header>
+          <Card.Header>Find and Select for Meeting to clone</Card.Header>
           <Card.Body>
             {isSelected ? (
               <div>
-                <ViewAcademicBatch academicBatch={academicBatch} />
+                <ViewMeeting meeting={meeting} />
                 <br />
-                <Button variant='success' onClick={onAcademicBatchSelectClick}>
+                <Button variant='success' onClick={onMeetingSelectClick}>
                   Select
                 </Button>{' '}
                 <Button

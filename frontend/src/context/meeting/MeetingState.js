@@ -9,6 +9,8 @@ import {
   CLEAR_ERRORS,
   CREATE_ERROR,
   CLEAR_MEETINGS,
+  GET_MEETING,
+  MEETING_ERROR,
 } from '../types';
 import LoadingContext from '../loading/loadingContext';
 
@@ -84,6 +86,27 @@ const MeetingState = (props) => {
     }
   };
 
+  // Get Meeting
+  const getMeeting = async (id = 0) => {
+    setLoading();
+    try {
+      const res = await axios.get(`/api/v1/meeting/${id}`);
+
+      dispatch({
+        type: GET_MEETING,
+        payload: res.data,
+      });
+    } catch (err) {
+      console.error(err);
+      dispatch({
+        type: MEETING_ERROR,
+        payload: err.response,
+      });
+    } finally {
+      resetLoading();
+    }
+  };
+
   // Create Meeting
   const createMeeting = async (reqObj) => {
     setLoading();
@@ -137,6 +160,7 @@ const MeetingState = (props) => {
         createMeeting,
         clearMeetings,
         getMeetings,
+        getMeeting,
       }}
     >
       {props.children}

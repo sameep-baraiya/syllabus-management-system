@@ -1,4 +1,4 @@
-import React, { useState, Fragment, useContext } from 'react';
+import React, { useState, Fragment, useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import {
   Form,
@@ -27,7 +27,7 @@ import MeetingContext from '../../../context/meeting/meetingContext';
 
 const CreateMeeting = ({ mode, setMode, type }) => {
   const meetingContext = useContext(MeetingContext);
-  const { createMeeting } = meetingContext;
+  const { meeting, createMeeting } = meetingContext;
 
   const initialReqObj = {
     meetingCode: '',
@@ -157,6 +157,50 @@ const CreateMeeting = ({ mode, setMode, type }) => {
 
   const [showNext, setShowNext] = useState(false);
 
+  const doClone = () => {
+    const {
+      meetingsNotes,
+      dateOfMeeting,
+      requestedChanges,
+      department,
+      isFreezed,
+    } = meeting;
+
+    let newRequestedChanges = null;
+    if (requestedChanges) {
+      if (Array.isArray(requestedChanges)) {
+        newRequestedChanges = requestedChanges.map((it) => {
+          return {
+            ...it,
+            effectiveFrom: new Date(it.effectiveFrom),
+          };
+        });
+      }
+    }
+
+    setReqObj({
+      meetingCode: '',
+      meetingsNotes: meetingsNotes !== null ? meetingsNotes : '',
+      dateOfMeeting:
+        dateOfMeeting !== null ? new Date(dateOfMeeting) : new Date(),
+      requestedChanges: newRequestedChanges !== null ? newRequestedChanges : [],
+      department: department !== null ? department : '',
+      isFreezed: isFreezed !== null ? isFreezed : false,
+    });
+    setMode('');
+  };
+
+  const onModeChange = () => {
+    if (mode === 'clone') {
+      doClone();
+    }
+  };
+
+  useEffect(() => {
+    onModeChange();
+    // eslint-disable-next-line
+  }, [mode]);
+
   const uiForm = () => (
     <Form onSubmit={onSubmit}>
       <Form.Group controlId='CreateMeeting.meetingCode'>
@@ -283,7 +327,7 @@ const CreateMeeting = ({ mode, setMode, type }) => {
                         <Form.Control
                           name={`${index}.mType`}
                           as='select'
-                          value={change.type}
+                          value={change.mType}
                           onChange={onRequestChange}
                         >
                           <option>None</option>

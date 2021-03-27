@@ -69,3 +69,24 @@ exports.getMeetings = async (req, res, next) => {
     return next(err);
   }
 };
+
+// @desc    Get single Meeting with specified id
+// @route   GET /api/v1/meeting/:id
+// @access  Private
+exports.getMeeting = async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    const meeting = await Meeting.findByPk(id);
+
+    if (meeting === null) {
+      return next(new ErrorResponse('Meeting not found', 404));
+    }
+
+    res.status(200).json({
+      success: true,
+      data: meeting.toJSON(),
+    });
+  } catch (err) {
+    return next(err);
+  }
+};

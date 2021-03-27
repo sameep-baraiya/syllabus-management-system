@@ -19,7 +19,11 @@ var storage = multer.diskStorage({
 
 var upload = multer({ storage: storage });
 
-const { createMeeting, getMeetings } = require('../controllers/meeting');
+const {
+  createMeeting,
+  getMeetings,
+  getMeeting,
+} = require('../controllers/meeting');
 
 // Model
 const Meeting = require('../models/Meeting');
@@ -34,5 +38,7 @@ router
   .route('/')
   .post(protect, upload.array('file'), createMeeting)
   .get(protect, advancedResult(Meeting, ['meetingCode']), getMeetings);
+
+router.route('/:id').get(protect, getMeeting);
 
 module.exports = router;
