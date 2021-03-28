@@ -166,6 +166,11 @@ const syllabusManager = {
           title: 'Edit Meeting',
           link: '/syllabus-manager/meeting/edit',
         },
+        {
+          title: 'Delete Meeting',
+          link: '/syllabus-manager/meeting/delete',
+          isDanger: true,
+        },
       ],
     },
   ],

@@ -24,6 +24,7 @@ const {
   getMeetings,
   getMeeting,
   updateMeeting,
+  deleteMeeting,
 } = require('../controllers/meeting');
 
 // Model
@@ -43,6 +44,7 @@ router
 router
   .route('/:id')
   .get(protect, getMeeting)
-  .put(protect, upload.array('file'), updateMeeting);
+  .put(protect, upload.array('file'), updateMeeting)
+  .delete(protect, deleteMeeting);
 
 module.exports = router;

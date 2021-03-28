@@ -1,5 +1,6 @@
 const ErrorResponse = require('../utils/ErrorResponse');
 const Meeting = require('../models/Meeting');
+const User = require('../models/User');
 
 // @desc    Create Meeting
 // @route   POST /api/v1/meeting
@@ -150,6 +151,40 @@ exports.updateMeeting = async (req, res, next) => {
         by: req.user.name,
       },
     });
+
+    res.status(200).json({
+      success: true,
+    });
+  } catch (err) {
+    return next(err);
+  }
+};
+
+// @desc    Delete meeting
+// @route   DELETE /api/v1/meeting/:id
+// @access  Private
+exports.deleteMeeting = async (req, res, next) => {
+  const { id } = req.params;
+  const { password } = req.body;
+
+  try {
+    const user = await User.findByPk(req.user.id);
+
+    if (!user.matchPassword(password)) {
+      return next(new ErrorResponse('Passowrd not matched', 404));
+    }
+
+    const meeting = await Meeting.findByPk(id);
+    if (meeting === null) {
+      return next(new ErrorResponse('Meeting not found', 404));
+    }
+
+    meeting.crudInfo = {
+      type: 'MEETING_DELETE',
+      by: req.user.name,
+    };
+
+    await meeting.destroy();
 
     res.status(200).json({
       success: true,

@@ -13,6 +13,8 @@ import {
   MEETING_ERROR,
   UPDATE_MEETING,
   UPDATE_ERROR,
+  DELETE_MEETING,
+  DELETE_ERROR,
 } from '../types';
 import LoadingContext from '../loading/loadingContext';
 
@@ -184,6 +186,29 @@ const MeetingState = (props) => {
     }
   };
 
+  // Delete Meeting
+  const deleteMeeting = async (reqObj) => {
+    setLoading();
+    try {
+      let res;
+      res = await axios.delete(`/api/v1/meeting/${reqObj.id}`, {
+        data: { password: reqObj.password },
+      });
+      dispatch({
+        type: DELETE_MEETING,
+        payload: res.data,
+      });
+    } catch (err) {
+      console.log(err);
+      dispatch({
+        type: DELETE_ERROR,
+        payload: err.response,
+      });
+    } finally {
+      resetLoading();
+    }
+  };
+
   // Clear Errors
   const clearErrors = () => dispatch({ type: CLEAR_ERRORS });
 
@@ -204,6 +229,7 @@ const MeetingState = (props) => {
         getMeetings,
         getMeeting,
         updateMeeting,
+        deleteMeeting,
       }}
     >
       {props.children}
