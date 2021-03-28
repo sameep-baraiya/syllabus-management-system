@@ -23,6 +23,7 @@ const {
   createMeeting,
   getMeetings,
   getMeeting,
+  updateMeeting,
 } = require('../controllers/meeting');
 
 // Model
@@ -39,6 +40,9 @@ router
   .post(protect, upload.array('file'), createMeeting)
   .get(protect, advancedResult(Meeting, ['meetingCode']), getMeetings);
 
-router.route('/:id').get(protect, getMeeting);
+router
+  .route('/:id')
+  .get(protect, getMeeting)
+  .put(protect, upload.array('file'), updateMeeting);
 
 module.exports = router;

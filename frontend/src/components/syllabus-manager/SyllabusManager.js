@@ -19,6 +19,7 @@ import SMDeleteAcademicBatch from './academic-batch/SMDeleteAcademicBatch';
 
 // Meeting Components
 import SMCreateMeeting from './meeting/SMCreateMeeting';
+import SMEditMeeting from './meeting/SMEditMeeting';
 
 // Nested Syllabus Manager Route
 // import CreateViaCSV from './CreateViaCSV';
@@ -91,6 +92,11 @@ const SyllabusManager = (props) => {
         exact
         path='/syllabus-manager/meeting'
         component={SMCreateMeeting}
+      />
+      <PrivateRoute
+        exact
+        path='/syllabus-manager/meeting/edit'
+        component={SMEditMeeting}
       />
       <Route component={NotFound} />
     </Switch>

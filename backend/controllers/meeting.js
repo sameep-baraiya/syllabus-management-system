@@ -90,3 +90,71 @@ exports.getMeeting = async (req, res, next) => {
     return next(err);
   }
 };
+
+// @desc    Update meeting
+// @route   PUT /api/v1/meeting/:id
+// @access  Private
+exports.updateMeeting = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { data } = req.body;
+
+    const {
+      meetingCode,
+      meetingsNotes,
+      meetingType,
+      dateOfMeeting,
+      requestedChanges,
+      department,
+      isFreezed,
+      cloneFiles,
+    } = JSON.parse(data);
+
+    const files = [];
+
+    if (req.files) {
+      req.files.forEach((it) => {
+        files.push({
+          name: it.filename,
+          path: it.path,
+        });
+      });
+    }
+
+    if (cloneFiles) {
+      cloneFiles.forEach((file) => {
+        files.push(file);
+      });
+    }
+
+    console.log(files);
+
+    const meeting = await Meeting.findByPk(id);
+
+    if (meeting === null) {
+      return next(new ErrorResponse('Meeting does not exists', 409));
+    }
+
+    await meeting.update({
+      meetingCode,
+      meetingsNotes,
+      meetingType,
+      dateOfMeeting,
+      requestedChanges,
+      department,
+      files,
+      isFreezed,
+      noOfFiles: files.length,
+      crudInfo: {
+        type: 'MEETING_UPDATE',
+        by: req.user.name,
+      },
+    });
+
+    res.status(200).json({
+      success: true,
+    });
+  } catch (err) {
+    return next(err);
+  }
+};

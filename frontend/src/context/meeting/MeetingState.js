@@ -11,6 +11,8 @@ import {
   CLEAR_MEETINGS,
   GET_MEETING,
   MEETING_ERROR,
+  UPDATE_MEETING,
+  UPDATE_ERROR,
 } from '../types';
 import LoadingContext from '../loading/loadingContext';
 
@@ -142,6 +144,46 @@ const MeetingState = (props) => {
     }
   };
 
+  // Update Meeting
+  const updateMeeting = async (reqObj) => {
+    setLoading();
+    try {
+      const formData = new FormData();
+      const { files, theoryFile, practicalFile, ...rest } = reqObj;
+
+      files.forEach((it) => {
+        formData.append('file', it.file, it.name);
+      });
+
+      formData.append('data', JSON.stringify(rest));
+
+      const config = {
+        headers: {
+          'content-type': 'multipart/form-data',
+        },
+      };
+
+      const res = await axios.put(
+        `/api/v1/meeting/${reqObj.id}`,
+        formData,
+        config
+      );
+
+      dispatch({
+        type: UPDATE_MEETING,
+        payload: res.data,
+      });
+    } catch (err) {
+      console.error(err);
+      dispatch({
+        type: UPDATE_ERROR,
+        payload: err.response,
+      });
+    } finally {
+      resetLoading();
+    }
+  };
+
   // Clear Errors
   const clearErrors = () => dispatch({ type: CLEAR_ERRORS });
 
@@ -161,6 +203,7 @@ const MeetingState = (props) => {
         clearMeetings,
         getMeetings,
         getMeeting,
+        updateMeeting,
       }}
     >
       {props.children}

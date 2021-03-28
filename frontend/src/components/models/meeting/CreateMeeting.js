@@ -209,7 +209,7 @@ const CreateMeeting = ({ mode, setMode, type }) => {
           <Form.Control
             name='meetingCode'
             type='text'
-            placeholder='Enter new academic batch code'
+            placeholder='Enter new meeting code'
             onChange={onChange}
             value={meetingCode}
           />

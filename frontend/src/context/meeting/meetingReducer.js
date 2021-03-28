@@ -7,6 +7,8 @@ import {
   MEETINGS_ERROR,
   GET_MEETING,
   MEETING_ERROR,
+  UPDATE_MEETING,
+  UPDATE_ERROR,
 } from '../types';
 
 const authReducer = (state, action) => {
@@ -37,12 +39,14 @@ const authReducer = (state, action) => {
         meeting: action.payload.data,
       };
     case CREATE_MEETING:
+    case UPDATE_MEETING:
       return {
         ...state,
         error: null,
       };
     case CREATE_ERROR:
     case MEETING_ERROR:
+    case UPDATE_ERROR:
       return {
         ...state,
         error: action.payload,

@@ -1069,7 +1069,7 @@ const EditSubject = ({ mode, setMode }) => {
   const uiSubjectFile = () => (
     <div>
       <div className='mb-2 mt-2'>
-        <strong>&#9658; Subject Practical File</strong>
+        <strong>&#9658; Subject File</strong>
       </div>
       <Row>
         <Col lg={3}>

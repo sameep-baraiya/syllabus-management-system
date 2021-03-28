@@ -162,6 +162,10 @@ const syllabusManager = {
           title: 'Create Meeting',
           link: '/syllabus-manager/meeting',
         },
+        {
+          title: 'Edit Meeting',
+          link: '/syllabus-manager/meeting/edit',
+        },
       ],
     },
   ],

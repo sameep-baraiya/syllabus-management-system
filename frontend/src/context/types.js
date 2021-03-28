@@ -70,3 +70,4 @@ export const GET_MEETINGS = 'GET_MEETINGS';
 export const MEETINGS_ERROR = 'MEETINGS_ERROR';
 export const GET_MEETING = 'GET_MEETING';
 export const MEETING_ERROR = 'MEETING_ERROR';
+export const UPDATE_MEETING = 'UPDATE_MEETING';
