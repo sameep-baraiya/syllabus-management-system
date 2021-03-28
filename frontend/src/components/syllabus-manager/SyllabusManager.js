@@ -22,12 +22,8 @@ import SMCreateMeeting from './meeting/SMCreateMeeting';
 import SMEditMeeting from './meeting/SMEditMeeting';
 import SMDeleteMeeting from './meeting/SMDeleteMeeting';
 
-// Nested Syllabus Manager Route
-// import CreateViaCSV from './CreateViaCSV';
-// import CreateCourse from './CreateCourse';
+// Default Syllabus Manager Page
 import DefaultSM from './DefaultSM';
-// import CreateSubject from './CreateSubject';
-// import CreateAcademicBatch from './CreateAcademicBatch';
 
 // Routing Componets
 import PrivateRoute from '../routing/PrivateRoute';
