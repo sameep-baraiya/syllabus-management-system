@@ -11,6 +11,7 @@ import {
   iconAnnouncement,
   iconNotification,
   iconSyllabusManger,
+  iconAdminBoard,
 } from './Icon';
 import { Link } from 'react-router-dom';
 import {
@@ -124,8 +125,14 @@ const MainNavbar = () => {
         <Nav.Link as={Link} to='/announcement'>
           {iconAnnouncement} Announcement
         </Nav.Link>
+        <Nav.Link as={Link} to='/dashboard'>
+          {iconDashboard} Dashboard
+        </Nav.Link>
         <Nav.Link as={Link} to='/syllabus-manager'>
           {iconSyllabusManger} Syllabus Manager
+        </Nav.Link>
+        <Nav.Link as={Link} to='/admin-board'>
+          {iconAdminBoard} Admin Board
         </Nav.Link>
       </Nav>
       <div>

@@ -41,6 +41,8 @@ import {
   faEdit,
   faFilePdf,
   faCheckSquare,
+  faUserShield,
+  faFileAlt,
 } from '@fortawesome/free-solid-svg-icons';
 
 const iconUser = <FontAwesomeIcon icon={faUser} />;
@@ -97,6 +99,8 @@ const iconEdit = <FontAwesomeIcon icon={faEdit} />;
 const iconEdit2 = <FontAwesomeIcon icon={faPen} />;
 const iconFileGen = <FontAwesomeIcon icon={faFilePdf} />;
 const iconTodo = <FontAwesomeIcon icon={faCheckSquare} />;
+const iconAdminBoard = <FontAwesomeIcon icon={faUserShield} />;
+const iconSystemInfo = <FontAwesomeIcon icon={faFileAlt} />;
 
 export {
   iconUser,
@@ -140,4 +144,6 @@ export {
   iconEdit2,
   iconFileGen,
   iconTodo,
+  iconAdminBoard,
+  iconSystemInfo,
 };

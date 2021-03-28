@@ -16,14 +16,17 @@ import About from './components/page/About';
 // Syllabus Manager Componets
 import SyllabusManager from './components/syllabus-manager/SyllabusManager';
 
+// Admin Board Componets
+import AdminBoard from './components/admin-board/AdminBoard';
+
 // Auth Componets
 import LogIn from './components/auth/LogIn';
 import Register from './components/auth/Register';
 
-// // Routing Componets
+// Routing Componets
 import PrivateRoute from './components/routing/PrivateRoute';
 
-// // Darshboard Componets
+// Darshboard Componets
 import Dashboard from './components/dashboard/Dashboard';
 
 // State
@@ -75,6 +78,10 @@ function App() {
                                 <PrivateRoute
                                   path='/syllabus-manager'
                                   component={SyllabusManager}
+                                />
+                                <PrivateRoute
+                                  path='/admin-board'
+                                  component={AdminBoard}
                                 />
                                 <Route component={NotFound} />
                               </Switch>

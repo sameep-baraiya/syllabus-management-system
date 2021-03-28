@@ -6,6 +6,7 @@ import {
   iconAcademicBatch,
   iconMeeting,
   iconFileGen,
+  iconSystemInfo,
 } from '../layout/Icon';
 
 const home = {
@@ -176,4 +177,24 @@ const syllabusManager = {
   ],
 };
 
-export { home, dashboard, syllabusManager };
+const adminBoard = {
+  sidebarTitle: 'Admin Board',
+  sidebarLink: [
+    {
+      title: 'System Info',
+      titleIcon: iconSystemInfo,
+      subLink: [
+        {
+          title: 'CRUD Information',
+          link: '/admin-board/crud-info',
+        },
+        {
+          title: 'Storge Information',
+          link: '/admin-board/storage-info',
+        },
+      ],
+    },
+  ],
+};
+
+export { home, dashboard, syllabusManager, adminBoard };

@@ -2,7 +2,12 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Card } from 'react-bootstrap';
 // Siderbar Link Data
-import { home, dashboard, syllabusManager } from '../routing/sidebarLinkData';
+import {
+  home,
+  dashboard,
+  syllabusManager,
+  adminBoard,
+} from '../routing/sidebarLinkData';
 
 const Sidebar = () => {
   let location = useLocation();
@@ -13,6 +18,8 @@ const Sidebar = () => {
       return dashboard;
     } else if (path.includes('syllabus-manager')) {
       return syllabusManager;
+    } else if (path.includes('admin-board')) {
+      return adminBoard;
     } else {
       return home;
     }
