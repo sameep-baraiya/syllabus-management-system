@@ -17,6 +17,7 @@ const notificationReducer = (state, action) => {
       });
       socket.on('connect', () => {
         console.log('Connected With Server');
+        socket.emit('INIT_NOTIFICATION', { id: action.payload });
       });
       return {
         ...state,

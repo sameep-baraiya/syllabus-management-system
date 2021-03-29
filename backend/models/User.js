@@ -34,6 +34,7 @@ User.init(
       values: ['admin', 'faculty-member', 'syllabus-manager'],
       allowNull: false,
     },
+    // TODO Fix This
     department: {
       type: DataTypes.ENUM,
       values: [

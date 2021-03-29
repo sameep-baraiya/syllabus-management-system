@@ -43,9 +43,18 @@ const MainNavbar = () => {
 
   useEffect(() => {
     loadUser();
-    initNotification();
+    console.log('Yes');
     // eslint-disable-next-line
   }, []);
+
+  useEffect(() => {
+    console.log('no');
+    if (user && user.id) {
+      console.log('once');
+      initNotification(user.id);
+    }
+    // eslint-disable-next-line
+  }, [user]);
 
   const onClickLogout = () => {
     logout();

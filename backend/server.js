@@ -32,6 +32,7 @@ const academicBatch = require('./routes/academicBatch');
 const meeting = require('./routes/meeting');
 const crudInfo = require('./routes/crudInfo');
 const storage = require('./routes/storage');
+const user = require('./routes/user');
 
 // Mount routers
 app.use('/api/v1/auth', auth);
@@ -42,6 +43,7 @@ app.use('/api/v1/academic-batch', academicBatch);
 app.use('/api/v1/meeting', meeting);
 app.use('/api/v1/crud-info', crudInfo);
 app.use('/api/v1/storage', storage);
+app.use('/api/v1/user', user);
 
 // Handle all error
 app.use(errorHandler);
@@ -56,13 +58,31 @@ const server = app.listen(
   )
 );
 
+app.set('LOGGED_USERS', new Map());
+
 const io = socket(server);
 //Whenever someone connects this gets executed
 io.on('connection', (socket) => {
   console.log('A user connected'.green);
 
+  socket.on('INIT_NOTIFICATION', (data) => {
+    const map = app.get('LOGGED_USERS');
+    if (data && Number.isInteger(data.id)) {
+      map.set(socket.id, {
+        id: data.id,
+        at: new Date(),
+      });
+    }
+    console.log(map, data.id);
+    app.set('LOGGED_USERS', map);
+  });
+
   //Whenever someone disconnects this piece of code executed
   socket.on('disconnect', () => {
+    const map = app.get('LOGGED_USERS');
+    map.delete(socket.id);
+    app.set('LOGGED_USERS', map);
+    console.log(map);
     console.log('A user disconnected'.yellow);
   });
 });

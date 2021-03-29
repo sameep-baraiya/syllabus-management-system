@@ -11,7 +11,7 @@ import {
 } from '../types';
 import LoadingContext from '../loading/loadingContext';
 
-const SubjectState = (props) => {
+const NotificationState = (props) => {
   const loadingContext = useContext(LoadingContext);
   const { setLoading, resetLoading } = loadingContext;
 
@@ -24,11 +24,12 @@ const SubjectState = (props) => {
   const [state, dispatch] = useReducer(notificationReducer, initialState);
 
   // Init Notification
-  const initNotification = async (reqObj) => {
+  const initNotification = async (id = 0) => {
     setLoading();
     try {
       dispatch({
         type: INIT_NOTIFICATION,
+        payload: id,
       });
     } catch (err) {
       dispatch({
@@ -41,7 +42,7 @@ const SubjectState = (props) => {
   };
 
   // Reconnect Notification
-  const reconnectNotification = async (reqObj) => {
+  const reconnectNotification = async () => {
     setLoading();
     try {
       dispatch({
@@ -76,4 +77,4 @@ const SubjectState = (props) => {
   );
 };
 
-export default SubjectState;
+export default NotificationState;

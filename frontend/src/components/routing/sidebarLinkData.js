@@ -192,6 +192,10 @@ const adminBoard = {
           title: 'Storge Information',
           link: '/admin-board/storage-info',
         },
+        {
+          title: 'Logged Users',
+          link: '/admin-board/logged-users',
+        },
       ],
     },
   ],

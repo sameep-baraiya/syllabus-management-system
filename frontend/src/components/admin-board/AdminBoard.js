@@ -4,6 +4,7 @@ import { Switch, Route } from 'react-router-dom';
 // Admin Board Componets
 import CRUDInfo from './CRUDInfo';
 import StorageInfo from './StorageInfo';
+import LoggedUsers from './LoggedUsers';
 
 // Default Admin Board Page
 import DefaultAB from './DefaultAB';
@@ -23,6 +24,11 @@ const AdminBoard = () => {
         exact
         path='/admin-board/storage-info'
         component={StorageInfo}
+      />
+      <PrivateRoute
+        exact
+        path='/admin-board/logged-users'
+        component={LoggedUsers}
       />
       <Route component={NotFound} />
     </Switch>
