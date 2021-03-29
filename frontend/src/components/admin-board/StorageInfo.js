@@ -19,7 +19,7 @@ const StorageInfo = () => {
     } else if (val < 1e9) {
       return `≅ ${Math.floor(val / 1e6)} Megabyte`;
     } else {
-      return `≅ ${Math.floor(val / 1e6)} Gigabyte`;
+      return `≅ ${Math.floor(val / 1e9)} Gigabyte`;
     }
   };
 
