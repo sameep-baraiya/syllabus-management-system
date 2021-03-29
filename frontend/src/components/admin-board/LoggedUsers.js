@@ -28,7 +28,7 @@ const LoggedUsers = () => {
             <th>#</th>
             <th>Name</th>
             <th>Department</th>
-            <th>Last Logged In Time</th>
+            <th>Last Check In Time</th>
             <th>Number Of Connected Instances</th>
           </tr>
         </thead>
