@@ -29,6 +29,7 @@ const LoggedUsers = () => {
             <th>Name</th>
             <th>Department</th>
             <th>Last Logged In Time</th>
+            <th>Number Of Connected Instances</th>
           </tr>
         </thead>
         <tbody>
@@ -43,6 +44,7 @@ const LoggedUsers = () => {
                     hour12: true,
                   })}
                 </td>
+                <td>{it.noOfDevices}</td>
               </tr>
             ))}
         </tbody>

@@ -11,11 +11,20 @@ exports.getLoggedUsers = async (req, res, next) => {
       const tempUser = await User.findByPk(mapKeys[i][1].id, {
         attributes: ['id', 'name', 'department'],
       });
-      users.push({
-        ...tempUser.toJSON(),
-        at: mapKeys[i][1].at,
-      });
+
+      const index = users.map((it) => it.id).indexOf(tempUser.id);
+      if (index !== -1) {
+        users[index].noOfDevices += 1;
+      } else {
+        users.push({
+          ...tempUser.toJSON(),
+          at: mapKeys[i][1].at,
+          noOfDevices: 1,
+        });
+      }
     }
+
+    // console.log(users);
 
     res.status(200).json({
       success: true,
