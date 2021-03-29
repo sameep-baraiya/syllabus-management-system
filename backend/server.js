@@ -30,6 +30,7 @@ const course = require('./routes/course');
 const download = require('./routes/download');
 const academicBatch = require('./routes/academicBatch');
 const meeting = require('./routes/meeting');
+const crudInfo = require('./routes/crudInfo');
 
 // Mount routers
 app.use('/api/v1/auth', auth);
@@ -38,6 +39,7 @@ app.use('/api/v1/course', course);
 app.use('/api/v1/download', download);
 app.use('/api/v1/academic-batch', academicBatch);
 app.use('/api/v1/meeting', meeting);
+app.use('/api/v1/crud-info', crudInfo);
 
 // Handle all error
 app.use(errorHandler);
