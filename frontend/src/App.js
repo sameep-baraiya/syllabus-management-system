@@ -40,6 +40,7 @@ import AlertState from './context/alert/AlertState';
 import NotificationState from './context/notification/NotificationState';
 import MeetingState from './context/meeting/MeetingState';
 import CrudInfoState from './context/crud-info/crudInfoState';
+import StorageState from './context/storage/StorageState';
 
 function App() {
   pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
@@ -49,62 +50,64 @@ function App() {
       <AlertState>
         <NotificationState>
           <CrudInfoState>
-            <AuthState>
-              <SubjectState>
-                <CourseState>
-                  <DownloadState>
-                    <AcademicBatchState>
-                      <MeetingState>
-                        <Router>
-                          <Navbar />
-                          <Alert />
-                          <div className='grid-container'>
-                            <div className='sidebar'>
-                              <Sidebar />
+            <StorageState>
+              <AuthState>
+                <SubjectState>
+                  <CourseState>
+                    <DownloadState>
+                      <AcademicBatchState>
+                        <MeetingState>
+                          <Router>
+                            <Navbar />
+                            <Alert />
+                            <div className='grid-container'>
+                              <div className='sidebar'>
+                                <Sidebar />
+                              </div>
+                              <div className='main-content'>
+                                <Container>
+                                  <Switch>
+                                    <Route exact path='/' component={Home} />
+                                    <Route
+                                      exact
+                                      path='/about'
+                                      component={About}
+                                    />
+                                    <Route
+                                      exact
+                                      path='/login'
+                                      component={LogIn}
+                                    />
+                                    <Route
+                                      exact
+                                      path='/register'
+                                      component={Register}
+                                    />
+                                    <PrivateRoute
+                                      path='/dashboard'
+                                      component={Dashboard}
+                                    />
+                                    <PrivateRoute
+                                      path='/syllabus-manager'
+                                      component={SyllabusManager}
+                                    />
+                                    <PrivateRoute
+                                      path='/admin-board'
+                                      component={AdminBoard}
+                                    />
+                                    <Route component={NotFound} />
+                                  </Switch>
+                                </Container>
+                              </div>
                             </div>
-                            <div className='main-content'>
-                              <Container>
-                                <Switch>
-                                  <Route exact path='/' component={Home} />
-                                  <Route
-                                    exact
-                                    path='/about'
-                                    component={About}
-                                  />
-                                  <Route
-                                    exact
-                                    path='/login'
-                                    component={LogIn}
-                                  />
-                                  <Route
-                                    exact
-                                    path='/register'
-                                    component={Register}
-                                  />
-                                  <PrivateRoute
-                                    path='/dashboard'
-                                    component={Dashboard}
-                                  />
-                                  <PrivateRoute
-                                    path='/syllabus-manager'
-                                    component={SyllabusManager}
-                                  />
-                                  <PrivateRoute
-                                    path='/admin-board'
-                                    component={AdminBoard}
-                                  />
-                                  <Route component={NotFound} />
-                                </Switch>
-                              </Container>
-                            </div>
-                          </div>
-                        </Router>
-                      </MeetingState>
-                    </AcademicBatchState>
-                  </DownloadState>
-                </CourseState>
-              </SubjectState>
-            </AuthState>
+                          </Router>
+                        </MeetingState>
+                      </AcademicBatchState>
+                    </DownloadState>
+                  </CourseState>
+                </SubjectState>
+              </AuthState>
+            </StorageState>
           </CrudInfoState>
         </NotificationState>
       </AlertState>

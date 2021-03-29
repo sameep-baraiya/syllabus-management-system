@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 
 // Admin Board Componets
 import CRUDInfo from './CRUDInfo';
+import StorageInfo from './StorageInfo';
 
 // Default Admin Board Page
 import DefaultAB from './DefaultAB';
@@ -18,6 +19,11 @@ const AdminBoard = () => {
     <Switch>
       <PrivateRoute exact path='/admin-board/' component={DefaultAB} />
       <PrivateRoute exact path='/admin-board/crud-info' component={CRUDInfo} />
+      <PrivateRoute
+        exact
+        path='/admin-board/storage-info'
+        component={StorageInfo}
+      />
       <Route component={NotFound} />
     </Switch>
   );
