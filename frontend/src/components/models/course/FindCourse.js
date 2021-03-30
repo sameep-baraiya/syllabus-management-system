@@ -1,13 +1,16 @@
 import React, { Fragment, useContext, useState, useEffect } from 'react';
-import CourseContext from '../../../context/course/courseContext';
 import PropTypes from 'prop-types';
 
-// Common
-import { departmentOptions } from '../../../common/department';
-import { courseTypeOptions } from '../../../common/courseType';
+// Context
+import CourseContext from '../../../context/course/courseContext';
+import ConfigContext from '../../../context/config/configContext';
 
 // Utils
 import s2pn from '../../../utils/s2pn';
+import {
+  departmentTypeOptions,
+  courseTypeOptions,
+} from '../../../utils/configUtils';
 
 // Icons
 import { iconSearch } from '../../layout/Icon';
@@ -24,6 +27,9 @@ import {
 const FindCourse = ({ defaultSelect = 'all' }) => {
   const courseContext = useContext(CourseContext);
   const { getCourses, clearCourses } = courseContext;
+
+  const configContext = useContext(ConfigContext);
+  const { departmentType, courseType: courseTypeArr } = configContext;
 
   // Normal Search
   const [searchQuery, setSearchQuery] = useState({
@@ -364,13 +370,13 @@ const FindCourse = ({ defaultSelect = 'all' }) => {
         <Form.Label>Department ?</Form.Label>
         <Form.Control name='where.department' as='select' onChange={onChange}>
           <option>None</option>
-          {departmentOptions()}
+          {departmentTypeOptions(departmentType)}
         </Form.Control>
         <br />
         <Form.Label>Course Type ?</Form.Label>
         <Form.Control name='where.courseType' as='select' onChange={onChange}>
           <option>None</option>
-          {courseTypeOptions()}
+          {courseTypeOptions(courseTypeArr)}
         </Form.Control>
         <br />
         <Form.Label>Is Freezed ?</Form.Label>

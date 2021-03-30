@@ -30,6 +30,7 @@ backend/node_modules
 backend/config/config.env
 backend/uploads
 backend/temp
+backend/database/level
 
 ### Other
 /.vscode

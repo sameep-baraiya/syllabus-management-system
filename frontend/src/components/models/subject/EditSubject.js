@@ -13,6 +13,7 @@ import {
 
 // Context
 import SubjectContext from '../../../context/subject/subjectContext';
+import ConfigContext from '../../../context/config/configContext';
 
 // Layout
 import { iconEdit, iconValidate, iconCopy } from '../../layout/Icon';
@@ -20,18 +21,22 @@ import PdfView from '../../layout/PdfView';
 
 // Utils
 import s2pn from '../../../utils/s2pn';
+import {
+  departmentTypeOptions,
+  subjectTypeOptions,
+} from '../../../utils/configUtils';
 
+// TODO This
 // Subject Model Componets
 // import HaedMasterJSONInput from './HaedMasterJSONInput';
 // import SubjectReqView from './SubjectReqView';
 
-// Common
-import { departmentOptions } from '../../../common/department';
-import { subjectTypeOptions } from '../../../common/subjectType';
-
 const EditSubject = ({ mode, setMode }) => {
   const subjectContext = useContext(SubjectContext);
   const { subject, updateSubject } = subjectContext;
+
+  const configContext = useContext(ConfigContext);
+  const { departmentType, subjectType: subjectTypeArr } = configContext;
 
   const initialReqObj = {
     subjectCode: '',
@@ -621,7 +626,7 @@ const EditSubject = ({ mode, setMode }) => {
               disabled={uObj.department}
             >
               <option>None</option>
-              {departmentOptions()}
+              {departmentTypeOptions(departmentType)}
             </Form.Control>
           </Form.Group>
         </Col>
@@ -657,7 +662,7 @@ const EditSubject = ({ mode, setMode }) => {
               disabled={uObj.subjectType}
             >
               <option>None</option>
-              {subjectTypeOptions()}
+              {subjectTypeOptions(subjectTypeArr)}
             </Form.Control>
           </Form.Group>
         </Col>

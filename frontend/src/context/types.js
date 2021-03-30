@@ -85,3 +85,7 @@ export const STORAGE_INFO_ERROR = 'STORAGE_INFO_ERROR';
 // User
 export const GET_LOGGED_USERS = 'GET_LOGGED_USERS';
 export const LOGGED_USERS_ERROR = 'LOGGED_USERS_ERROR';
+
+// Config
+export const INIT_CONFIG = 'INIT_CONFIG';
+export const INIT_CONFIG_ERROR = 'INIT_CONFIG_ERROR';

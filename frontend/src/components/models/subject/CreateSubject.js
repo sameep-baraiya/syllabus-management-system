@@ -13,6 +13,7 @@ import PropTypes from 'prop-types';
 
 // Context
 import SubjectContext from '../../../context/subject/subjectContext';
+import ConfigContext from '../../../context/config/configContext';
 
 // Layout
 import { iconCreate, iconValidate } from '../../layout/Icon';
@@ -20,18 +21,21 @@ import PdfView from '../../layout/PdfView';
 
 // Utils
 import s2pn from '../../../utils/s2pn';
+import {
+  departmentTypeOptions,
+  subjectTypeOptions,
+} from '../../../utils/configUtils';
 
 // Subject Model Componets
 import HaedMasterJSONInput from './HaedMasterJSONInput';
 import SubjectReqView from './SubjectReqView';
 
-// Common
-import { departmentOptions } from '../../../common/department';
-import { subjectTypeOptions } from '../../../common/subjectType';
-
 const CreateSubject = ({ mode, setMode }) => {
   const subjectContext = useContext(SubjectContext);
   const { subject, createSubject } = subjectContext;
+
+  const configContext = useContext(ConfigContext);
+  const { departmentType, subjectType: subjectTypeArr } = configContext;
 
   const initialReqObj = {
     subjectCode: '',
@@ -415,7 +419,7 @@ const CreateSubject = ({ mode, setMode }) => {
               value={department}
             >
               <option>None</option>
-              {departmentOptions()}
+              {departmentTypeOptions(departmentType)}
             </Form.Control>
           </Form.Group>
         </Col>
@@ -429,7 +433,7 @@ const CreateSubject = ({ mode, setMode }) => {
               value={subjectType}
             >
               <option>None</option>
-              {subjectTypeOptions()}
+              {subjectTypeOptions(subjectTypeArr)}
             </Form.Control>
           </Form.Group>
         </Col>

@@ -1,11 +1,17 @@
 import React, { Fragment, useContext, useState, useEffect } from 'react';
-import SubjectContext from '../../../context/subject/subjectContext';
 import PropTypes from 'prop-types';
 
-import { departmentOptions } from '../../../common/department';
+// Context
+import SubjectContext from '../../../context/subject/subjectContext';
+import ConfigContext from '../../../context/config/configContext';
 
 // Utils
 import s2pn from '../../../utils/s2pn';
+import {
+  departmentTypeOptions,
+  // TODO Add This
+  // subjectTypeOptions,
+} from '../../../utils/configUtils';
 
 // Icons
 import { iconSearch } from '../../layout/Icon';
@@ -22,6 +28,9 @@ import {
 const FindSubject = ({ defaultSelect = 'all' }) => {
   const subjectContext = useContext(SubjectContext);
   const { getSubjects, clearSubjects } = subjectContext;
+
+  const configContext = useContext(ConfigContext);
+  const { departmentType } = configContext;
 
   // Normal Search
   const [searchQuery, setSearchQuery] = useState({
@@ -465,7 +474,7 @@ const FindSubject = ({ defaultSelect = 'all' }) => {
         <Form.Label>Department ?</Form.Label>
         <Form.Control name='where.department' as='select' onChange={onChange}>
           <option>None</option>
-          {departmentOptions()}
+          {departmentTypeOptions(departmentType)}
         </Form.Control>
         <br />
         <Form.Label>Is Elective ?</Form.Label>

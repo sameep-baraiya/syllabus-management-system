@@ -16,18 +16,20 @@ import 'react-datepicker/dist/react-datepicker.css';
 // Layout
 import { iconTodo, iconValidate, iconCreate } from '../../layout/Icon';
 
-// Common
-import { departmentOptions } from '../../../common/department';
-
 // Utils
 import s2pn from '../../../utils/s2pn';
+import { departmentTypeOptions } from '../../../utils/configUtils';
 
 // Context
 import MeetingContext from '../../../context/meeting/meetingContext';
+import ConfigContext from '../../../context/config/configContext';
 
 const CreateMeeting = ({ mode, setMode, type }) => {
   const meetingContext = useContext(MeetingContext);
   const { meeting, createMeeting } = meetingContext;
+
+  const configContext = useContext(ConfigContext);
+  const { departmentType } = configContext;
 
   const initialReqObj = {
     meetingCode: '',
@@ -252,7 +254,7 @@ const CreateMeeting = ({ mode, setMode, type }) => {
               value={department}
             >
               <option>None</option>
-              {departmentOptions()}
+              {departmentTypeOptions(departmentType)}
             </Form.Control>
           </Form.Group>
         </Col>

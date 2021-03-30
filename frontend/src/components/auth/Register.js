@@ -1,6 +1,5 @@
 import React, { Fragment, useContext, useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import AuthContext from '../../context/auth/authContext';
 import {
   Form,
   Container,
@@ -10,6 +9,8 @@ import {
   Card,
   InputGroup,
 } from 'react-bootstrap';
+
+// Layout
 import {
   iconPassword,
   iconEmail,
@@ -21,11 +22,20 @@ import {
   iconUserTie,
 } from '../layout/Icon';
 
+// Context
+import AuthContext from '../../context/auth/authContext';
+import ConfigContext from '../../context/config/configContext';
+
+// Utils
+import { departmentTypeOptions } from '../../utils/configUtils';
+
 const LogIn = () => {
   const histroy = useHistory();
   const authContext = useContext(AuthContext);
+  const configContext = useContext(ConfigContext);
 
   const { register, registrationDone, clearRegistrationDone } = authContext;
+  const { departmentType } = configContext;
 
   useEffect(() => {
     if (registrationDone) {
@@ -208,12 +218,7 @@ const LogIn = () => {
           value={department}
         >
           <option>None</option>
-          <option>CH - Chemical Engineering</option>
-          <option>CI - Civil Engineering</option>
-          <option>CE - Computer Engineering</option>
-          <option>EC - Electronic Engineering</option>
-          <option>ME - Mechanical Engineering</option>
-          <option>IT - Information Technology</option>
+          {departmentTypeOptions(departmentType)}
         </Form.Control>
       </Form.Group>
       <hr />

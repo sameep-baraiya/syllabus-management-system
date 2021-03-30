@@ -33,6 +33,7 @@ const meeting = require('./routes/meeting');
 const crudInfo = require('./routes/crudInfo');
 const storage = require('./routes/storage');
 const user = require('./routes/user');
+const config = require('./routes/config');
 
 // Mount routers
 app.use('/api/v1/auth', auth);
@@ -44,6 +45,7 @@ app.use('/api/v1/meeting', meeting);
 app.use('/api/v1/crud-info', crudInfo);
 app.use('/api/v1/storage', storage);
 app.use('/api/v1/user', user);
+app.use('/api/v1/config', config);
 
 // Handle all error
 app.use(errorHandler);
@@ -73,7 +75,7 @@ io.on('connection', (socket) => {
         at: new Date(),
       });
     }
-    console.log(map, data.id);
+    // console.log(map, data.id);
     app.set('LOGGED_USERS', map);
   });
 
@@ -82,7 +84,7 @@ io.on('connection', (socket) => {
     const map = app.get('LOGGED_USERS');
     map.delete(socket.id);
     app.set('LOGGED_USERS', map);
-    console.log(map);
+    // console.log(map);
     console.log('A user disconnected'.yellow);
   });
 });

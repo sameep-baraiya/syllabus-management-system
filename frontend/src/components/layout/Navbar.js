@@ -25,11 +25,13 @@ import {
 import AuthContext from '../../context/auth/authContext';
 import LoadingContext from '../../context/loading/loadingContext';
 import NotificationContext from '../../context/notification/notificationContext';
+import ConfigContext from '../../context/config/configContext';
 
 const MainNavbar = () => {
   const authContext = useContext(AuthContext);
   const loadingContext = useContext(LoadingContext);
   const notificationContext = useContext(NotificationContext);
+  const configContext = useContext(ConfigContext);
 
   const { isAuthenticated, user, loadUser, logout } = authContext;
   const { loading } = loadingContext;
@@ -38,10 +40,12 @@ const MainNavbar = () => {
     socket,
     reconnectNotification,
   } = notificationContext;
+  const { initConfig } = configContext;
 
   const [isDisconnected, setIsDisconnected] = useState(false);
 
   useEffect(() => {
+    initConfig();
     loadUser();
     console.log('Yes');
     // eslint-disable-next-line

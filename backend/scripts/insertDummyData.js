@@ -6,9 +6,38 @@ const AcademicBatch = require('../models/AcademicBatch');
 const Meeting = require('../models/Meeting');
 const CRUDLog = require('../models/CRUDLog');
 const subjects = require('./subjects16-20');
+const db = require('../config/initLevelDB');
 
 const insertDummyData = async () => {
   try {
+    // Init department, course, subject type in levelDB
+    await db.put('DEPARTMENT_TYPE', [
+      'CH - Chemical Engineering',
+      'CI - Civil Engineering',
+      'CE - Computer Engineering',
+      'EC - Electronic Engineering',
+      'ME - Mechanical Engineering',
+      'IT - Information Technology',
+      'Keep Empty For Now',
+    ]);
+
+    await db.put('COURSE_TYPE', [
+      'B.Tech - Bachelor of Technology',
+      'M.Tech - Master of Technology',
+      'Ph.D. - Doctoral Programmes',
+      'B.Pharma - Bachelor of Pharmacy',
+      'Keep Empty For Now',
+    ]);
+
+    await db.put('SUBJECT_TYPE', [
+      'Subject Type 1',
+      'Subject Type 2',
+      'Subject Type 3',
+      'Subject Type 4',
+      'Keep Empty For Now',
+    ]);
+    console.log('Level DB init Done');
+
     // Users
     const admin = await User.create(adminData);
     console.log('Admin Created');

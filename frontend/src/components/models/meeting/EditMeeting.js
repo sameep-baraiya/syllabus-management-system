@@ -16,19 +16,21 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 // Context
 import MeetingContext from '../../../context/meeting/meetingContext';
+import ConfigContext from '../../../context/config/configContext';
 
 // Layout
 import { iconEdit, iconValidate, iconCopy, iconTodo } from '../../layout/Icon';
 
 // Utils
 import s2pn from '../../../utils/s2pn';
-
-// Common
-import { departmentOptions } from '../../../common/department';
+import { departmentTypeOptions } from '../../../utils/configUtils';
 
 const EditMeeting = ({ mode, setMode }) => {
   const meetingContext = useContext(MeetingContext);
   const { meeting, updateMeeting } = meetingContext;
+
+  const configContext = useContext(ConfigContext);
+  const { departmentType } = configContext;
 
   const initialReqObj = {
     meetingCode: '',
@@ -403,7 +405,7 @@ const EditMeeting = ({ mode, setMode }) => {
               disabled={uObj.department}
             >
               <option>None</option>
-              {departmentOptions()}
+              {departmentTypeOptions(departmentType)}
             </Form.Control>
           </Form.Group>
         </Col>

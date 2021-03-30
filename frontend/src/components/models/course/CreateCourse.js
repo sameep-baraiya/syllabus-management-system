@@ -11,19 +11,23 @@ import {
 
 // Context
 import CourseContext from '../../../context/course/courseContext';
+import ConfigContext from '../../../context/config/configContext';
 
 // Utils
 import s2pn from '../../../utils/s2pn';
-
-// Common
-import { departmentOptions } from '../../../common/department';
-import { courseTypeOptions } from '../../../common/courseType';
+import {
+  departmentTypeOptions,
+  courseTypeOptions,
+} from '../../../utils/configUtils';
 
 // Layout
 import { iconCreate, iconValidate } from '../../layout/Icon';
 
 const CreateCourse = () => {
   const courseContext = useContext(CourseContext);
+  const configContext = useContext(ConfigContext);
+
+  const { departmentType, courseType: courseTypeArr } = configContext;
   const { createCourse } = courseContext;
 
   const [reqObj, setReqObj] = useState({
@@ -148,7 +152,7 @@ const CreateCourse = () => {
           value={courseType}
         >
           <option>None</option>
-          {courseTypeOptions()}
+          {courseTypeOptions(courseTypeArr)}
         </Form.Control>
       </Form.Group>
       <Form.Group controlId='CreateCourse.department'>
@@ -160,7 +164,7 @@ const CreateCourse = () => {
           value={department}
         >
           <option>None</option>
-          {departmentOptions()}
+          {departmentTypeOptions(departmentType)}
         </Form.Control>
       </Form.Group>
       <Row>

@@ -1,12 +1,13 @@
 import React, { Fragment, useContext, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import MeetingContext from '../../../context/meeting/meetingContext';
 
-// Common
-import { departmentOptions } from '../../../common/department';
+// Context
+import MeetingContext from '../../../context/meeting/meetingContext';
+import ConfigContext from '../../../context/config/configContext';
 
 // Utils
 import s2pn from '../../../utils/s2pn';
+import { departmentTypeOptions } from '../../../utils/configUtils';
 
 // Icons
 import { iconSearch } from '../../layout/Icon';
@@ -23,6 +24,9 @@ import {
 const FindMeeting = ({ defaultSelect = 'all' }) => {
   const meetingContext = useContext(MeetingContext);
   const { getMeetings, clearMeetings } = meetingContext;
+
+  const configContext = useContext(ConfigContext);
+  const { departmentType } = configContext;
 
   // Normal Search
   const [searchQuery, setSearchQuery] = useState({
@@ -344,7 +348,7 @@ const FindMeeting = ({ defaultSelect = 'all' }) => {
         <Form.Label>Department ?</Form.Label>
         <Form.Control name='where.department' as='select' onChange={onChange}>
           <option>None</option>
-          {departmentOptions()}
+          {departmentTypeOptions(departmentType)}
         </Form.Control>
         <br />
         <Form.Label>Is Freezed ?</Form.Label>

@@ -12,20 +12,24 @@ import {
 
 // Context
 import CourseContext from '../../../context/course/courseContext';
+import ConfigContext from '../../../context/config/configContext';
 
 // Layout
 import { iconEdit, iconValidate, iconCopy } from '../../layout/Icon';
 
 // Utils
 import s2pn from '../../../utils/s2pn';
-
-// Common
-import { departmentOptions } from '../../../common/department';
-import { courseTypeOptions } from '../../../common/courseType';
+import {
+  departmentTypeOptions,
+  courseTypeOptions,
+} from '../../../utils/configUtils';
 
 const EditCourse = ({ mode, setMode }) => {
   const courseContext = useContext(CourseContext);
   const { course, updateCourse } = courseContext;
+
+  const configContext = useContext(ConfigContext);
+  const { departmentType, courseType: courseTypeArr } = configContext;
 
   const initialReqObj = {
     id: null,
@@ -324,7 +328,7 @@ const EditCourse = ({ mode, setMode }) => {
               disabled={uObj.department}
             >
               <option>None</option>
-              {departmentOptions()}
+              {departmentTypeOptions(departmentType)}
             </Form.Control>
           </Form.Group>
         </Col>
@@ -360,7 +364,7 @@ const EditCourse = ({ mode, setMode }) => {
               disabled={uObj.courseType}
             >
               <option>None</option>
-              {courseTypeOptions()}
+              {courseTypeOptions(courseTypeArr)}
             </Form.Control>
           </Form.Group>
         </Col>
