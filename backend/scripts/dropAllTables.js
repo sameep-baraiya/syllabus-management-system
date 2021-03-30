@@ -4,11 +4,13 @@ const Subject = require('../models/Subject');
 const AcademicBatchSubject = require('../models/AcademicBatchSubject');
 const AcademicBatch = require('../models/AcademicBatch');
 const Meeting = require('../models/Meeting');
+const AccountRequest = require('../models/AccountRequest');
 const CRUDLog = require('../models/CRUDLog');
 
 const dropAllTable = async () => {
   try {
     await CRUDLog.drop();
+    await AccountRequest.drop();
     await User.drop();
     await AcademicBatchSubject.drop();
     await AcademicBatch.drop();

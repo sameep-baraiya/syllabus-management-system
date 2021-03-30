@@ -1,6 +1,7 @@
 const { validationResult } = require('express-validator');
 const ErrorResponse = require('../utils/ErrorResponse');
 const User = require('../models/User');
+const AccountRequest = require('../models/AccountRequest');
 
 // @desc    Get logged in user
 // @route   GET /api/v1/auth/
@@ -55,7 +56,24 @@ exports.register = async (req, res, next) => {
       role,
       department,
       password,
+      crudInfo: {
+        type: 'USER_CREATE',
+      },
     });
+
+    const accountRequest = await AccountRequest.create({
+      isReviewed: false,
+      crudInfo: {
+        type: 'ACCOUNT_REQUSET_CREATE',
+        by: user.name,
+      },
+    });
+
+    accountRequest.crudInfo = {
+      type: 'ACCOUNT_REQUSET_UPDATE',
+      by: user.name,
+    };
+    await accountRequest.setUser(user);
 
     res.status(200).json({
       success: true,

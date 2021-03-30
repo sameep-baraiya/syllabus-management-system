@@ -6,6 +6,7 @@ import CRUDInfo from './CRUDInfo';
 import StorageInfo from './StorageInfo';
 import LoggedUsers from './LoggedUsers';
 import EditCoreConfig from './EditCoreConfig';
+import AccountRequest from './AccountRequest';
 
 // Default Admin Board Page
 import DefaultAB from './DefaultAB';
@@ -35,6 +36,11 @@ const AdminBoard = () => {
         exact
         path='/admin-board/edit-config'
         component={EditCoreConfig}
+      />
+      <PrivateRoute
+        exact
+        path='/admin-board/account-request'
+        component={AccountRequest}
       />
       <Route component={NotFound} />
     </Switch>

@@ -34,6 +34,7 @@ const crudInfo = require('./routes/crudInfo');
 const storage = require('./routes/storage');
 const user = require('./routes/user');
 const config = require('./routes/config');
+const accountRequest = require('./routes/accountRequest');
 
 // Mount routers
 app.use('/api/v1/auth', auth);
@@ -46,6 +47,7 @@ app.use('/api/v1/crud-info', crudInfo);
 app.use('/api/v1/storage', storage);
 app.use('/api/v1/user', user);
 app.use('/api/v1/config', config);
+app.use('/api/v1/account-request', accountRequest);
 
 // Handle all error
 app.use(errorHandler);

@@ -8,6 +8,7 @@ import {
   iconFileGen,
   iconSystemInfo,
   iconEditSystem,
+  iconManageUsers,
 } from '../layout/Icon';
 
 const home = {
@@ -206,6 +207,25 @@ const adminBoard = {
         {
           title: 'Edit Core Config',
           link: '/admin-board/edit-config',
+        },
+      ],
+    },
+    {
+      title: 'Manage Users',
+      titleIcon: iconManageUsers,
+      subLink: [
+        {
+          title: 'Account Request',
+          link: '/admin-board/account-request',
+        },
+        {
+          title: 'Edit User',
+          link: '/admin-board/edit-user',
+        },
+        {
+          title: 'Delete User',
+          link: '/admin-board/delete-user',
+          isDanger: true,
         },
       ],
     },

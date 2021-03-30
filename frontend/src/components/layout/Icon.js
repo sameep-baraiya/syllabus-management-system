@@ -45,6 +45,7 @@ import {
   faFileAlt,
   faUpload,
   faTools,
+  faUserCog,
 } from '@fortawesome/free-solid-svg-icons';
 
 const iconUser = <FontAwesomeIcon icon={faUser} />;
@@ -105,6 +106,7 @@ const iconAdminBoard = <FontAwesomeIcon icon={faUserShield} />;
 const iconSystemInfo = <FontAwesomeIcon icon={faFileAlt} />;
 const iconUpload = <FontAwesomeIcon icon={faUpload} />;
 const iconEditSystem = <FontAwesomeIcon icon={faTools} />;
+const iconManageUsers = <FontAwesomeIcon icon={faUserCog} />;
 
 export {
   iconUser,
@@ -152,4 +154,5 @@ export {
   iconSystemInfo,
   iconUpload,
   iconEditSystem,
+  iconManageUsers,
 };

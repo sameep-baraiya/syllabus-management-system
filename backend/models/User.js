@@ -34,17 +34,8 @@ User.init(
       values: ['admin', 'faculty-member', 'syllabus-manager'],
       allowNull: false,
     },
-    // TODO Fix This
     department: {
-      type: DataTypes.ENUM,
-      values: [
-        'CH - Chemical Engineering',
-        'CI - Civil Engineering',
-        'CE - Computer Engineering',
-        'EC - Electronic Engineering',
-        'ME - Mechanical Engineering',
-        'IT - Information Technology',
-      ],
+      type: DataTypes.STRING,
       allowNull: false,
     },
     password: {
@@ -76,12 +67,56 @@ User.init(
                 msg: `User ${user.name} Created`,
                 type: 'CREATE',
                 model: 'User',
-                by: user.crudInfo.by,
+                by: user.crudInfo.by && user.crudInfo.by,
               });
               break;
             default:
               await CRUDLog.create({
                 msg: 'Unexpected crudInfo Model User, Opertaion Create',
+              });
+              break;
+          }
+        } catch (err) {
+          console.error(err);
+          throw err;
+        }
+      },
+      afterUpdate: async (user, options) => {
+        try {
+          switch (user.crudInfo.type) {
+            case 'USER_UPDATE':
+              await CRUDLog.create({
+                msg: `User ${user.name} Updated`,
+                type: 'UPDATE',
+                model: 'User',
+                by: user.crudInfo.by,
+              });
+              break;
+            default:
+              await CRUDLog.create({
+                msg: 'Unexpected crudInfo Model User, Opertaion Update',
+              });
+              break;
+          }
+        } catch (err) {
+          console.error(err);
+          throw err;
+        }
+      },
+      afterDestroy: async (user, options) => {
+        try {
+          switch (user.crudInfo.type) {
+            case 'USER_DELETE':
+              await CRUDLog.create({
+                msg: `User ${user.name} Deleted`,
+                type: 'DELETE',
+                model: 'User',
+                by: user.crudInfo.by,
+              });
+              break;
+            default:
+              await CRUDLog.create({
+                msg: 'Unexpected crudInfo Model User, Opertaion Delete',
               });
               break;
           }
