@@ -144,6 +144,7 @@ const CRUDInfo = () => {
               </option>
               <option value='Meeting'>Meeting</option>
               <option value='Account Request'>Account Request</option>
+              <option value='Config'>Config</option>
             </Form.Control>
             <br />
 

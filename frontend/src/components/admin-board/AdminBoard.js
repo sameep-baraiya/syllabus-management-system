@@ -5,6 +5,7 @@ import { Switch, Route } from 'react-router-dom';
 import CRUDInfo from './CRUDInfo';
 import StorageInfo from './StorageInfo';
 import LoggedUsers from './LoggedUsers';
+import EditCoreConfig from './EditCoreConfig';
 
 // Default Admin Board Page
 import DefaultAB from './DefaultAB';
@@ -29,6 +30,11 @@ const AdminBoard = () => {
         exact
         path='/admin-board/logged-users'
         component={LoggedUsers}
+      />
+      <PrivateRoute
+        exact
+        path='/admin-board/edit-config'
+        component={EditCoreConfig}
       />
       <Route component={NotFound} />
     </Switch>

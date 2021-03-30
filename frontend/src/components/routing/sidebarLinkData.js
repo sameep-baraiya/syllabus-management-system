@@ -7,6 +7,7 @@ import {
   iconMeeting,
   iconFileGen,
   iconSystemInfo,
+  iconEditSystem,
 } from '../layout/Icon';
 
 const home = {
@@ -195,6 +196,16 @@ const adminBoard = {
         {
           title: 'Logged Users',
           link: '/admin-board/logged-users',
+        },
+      ],
+    },
+    {
+      title: 'Edit System',
+      titleIcon: iconEditSystem,
+      subLink: [
+        {
+          title: 'Edit Core Config',
+          link: '/admin-board/edit-config',
         },
       ],
     },

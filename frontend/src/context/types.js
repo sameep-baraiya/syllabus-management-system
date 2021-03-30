@@ -89,3 +89,4 @@ export const LOGGED_USERS_ERROR = 'LOGGED_USERS_ERROR';
 // Config
 export const INIT_CONFIG = 'INIT_CONFIG';
 export const INIT_CONFIG_ERROR = 'INIT_CONFIG_ERROR';
+export const UPDATE_CONFIG = 'UPDATE_CONFIG';

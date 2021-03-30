@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const { getConfig } = require('../controllers/config');
+const { protect } = require('../middleware/auth');
+const { getConfig, updateConfig } = require('../controllers/config');
 
-router.route('/').get(getConfig);
+router.route('/').get(getConfig).put(protect, updateConfig);
 
 module.exports = router;

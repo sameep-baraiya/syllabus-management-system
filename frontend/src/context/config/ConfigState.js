@@ -2,7 +2,13 @@ import React, { useReducer, useContext } from 'react';
 import axios from 'axios';
 import ConfigContext from './configContext';
 import configReducer from './configReducer';
-import { INIT_CONFIG, INIT_CONFIG_ERROR, CLEAR_ERRORS } from '../types';
+import {
+  INIT_CONFIG,
+  INIT_CONFIG_ERROR,
+  CLEAR_ERRORS,
+  UPDATE_ERROR,
+  UPDATE_CONFIG,
+} from '../types';
 import LoadingContext from '../loading/loadingContext';
 
 const ConfigState = (props) => {
@@ -39,6 +45,33 @@ const ConfigState = (props) => {
     }
   };
 
+  // Update Config
+  const updateConfig = async (reqObj) => {
+    setLoading();
+    try {
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
+
+      const res = await axios.put('/api/v1/config', reqObj, config);
+
+      dispatch({
+        type: UPDATE_CONFIG,
+        payload: res.data,
+      });
+    } catch (err) {
+      console.log(err);
+      dispatch({
+        type: UPDATE_ERROR,
+        payload: err.response,
+      });
+    } finally {
+      resetLoading();
+    }
+  };
+
   // Clear Errors
   const clearErrors = () => dispatch({ type: CLEAR_ERRORS });
 
@@ -51,6 +84,7 @@ const ConfigState = (props) => {
         error: state.error,
         clearErrors,
         initConfig,
+        updateConfig,
       }}
     >
       {props.children}
