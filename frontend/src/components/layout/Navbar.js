@@ -62,6 +62,7 @@ const MainNavbar = () => {
 
   const onClickLogout = () => {
     logout();
+    socket.disconnect();
   };
 
   if (socket) {
@@ -112,13 +113,6 @@ const MainNavbar = () => {
             <Spinner animation='border' variant='light' size='sm' />{' '}
           </Fragment>
         ) : null}
-        {isDisconnected && (
-          <Fragment>
-            <Button variant='danger' onClick={reconnect}>
-              You Are Disconnected
-            </Button>{' '}
-          </Fragment>
-        )}
         <Link to='/login' style={{ textDecoration: 'none' }}>
           <Button variant='secondary'>{iconLogIn} Log In</Button>
         </Link>{' '}
