@@ -10,6 +10,7 @@ import EditCoreConfig from './EditCoreConfig';
 import LoggedUsers from './user/LoggedUsers';
 import AccountRequest from './user/AccountRequest';
 import ABFindUser from './user/ABFindUser';
+import ABEditUser from './user/ABEditUser';
 
 // Default Admin Board Page
 import DefaultAB from './DefaultAB';
@@ -39,6 +40,11 @@ const AdminBoard = () => {
         exact
         path='/admin-board/view-user'
         component={ABFindUser}
+      />
+      <PrivateRoute
+        exact
+        path='/admin-board/edit-user'
+        component={ABEditUser}
       />
       <PrivateRoute
         exact

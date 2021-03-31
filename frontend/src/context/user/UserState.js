@@ -8,7 +8,11 @@ import {
   CLEAR_USERS,
   GET_USERS,
   USERS_ERROR,
+  GET_USER,
+  USER_ERROR,
   CLEAR_ERRORS,
+  UPDATE_ERROR,
+  UPDATE_USER,
 } from '../types';
 import LoadingContext from '../loading/loadingContext';
 
@@ -100,6 +104,51 @@ const UserState = (props) => {
     }
   };
 
+  // Get User
+  const getUser = async (id = 0) => {
+    setLoading();
+    try {
+      const res = await axios.get(`/api/v1/user/${id}`);
+      dispatch({
+        type: GET_USER,
+        payload: res.data,
+      });
+    } catch (err) {
+      dispatch({
+        type: USER_ERROR,
+        payload: err.response,
+      });
+    } finally {
+      resetLoading();
+    }
+  };
+
+  // Update User
+  const updateUser = async (reqObj) => {
+    setLoading();
+    try {
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
+
+      const res = await axios.put(`/api/v1/user/${reqObj.id}`, reqObj, config);
+
+      dispatch({
+        type: UPDATE_USER,
+        payload: res.data,
+      });
+    } catch (err) {
+      dispatch({
+        type: UPDATE_ERROR,
+        payload: err.response,
+      });
+    } finally {
+      resetLoading();
+    }
+  };
+
   // Clear Users
   const clearUsers = () => dispatch({ type: CLEAR_USERS });
 
@@ -119,6 +168,8 @@ const UserState = (props) => {
         getLoggedUsers,
         clearUsers,
         getUsers,
+        getUser,
+        updateUser,
       }}
     >
       {props.children}

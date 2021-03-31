@@ -5,6 +5,10 @@ import {
   CLEAR_USERS,
   GET_USERS,
   USERS_ERROR,
+  GET_USER,
+  USER_ERROR,
+  UPDATE_ERROR,
+  UPDATE_USER,
 } from '../types';
 
 const userReducer = (state, action) => {
@@ -28,6 +32,12 @@ const userReducer = (state, action) => {
         total: action.payload.total,
         pagination: action.payload.pagination,
       };
+    case GET_USER:
+      return {
+        ...state,
+        error: null,
+        user: action.payload.data,
+      };
     case CLEAR_USERS:
       return {
         ...state,
@@ -36,11 +46,14 @@ const userReducer = (state, action) => {
         pagination: null,
       };
     case USERS_ERROR:
+    case UPDATE_ERROR:
+    case USER_ERROR:
       return {
         ...state,
         error: action.payload,
       };
     case CLEAR_ERRORS:
+    case UPDATE_USER:
       return {
         ...state,
         error: null,

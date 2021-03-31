@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const ErrorResponse = require('../utils/ErrorResponse');
 
 // @desc    Get logged users
 // @route   GET /api/v1/user/logged
@@ -36,7 +37,7 @@ exports.getLoggedUsers = async (req, res, next) => {
 };
 
 // @desc    Get users
-// @route   GET /api/v1/users
+// @route   GET /api/v1/user
 // @access  Private
 exports.getUsers = async (req, res, next) => {
   try {
@@ -46,6 +47,68 @@ exports.getUsers = async (req, res, next) => {
     });
 
     res.status(200).json(res.advancedResults);
+  } catch (err) {
+    return next(err);
+  }
+};
+
+// @desc    Get user
+// @route   GET /api/v1/user/:id
+// @access  Private
+exports.getUser = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    const user = await User.findByPk(id, {
+      attributes: {
+        exclude: ['password'],
+      },
+    });
+
+    if (!user) {
+      return next(new ErrorResponse('Error: User does not exist', 400));
+    }
+
+    res.status(200).json({
+      success: true,
+      data: user.toJSON(),
+    });
+  } catch (err) {
+    return next(err);
+  }
+};
+
+// @desc    Updated user (By Admin or By user self)
+// @route   PUT /api/v1/user/:id
+// @access  Private
+exports.updateUser = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    const user = await User.findByPk(id);
+
+    if (!user) {
+      return next(new ErrorResponse('Error: User does not exist', 400));
+    }
+
+    // TODO Fix when role access fixed
+    // if (user.id === req.user.id) {
+
+    // } else {
+    const { role, department } = req.body;
+
+    user.role = role;
+    user.department = department;
+    user.crudInfo = {
+      type: 'USER_UPDATE',
+      by: req.user.name,
+    };
+    await user.save();
+
+    res.status(200).json({
+      success: true,
+    });
+    // }
   } catch (err) {
     return next(err);
   }
