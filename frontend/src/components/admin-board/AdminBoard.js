@@ -11,6 +11,7 @@ import LoggedUsers from './user/LoggedUsers';
 import AccountRequest from './user/AccountRequest';
 import ABFindUser from './user/ABFindUser';
 import ABEditUser from './user/ABEditUser';
+import ABDeleteUser from './user/ABDeleteUser';
 
 // Default Admin Board Page
 import DefaultAB from './DefaultAB';
@@ -45,6 +46,11 @@ const AdminBoard = () => {
         exact
         path='/admin-board/edit-user'
         component={ABEditUser}
+      />
+      <PrivateRoute
+        exact
+        path='/admin-board/delete-user'
+        component={ABDeleteUser}
       />
       <PrivateRoute
         exact

@@ -13,6 +13,8 @@ import {
   CLEAR_ERRORS,
   UPDATE_ERROR,
   UPDATE_USER,
+  DELETE_USER,
+  DELETE_ERROR,
 } from '../types';
 import LoadingContext from '../loading/loadingContext';
 
@@ -149,6 +151,29 @@ const UserState = (props) => {
     }
   };
 
+  // Delete User
+  const deleteUser = async (reqObj) => {
+    setLoading();
+    try {
+      let res;
+      res = await axios.delete(`/api/v1/user/${reqObj.id}`, {
+        data: { password: reqObj.password },
+      });
+      dispatch({
+        type: DELETE_USER,
+        payload: res.data,
+      });
+    } catch (err) {
+      console.log(err);
+      dispatch({
+        type: DELETE_ERROR,
+        payload: err.response,
+      });
+    } finally {
+      resetLoading();
+    }
+  };
+
   // Clear Users
   const clearUsers = () => dispatch({ type: CLEAR_USERS });
 
@@ -170,6 +195,7 @@ const UserState = (props) => {
         getUsers,
         getUser,
         updateUser,
+        deleteUser,
       }}
     >
       {props.children}

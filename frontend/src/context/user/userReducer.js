@@ -9,6 +9,8 @@ import {
   USER_ERROR,
   UPDATE_ERROR,
   UPDATE_USER,
+  DELETE_USER,
+  DELETE_ERROR,
 } from '../types';
 
 const userReducer = (state, action) => {
@@ -45,6 +47,7 @@ const userReducer = (state, action) => {
         total: 0,
         pagination: null,
       };
+    case DELETE_ERROR:
     case USERS_ERROR:
     case UPDATE_ERROR:
     case USER_ERROR:
@@ -54,6 +57,7 @@ const userReducer = (state, action) => {
       };
     case CLEAR_ERRORS:
     case UPDATE_USER:
+    case DELETE_USER:
       return {
         ...state,
         error: null,

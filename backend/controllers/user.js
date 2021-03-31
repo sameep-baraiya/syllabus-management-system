@@ -113,3 +113,38 @@ exports.updateUser = async (req, res, next) => {
     return next(err);
   }
 };
+
+// @desc    Delete User
+// @route   DELETE /api/v1/user/:id
+// @access  Private
+exports.deleteUser = async (req, res, next) => {
+  try {
+    // TODO Fix this
+    const { id } = req.params;
+    const { password } = req.body;
+
+    const ogUser = await User.findByPk(req.user.id);
+
+    if (!ogUser.matchPassword(password)) {
+      return next(new ErrorResponse('Passowrd not matched', 404));
+    }
+
+    const user = await User.findByPk(id);
+
+    if (!user) {
+      return next(new ErrorResponse('Error: User does not exist', 400));
+    }
+
+    user.crudInfo = {
+      type: 'USER_DELETE',
+      by: ogUser.name,
+    };
+    await user.destroy();
+
+    res.status(200).json({
+      success: true,
+    });
+  } catch (err) {
+    return next(err);
+  }
+};

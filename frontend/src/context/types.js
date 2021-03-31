@@ -91,6 +91,7 @@ export const USERS_ERROR = 'USERS_ERROR';
 export const GET_USER = 'GET_USER';
 export const USER_ERROR = 'USER_ERROR';
 export const UPDATE_USER = 'UPDATE_USER';
+export const DELETE_USER = 'DELETE_USER';
 
 // Config
 export const INIT_CONFIG = 'INIT_CONFIG';

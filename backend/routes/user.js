@@ -5,6 +5,7 @@ const {
   getUsers,
   getUser,
   updateUser,
+  deleteUser,
 } = require('../controllers/user');
 
 // Middleware
@@ -22,6 +23,11 @@ router
     advancedResult(User, ['name', 'email', 'contactNumber']),
     getUsers
   );
-router.route('/:id').get(protect, getUser).put(protect, updateUser);
+
+router
+  .route('/:id')
+  .get(protect, getUser)
+  .put(protect, updateUser)
+  .delete(protect, deleteUser);
 
 module.exports = router;
