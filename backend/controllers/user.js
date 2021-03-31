@@ -34,3 +34,19 @@ exports.getLoggedUsers = async (req, res, next) => {
     return next(err);
   }
 };
+
+// @desc    Get users
+// @route   GET /api/v1/users
+// @access  Private
+exports.getUsers = async (req, res, next) => {
+  try {
+    const userArr = res.advancedResults.data;
+    userArr.forEach((it) => {
+      delete it.password;
+    });
+
+    res.status(200).json(res.advancedResults);
+  } catch (err) {
+    return next(err);
+  }
+};

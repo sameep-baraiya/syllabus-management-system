@@ -4,9 +4,12 @@ import { Switch, Route } from 'react-router-dom';
 // Admin Board Componets
 import CRUDInfo from './CRUDInfo';
 import StorageInfo from './StorageInfo';
-import LoggedUsers from './LoggedUsers';
 import EditCoreConfig from './EditCoreConfig';
-import AccountRequest from './AccountRequest';
+
+// Admin Board User Sub Componets
+import LoggedUsers from './user/LoggedUsers';
+import AccountRequest from './user/AccountRequest';
+import ABFindUser from './user/ABFindUser';
 
 // Default Admin Board Page
 import DefaultAB from './DefaultAB';
@@ -31,6 +34,11 @@ const AdminBoard = () => {
         exact
         path='/admin-board/logged-users'
         component={LoggedUsers}
+      />
+      <PrivateRoute
+        exact
+        path='/admin-board/view-user'
+        component={ABFindUser}
       />
       <PrivateRoute
         exact

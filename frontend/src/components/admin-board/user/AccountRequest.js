@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { Button, Row, Col, Card, Form } from 'react-bootstrap';
 
 // Context
-import AccountRequestContext from '../../context/account-request/accountRequestContext';
+import AccountRequestContext from '../../../context/account-request/accountRequestContext';
 
 const AccountRequest = () => {
   const accountRequestContext = useContext(AccountRequestContext);

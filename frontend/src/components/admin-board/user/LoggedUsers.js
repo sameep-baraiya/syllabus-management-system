@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Button, Table } from 'react-bootstrap';
 
 // Context
-import UserContext from '../../context/user/userContext';
+import UserContext from '../../../context/user/userContext';
 
 const LoggedUsers = () => {
   const userContext = useContext(UserContext);

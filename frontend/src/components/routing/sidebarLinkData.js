@@ -219,6 +219,10 @@ const adminBoard = {
           link: '/admin-board/account-request',
         },
         {
+          title: 'View User',
+          link: '/admin-board/view-user',
+        },
+        {
           title: 'Edit User',
           link: '/admin-board/edit-user',
         },
