@@ -13,9 +13,14 @@ const DashboardCourse = () => {
 
   return (
     <div>
+      <br />
       <FindCourse defaultSelect='all' />
       {courses &&
-        courses.map((it, index) => <ViewCourse course={it} key={index} />)}
+        courses.map((it, index) => (
+          <div key={index} className='mt-2'>
+            <ViewCourse course={it} />
+          </div>
+        ))}
     </div>
   );
 };
