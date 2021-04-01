@@ -17,6 +17,7 @@ const authReducer = (state, action) => {
         ...state,
         isAuthenticated: true,
         user: action.payload.data,
+        error: null,
       };
     case REGISTER_SUCCESS:
       return {
@@ -24,6 +25,7 @@ const authReducer = (state, action) => {
         ...action.payload,
         isAuthenticated: false,
         registrationDone: true,
+        error: null,
       };
     case LOGIN_SUCCESS:
       localStorage.setItem('dsms-token', action.payload.token);
@@ -31,6 +33,7 @@ const authReducer = (state, action) => {
         ...state,
         ...action.payload,
         isAuthenticated: true,
+        error: null,
       };
     case CLEAR_REGISTRATION_DONE:
       return {

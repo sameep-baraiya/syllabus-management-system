@@ -2,6 +2,7 @@ import { Container } from 'react-bootstrap';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { pdfjs } from 'react-pdf';
 import './components/style/sidebar.css';
+import './components/style/showonhover.css';
 
 // Layout Componets
 import Navbar from './components/layout/Navbar';
@@ -96,14 +97,21 @@ function App() {
                                           <PrivateRoute
                                             path='/dashboard'
                                             component={Dashboard}
+                                            role={[
+                                              'admin',
+                                              'faculty-member',
+                                              'syllabus-manager',
+                                            ]}
                                           />
                                           <PrivateRoute
                                             path='/syllabus-manager'
                                             component={SyllabusManager}
+                                            role={['admin', 'syllabus-manager']}
                                           />
                                           <PrivateRoute
                                             path='/admin-board'
                                             component={AdminBoard}
+                                            role={['admin']}
                                           />
                                           <Route component={NotFound} />
                                         </Switch>

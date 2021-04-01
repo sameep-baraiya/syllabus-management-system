@@ -35,6 +35,8 @@ export const DELETE_COURSE = 'DELETE_COURSE';
 // Download
 export const DOWNLOAD_FILE = 'DOWNLOAD_FILE';
 export const DOWNLOAD_ERROR = 'DOWNLOAD_ERROR';
+export const VIEW_FILE = 'VIEW_FILE';
+export const VIEW_FILE_ERROR = 'VIEW_FILE_ERROR';
 
 // Academic Batch
 export const CREATE_ACADEMIC_BATCH = 'CREATE_ACADEMIC_BATCH';

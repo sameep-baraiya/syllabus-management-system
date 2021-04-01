@@ -10,9 +10,6 @@ import DashboardMeeting from './DashboardMeeting';
 // Default Dashboard Componentes
 import DefaultDashboard from './DefaultDashboard';
 
-// Routing Componets
-import PrivateRoute from '../routing/PrivateRoute';
-
 // Page Componets
 import NotFound from '../page/NotFound';
 
@@ -20,28 +17,15 @@ const Dashboard = (props) => {
   return (
     <Fragment>
       <Switch>
-        <PrivateRoute exact path='/dashboard/' component={DefaultDashboard} />
-        <PrivateRoute
-          exact
-          path='/dashboard/subject'
-          component={DashboardSubject}
-        />
-        <PrivateRoute
-          exact
-          path='/dashboard/course'
-          component={DashboardCourse}
-        />
-        <PrivateRoute
+        <Route exact path='/dashboard/' component={DefaultDashboard} />
+        <Route exact path='/dashboard/subject' component={DashboardSubject} />
+        <Route exact path='/dashboard/course' component={DashboardCourse} />
+        <Route
           exact
           path='/dashboard/academic-batch'
           component={DashboardAcademicBatch}
         />
-        <PrivateRoute
-          exact
-          path='/dashboard/meeting'
-          component={DashboardMeeting}
-        />
-        {/* <PrivateRoute exact path='/dashboard/course' component={FindCourse} /> */}
+        <Route exact path='/dashboard/meeting' component={DashboardMeeting} />
 
         <Route component={NotFound} />
       </Switch>

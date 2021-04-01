@@ -42,6 +42,7 @@ const {
   getSubject,
   updateSubject,
   deleteSubject,
+  getSubjectByCode,
 } = require('../controllers/subject');
 
 const router = express.Router();
@@ -59,5 +60,6 @@ router
     advancedResult(Subject, ['subjectCode', 'subjectName', 'subjectShort']),
     getSubjects
   );
+router.route('/code/:code').get(protect, getSubjectByCode);
 
 module.exports = router;

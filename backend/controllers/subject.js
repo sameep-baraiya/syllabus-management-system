@@ -209,6 +209,31 @@ exports.getSubject = async (req, res, next) => {
   }
 };
 
+// @desc    Get Subject by subject code
+// @route   GET /api/v1/subject/code/:code
+// @access  Private
+exports.getSubjectByCode = async (req, res, next) => {
+  const { code } = req.params;
+  try {
+    const subject = await Subject.findOne({
+      where: {
+        subjectCode: code,
+      },
+    });
+
+    if (subject === null) {
+      return next(new ErrorResponse('Subject not found', 404));
+    }
+
+    res.status(200).json({
+      success: true,
+      data: subject.toJSON(),
+    });
+  } catch (err) {
+    return next(err);
+  }
+};
+
 // @desc    Update subject
 // @route   PUT /api/v1/subject/:id
 // @access  Private

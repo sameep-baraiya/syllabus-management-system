@@ -218,7 +218,7 @@ const LogIn = () => {
           value={department}
         >
           <option>None</option>
-          {departmentTypeOptions(departmentType)}
+          {departmentType && departmentTypeOptions(departmentType)}
         </Form.Control>
       </Form.Group>
       <hr />

@@ -135,12 +135,16 @@ const MainNavbar = () => {
         <Nav.Link as={Link} to='/dashboard'>
           {iconDashboard} Dashboard
         </Nav.Link>
-        <Nav.Link as={Link} to='/syllabus-manager'>
-          {iconSyllabusManger} Syllabus Manager
-        </Nav.Link>
-        <Nav.Link as={Link} to='/admin-board'>
-          {iconAdminBoard} Admin Board
-        </Nav.Link>
+        {user && (user.role === 'syllabus-manager' || user.role === 'admin') && (
+          <Nav.Link as={Link} to='/syllabus-manager'>
+            {iconSyllabusManger} Syllabus Manager
+          </Nav.Link>
+        )}
+        {user && user.role === 'admin' && (
+          <Nav.Link as={Link} to='/admin-board'>
+            {iconAdminBoard} Admin Board
+          </Nav.Link>
+        )}
       </Nav>
       <div>
         {loading ? (

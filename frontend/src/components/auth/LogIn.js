@@ -1,4 +1,5 @@
 import React, { Fragment, useContext, useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import AuthContext from '../../context/auth/authContext';
 import { useHistory } from 'react-router-dom';
 import {
@@ -16,14 +17,14 @@ const LogIn = () => {
   const histroy = useHistory();
   const authContext = useContext(AuthContext);
 
-  const { login, isAuthenticated } = authContext;
+  const { login, isAuthenticated, error } = authContext;
 
   useEffect(() => {
-    if (isAuthenticated) {
-      histroy.push('/dashboard');
+    if (error !== null) {
+      histroy.push('/login');
     }
     // eslint-disable-next-line
-  }, [isAuthenticated]);
+  }, [isAuthenticated, error]);
 
   const onChange = (e) => setUser({ ...user, [e.target.name]: e.target.value });
 
@@ -131,6 +132,10 @@ const LogIn = () => {
       </Container>
     </Fragment>
   );
+};
+
+LogIn.propTypes = {
+  initURL: PropTypes.string,
 };
 
 export default LogIn;

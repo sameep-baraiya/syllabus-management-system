@@ -1,22 +1,27 @@
 import React, { useContext } from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import AuthContext from '../../context/auth/authContext';
 
-const PrivateRoute = ({ component: Component, ...rest }) => {
+// Login
+import LogIn from '../auth/LogIn';
+
+// Page Not Found
+import NotFound from '../page/NotFound';
+
+const PrivateRoute = ({ component: Component, role = [], ...rest }) => {
   const authContext = useContext(AuthContext);
-  const { isAuthenticated, loading } = authContext;
-  return (
-    <Route
-      {...rest}
-      render={(props) =>
-        !isAuthenticated && !loading ? (
-          <Redirect to='/login' />
-        ) : (
-          <Component {...props} />
-        )
+  const { isAuthenticated, loading, user } = authContext;
+
+  if (!isAuthenticated && !loading) {
+    return <Route {...rest} render={() => <LogIn />} />;
+  } else {
+    if (user) {
+      if (!role.includes(user.role)) {
+        return <NotFound />;
       }
-    />
-  );
+    }
+    return <Route {...rest} render={(props) => <Component {...props} />} />;
+  }
 };
 
 export default PrivateRoute;

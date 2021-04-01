@@ -2,7 +2,13 @@ import React, { useReducer, useContext } from 'react';
 import axios from 'axios';
 import DownloadContext from './downloadContext';
 import downloadReducer from './downloadReducer';
-import { CLEAR_ERRORS, DOWNLOAD_FILE, DOWNLOAD_ERROR } from '../types';
+import {
+  CLEAR_ERRORS,
+  DOWNLOAD_FILE,
+  DOWNLOAD_ERROR,
+  VIEW_FILE,
+  VIEW_FILE_ERROR,
+} from '../types';
 import LoadingContext from '../loading/loadingContext';
 
 const DownloadState = (props) => {
@@ -43,6 +49,31 @@ const DownloadState = (props) => {
     }
   };
 
+  // View File
+  const viewFile = async (filepath) => {
+    setLoading();
+    try {
+      const res = await axios.get(`/api/v1/download/${filepath}`, {
+        responseType: 'arraybuffer',
+      });
+      var file = new Blob([res.data], { type: 'application/pdf' });
+      console.log(file);
+      var fileURL = URL.createObjectURL(file);
+      window.open(fileURL);
+      dispatch({
+        type: VIEW_FILE,
+      });
+    } catch (err) {
+      console.log(err);
+      dispatch({
+        type: VIEW_FILE_ERROR,
+        payload: err.response,
+      });
+    } finally {
+      resetLoading();
+    }
+  };
+
   // Clear Errors
   const clearErrors = () => dispatch({ type: CLEAR_ERRORS });
 
@@ -51,6 +82,7 @@ const DownloadState = (props) => {
       value={{
         error: state.error,
         download,
+        viewFile,
         clearErrors,
       }}
     >

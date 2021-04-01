@@ -36,7 +36,10 @@ const FindSubject = ({ defaultSelect = 'all' }) => {
   const [searchQuery, setSearchQuery] = useState({
     search: '',
     page: 0,
-    select: defaultSelect,
+    select:
+      defaultSelect !== 'smp'
+        ? defaultSelect
+        : 'id,subjectCode,subjectName,subjectShort,noOfFiles,department,isElective,semNo,listIndex,isFreezed,isOutdated,createdAt,updatedAt,headMasterJSON,updateNo',
   });
   const { search } = searchQuery;
 
@@ -525,7 +528,7 @@ const FindSubject = ({ defaultSelect = 'all' }) => {
           <strong>{iconSearch} Search Subjects</strong>
         </h3>
 
-        {isAdvanced ? null : (
+        {isAdvanced || defaultSelect === 'smp' ? null : (
           <p className='h6 text-muted'>
             <strong>Default Selected Fields: </strong>
             {searchQuery.select.split(',').join(', ')}

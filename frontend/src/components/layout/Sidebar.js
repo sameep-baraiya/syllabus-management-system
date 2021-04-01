@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Card } from 'react-bootstrap';
+
 // Siderbar Link Data
 import {
   home,
@@ -9,20 +10,32 @@ import {
   adminBoard,
 } from '../routing/sidebarLinkData';
 
+// Context
+import AuthContext from '../../context/auth/authContext';
+
 const Sidebar = () => {
   let location = useLocation();
 
+  const authContext = useContext(AuthContext);
+  const { isAuthenticated, user } = authContext;
+
   const sidebarData = () => {
     let path = location.pathname;
-    if (path.includes('dashboard')) {
-      return dashboard;
-    } else if (path.includes('syllabus-manager')) {
-      return syllabusManager;
-    } else if (path.includes('admin-board')) {
-      return adminBoard;
-    } else {
-      return home;
+    if (isAuthenticated) {
+      if (user) {
+        if (path.includes('dashboard')) {
+          return dashboard;
+        } else if (
+          path.includes('syllabus-manager') &&
+          (user.role === 'syllabus-manager' || user.role === 'admin')
+        ) {
+          return syllabusManager;
+        } else if (path.includes('admin-board') && user.role === 'admin') {
+          return adminBoard;
+        }
+      }
     }
+    return home;
   };
   return (
     <Card className='m-2'>

@@ -1,0 +1,15 @@
+.showon-child {
+  display: none;
+}
+
+.showon-parent {
+  margin-bottom: 3rem;
+}
+
+.showon-parent:hover {
+  margin-bottom: calc(3rem - 31px);
+}
+
+.showon-parent:hover .showon-child {
+  display: block;
+}

@@ -1,69 +1,67 @@
-import React, { Fragment, useContext, useState } from 'react';
+import React, { Fragment, useContext } from 'react';
+import { useHistory, useLocation } from 'react-router-dom';
+import PropTypes from 'prop-types';
+
 import SubjectContext from '../../context/subject/subjectContext';
-// import DownloadContext from '../../context/download/downloadContext';
 
-import { Button, ButtonGroup } from 'react-bootstrap';
-import {
-  iconCardView,
-  iconListView,
-  iconJsonView,
-  iconResult,
-} from '../layout/Icon';
-
-// Subject Views
-// import SubjectCardView from './SubjectCardView';
-// import itemListView from './itemListView';
-// import itemJsonView from './itemJsonView';
+import { Button } from 'react-bootstrap';
 
 // Subject Componets
 import FindSubject from '../models/subject/FindSubject';
 import ViewSubject from '../models/subject/ViewSubject';
 
 const DashboardSubject = () => {
+  const useQuery = () => {
+    return new URLSearchParams(useLocation().search);
+  };
+
+  let query = useQuery();
+
+  const history = useHistory();
   const subjectContext = useContext(SubjectContext);
-  const { subjects } = subjectContext;
+  const { subjects, subject, getSubjectByCode, getSubject } = subjectContext;
 
-  // const downloadContext = useContext(DownloadContext);
-  // const { download } = downloadContext;
+  if (query.get('subjectCode') || query.get('id')) {
+    return (
+      <div>
+        <br />
+        {!(subject && subject.subjectCode === query.get('subjectCode')) && (
+          <div className='mb-2'>
+            <Button
+              onClick={() => {
+                if (query.get('id')) {
+                  getSubject(query.get('id'));
+                } else {
+                  getSubjectByCode(query.get('subjectCode'));
+                }
+              }}
+              block
+            >
+              Get complet details about subject{' '}
+              {query.get('id')
+                ? `wiht id ${query.get('id')}`
+                : `wid code ${query.get('subjectCode')}`}
+            </Button>
+          </div>
+        )}
 
-  // const downloadFile = (e) => {
-  //   download(e.target.name);
-  // };
+        {subject &&
+          !query.get('id') &&
+          subject.subjectCode === query.get('subjectCode') && (
+            <ViewSubject subject={subject} />
+          )}
 
-  const [viewMode, setViewMode] = useState('card');
-
-  return (
-    <Fragment>
-      <FindSubject defaultSelect='all' />
-      <h4>
-        <strong>{iconResult} Result :</strong>
-
-        <ButtonGroup aria-label='viewMode' className='float-right'>
-          <Button
-            name='card'
-            variant={viewMode === 'card' ? 'success' : 'warning'}
-            onClick={() => setViewMode('card')}
-          >
-            {iconCardView}
-          </Button>
-          <Button
-            name='list'
-            variant={viewMode === 'list' ? 'success' : 'warning'}
-            onClick={() => setViewMode('list')}
-          >
-            {iconListView}
-          </Button>
-          <Button
-            name='json'
-            variant={viewMode === 'json' ? 'success' : 'warning'}
-            onClick={() => setViewMode('json')}
-          >
-            {iconJsonView}
-          </Button>
-        </ButtonGroup>
-      </h4>
-      <br />
-      {/* {pagination && (
+        {subject && subject.id === parseInt(query.get('id')) && (
+          <ViewSubject subject={subject} />
+        )}
+      </div>
+    );
+  } else {
+    return (
+      <Fragment>
+        <br />
+        <FindSubject defaultSelect='smp' />
+        {/* {pagination && (
         <Pagination>
           <Pagination.Item
             name='first'
@@ -107,16 +105,36 @@ const DashboardSubject = () => {
           ) : null}
         </Pagination>
       )} */}
-      {subjects &&
-        viewMode === 'card' &&
-        subjects.map((it, index) => {
-          return <ViewSubject subject={it} key={index} />;
-        })}
-      {/* {subjects && viewMode === 'list' && itemListView(subjects)} */}
+        {subjects &&
+          subjects.map((it, index) => {
+            return (
+              <div key={index} className='mt-3 showon-parent'>
+                <ViewSubject subject={it} />
+                <Button
+                  variant='primary'
+                  className='showon-child'
+                  block
+                  size='sm'
+                  onClick={() => {
+                    getSubject(it.id);
+                    history.push(
+                      `/dashboard/subject?subjectCode=${it.subjectCode}`
+                    );
+                  }}
+                >
+                  View More
+                </Button>
+              </div>
+            );
+          })}
+        <br />
+      </Fragment>
+    );
+  }
+};
 
-      <br />
-    </Fragment>
-  );
+DashboardSubject.propTypes = {
+  mode: PropTypes.number,
 };
 
 export default DashboardSubject;

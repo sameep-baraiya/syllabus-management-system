@@ -111,6 +111,27 @@ const SubjectState = (props) => {
     }
   };
 
+  // Get Subject by sbuject code
+  const getSubjectByCode = async (code = '') => {
+    setLoading();
+    try {
+      let res;
+      res = await axios.get(`/api/v1/subject/code/${code}`);
+      dispatch({
+        type: GET_SUBJECT,
+        payload: res.data,
+      });
+    } catch (err) {
+      console.log(err);
+      dispatch({
+        type: SUBJECT_ERROR,
+        payload: err.response,
+      });
+    } finally {
+      resetLoading();
+    }
+  };
+
   // Create Sujbect
   const createSubject = async (reqObj) => {
     setLoading();
@@ -246,6 +267,7 @@ const SubjectState = (props) => {
         clearSubjects,
         updateSubject,
         deleteSubject,
+        getSubjectByCode,
       }}
     >
       {props.children}

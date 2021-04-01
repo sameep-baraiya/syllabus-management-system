@@ -25,77 +25,74 @@ import SMDeleteMeeting from './meeting/SMDeleteMeeting';
 // Default Syllabus Manager Page
 import DefaultSM from './DefaultSM';
 
-// Routing Componets
-import PrivateRoute from '../routing/PrivateRoute';
-
 // Page Componets
 import NotFound from '../page/NotFound';
 
 const SyllabusManager = (props) => {
   return (
     <Switch>
-      <PrivateRoute exact path='/syllabus-manager/' component={DefaultSM} />
-      <PrivateRoute
+      <Route exact path='/syllabus-manager/' component={DefaultSM} />
+      <Route
         exact
         path='/syllabus-manager/subject'
         component={SMCreateSubject}
       />
-      <PrivateRoute
+      <Route
         exact
         path='/syllabus-manager/subject/edit'
         component={SMEditSubject}
       />
-      <PrivateRoute
+      <Route
         exact
         path='/syllabus-manager/subject/delete'
         component={SMDeleteSubject}
       />
-      <PrivateRoute
+      <Route
         exact
         path='/syllabus-manager/course/'
         component={SMCreateCourse}
       />
-      <PrivateRoute
+      <Route
         exact
         path='/syllabus-manager/course/edit'
         component={SMEditCourse}
       />
-      <PrivateRoute
+      <Route
         exact
         path='/syllabus-manager/course/delete'
         component={SMDeleteCourse}
       />
-      <PrivateRoute
+      <Route
         exact
         path='/syllabus-manager/academic-batch'
         component={SMCreateAcademicBatch}
       />
-      <PrivateRoute
+      <Route
         exact
         path='/syllabus-manager/academic-batch/edit'
         component={SMEditAcademicBatch}
       />
-      <PrivateRoute
+      <Route
         exact
         path='/syllabus-manager/academic-batch/delete'
         component={SMDeleteAcademicBatch}
       />
-      <PrivateRoute
+      <Route
         exact
         path='/syllabus-manager/academic-batch/create-file'
         component={SMCreateFile}
       />
-      <PrivateRoute
+      <Route
         exact
         path='/syllabus-manager/meeting'
         component={SMCreateMeeting}
       />
-      <PrivateRoute
+      <Route
         exact
         path='/syllabus-manager/meeting/edit'
         component={SMEditMeeting}
       />
-      <PrivateRoute
+      <Route
         exact
         path='/syllabus-manager/meeting/delete'
         component={SMDeleteMeeting}
