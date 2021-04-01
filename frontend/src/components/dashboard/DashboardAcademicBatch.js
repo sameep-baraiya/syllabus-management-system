@@ -13,10 +13,13 @@ const DashboardAcademicBatch = () => {
 
   return (
     <div>
+      <br />
       <FindAcademicBatch defaultSelect='all' />
       {academicBatches &&
         academicBatches.map((it, index) => (
-          <ViewAcademicBatch academicBatch={it} key={index} />
+          <div key={index} className='mt-2'>
+            <ViewAcademicBatch academicBatch={it} />
+          </div>
         ))}
     </div>
   );
