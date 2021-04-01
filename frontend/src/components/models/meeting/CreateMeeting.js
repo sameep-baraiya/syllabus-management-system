@@ -188,6 +188,7 @@ const CreateMeeting = ({ mode, setMode, type }) => {
       requestedChanges: newRequestedChanges !== null ? newRequestedChanges : [],
       department: department !== null ? department : '',
       isFreezed: isFreezed !== null ? isFreezed : false,
+      files: [{ name: '', file: null }],
     });
     setMode('');
   };

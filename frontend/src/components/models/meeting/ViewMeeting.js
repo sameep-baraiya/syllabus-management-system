@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useContext } from 'react';
 import { Card, Badge, Button, Table } from 'react-bootstrap';
 import { iconMeeting } from '../../layout/Icon';
 import PropTypes from 'prop-types';
@@ -6,7 +6,13 @@ import PropTypes from 'prop-types';
 // Utils
 import unf from '../../../utils/unf';
 
+// Context
+import DownloadContext from '../../../context/download/downloadContext';
+
 const ViewMeeting = ({ meeting }) => {
+  const downloadContext = useContext(DownloadContext);
+  const { download } = downloadContext;
+
   if (!unf(meeting)) {
     return null;
   }
@@ -186,7 +192,14 @@ const ViewMeeting = ({ meeting }) => {
                           )}
                         </td>
                         <td>
-                          <Button name={file.path} variant='success' size='sm'>
+                          <Button
+                            variant='success'
+                            size='sm'
+                            block
+                            onClick={() => {
+                              download(file.path);
+                            }}
+                          >
                             Download
                           </Button>
                         </td>
