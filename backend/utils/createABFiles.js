@@ -216,7 +216,11 @@ const createABFiles = async (
             }
 
             await academicBatch.save();
-            io.to(socketId).emit('CREATE_FILE', 'Done');
+            io.to(socketId).emit('CREATE_FILE', {
+              success: true,
+              type: type,
+              code: academicBatch.academicBatchCode,
+            });
           } else {
             shell.exec(
               `wkhtmltopdf '${tempFilePath}' '${newPdfFilePath}'`,
@@ -272,7 +276,11 @@ const createABFiles = async (
 
                 rimraf.sync(tempDirPath);
                 await academicBatch.save();
-                io.to(socketId).emit('CREATE_FILE', 'Done');
+                io.to(socketId).emit('CREATE_FILE', {
+                  success: true,
+                  type: type,
+                  code: academicBatch.academicBatchCode,
+                });
               }
             );
           }

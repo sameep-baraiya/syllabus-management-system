@@ -11,7 +11,7 @@ const CreateFile = ({ mode, setMode }) => {
   const notificationContext = useContext(NotificationContext);
 
   const { academicBatch, createFile } = academicBatchContext;
-  const { socket } = notificationContext;
+  const { socket, createNotification } = notificationContext;
 
   const [reqObj, setReqObj] = useState({
     id: 0,
@@ -56,10 +56,17 @@ const CreateFile = ({ mode, setMode }) => {
     // eslint-disable-next-line
   }, [mode]);
 
-  if (!socket._callbacks.$CREATE_FILE) {
-    socket.on('CREATE_FILE', (data) => {
-      console.log(data);
-    });
+  if (socket) {
+    if (!socket._callbacks.$CREATE_FILE) {
+      socket.on('CREATE_FILE', (data) => {
+        if (data.success) {
+          createNotification(
+            `Academic Batch ${data.code}, File Type ${data.type} Created Successfully`,
+            'success'
+          );
+        }
+      });
+    }
   }
 
   // checkBox onChange handler

@@ -7,6 +7,8 @@ import {
   // SET_NOTIFICATION,
   RECONNECT_NOTIFICATION,
   RECONNECT_ERROR,
+  CREATE_NOTIFICATION,
+  CLEAR_NOTIFICATIONS,
   CLEAR_ERRORS,
 } from '../types';
 import LoadingContext from '../loading/loadingContext';
@@ -16,6 +18,7 @@ const NotificationState = (props) => {
   const { setLoading, resetLoading } = loadingContext;
 
   const initialState = {
+    tray: null,
     socket: null,
     response: null,
     error: null,
@@ -58,6 +61,21 @@ const NotificationState = (props) => {
     }
   };
 
+  // Create Notification
+  const createNotification = async (msg = '', type = 'info') => {
+    dispatch({
+      type: CREATE_NOTIFICATION,
+      payload: { msg, type },
+    });
+  };
+
+  // Clear Notifications
+  const clearNotifications = async () => {
+    dispatch({
+      type: CLEAR_NOTIFICATIONS,
+    });
+  };
+
   // Clear Errors
   const clearErrors = () => dispatch({ type: CLEAR_ERRORS });
 
@@ -65,11 +83,14 @@ const NotificationState = (props) => {
     <NotificationContext.Provider
       value={{
         socket: state.socket,
+        tray: state.tray,
         response: state.response,
         error: state.error,
         clearErrors,
         initNotification,
         reconnectNotification,
+        createNotification,
+        clearNotifications,
       }}
     >
       {props.children}

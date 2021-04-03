@@ -9,7 +9,6 @@ import {
   iconUserProfile,
   iconDashboard,
   iconAnnouncement,
-  iconNotification,
   iconSyllabusManger,
   iconAdminBoard,
 } from './Icon';
@@ -22,6 +21,11 @@ import {
   ButtonGroup,
   Spinner,
 } from 'react-bootstrap';
+
+// Layout Notification
+import Notification from './Notification';
+
+// Context
 import AuthContext from '../../context/auth/authContext';
 import LoadingContext from '../../context/loading/loadingContext';
 import NotificationContext from '../../context/notification/notificationContext';
@@ -52,9 +56,7 @@ const MainNavbar = () => {
   }, []);
 
   useEffect(() => {
-    console.log('no');
     if (user && user.id) {
-      console.log('once');
       initNotification(user.id);
     }
     // eslint-disable-next-line
@@ -159,7 +161,7 @@ const MainNavbar = () => {
             </Button>{' '}
           </Fragment>
         )}
-        <Button variant='warning'>{iconNotification}</Button>{' '}
+        <Notification />
         <Dropdown as={ButtonGroup}>
           <Button variant='success'>
             {iconUser} {user != null && user.name.split('-')[0]}

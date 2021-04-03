@@ -5,6 +5,8 @@ import {
   RECONNECT_NOTIFICATION,
   RECONNECT_ERROR,
   // SET_NOTIFICATION,
+  CREATE_NOTIFICATION,
+  CLEAR_NOTIFICATIONS,
   CLEAR_ERRORS,
 } from '../types';
 const ENDPOINT = 'http://127.0.0.1:5000';
@@ -27,6 +29,23 @@ const notificationReducer = (state, action) => {
       state.socket.connect();
       return {
         ...state,
+      };
+    case CREATE_NOTIFICATION:
+      let tray = null;
+      if (!state.tray) {
+        tray = [];
+      } else {
+        tray = [...state.tray];
+      }
+      tray.push({ ...action.payload });
+      return {
+        ...state,
+        tray: tray,
+      };
+    case CLEAR_NOTIFICATIONS:
+      return {
+        ...state,
+        tray: null,
       };
     case RECONNECT_ERROR:
     case INIT_NOTIFICATION_ERROR:
