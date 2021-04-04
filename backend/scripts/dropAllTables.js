@@ -6,6 +6,7 @@ const AcademicBatch = require('../models/AcademicBatch');
 const Meeting = require('../models/Meeting');
 const AccountRequest = require('../models/AccountRequest');
 const CRUDLog = require('../models/CRUDLog');
+const Announcement = require('../models/Announcement');
 
 const dropAllTable = async () => {
   try {
@@ -17,6 +18,7 @@ const dropAllTable = async () => {
     await Cousre.drop();
     await Subject.drop();
     await Meeting.drop();
+    await Announcement.drop();
   } catch (err) {
     console.error(err);
   }

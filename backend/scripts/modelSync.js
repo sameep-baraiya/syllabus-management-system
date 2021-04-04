@@ -6,6 +6,7 @@ const AcademicBatch = require('../models/AcademicBatch');
 const Meeting = require('../models/Meeting');
 const AccountRequest = require('../models/AccountRequest');
 const CRUDLog = require('../models/CRUDLog');
+const Announcement = require('../models/Announcement');
 
 const modelSync = async () => {
   try {
@@ -17,6 +18,7 @@ const modelSync = async () => {
     await Subject.sync();
     await AcademicBatchSubject.sync();
     await Meeting.sync();
+    await Announcement.sync();
   } catch (err) {
     console.error(err);
   }

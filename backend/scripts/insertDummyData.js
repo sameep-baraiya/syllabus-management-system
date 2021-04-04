@@ -5,6 +5,7 @@ const AcademicBatchSubject = require('../models/AcademicBatchSubject');
 const AcademicBatch = require('../models/AcademicBatch');
 const Meeting = require('../models/Meeting');
 const CRUDLog = require('../models/CRUDLog');
+const Announcement = require('../models/Announcement');
 const subjects = require('./subjects16-20');
 const db = require('../config/initLevelDB');
 
@@ -95,6 +96,17 @@ const insertDummyData = async () => {
     console.log('BOS Meeting Created');
     const acMeeting = await Meeting.create(acMeetingData);
     console.log('AC Meeting Created');
+
+    const announcement = await Announcement.create({
+      title: 'New Subject Announcement',
+      msg: 'There will be new subject in our course BT 127',
+      department: 'IT - Information Technology',
+      crudInfo: {
+        type: 'ANNOUNCEMENT_CREATE',
+        by: 'Script Manger',
+      },
+    });
+    console.log('Announcement Created');
   } catch (err) {
     console.error(err);
   }
