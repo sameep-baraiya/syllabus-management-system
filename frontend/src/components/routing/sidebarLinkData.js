@@ -9,6 +9,7 @@ import {
   iconSystemInfo,
   iconEditSystem,
   iconManageUsers,
+  iconAnnouncement,
 } from '../layout/Icon';
 
 const home = {
@@ -230,6 +231,16 @@ const adminBoard = {
           title: 'Delete User',
           link: '/admin-board/delete-user',
           isDanger: true,
+        },
+      ],
+    },
+    {
+      title: 'Manage Announcement',
+      titleIcon: iconAnnouncement,
+      subLink: [
+        {
+          title: 'Create Announcement',
+          link: '/admin-board/create-announcement',
         },
       ],
     },

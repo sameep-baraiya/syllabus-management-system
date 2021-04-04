@@ -12,7 +12,12 @@ import NotificationContext from '../../context/notification/notificationContext'
 
 const Notification = () => {
   const notificationContext = useContext(NotificationContext);
-  const { tray, clearNotifications } = notificationContext;
+  const {
+    socket,
+    tray,
+    clearNotifications,
+    createNotification,
+  } = notificationContext;
 
   const [show, setShow] = useState(false);
   const [visited, setVisited] = useState(true);
@@ -23,6 +28,15 @@ const Notification = () => {
     }
     // eslint-disable-next-line
   }, [tray]);
+
+  if (socket) {
+    if (!socket._callbacks.$MAKE_ANNOUNCEMENT) {
+      socket.on('MAKE_ANNOUNCEMENT', () => {
+        createNotification('There is new announcement done', 'success');
+      });
+    }
+  }
+
   return (
     <Fragment>
       <div className='notification_popover_wrapper'>

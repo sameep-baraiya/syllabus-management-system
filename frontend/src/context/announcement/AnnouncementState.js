@@ -2,7 +2,13 @@ import React, { useReducer, useContext } from 'react';
 import axios from 'axios';
 import AnnouncementContext from './announcementContext';
 import announcementReducer from './announcementReducer';
-import { GET_ANNOUNCEMENTS, ANNOUNCEMENTS_ERROR, CLEAR_ERRORS } from '../types';
+import {
+  GET_ANNOUNCEMENTS,
+  CREATE_ANNOUNCEMENT,
+  CREATE_ERROR,
+  ANNOUNCEMENTS_ERROR,
+  CLEAR_ERRORS,
+} from '../types';
 import LoadingContext from '../loading/loadingContext';
 
 const AnnouncementState = (props) => {
@@ -37,6 +43,33 @@ const AnnouncementState = (props) => {
     }
   };
 
+  // Create Announcement
+  const createAnnouncement = async (reqObj) => {
+    setLoading();
+    try {
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
+
+      const res = await axios.post(`/api/v1/announcement`, reqObj, config);
+
+      dispatch({
+        type: CREATE_ANNOUNCEMENT,
+        payload: res.data,
+      });
+    } catch (err) {
+      console.error(err);
+      dispatch({
+        type: CREATE_ERROR,
+        payload: err.response,
+      });
+    } finally {
+      resetLoading();
+    }
+  };
+
   // Clear Errors
   const clearErrors = () => dispatch({ type: CLEAR_ERRORS });
 
@@ -47,6 +80,7 @@ const AnnouncementState = (props) => {
         announcements: state.announcements,
         clearErrors,
         getAnnouncements,
+        createAnnouncement,
       }}
     >
       {props.children}

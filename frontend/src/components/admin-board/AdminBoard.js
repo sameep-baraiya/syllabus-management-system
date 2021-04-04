@@ -13,6 +13,9 @@ import ABFindUser from './user/ABFindUser';
 import ABEditUser from './user/ABEditUser';
 import ABDeleteUser from './user/ABDeleteUser';
 
+// Admin Board Announcement Sub Componets
+import ABCreateAnnouncement from './announcement/ABCreateAnnouncement';
+
 // Default Admin Board Page
 import DefaultAB from './DefaultAB';
 
@@ -34,6 +37,11 @@ const AdminBoard = () => {
         exact
         path='/admin-board/account-request'
         component={AccountRequest}
+      />
+      <Route
+        exact
+        path='/admin-board/create-announcement'
+        component={ABCreateAnnouncement}
       />
       <Route component={NotFound} />
     </Switch>
