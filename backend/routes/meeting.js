@@ -38,13 +38,25 @@ const router = express.Router();
 
 router
   .route('/')
-  .post(protect, upload.array('file'), createMeeting)
-  .get(protect, advancedResult(Meeting, ['meetingCode']), getMeetings);
+  .post(
+    protect(['admin', 'syllabus-manager']),
+    upload.array('file'),
+    createMeeting
+  )
+  .get(
+    protect(['admin', 'faculty-member', 'syllabus-manager']),
+    advancedResult(Meeting, ['meetingCode']),
+    getMeetings
+  );
 
 router
   .route('/:id')
-  .get(protect, getMeeting)
-  .put(protect, upload.array('file'), updateMeeting)
-  .delete(protect, deleteMeeting);
+  .get(protect(['admin', 'faculty-member', 'syllabus-manager']), getMeeting)
+  .put(
+    protect(['admin', 'syllabus-manager']),
+    upload.array('file'),
+    updateMeeting
+  )
+  .delete(protect(['admin', 'syllabus-manager']), deleteMeeting);
 
 module.exports = router;

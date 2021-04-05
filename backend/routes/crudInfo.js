@@ -7,6 +7,10 @@ const advancedResult = require('../middleware/advancedResult');
 
 router
   .route('/')
-  .get(protect, advancedResult(CRUDLog, ['msg', 'by']), getCRUDRecords);
+  .get(
+    protect(['admin']),
+    advancedResult(CRUDLog, ['msg', 'by']),
+    getCRUDRecords
+  );
 
 module.exports = router;

@@ -48,6 +48,7 @@ app.use('/api/v1/crud-info', crudInfo);
 app.use('/api/v1/storage', storage);
 app.use('/api/v1/user', user);
 app.use('/api/v1/config', config);
+app.use('/api/v1/account-request', accountRequest);
 app.use('/api/v1/announcement', announcement);
 
 // Handle all error

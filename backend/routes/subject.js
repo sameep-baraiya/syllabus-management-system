@@ -47,19 +47,26 @@ const {
 
 const router = express.Router();
 
-router.route('/').post(protect, uploadFiels, createSubject);
-router
-  .route('/:id')
-  .get(protect, getSubject)
-  .delete(protect, deleteSubject)
-  .put(protect, uploadFiels, updateSubject);
 router
   .route('/')
+  .post(protect(['admin', 'syllabus-manager']), uploadFiels, createSubject)
   .get(
-    protect,
+    protect(['admin', 'faculty-member', 'syllabus-manager']),
     advancedResult(Subject, ['subjectCode', 'subjectName', 'subjectShort']),
     getSubjects
   );
-router.route('/code/:code').get(protect, getSubjectByCode);
+
+router
+  .route('/:id')
+  .get(protect(['admin', 'faculty-member', 'syllabus-manager']), getSubject)
+  .delete(protect(['admin', 'syllabus-manager']), deleteSubject)
+  .put(protect(['admin', 'syllabus-manager']), uploadFiels, updateSubject);
+
+router
+  .route('/code/:code')
+  .get(
+    protect(['admin', 'faculty-member', 'syllabus-manager']),
+    getSubjectByCode
+  );
 
 module.exports = router;

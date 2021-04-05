@@ -18,18 +18,21 @@ const router = express.Router();
 
 router
   .route('/')
-  .post(protect, createAcademicBatch)
+  .post(protect(['admin', 'syllabus-manager']), createAcademicBatch)
   .get(
-    protect,
+    protect(['admin', 'faculty-member', 'syllabus-manager']),
     advancedResult(AcademicBatch, ['academicBatchCode', 'academicBatchName']),
     getAcademicBatches
   );
 
 router
   .route('/:id')
-  .get(protect, getAcademicBatch)
-  .post(protect, createFile)
-  .put(protect, updateAcademicBatch)
-  .delete(protect, deleteAcademicBatch);
+  .get(
+    protect(['admin', 'faculty-member', 'syllabus-manager']),
+    getAcademicBatch
+  )
+  .post(protect(['admin', 'syllabus-manager']), createFile)
+  .put(protect(['admin', 'syllabus-manager']), updateAcademicBatch)
+  .delete(protect(['admin', 'syllabus-manager']), deleteAcademicBatch);
 
 module.exports = router;

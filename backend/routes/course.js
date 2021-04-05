@@ -14,17 +14,17 @@ const advancedResult = require('../middleware/advancedResult');
 
 router
   .route('/')
-  .post(protect, createCourse)
+  .post(protect(['admin', 'syllabus-manager']), createCourse)
   .get(
-    protect,
+    protect(['admin', 'faculty-member', 'syllabus-manager']),
     advancedResult(Course, ['courseCode', 'courseName']),
     getCourses
   );
 
 router
   .route('/:id')
-  .get(protect, getCourse)
-  .put(protect, updateCourse)
-  .delete(protect, deleteCourse);
+  .get(protect(['admin', 'faculty-member', 'syllabus-manager']), getCourse)
+  .put(protect(['admin', 'syllabus-manager']), updateCourse)
+  .delete(protect(['admin', 'syllabus-manager']), deleteCourse);
 
 module.exports = router;

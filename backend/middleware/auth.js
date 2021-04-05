@@ -3,7 +3,7 @@ const ErrorResponse = require('../utils/ErrorResponse');
 const User = require('../models/User');
 
 // Protect routes
-exports.protect = async (req, res, next) => {
+exports.protect = (roleArr = ['admin']) => async (req, res, next) => {
   try {
     let token;
 
@@ -33,9 +33,14 @@ exports.protect = async (req, res, next) => {
         );
       }
       const user = await User.findByPk(decoded.id, {
-        attributes: ['id', 'name'],
+        attributes: ['id', 'name', 'role'],
       });
       if (user === null) {
+        return next(
+          new ErrorResponse('Not authorized to access this route', 401)
+        );
+      }
+      if (!roleArr.includes(user.role)) {
         return next(
           new ErrorResponse('Not authorized to access this route', 401)
         );

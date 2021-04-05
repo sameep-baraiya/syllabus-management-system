@@ -15,19 +15,19 @@ const advancedResult = require('../middleware/advancedResult');
 // User Model
 const User = require('../models/User');
 
-router.route('/logged').get(protect, getLoggedUsers);
+router.route('/logged').get(protect(['admin']), getLoggedUsers);
 router
   .route('/')
   .get(
-    protect,
+    protect(['admin']),
     advancedResult(User, ['name', 'email', 'contactNumber']),
     getUsers
   );
 
 router
   .route('/:id')
-  .get(protect, getUser)
-  .put(protect, updateUser)
-  .delete(protect, deleteUser);
+  .get(protect(['admin']), getUser)
+  .put(protect(['admin']), updateUser)
+  .delete(protect(['admin']), deleteUser);
 
 module.exports = router;

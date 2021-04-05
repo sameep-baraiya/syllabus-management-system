@@ -6,7 +6,7 @@ const {
   updateAccountRequest,
 } = require('../controllers/accountRequest');
 
-router.route('/').get(protect, getAccountRequests);
-router.route('/:id').put(protect, updateAccountRequest);
+router.route('/').get(protect(['admin']), getAccountRequests);
+router.route('/:id').put(protect(['admin']), updateAccountRequest);
 
 module.exports = router;

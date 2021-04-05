@@ -11,13 +11,19 @@ const {
 
 router
   .route('/')
-  .get(protect, getAnnouncements)
-  .post(protect, createAnnouncement);
+  .get(
+    protect(['admin', 'faculty-member', 'syllabus-manager']),
+    getAnnouncements
+  )
+  .post(protect(['admin']), createAnnouncement);
 
 router
   .route('/:id')
-  .get(protect, getAnnouncement)
-  .put(protect, updateAnnouncement)
-  .delete(protect, deleteAnnouncement);
+  .get(
+    protect(['admin', 'faculty-member', 'syllabus-manager']),
+    getAnnouncement
+  )
+  .put(protect(['admin']), updateAnnouncement)
+  .delete(protect(['admin']), deleteAnnouncement);
 
 module.exports = router;
