@@ -1,4 +1,5 @@
 import React, { Fragment, useContext, useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import {
   iconUser,
   iconLogOut,
@@ -32,6 +33,7 @@ import NotificationContext from '../../context/notification/notificationContext'
 import ConfigContext from '../../context/config/configContext';
 
 const MainNavbar = () => {
+  const histroy = useHistory();
   const authContext = useContext(AuthContext);
   const loadingContext = useContext(LoadingContext);
   const notificationContext = useContext(NotificationContext);
@@ -163,7 +165,12 @@ const MainNavbar = () => {
         )}
         <Notification />
         <Dropdown as={ButtonGroup}>
-          <Button variant='success'>
+          <Button
+            variant='success'
+            onClick={() => {
+              histroy.push('/profile');
+            }}
+          >
             {iconUser} {user != null && user.name.split('-')[0]}
           </Button>
 

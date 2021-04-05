@@ -33,6 +33,9 @@ import Dashboard from './components/dashboard/Dashboard';
 // Announcement Componets
 import Announcement from './components/announcement/Announcement';
 
+// Profile Componets
+import Profile from './components/profile/Profile';
+
 // State
 import AuthState from './context/auth/AuthState';
 import SubjectState from './context/subject/SubjectState';
@@ -102,6 +105,15 @@ function App() {
                                             <PrivateRoute
                                               path='/announcement'
                                               component={Announcement}
+                                              role={[
+                                                'admin',
+                                                'faculty-member',
+                                                'syllabus-manager',
+                                              ]}
+                                            />
+                                            <PrivateRoute
+                                              path='/profile'
+                                              component={Profile}
                                               role={[
                                                 'admin',
                                                 'faculty-member',

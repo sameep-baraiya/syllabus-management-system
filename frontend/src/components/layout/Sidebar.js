@@ -34,6 +34,8 @@ const Sidebar = () => {
           return adminBoard;
         } else if (path.includes('announcement')) {
           return null;
+        } else if (path.includes('profile')) {
+          return null;
         }
       }
     }
