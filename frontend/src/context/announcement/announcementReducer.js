@@ -4,6 +4,10 @@ import {
   CREATE_ERROR,
   ANNOUNCEMENTS_ERROR,
   CLEAR_ERRORS,
+  GET_ANNOUNCEMENT,
+  ANNOUNCEMENT_ERROR,
+  UPDATE_ANNOUNCEMENT,
+  UPDATE_ERROR,
 } from '../types';
 
 const loadingReducer = (state, action) => {
@@ -14,14 +18,23 @@ const loadingReducer = (state, action) => {
         announcements: action.payload.data,
         error: null,
       };
+    case GET_ANNOUNCEMENT:
+      return {
+        ...state,
+        announcement: action.payload.data,
+        error: null,
+      };
+    case ANNOUNCEMENT_ERROR:
     case ANNOUNCEMENTS_ERROR:
     case CREATE_ERROR:
+    case UPDATE_ERROR:
       return {
         ...state,
         error: action.payload,
       };
     case CLEAR_ERRORS:
     case CREATE_ANNOUNCEMENT:
+    case UPDATE_ANNOUNCEMENT:
       return {
         ...state,
         error: null,

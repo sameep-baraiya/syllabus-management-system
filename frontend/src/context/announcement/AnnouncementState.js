@@ -8,6 +8,10 @@ import {
   CREATE_ERROR,
   ANNOUNCEMENTS_ERROR,
   CLEAR_ERRORS,
+  GET_ANNOUNCEMENT,
+  ANNOUNCEMENT_ERROR,
+  UPDATE_ANNOUNCEMENT,
+  UPDATE_ERROR,
 } from '../types';
 import LoadingContext from '../loading/loadingContext';
 
@@ -17,6 +21,7 @@ const AnnouncementState = (props) => {
 
   const initialState = {
     announcements: null,
+    announcement: null,
     error: null,
   };
 
@@ -70,6 +75,57 @@ const AnnouncementState = (props) => {
     }
   };
 
+  // Get Announcement
+  const getAnnouncement = async (id) => {
+    setLoading();
+    try {
+      const res = await axios.get(`/api/v1/announcement/${id}`);
+
+      dispatch({
+        type: GET_ANNOUNCEMENT,
+        payload: res.data,
+      });
+    } catch (err) {
+      console.error(err);
+      dispatch({
+        type: ANNOUNCEMENT_ERROR,
+        payload: err.response,
+      });
+    } finally {
+      resetLoading();
+    }
+  };
+
+  // Update Announcement
+  const updateAnnouncement = async (reqObj) => {
+    setLoading();
+    try {
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
+
+      const res = await axios.put(
+        `/api/v1/announcement/${reqObj.id}`,
+        reqObj,
+        config
+      );
+
+      dispatch({
+        type: UPDATE_ANNOUNCEMENT,
+        payload: res.data,
+      });
+    } catch (err) {
+      dispatch({
+        type: UPDATE_ERROR,
+        payload: err.response,
+      });
+    } finally {
+      resetLoading();
+    }
+  };
+
   // Clear Errors
   const clearErrors = () => dispatch({ type: CLEAR_ERRORS });
 
@@ -78,9 +134,12 @@ const AnnouncementState = (props) => {
       value={{
         error: state.error,
         announcements: state.announcements,
+        announcement: state.announcement,
         clearErrors,
         getAnnouncements,
         createAnnouncement,
+        getAnnouncement,
+        updateAnnouncement,
       }}
     >
       {props.children}

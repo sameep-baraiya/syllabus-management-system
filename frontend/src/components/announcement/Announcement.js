@@ -1,11 +1,14 @@
 import React, { useContext } from 'react';
-import { Button, Card, Badge } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 
 // Layout
 import { iconAnnouncement } from '../layout/Icon';
 
 // Context
 import AnnouncementContext from '../../context/announcement/announcementContext';
+
+// Announcement Model Components
+import ViewAnnouncement from '../models/announcement/ViewAnnouncement';
 
 const Announcement = () => {
   const announcementContext = useContext(AnnouncementContext);
@@ -30,17 +33,7 @@ const Announcement = () => {
       {announcements &&
         announcements.map((it, index) => (
           <div key={index} className='mb-3'>
-            <Card>
-              <Card.Body>
-                <Card.Title>
-                  {iconAnnouncement} {it.title}
-                </Card.Title>
-                <Card.Subtitle className='mb-2'>
-                  <Badge variant='success'>{it.department}</Badge>
-                </Card.Subtitle>
-                <Card.Text>{it.msg}</Card.Text>
-              </Card.Body>
-            </Card>
+            <ViewAnnouncement announcement={it} />
           </div>
         ))}
     </div>

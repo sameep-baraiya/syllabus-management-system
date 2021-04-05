@@ -242,6 +242,10 @@ const adminBoard = {
           title: 'Create Announcement',
           link: '/admin-board/create-announcement',
         },
+        {
+          title: 'Edit Announcement',
+          link: '/admin-board/edit-announcement',
+        },
       ],
     },
   ],
