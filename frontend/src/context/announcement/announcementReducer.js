@@ -8,6 +8,8 @@ import {
   ANNOUNCEMENT_ERROR,
   UPDATE_ANNOUNCEMENT,
   UPDATE_ERROR,
+  DELETE_ANNOUNCEMENT,
+  DELETE_ERROR,
 } from '../types';
 
 const loadingReducer = (state, action) => {
@@ -28,6 +30,7 @@ const loadingReducer = (state, action) => {
     case ANNOUNCEMENTS_ERROR:
     case CREATE_ERROR:
     case UPDATE_ERROR:
+    case DELETE_ERROR:
       return {
         ...state,
         error: action.payload,
@@ -35,6 +38,7 @@ const loadingReducer = (state, action) => {
     case CLEAR_ERRORS:
     case CREATE_ANNOUNCEMENT:
     case UPDATE_ANNOUNCEMENT:
+    case DELETE_ANNOUNCEMENT:
       return {
         ...state,
         error: null,

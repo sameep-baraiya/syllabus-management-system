@@ -34,6 +34,7 @@ Announcement.init(
                 msg: `Announcement ${it.id} created by : ${it.crudInfo.by}`,
                 type: 'CREATE',
                 model: 'Announcement',
+                by: it.crudInfo.by,
               });
               break;
             default:

@@ -6,6 +6,7 @@ const {
   createAnnouncement,
   getAnnouncement,
   updateAnnouncement,
+  deleteAnnouncement,
 } = require('../controllers/announcement');
 
 router
@@ -16,6 +17,7 @@ router
 router
   .route('/:id')
   .get(protect, getAnnouncement)
-  .put(protect, updateAnnouncement);
+  .put(protect, updateAnnouncement)
+  .delete(protect, deleteAnnouncement);
 
 module.exports = router;

@@ -1,5 +1,6 @@
 const ErrorResponse = require('../utils/ErrorResponse');
 const Announcement = require('../models/Announcement');
+const User = require('../models/User');
 
 // @desc    Get Announcements
 // @route   GET /api/v1/announcement/
@@ -101,6 +102,40 @@ exports.updateAnnouncement = async (req, res, next) => {
         new ErrorResponse('Error: Unable to update announcement', 400)
       );
     }
+
+    res.status(200).json({
+      success: true,
+    });
+  } catch (err) {
+    return next(err);
+  }
+};
+
+// @desc    Delete Announcement
+// @route   DELETE /api/v1/announcement/:id
+// @access  Private
+exports.deleteAnnouncement = async (req, res, next) => {
+  const { id } = req.params;
+  const { password } = req.body;
+
+  try {
+    const user = await User.findByPk(req.user.id);
+
+    if (!user.matchPassword(password)) {
+      return next(new ErrorResponse('Passowrd not matched', 404));
+    }
+
+    const announcement = await Announcement.findByPk(id);
+    if (announcement === null) {
+      return next(new ErrorResponse('announcement not found', 404));
+    }
+
+    announcement.crudInfo = {
+      type: 'ANNOUNCEMENT_DELETE',
+      by: req.user.name,
+    };
+
+    await announcement.destroy();
 
     res.status(200).json({
       success: true,

@@ -246,6 +246,11 @@ const adminBoard = {
           title: 'Edit Announcement',
           link: '/admin-board/edit-announcement',
         },
+        {
+          title: 'Delete Announcement',
+          link: '/admin-board/delete-announcement',
+          isDanger: true,
+        },
       ],
     },
   ],

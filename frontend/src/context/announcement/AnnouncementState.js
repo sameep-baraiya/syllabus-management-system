@@ -12,6 +12,8 @@ import {
   ANNOUNCEMENT_ERROR,
   UPDATE_ANNOUNCEMENT,
   UPDATE_ERROR,
+  DELETE_ANNOUNCEMENT,
+  DELETE_ERROR,
 } from '../types';
 import LoadingContext from '../loading/loadingContext';
 
@@ -126,6 +128,29 @@ const AnnouncementState = (props) => {
     }
   };
 
+  // Delete Announcement
+  const deleteAnnouncement = async (reqObj) => {
+    setLoading();
+    try {
+      let res;
+      res = await axios.delete(`/api/v1/announcement/${reqObj.id}`, {
+        data: { password: reqObj.password },
+      });
+      dispatch({
+        type: DELETE_ANNOUNCEMENT,
+        payload: res.data,
+      });
+    } catch (err) {
+      console.log(err);
+      dispatch({
+        type: DELETE_ERROR,
+        payload: err.response,
+      });
+    } finally {
+      resetLoading();
+    }
+  };
+
   // Clear Errors
   const clearErrors = () => dispatch({ type: CLEAR_ERRORS });
 
@@ -140,6 +165,7 @@ const AnnouncementState = (props) => {
         createAnnouncement,
         getAnnouncement,
         updateAnnouncement,
+        deleteAnnouncement,
       }}
     >
       {props.children}

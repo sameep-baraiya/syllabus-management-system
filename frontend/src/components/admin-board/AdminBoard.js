@@ -16,6 +16,7 @@ import ABDeleteUser from './user/ABDeleteUser';
 // Admin Board Announcement Sub Componets
 import ABCreateAnnouncement from './announcement/ABCreateAnnouncement';
 import ABEditAnnouncement from './announcement/ABEditAnnouncement';
+import ABDeleteAnnouncement from './announcement/ABDeleteAnnouncement';
 
 // Default Admin Board Page
 import DefaultAB from './DefaultAB';
@@ -48,6 +49,11 @@ const AdminBoard = () => {
         exact
         path='/admin-board/edit-announcement'
         component={ABEditAnnouncement}
+      />
+      <Route
+        exact
+        path='/admin-board/delete-announcement'
+        component={ABDeleteAnnouncement}
       />
       <Route component={NotFound} />
     </Switch>
