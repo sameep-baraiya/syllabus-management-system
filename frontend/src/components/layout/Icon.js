@@ -88,8 +88,9 @@ const fucIconAlert = (variant) => {
     case 'warning':
       return <FontAwesomeIcon icon={faExclamationCircle}></FontAwesomeIcon>;
     case 'info':
-    default:
       return <FontAwesomeIcon icon={faQuestionCircle}></FontAwesomeIcon>;
+    default:
+      return null;
   }
 };
 const iconMeeting = <FontAwesomeIcon icon={faHandshake} />;

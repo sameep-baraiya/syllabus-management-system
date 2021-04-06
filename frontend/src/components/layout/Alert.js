@@ -5,7 +5,7 @@ import AlertContext from '../../context/alert/alertContext';
 
 const MainAlert = () => {
   const alertContext = useContext(AlertContext);
-  const { message, variant, isVisible } = alertContext;
+  const { alert } = alertContext;
 
   const visible = {
     visibility: 'visible',
@@ -31,8 +31,8 @@ const MainAlert = () => {
         zIndex: '-10',
       }}
     >
-      <Alert variant={variant} style={isVisible ? visible : hidden}>
-        {fucIconAlert(variant)} {message}
+      <Alert variant={alert && alert.variant} style={alert ? visible : hidden}>
+        {fucIconAlert(alert && alert.variant)} {alert && alert.message}
       </Alert>
     </div>
   );

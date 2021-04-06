@@ -16,11 +16,17 @@ import {
   DELETE_SUBJECT,
   DELETE_ERROR,
 } from '../types';
+
+// Context
 import LoadingContext from '../loading/loadingContext';
+import AlertContext from '../alert/alertContext';
 
 const SubjectState = (props) => {
   const loadingContext = useContext(LoadingContext);
   const { setLoading, resetLoading } = loadingContext;
+
+  const alertContext = useContext(AlertContext);
+  const { setAlert } = alertContext;
 
   const initialState = {
     subject: null,
@@ -79,6 +85,9 @@ const SubjectState = (props) => {
         type: GET_SUBJECTS,
         payload: res.data,
       });
+      if (res.data.data.length === 0) {
+        setAlert('No subjects found for particular query', 'info');
+      }
     } catch (err) {
       console.log(err);
       dispatch({

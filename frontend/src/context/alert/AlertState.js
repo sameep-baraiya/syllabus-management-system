@@ -5,9 +5,7 @@ import { SET_ALERT, RESET_ALERT } from '../types';
 
 const AlertState = (props) => {
   const initialState = {
-    message: '',
-    variant: 'info',
-    isVisible: false,
+    alert: null,
   };
 
   const [state, dispatch] = useReducer(alertReducer, initialState);
@@ -32,9 +30,7 @@ const AlertState = (props) => {
   return (
     <AlertContext.Provider
       value={{
-        message: state.message,
-        variant: state.variant,
-        isVisible: state.isVisible,
+        alert: state.alert,
         setAlert,
         resetAlert,
       }}

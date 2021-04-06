@@ -6,6 +6,11 @@ const router = express.Router();
 
 router.route('/register').post(registerVal, register);
 router.route('/login').post(loginVal, login);
-router.route('/').get(protect(['admin']), getLoggedInUser);
+router
+  .route('/')
+  .get(
+    protect(['admin', 'faculty-member', 'syllabus-manager']),
+    getLoggedInUser
+  );
 
 module.exports = router;

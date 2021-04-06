@@ -5,14 +5,12 @@ const alertReducer = (state, action) => {
     case SET_ALERT:
       return {
         ...state,
-        message: action.payload.message,
-        variant: action.payload.variant,
-        isVisible: true,
+        alert: action.payload,
       };
     case RESET_ALERT:
       return {
         ...state,
-        isVisible: false,
+        alert: null,
       };
     default:
       return state;
