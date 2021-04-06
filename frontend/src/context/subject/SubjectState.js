@@ -89,7 +89,7 @@ const SubjectState = (props) => {
         setAlert('No subjects found for particular query', 'info');
       }
     } catch (err) {
-      console.log(err);
+      setAlert('Error in getting subjects', 'danger');
       dispatch({
         type: SUBJECTS_ERROR,
         payload: err.response,

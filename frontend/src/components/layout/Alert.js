@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { Alert } from 'react-bootstrap';
 import { fucIconAlert } from './Icon';
 import AlertContext from '../../context/alert/alertContext';
@@ -21,6 +21,16 @@ const MainAlert = () => {
     zIndex: '-10',
   };
 
+  const [variant, setVariant] = useState(null);
+  const [message, setMessage] = useState(null);
+
+  useEffect(() => {
+    if (alert) {
+      setVariant(alert.variant);
+      setMessage(alert.message);
+    }
+  }, [alert]);
+
   return (
     <div
       style={{
@@ -31,8 +41,8 @@ const MainAlert = () => {
         zIndex: '-10',
       }}
     >
-      <Alert variant={alert && alert.variant} style={alert ? visible : hidden}>
-        {fucIconAlert(alert && alert.variant)} {alert && alert.message}
+      <Alert variant={variant} style={alert ? visible : hidden}>
+        {fucIconAlert(variant)} {message}
       </Alert>
     </div>
   );
