@@ -11,14 +11,12 @@ const MainAlert = () => {
     visibility: 'visible',
     opacity: '1',
     transition: 'opacity 0.3s linear',
-    zIndex: '+10',
   };
 
   const hidden = {
     visibility: 'hidden',
     opacity: '0',
     transition: 'visibility 0s 0.3s, opacity 0.3s linear',
-    zIndex: '-10',
   };
 
   const [variant, setVariant] = useState(null);
@@ -38,7 +36,7 @@ const MainAlert = () => {
         display: 'flex',
         justifyContent: 'center',
         position: 'fixed',
-        zIndex: '-10',
+        zIndex: alert ? '+10' : '-10',
       }}
     >
       <Alert variant={variant} style={alert ? visible : hidden}>

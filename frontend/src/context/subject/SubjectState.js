@@ -110,7 +110,7 @@ const SubjectState = (props) => {
         payload: res.data,
       });
     } catch (err) {
-      console.log(err);
+      setAlert('Error in getting subject', 'danger');
       dispatch({
         type: SUBJECT_ERROR,
         payload: err.response,
@@ -131,7 +131,7 @@ const SubjectState = (props) => {
         payload: res.data,
       });
     } catch (err) {
-      console.log(err);
+      setAlert(`Error in getting subject code:${code}`, 'danger');
       dispatch({
         type: SUBJECT_ERROR,
         payload: err.response,
