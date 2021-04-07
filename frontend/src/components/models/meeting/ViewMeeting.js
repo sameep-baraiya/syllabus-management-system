@@ -117,6 +117,7 @@ const ViewMeeting = ({ meeting }) => {
                   <tr className='table-secondary'>
                     <th>Index</th>
                     <th>Type of Change</th>
+                    <th>Type of Course</th>
                     <th>Type of Modificaion</th>
                     <th>Effective From</th>
                     <th>Is Approved</th>
@@ -128,6 +129,7 @@ const ViewMeeting = ({ meeting }) => {
                       <tr className='table-info'>
                         <td>{index + 1}</td>
                         <td>{rq.type}</td>
+                        <td>{rq.cType}</td>
                         <td>{rq.mType}</td>
                         <td>
                           {new Date(rq.effectiveFrom).toLocaleString('en-BZ', {

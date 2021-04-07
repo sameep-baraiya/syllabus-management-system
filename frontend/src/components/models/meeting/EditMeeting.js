@@ -115,6 +115,7 @@ const EditMeeting = ({ mode, setMode }) => {
     requestedChanges.push({
       type: 'None',
       mType: 'None',
+      cType: 'None',
       description: '',
       linkedSubjectCode: '',
       linkedSubjectName: '',
@@ -706,6 +707,19 @@ const EditMeeting = ({ mode, setMode }) => {
                             <option value='add'>Addition of Subject</option>
                             <option value='mod'>Modification of Subject</option>
                             <option value='dep'>Deprecation of Subject</option>
+                          </Form.Control>
+                        </Col>
+                        <Col>
+                          <Form.Label>Type of Course</Form.Label>
+                          <Form.Control
+                            name={`${index}.cType`}
+                            as='select'
+                            value={change.cType}
+                            onChange={onRequestChange}
+                          >
+                            <option>None</option>
+                            <option value='btech'>B. Tech</option>
+                            <option value='mtech'>M. Tech</option>
                           </Form.Control>
                         </Col>
                         {change.type === 'mod' && (

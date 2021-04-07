@@ -186,6 +186,8 @@ const bosMeetingData = {
   requestedChanges: [
     {
       type: 'add',
+      cType: 'btech',
+      mType: 'None',
       description: 'Added New Subject For Sem 2 student',
       linkedSubjectCode: 'NEWSUB',
       linkedSubjectName: 'THE NEW SUBJECT',
@@ -194,6 +196,7 @@ const bosMeetingData = {
     },
     {
       type: 'mod',
+      cType: 'mtech',
       mType: 'theory',
       description: 'Modifed thoery of subject MODSUB added new topices',
       linkedSubjectCode: 'MODSUB',
@@ -203,6 +206,8 @@ const bosMeetingData = {
     },
     {
       type: 'dep',
+      cType: 'btech',
+      mType: 'None',
       description: 'Deprecation of subject DEPSUB',
       linkedSubjectCode: 'DEPSUB',
       linkedSubjectName: 'DEPRECATION SUBJECT',
@@ -226,6 +231,8 @@ const acMeetingData = {
   requestedChanges: [
     {
       type: 'add',
+      cType: 'btech',
+      mType: 'None',
       description: 'Added New Subject For Sem 2 student',
       linkedSubjectCode: 'NEWSUB',
       linkedSubjectName: 'THE NEW SUBJECT',
@@ -235,6 +242,7 @@ const acMeetingData = {
     {
       type: 'mod',
       mType: 'theory',
+      cType: 'mtech',
       description: 'Modifed thoery of subject MODSUB but no new topices',
       linkedSubjectCode: 'MODSUB',
       linkedSubjectName: 'MODIFED SUBJECT',
@@ -243,6 +251,8 @@ const acMeetingData = {
     },
     {
       type: 'dep',
+      cType: 'btech',
+      mType: 'None',
       description: 'Deprecation of subject DEPSUB',
       linkedSubjectCode: 'DEPSUB',
       linkedSubjectName: 'DEPRECATION SUBJECT',
