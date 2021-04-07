@@ -1,7 +1,15 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 
 const NotFound = () => {
-  return <Fragment>Not Found</Fragment>;
+  return (
+    <div>
+      <br />
+      <h2>
+        <strong>Page Not Found</strong>
+      </h2>
+      <p className='text-muted'>Page you are looking for could not be found</p>
+    </div>
+  );
 };
 
 export default NotFound;

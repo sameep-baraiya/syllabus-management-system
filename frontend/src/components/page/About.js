@@ -1,7 +1,15 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 
 const About = () => {
-  return <Fragment>About</Fragment>;
+  return (
+    <div>
+      <br />
+      <h2>
+        <strong>About</strong>
+      </h2>
+      <p className='text-muted'>This is about page of application</p>
+    </div>
+  );
 };
 
 export default About;
