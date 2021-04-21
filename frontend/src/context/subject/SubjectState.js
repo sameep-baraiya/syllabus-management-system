@@ -168,6 +168,7 @@ const SubjectState = (props) => {
         },
       };
       const res = await axios.post('/api/v1/subject', formData, config);
+      setAlert('Subject Created Successfully', 'success');
 
       dispatch({
         type: CREATE_SUBJECT,
@@ -175,6 +176,8 @@ const SubjectState = (props) => {
       });
     } catch (err) {
       console.error(err);
+      setAlert('Error in creating subject', 'danger');
+
       dispatch({
         type: CREATE_ERROR,
         payload: err.response,
@@ -199,9 +202,11 @@ const SubjectState = (props) => {
         formData.append('practical', practicalFile.file, practicalFile.name);
       }
 
-      files.forEach((it) => {
-        formData.append('file', it.file, it.name);
-      });
+      if (files) {
+        files.forEach((it) => {
+          formData.append('file', it.file, it.name);
+        });
+      }
 
       formData.append('data', JSON.stringify(rest));
 
@@ -217,12 +222,16 @@ const SubjectState = (props) => {
         config
       );
 
+      setAlert('Subject Updated Successfully', 'success');
+
       dispatch({
         type: UPDATE_SUBJECT,
         payload: res.data,
       });
     } catch (err) {
       console.error(err);
+      setAlert('Error in updating subject', 'danger');
+
       dispatch({
         type: UPDATE_ERROR,
         payload: err.response,
@@ -240,12 +249,17 @@ const SubjectState = (props) => {
       res = await axios.delete(`/api/v1/subject/${reqObj.id}`, {
         data: { password: reqObj.password },
       });
+
+      setAlert('Subject Deleted Successfully', 'success');
+
       dispatch({
         type: DELETE_SUBJECT,
         payload: res.data,
       });
     } catch (err) {
       console.log(err);
+      setAlert('Error in deleting subject', 'danger');
+
       dispatch({
         type: DELETE_ERROR,
         payload: err.response,
