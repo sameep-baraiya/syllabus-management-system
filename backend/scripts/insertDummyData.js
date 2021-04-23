@@ -107,6 +107,31 @@ const insertDummyData = async () => {
       },
     });
     console.log('Announcement Created');
+
+    const v1Subject = await Subject.create(v1SubjectData);
+    const v2Subject = await Subject.create(v2SubjectData);
+    const v3Subject = await Subject.create(v3SubjectData);
+
+    v1Subject.crudInfo = {
+      type: 'SUBJECT_UPDATE_SUCCESSOR_PREDECESSOR',
+      by: 'Script Manger User',
+    };
+    v2Subject.crudInfo = {
+      type: 'SUBJECT_UPDATE_SUCCESSOR_PREDECESSOR',
+      by: 'Script Manger User',
+    };
+    v3Subject.crudInfo = {
+      type: 'SUBJECT_UPDATE_SUCCESSOR_PREDECESSOR',
+      by: 'Script Manger User',
+    };
+
+    await v1Subject.setSuccessor(v2Subject);
+
+    await v2Subject.setPredecessor(v1Subject);
+    await v2Subject.setSuccessor(v3Subject);
+
+    await v3Subject.setPredecessor(v2Subject);
+    console.log('Subject Version Created');
   } catch (err) {
     console.error(err);
   }
@@ -264,6 +289,111 @@ const acMeetingData = {
   crudInfo: {
     type: 'MEETING_CREATE',
     by: 'Script Manger',
+  },
+};
+
+const v1SubjectData = {
+  subjectCode: 'VER 101',
+  subjectName: 'VERSION DEMO 1',
+  subjectShort: 'VER-1',
+  headMasterJSON: {
+    headMasters: [
+      'Lecture',
+      'Tutorial',
+      'Practical',
+      'L+T',
+      'P',
+      'Total CS',
+      'Theory',
+      'Sessional',
+      'Practical',
+      'Term Work',
+      'Total ES',
+    ],
+    headGroups: ['Teaching Scheme', 'Credit Structure', 'Exam Scheme'],
+    headGroupsLength: [3, 3, 5],
+    points: [4, 0, 0, 4, 0, 4, 60, 40, 0, 0, 100],
+  },
+  subjectType: 'Subject Type 1',
+  department: 'IT - Information Technology',
+  updateNo: 0,
+  isElective: false,
+  semNo: 1,
+  listIndex: 1,
+  isFreezed: false,
+  crudInfo: {
+    type: 'SUBJECT_CREATE',
+    by: 'Script Manger User',
+  },
+};
+
+const v2SubjectData = {
+  subjectCode: 'VER 102',
+  subjectName: 'VERSION DEMO 2',
+  subjectShort: 'VER-2',
+  headMasterJSON: {
+    headMasters: [
+      'Lecture',
+      'Tutorial',
+      'Practical',
+      'L+T',
+      'P',
+      'Total CS',
+      'Theory',
+      'Sessional',
+      'Practical',
+      'Term Work',
+      'Total ES',
+    ],
+    headGroups: ['Teaching Scheme', 'Credit Structure', 'Exam Scheme'],
+    headGroupsLength: [3, 3, 5],
+    points: [4, 0, 0, 4, 0, 4, 60, 40, 0, 0, 100],
+  },
+  subjectType: 'Subject Type 1',
+  department: 'IT - Information Technology',
+  updateNo: 1,
+  isElective: false,
+  semNo: 1,
+  listIndex: 1,
+  isFreezed: false,
+  crudInfo: {
+    type: 'SUBJECT_CREATE',
+    by: 'Script Manger User',
+  },
+};
+
+const v3SubjectData = {
+  subjectCode: 'VER 103',
+  subjectName: 'VERSION DEMO 3',
+  subjectShort: 'VER-3',
+  headMasterJSON: {
+    headMasters: [
+      'Lecture',
+      'Tutorial',
+      'Practical',
+      'L+T',
+      'P',
+      'Total CS',
+      'Theory',
+      'Sessional',
+      'Practical',
+      'Term Work',
+      'Total ES',
+    ],
+    headGroups: ['Teaching Scheme', 'Credit Structure', 'Exam Scheme'],
+    headGroupsLength: [3, 3, 5],
+    points: [4, 0, 0, 4, 0, 4, 60, 40, 0, 0, 100],
+  },
+  subjectType: 'Subject Type 1',
+  department: 'IT - Information Technology',
+  updateNo: 2,
+  isElective: false,
+  semNo: 1,
+  listIndex: 1,
+  isFreezed: false,
+  crudInfo: {
+    type: 'SUBJECT_CREATE',
+    by: 'Script Manger User',
   },
 };
 
