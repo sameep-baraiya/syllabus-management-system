@@ -301,10 +301,10 @@ exports.updateSubject = async (req, res, next) => {
       return next(new ErrorResponse('Subject not found', 400));
     }
 
-    let updateNo = 0;
+    let updateNo = undefined;
     let successerSub = null;
     let predecessorSub = null;
-    if ((successer !== undefined) & (predecessor !== undefined)) {
+    if (successer !== undefined && predecessor !== undefined) {
       if (
         successer.id !== predecessor.id &&
         successer.updateNo - predecessor.updateNo === 2
@@ -369,7 +369,7 @@ exports.updateSubject = async (req, res, next) => {
       listIndex,
       isOutdated,
       isFreezed,
-      files,
+      files: files.length !== 0 ? files : undefined,
       updateNo,
       crudInfo,
       theoryFile,

@@ -143,7 +143,7 @@ const ViewSubject = ({ subject = null }) => {
           <div>
             <Badge variant='primary'>{unf(semNo) && `Sem No: ${semNo}`}</Badge>{' '}
             <Badge style={{ backgroundColor: '#DA70D6', color: 'white' }}>
-              {unf(listIndex) && `List Index: ${semNo}`}
+              {unf(listIndex) && `List Index: ${listIndex}`}
             </Badge>{' '}
             <Badge variant='warning'>
               {unf(noOfFiles) && `No of Files: ${noOfFiles}`}

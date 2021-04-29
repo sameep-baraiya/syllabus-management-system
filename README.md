@@ -2,6 +2,10 @@
 
 DDIT Syllabus Management System is a web application which manages university syllabus in an effective manner. Traditional syllabus management systems require more manpower and are error prone. While our system elements manpower and error by huge margins by making such tasks automatic and managing data properly. Hence improvement in speed of process of syllabus management and we also have access to the system over the web.
 
+> Watch quick demo in 110 seconds video
+
+[![DDIT Syllabus Management System](http://img.youtube.com/vi/v6ZxjCSIXNs/0.jpg)](http://www.youtube.com/watch?v=v6ZxjCSIXNs 'DDIT Syllabus Management System - Final Year Project - Quick Demo')
+
 ## Tech Stack
 
 Frontend has implemented react with bootstrap ui. Backend has implemented in node js express app with sequelize as ORM and mysql as database. Including one external dependency wkhtmltopdf.

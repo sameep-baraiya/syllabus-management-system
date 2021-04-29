@@ -45,6 +45,7 @@ const subjects = [
       name: 'Test Practical-1615530125925.pdf',
       path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
     },
+    noOfFiles: 1,
     files: [
       {
         name: 'Test Theory-1615530125925.pdf',
@@ -79,6 +80,7 @@ const subjects = [
       name: 'Test Practical-1615530125925.pdf',
       path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
     },
+    noOfFiles: 1,
     files: [
       {
         name: 'Test Theory-1615530125925.pdf',
@@ -113,6 +115,7 @@ const subjects = [
       name: 'Test Practical-1615530125925.pdf',
       path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
     },
+    noOfFiles: 1,
     files: [
       {
         name: 'Test Theory-1615530125925.pdf',
@@ -147,6 +150,7 @@ const subjects = [
       name: 'Test Practical-1615530125925.pdf',
       path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
     },
+    noOfFiles: 1,
     files: [
       {
         name: 'Test Theory-1615530125925.pdf',
@@ -181,6 +185,7 @@ const subjects = [
       name: 'Test Practical-1615530125925.pdf',
       path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
     },
+    noOfFiles: 1,
     files: [
       {
         name: 'Test Theory-1615530125925.pdf',
@@ -215,6 +220,7 @@ const subjects = [
       name: 'Test Practical-1615530125925.pdf',
       path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
     },
+    noOfFiles: 1,
     files: [
       {
         name: 'Test Theory-1615530125925.pdf',
@@ -249,6 +255,7 @@ const subjects = [
       name: 'Test Practical-1615530125925.pdf',
       path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
     },
+    noOfFiles: 1,
     files: [
       {
         name: 'Test Theory-1615530125925.pdf',
@@ -284,6 +291,7 @@ const subjects = [
       name: 'Test Practical-1615530125925.pdf',
       path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
     },
+    noOfFiles: 1,
     files: [
       {
         name: 'Test Theory-1615530125925.pdf',
@@ -318,6 +326,7 @@ const subjects = [
       name: 'Test Practical-1615530125925.pdf',
       path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
     },
+    noOfFiles: 1,
     files: [
       {
         name: 'Test Theory-1615530125925.pdf',
@@ -352,6 +361,7 @@ const subjects = [
       name: 'Test Practical-1615530125925.pdf',
       path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
     },
+    noOfFiles: 1,
     files: [
       {
         name: 'Test Theory-1615530125925.pdf',
@@ -386,6 +396,7 @@ const subjects = [
       name: 'Test Practical-1615530125925.pdf',
       path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
     },
+    noOfFiles: 1,
     files: [
       {
         name: 'Test Theory-1615530125925.pdf',
@@ -420,6 +431,7 @@ const subjects = [
       name: 'Test Practical-1615530125925.pdf',
       path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
     },
+    noOfFiles: 1,
     files: [
       {
         name: 'Test Theory-1615530125925.pdf',
@@ -454,6 +466,7 @@ const subjects = [
       name: 'Test Practical-1615530125925.pdf',
       path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
     },
+    noOfFiles: 1,
     files: [
       {
         name: 'Test Theory-1615530125925.pdf',
@@ -488,6 +501,7 @@ const subjects = [
       name: 'Test Practical-1615530125925.pdf',
       path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
     },
+    noOfFiles: 1,
     files: [
       {
         name: 'Test Theory-1615530125925.pdf',
@@ -523,6 +537,7 @@ const subjects = [
       name: 'Test Practical-1615530125925.pdf',
       path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
     },
+    noOfFiles: 1,
     files: [
       {
         name: 'Test Theory-1615530125925.pdf',
@@ -557,6 +572,7 @@ const subjects = [
       name: 'Test Practical-1615530125925.pdf',
       path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
     },
+    noOfFiles: 1,
     files: [
       {
         name: 'Test Theory-1615530125925.pdf',
@@ -591,6 +607,7 @@ const subjects = [
       name: 'Test Practical-1615530125925.pdf',
       path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
     },
+    noOfFiles: 1,
     files: [
       {
         name: 'Test Theory-1615530125925.pdf',
@@ -625,6 +642,7 @@ const subjects = [
       name: 'Test Practical-1615530125925.pdf',
       path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
     },
+    noOfFiles: 1,
     files: [
       {
         name: 'Test Theory-1615530125925.pdf',
@@ -659,6 +677,7 @@ const subjects = [
       name: 'Test Practical-1615530125925.pdf',
       path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
     },
+    noOfFiles: 1,
     files: [
       {
         name: 'Test Theory-1615530125925.pdf',
@@ -693,6 +712,7 @@ const subjects = [
       name: 'Test Practical-1615530125925.pdf',
       path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
     },
+    noOfFiles: 1,
     files: [
       {
         name: 'Test Theory-1615530125925.pdf',
@@ -728,6 +748,7 @@ const subjects = [
       name: 'Test Practical-1615530125925.pdf',
       path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
     },
+    noOfFiles: 1,
     files: [
       {
         name: 'Test Theory-1615530125925.pdf',
@@ -762,6 +783,7 @@ const subjects = [
       name: 'Test Practical-1615530125925.pdf',
       path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
     },
+    noOfFiles: 1,
     files: [
       {
         name: 'Test Theory-1615530125925.pdf',
@@ -796,6 +818,7 @@ const subjects = [
       name: 'Test Practical-1615530125925.pdf',
       path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
     },
+    noOfFiles: 1,
     files: [
       {
         name: 'Test Theory-1615530125925.pdf',
@@ -830,6 +853,7 @@ const subjects = [
       name: 'Test Practical-1615530125925.pdf',
       path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
     },
+    noOfFiles: 1,
     files: [
       {
         name: 'Test Theory-1615530125925.pdf',
@@ -864,6 +888,7 @@ const subjects = [
       name: 'Test Practical-1615530125925.pdf',
       path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
     },
+    noOfFiles: 1,
     files: [
       {
         name: 'Test Theory-1615530125925.pdf',
@@ -898,6 +923,7 @@ const subjects = [
       name: 'Test Practical-1615530125925.pdf',
       path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
     },
+    noOfFiles: 1,
     files: [
       {
         name: 'Test Theory-1615530125925.pdf',
@@ -933,6 +959,7 @@ const subjects = [
       name: 'Test Practical-1615530125925.pdf',
       path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
     },
+    noOfFiles: 1,
     files: [
       {
         name: 'Test Theory-1615530125925.pdf',
@@ -967,6 +994,7 @@ const subjects = [
       name: 'Test Practical-1615530125925.pdf',
       path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
     },
+    noOfFiles: 1,
     files: [
       {
         name: 'Test Theory-1615530125925.pdf',
@@ -1001,6 +1029,7 @@ const subjects = [
       name: 'Test Practical-1615530125925.pdf',
       path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
     },
+    noOfFiles: 1,
     files: [
       {
         name: 'Test Theory-1615530125925.pdf',
@@ -1035,6 +1064,7 @@ const subjects = [
       name: 'Test Practical-1615530125925.pdf',
       path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
     },
+    noOfFiles: 1,
     files: [
       {
         name: 'Test Theory-1615530125925.pdf',
@@ -1069,6 +1099,7 @@ const subjects = [
       name: 'Test Practical-1615530125925.pdf',
       path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
     },
+    noOfFiles: 1,
     files: [
       {
         name: 'Test Theory-1615530125925.pdf',
@@ -1103,6 +1134,7 @@ const subjects = [
       name: 'Test Practical-1615530125925.pdf',
       path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
     },
+    noOfFiles: 1,
     files: [
       {
         name: 'Test Theory-1615530125925.pdf',
@@ -1137,6 +1169,7 @@ const subjects = [
       name: 'Test Practical-1615530125925.pdf',
       path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
     },
+    noOfFiles: 1,
     files: [
       {
         name: 'Test Theory-1615530125925.pdf',
@@ -1172,6 +1205,7 @@ const subjects = [
       name: 'Test Practical-1615530125925.pdf',
       path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
     },
+    noOfFiles: 1,
     files: [
       {
         name: 'Test Theory-1615530125925.pdf',
@@ -1206,6 +1240,7 @@ const subjects = [
       name: 'Test Practical-1615530125925.pdf',
       path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
     },
+    noOfFiles: 1,
     files: [
       {
         name: 'Test Theory-1615530125925.pdf',
@@ -1240,6 +1275,7 @@ const subjects = [
       name: 'Test Practical-1615530125925.pdf',
       path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
     },
+    noOfFiles: 1,
     files: [
       {
         name: 'Test Theory-1615530125925.pdf',
@@ -1274,6 +1310,7 @@ const subjects = [
       name: 'Test Practical-1615530125925.pdf',
       path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
     },
+    noOfFiles: 1,
     files: [
       {
         name: 'Test Theory-1615530125925.pdf',
@@ -1308,6 +1345,7 @@ const subjects = [
       name: 'Test Practical-1615530125925.pdf',
       path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
     },
+    noOfFiles: 1,
     files: [
       {
         name: 'Test Theory-1615530125925.pdf',
@@ -1342,6 +1380,7 @@ const subjects = [
       name: 'Test Practical-1615530125925.pdf',
       path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
     },
+    noOfFiles: 1,
     files: [
       {
         name: 'Test Theory-1615530125925.pdf',
@@ -1376,6 +1415,7 @@ const subjects = [
       name: 'Test Practical-1615530125925.pdf',
       path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
     },
+    noOfFiles: 1,
     files: [
       {
         name: 'Test Theory-1615530125925.pdf',
@@ -1410,6 +1450,7 @@ const subjects = [
       name: 'Test Practical-1615530125925.pdf',
       path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
     },
+    noOfFiles: 1,
     files: [
       {
         name: 'Test Theory-1615530125925.pdf',
@@ -1444,6 +1485,7 @@ const subjects = [
       name: 'Test Practical-1615530125925.pdf',
       path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
     },
+    noOfFiles: 1,
     files: [
       {
         name: 'Test Theory-1615530125925.pdf',
@@ -1479,6 +1521,7 @@ const subjects = [
       name: 'Test Practical-1615530125925.pdf',
       path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
     },
+    noOfFiles: 1,
     files: [
       {
         name: 'Test Theory-1615530125925.pdf',
@@ -1513,6 +1556,7 @@ const subjects = [
       name: 'Test Practical-1615530125925.pdf',
       path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
     },
+    noOfFiles: 1,
     files: [
       {
         name: 'Test Theory-1615530125925.pdf',
@@ -1547,6 +1591,7 @@ const subjects = [
       name: 'Test Practical-1615530125925.pdf',
       path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
     },
+    noOfFiles: 1,
     files: [
       {
         name: 'Test Theory-1615530125925.pdf',
@@ -1581,6 +1626,7 @@ const subjects = [
       name: 'Test Practical-1615530125925.pdf',
       path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
     },
+    noOfFiles: 1,
     files: [
       {
         name: 'Test Theory-1615530125925.pdf',
@@ -1615,6 +1661,7 @@ const subjects = [
       name: 'Test Practical-1615530125925.pdf',
       path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
     },
+    noOfFiles: 1,
     files: [
       {
         name: 'Test Theory-1615530125925.pdf',
@@ -1649,6 +1696,7 @@ const subjects = [
       name: 'Test Practical-1615530125925.pdf',
       path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
     },
+    noOfFiles: 1,
     files: [
       {
         name: 'Test Theory-1615530125925.pdf',
@@ -1683,6 +1731,7 @@ const subjects = [
       name: 'Test Practical-1615530125925.pdf',
       path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
     },
+    noOfFiles: 1,
     files: [
       {
         name: 'Test Theory-1615530125925.pdf',
@@ -1717,6 +1766,7 @@ const subjects = [
       name: 'Test Practical-1615530125925.pdf',
       path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
     },
+    noOfFiles: 1,
     files: [
       {
         name: 'Test Theory-1615530125925.pdf',
@@ -1751,6 +1801,7 @@ const subjects = [
       name: 'Test Practical-1615530125925.pdf',
       path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
     },
+    noOfFiles: 1,
     files: [
       {
         name: 'Test Theory-1615530125925.pdf',
@@ -1785,6 +1836,7 @@ const subjects = [
       name: 'Test Practical-1615530125925.pdf',
       path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
     },
+    noOfFiles: 1,
     files: [
       {
         name: 'Test Theory-1615530125925.pdf',
@@ -1820,6 +1872,7 @@ const subjects = [
       name: 'Test Practical-1615530125925.pdf',
       path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
     },
+    noOfFiles: 1,
     files: [
       {
         name: 'Test Theory-1615530125925.pdf',
@@ -1854,6 +1907,7 @@ const subjects = [
       name: 'Test Practical-1615530125925.pdf',
       path: 'uploads/Subjects/Test Practical-1615530125925.pdf',
     },
+    noOfFiles: 1,
     files: [
       {
         name: 'Test Theory-1615530125925.pdf',

@@ -55,7 +55,10 @@ const ViewMeeting = ({ meeting }) => {
           {iconMeeting} {meetingCode}
         </Card.Title>
         <Card.Subtitle className='mb-1'>
-          <Badge variant='primary'>{meetingType}</Badge>{' '}
+          <Badge variant='primary'>
+            {meetingType &&
+              (meetingType === 'bos' ? 'Board of studies' : 'Academic Council')}
+          </Badge>{' '}
           <Badge variant='success'>{department}</Badge>{' '}
           <Badge variant='warning'>
             {unf(noOfFiles) && `No of Files: ${noOfFiles}`}
@@ -110,7 +113,7 @@ const ViewMeeting = ({ meeting }) => {
         {unf(requestedChanges) && Array.isArray(requestedChanges) && (
           <Fragment>
             <div className='mb-1'>
-              <strong>Files :</strong>
+              <strong>Requested Changes :</strong>
               <br />
               <Table bordered>
                 <thead>
@@ -139,13 +142,13 @@ const ViewMeeting = ({ meeting }) => {
                         <td>{rq.isApproved === true ? 'Yes' : 'No'}</td>
                       </tr>
                       <tr>
-                        <td colSpan={5}>
+                        <td colSpan={6}>
                           <strong>Subject :</strong> {rq.linkedSubjectCode}:{' '}
                           {rq.linkedSubjectName}
                         </td>
                       </tr>
                       <tr>
-                        <td colSpan={5}>
+                        <td colSpan={6}>
                           <strong>Description :</strong>
                           <br />
                           {rq.description}

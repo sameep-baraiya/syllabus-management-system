@@ -304,9 +304,9 @@ const FindSubject = ({ defaultSelect = 'all' }) => {
               onChange={onChange}
             />
             <Form.Check
-              name='select.theory'
+              name='select.theoryFile'
               type='checkbox'
-              label='Theory'
+              label='Theory File'
               onChange={onChange}
             />
             <Form.Check
@@ -316,9 +316,9 @@ const FindSubject = ({ defaultSelect = 'all' }) => {
               onChange={onChange}
             />
             <Form.Check
-              name='select.practical'
+              name='select.practicalFile'
               type='checkbox'
-              label='Practical'
+              label='Practical File'
               onChange={onChange}
             />
             <Form.Check
