@@ -193,3 +193,14 @@ Application following rest pattern. Every backend request starts with “/api/v1
 Backend is divided into controller, model, middleware mainly. Server will forward requests based on the path to repectice route file, then the route will execute middleware and controller in specific order.
 
 Frontend is divided in model, layout, context components mainly. The layout component aligns the main context on view and provides common visual components. Model components contain model vise create, view, edit, delete, find component for pertucaler model. By combining this model components we can have new components. Context component provides all components to command global data and functionality.
+
+### Screenshots
+
+<p float='left'>
+<img src="https://user-images.githubusercontent.com/32372641/116529575-c2e4d880-a8fa-11eb-800c-f4110f70e639.png" width="49%"/>
+<img src="https://user-images.githubusercontent.com/32372641/116529580-c4ae9c00-a8fa-11eb-84d9-cb49ccb2e32f.png" width="49%"/>
+<img src="https://user-images.githubusercontent.com/32372641/116529582-c5dfc900-a8fa-11eb-8353-5e3c89787b8c.png" width="49%"/>
+<img src="https://user-images.githubusercontent.com/32372641/116529586-c6785f80-a8fa-11eb-9782-aa6cee25ed35.png" width="49%"/>
+</p>
+
+For more open screenshot directory
